@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
   return (
     <aside className="w-64 bg-white flex-shrink-0 flex flex-col border-r border-[#101021]/10">
       <div className="h-20 flex items-center justify-center border-b border-[#101021]/10">
-        <img src="/images/logo_animikdemi.png" alt="AnImiKdemi Logo" className="h-12" />
+        <img src={assetPath('images/logo_animikdemi.png')} alt="AnImiKdemi Logo" className="h-12" />
       </div>
       <nav className="flex-grow pt-8">
         <ul className="space-y-3">
@@ -88,3 +88,4 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
 };
 
 export default Sidebar;
+import { assetPath } from '../../utils/paths';

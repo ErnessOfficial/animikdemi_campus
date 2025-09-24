@@ -1,5 +1,6 @@
 import type { Course } from '../../types';
 import { mockInstructor } from './courseData';
+import { assetPath } from '../../utils/paths';
 
 export const course: Course = {
   id: 'gestion-del-estres-cotidiano',
@@ -9,7 +10,7 @@ export const course: Course = {
     'Aprende a reconocer, comprender y manejar el estrés con técnicas simples y efectivas. Este curso te guiará paso a paso para recuperar tu bienestar en medio de las exigencias diarias.',
   category: 'Autocuidado y Regulación Emocional',
   broadCategories: ['Gestión Emocional'],
-  coverImage: '/images/estres_portada.png',
+  coverImage: assetPath('images/estres_portada.png'),
   instructor: mockInstructor,
   learningObjectives: [
     'Identificar las principales fuentes de estrés en la vida cotidiana.',
@@ -27,7 +28,7 @@ export const course: Course = {
           title: 'Bienvenida y fundamentos del estrés',
           description:
             'En este video conocerás qué es el estrés, cómo se manifiesta en el cuerpo y cuáles son sus principales causas.',
-          videoSrc: '/videos/estres_intro.mp4',
+          videoSrc: assetPath('videos/estres_intro.mp4'),
         },
         {
           id: 'm1a2',
@@ -67,7 +68,7 @@ export const course: Course = {
           type: 'audio',
           title: 'Práctica guiada: Respiración 4x4',
           description: 'Ejercicio de respiración cuadrada para calmar cuerpo y mente en minutos.',
-          audioSrc: '/audios/respiracion_4x4.mp3',
+          audioSrc: assetPath('audios/respiracion_4x4.mp3'),
         },
       ],
     },

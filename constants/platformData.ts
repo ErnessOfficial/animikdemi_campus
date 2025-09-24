@@ -1,4 +1,5 @@
 import type { Course, User, UserProgress, Achievement, Instructor, DiagnosticQuestion } from '../types';
+import { assetPath } from '../utils/paths';
 import { mockInstructor } from './courses/courseData';
 
 // Descubre automáticamente cursos detallados en constants/courses/*
@@ -10,7 +11,7 @@ const discoveredCourses: Course[] = Object.values(discoveredModules).flatMap((mo
 
 export const mockUser: User = {
   name: 'Alex Quiroz',
-  avatarUrl: '/images/instructor_avatar.png',
+  avatarUrl: assetPath('images/instructor_avatar.png'),
   bio: 'Aprendiz de por vida y entusiasta del crecimiento personal. Buscando siempre nuevas formas de entenderme a mí mismo y al mundo que me rodea.',
   hasTakenDiagnostic: false,
 };
@@ -68,7 +69,7 @@ const placeholderCourses: Course[] = [
     description: 'Este curso te proporciona herramientas prácticas para navegar tu paisaje emocional. Aprenderás a identificar, comprender y regular tus emociones, transformando tu relación con el estrés, la ansiedad y la alegría. A través de ejercicios basados en la ciencia, mejorarás tu toma de decisiones y fortalecerás tu resiliencia.',
     category: 'Autoconciencia & Regulación emocional',
     broadCategories: ['Gestión Emocional'],
-    coverImage: '/images/course_cover_2.png',
+    coverImage: assetPath('images/course_cover_2.png'),
     instructor: mockInstructor,
     learningObjectives: [
       'Identificar emociones básicas en ti mismo y en los demás.',
@@ -86,7 +87,7 @@ const placeholderCourses: Course[] = [
     description: 'Fortalece tus conexiones con los demás a través del poder de la comunicación consciente. Este curso se enfoca en dos pilares: la asertividad para expresar tus necesidades con respeto y la empatía para comprender a los demás profundamente. Ideal para mejorar tus relaciones personales, tu liderazgo y tu capacidad de colaboración.',
     category: 'Relaciones & Comunicación con Criterio',
     broadCategories: ['Habilidades Sociales'],
-    coverImage: '/images/course_cover_3.png',
+    coverImage: assetPath('images/course_cover_3.png'),
     instructor: mockInstructor,
     learningObjectives: [
       'Diferenciar entre comunicación pasiva, agresiva y asertiva.',
@@ -104,7 +105,7 @@ const placeholderCourses: Course[] = [
     description: 'Descubre las claves científicas y prácticas ancestrales para mejorar la calidad de tu sueño. Este curso te enseñará a crear rituales nocturnos, gestionar los pensamientos que te impiden dormir y a entender tu propio ciclo de descanso para despertar renovado cada mañana.',
     category: "Sueño & Descanso consciente",
     broadCategories: ['Gestión Emocional'],
-    coverImage: '/images/course_cover_5.png',
+    coverImage: assetPath('images/course_cover_5.png'),
     instructor: mockInstructor,
     learningObjectives: [
         'Entender las fases del sueño y su importancia.',
@@ -122,7 +123,7 @@ const placeholderCourses: Course[] = [
     description: 'Basado en la metodología especial "PILAR", este curso está diseñado para ayudarte a navegar los desafíos del mundo laboral moderno. Aprenderás a gestionar el estrés, evitar el burnout, comunicarte eficazmente y encontrar un mayor sentido de propósito en tu trabajo diario.',
     category: "Bienestar en el Trabajo - Especial \"PILAR\"",
     broadCategories: ['Gestión Emocional', 'Habilidades Sociales'],
-    coverImage: '/images/course_cover_6.png',
+    coverImage: assetPath('images/course_cover_6.png'),
     instructor: mockInstructor,
     learningObjectives: [
         'Aplicar los principios de la metodología PILAR.',
@@ -140,7 +141,7 @@ const placeholderCourses: Course[] = [
     description: 'Este curso ofrece herramientas y perspectivas para padres, madres y cuidadores que buscan criar desde la conexión y el respeto mutuo. Abordaremos temas clave desde la infancia hasta la adolescencia, enfocándonos en la comunicación efectiva, la gestión de berrinches y la construcción de un vínculo familiar sólido.',
     category: "Familia, Crianza & Adolescencia",
     broadCategories: ['Habilidades Sociales'],
-    coverImage: '/images/course_cover_7.png',
+    coverImage: assetPath('images/course_cover_7.png'),
     instructor: mockInstructor,
     learningObjectives: [
         'Comprender las bases de la crianza consciente y respetuosa.',

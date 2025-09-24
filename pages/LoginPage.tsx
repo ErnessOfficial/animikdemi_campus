@@ -9,7 +9,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onRegister }) => {
   return (
     <div className="flex items-center justify-center h-screen bg-[#f0f2f5]">
       <div className="text-center p-12 bg-white rounded-2xl shadow-xl max-w-md w-full mx-4">
-        <img src="/images/logo_animikdemi.png" alt="AnImiKdemi Logo" className="h-16 mx-auto mb-6" />
+        <img src={assetPath('images/logo_animikdemi.png')} alt="AnImiKdemi Logo" className="h-16 mx-auto mb-6" />
         <h1 className="text-3xl font-extrabold text-[#101021]">Bienvenido a AnImiKdemi Campus</h1>
         <p className="mt-2 text-[#101021]/70">Tu viaje de aprendizaje emocional comienza aquí.</p>
 
@@ -36,3 +36,4 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onRegister }) => {
 };
 
 export default LoginPage;
+import { assetPath } from '../utils/paths';

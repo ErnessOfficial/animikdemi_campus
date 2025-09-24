@@ -1,9 +1,10 @@
 import type { Course, Instructor } from '../../types';
+import { assetPath } from '../../utils/paths';
 
 export const mockInstructor: Instructor = {
     name: 'Ernesto Mendoza',
     title: 'Master en Terapia Conductual & Reintegracion Social',
-    avatarUrl: '/images/instructor_avatar.png', 
+    avatarUrl: assetPath('images/instructor_avatar.png'), 
     bio: 'Ernesto cuenta con una amplia formación que incluye un Master en Terapia Conductual por la Universidad Europea a Distancia y Un Master en Justicia Restaurativa & Reintegración Social por la University of Portsmouth en el Reino Unido.Con mas de 15 años de experiencia te guiara en este viaje con un estilo empático, honesto y basado en evidencia, para que obtengas herrameintas practicas para la gestión de tus emociones.'
 }; 
 
@@ -14,7 +15,7 @@ export const courseData: Course = {
   description: 'Este curso es una inmersión profunda en el núcleo de tu ser. A través de una serie de módulos interactivos, reflexiones guiadas y ejercicios prácticos, te embarcarás en un viaje para desentrañar las capas de tu identidad. Aprenderás a identificar tus valores fundamentales, a cuestionar y transformar creencias que te limitan, y a cultivar una mentalidad de crecimiento que te permitirá enfrentar los desafíos de la vida con resiliencia y autenticidad. No es solo un curso, es una herramienta para construir una relación más honesta y compasiva contigo mismo.',
   category: 'Autoconciencia & Regulación emocional',
   broadCategories: ['Autoconocimiento', 'Gestión Emocional'],
-  coverImage: '/images/course_cover_1.png',
+  coverImage: assetPath('images/course_cover_1.png'),
   instructor: mockInstructor,
   learningObjectives: [
     'Identificar y priorizar tus valores personales fundamentales.',
@@ -33,7 +34,7 @@ export const courseData: Course = {
           type: 'video',
           title: 'Bienvenida al Viaje',
           description: 'Una introducción a los conceptos clave del autoconocimiento y lo que exploraremos en este curso.',
-          videoSrc: '/videos/intro.mp4',
+          videoSrc: assetPath('videos/intro.mp4'),
         },
         {
           id: 'm1a2',
@@ -95,7 +96,7 @@ export const courseData: Course = {
           type: 'audio',
           title: 'Meditación Guiada: Conectando con tus Valores',
           description: 'Un ejercicio de audio para ayudarte a identificar tus valores fundamentales de una manera intuitiva y profunda.',
-          audioSrc: '/audios/meditacion.mp3',
+          audioSrc: assetPath('audios/meditacion.mp3'),
           content: [
             "(Música suave de fondo)",
             "Encuentra una postura cómoda, sentado o acostado. Cierra los ojos suavemente.",
@@ -113,7 +114,7 @@ export const courseData: Course = {
           type: 'reflectionTree',
           title: 'Mi Árbol de la Reflexión',
           description: 'Una actividad interactiva para visualizar tus valores, creencias y logros, construyendo una imagen clara de quién eres.',
-          imageSrc: '/images/tree_illustration.png',
+          imageSrc: assetPath('images/tree_illustration.png'),
         },
         {
           id: 'm2a3',
@@ -167,7 +168,7 @@ export const courseData: Course = {
           type: 'video',
           title: 'Mentalidad Fija vs. Mentalidad de Crecimiento',
           description: 'Un video explicativo sobre la teoría de Carol Dweck y cómo puede transformar tu forma de enfrentar los desafíos.',
-          videoSrc: '/videos/mindset.mp4',
+          videoSrc: assetPath('videos/mindset.mp4'),
         },
         {
           id: 'm4a2',
