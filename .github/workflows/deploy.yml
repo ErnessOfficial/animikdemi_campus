@@ -33,6 +33,9 @@ jobs:
       - name: Build
         env:
           VITE_BASE: "/animikdemi_campus/"
+          VITE_BYPASS_AUTH: "true"
+          VITE_KINDE_DOMAIN: "https://animikdemi.kinde.com"
+          VITE_KINDE_CLIENT_ID: "0baaabe50d6e4f21ae6646e564c07bfd"
         run: npm run build
 
       - name: Upload artifact
@@ -50,4 +53,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
