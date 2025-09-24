@@ -26,6 +26,7 @@ import EnrollmentConfirmationModal from './components/platform/EnrollmentConfirm
 import LoginPage from './pages/LoginPage';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import DebugAuthPanel from './components/common/DebugAuthPanel';
+import { assetPath } from './utils/paths';
 
 
 export type View =
@@ -57,7 +58,7 @@ const App: React.FC = () => {
         if (bypassAuth) {
             const appUser: User = {
                 name: 'Dev User',
-                avatarUrl: '/images/instructor_avatar.png',
+                avatarUrl: assetPath('images/instructor_avatar.png'),
                 bio: 'Usuario simulado para desarrollo',
                 hasTakenDiagnostic: false,
             };
@@ -69,7 +70,7 @@ const App: React.FC = () => {
             const appUser: User = {
                 // FIX: Corrected property names from snake_case to camelCase for Kinde user object.
                 name: `${kindeUser.givenName || ''} ${kindeUser.familyName || ''}`.trim(),
-                avatarUrl: kindeUser.picture || '/images/instructor_avatar.png',
+                avatarUrl: kindeUser.picture || assetPath('images/instructor_avatar.png'),
                 // Assuming these are stored/managed within the app's own backend in a real scenario
                 bio: 'Aprendiz de por vida y entusiasta del crecimiento personal.',
                 hasTakenDiagnostic: false, // This would be fetched from your DB

@@ -1,5 +1,6 @@
 import type { Course } from '../../types';
 import { mockInstructor } from './courseData';
+import { assetPath } from '../../utils/paths';
 
 export const courseDataMindfulness: Course = {
   id: 'mindfulness-101',
@@ -8,7 +9,7 @@ export const courseDataMindfulness: Course = {
   description: 'Este curso es una guía práctica y compasiva para desarrollar la atención plena. Aprenderás a anclarte en el presente, a observar tus pensamientos sin juicio y a cultivar una actitud de calma y aceptación ante los desafíos de la vida. A través de meditaciones guiadas, ejercicios sencillos y reflexiones, descubrirás un refugio de serenidad dentro de ti mismo.',
   category: 'Ansiedad, Estrés y Calma',
   broadCategories: ['Gestión Emocional'],
-  coverImage: '/images/course_cover_4.png',
+  coverImage: assetPath('images/course_cover_4.png'),
   instructor: mockInstructor,
   learningObjectives: [
     'Comprender los principios fundamentales del mindfulness y sus beneficios.',
@@ -27,7 +28,7 @@ export const courseDataMindfulness: Course = {
           type: 'video',
           title: 'Te doy la bienvenida a tu Refugio Interior',
           description: 'Una introducción al curso, donde sentaremos las bases de nuestro viaje hacia la calma y la atención plena.',
-          videoSrc: '/videos/intro.mp4', // Placeholder video
+          videoSrc: assetPath('videos/intro.mp4'), // Placeholder video
         },
         {
           id: 'm1a2',
@@ -46,7 +47,7 @@ export const courseDataMindfulness: Course = {
           type: 'audio',
           title: 'Práctica de la Respiración Consciente (3 Minutos)',
           description: 'Tu primera meditación guiada. Un ejercicio simple y poderoso para anclarte en el aquí y ahora.',
-          audioSrc: '/audios/meditacion.mp3', // Placeholder audio
+          audioSrc: assetPath('audios/meditacion.mp3'), // Placeholder audio
           content: [
             "(Sonido suave de una campana)",
             "Encuentra una postura cómoda, con la espalda erguida pero no rígida. Puedes cerrar los ojos si te sientes a gusto.",
@@ -84,7 +85,7 @@ export const courseDataMindfulness: Course = {
           type: 'audio',
           title: 'Meditación Guiada: Escaneo Corporal',
           description: 'Un viaje de atención a través de tu cuerpo para reconectar con tus sensaciones físicas y liberar tensiones.',
-          audioSrc: '/audios/meditacion.mp3', // Placeholder audio
+          audioSrc: assetPath('audios/meditacion.mp3'), // Placeholder audio
         },
         {
           id: 'm2a2',
@@ -117,7 +118,7 @@ export const courseDataMindfulness: Course = {
           type: 'video',
           title: 'Observando los Pensamientos sin Juicio',
           description: 'Aprende a ver tus pensamientos como eventos mentales pasajeros en lugar de verdades absolutas.',
-          videoSrc: '/videos/mindset.mp4', // Placeholder video
+          videoSrc: assetPath('videos/mindset.mp4'), // Placeholder video
         },
         {
           id: 'm3a2',
@@ -169,7 +170,7 @@ export const courseDataMindfulness: Course = {
             type: 'audio',
             title: 'Meditación de la Bondad Amorosa (Loving-Kindness)',
             description: 'Una práctica para cultivar sentimientos de calidez, amabilidad y compasión hacia ti mismo y hacia los demás.',
-            audioSrc: '/audios/meditacion.mp3', // Placeholder
+            audioSrc: assetPath('audios/meditacion.mp3'), // Placeholder
           },
           {
             id: 'm5a2',
