@@ -1,0 +1,22 @@
+import type { } from '../../types';
+import type { ResourceItem } from '../../components/resources/ResourceList';
+
+// Agrega aquí recursos complementarios. Solo debes editar este archivo:
+// - title: nombre visible
+// - url: enlace externo (artículo, vídeo, publicación, etc.)
+
+export const complementary: ResourceItem[] = [
+  {
+    title: 'Artículo: Estrategias para reducir el estrés en 5 minutos',
+    url: 'https://example.com/articulo-estrategias-estres'
+  },
+  {
+    title: 'Recurso: Respiración 4x4 (video demostración)',
+    url: 'https://example.com/respiracion-4x4'
+  },
+  {
+    title: 'Blog: Comunicación asertiva en el trabajo (guía práctica)',
+    url: 'https://example.com/comunicacion-asertiva-trabajo'
+  }
+];
+
