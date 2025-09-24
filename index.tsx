@@ -17,6 +17,10 @@ if (!rootElement) {
 
 const root = ReactDOM.createRoot(rootElement);
 const origin = window.location.origin;
+const basePath = (import.meta as any).env?.BASE_URL || '/';
+// Compose full site base (handles GitHub Pages subpath like /animikdemi_campus/)
+const siteBase = new URL(basePath, origin).toString().replace(/\/$/, '');
+
 const kinDeDomain = (import.meta as any).env?.VITE_KINDE_DOMAIN || "https://animik.kinde.com";
 const kinDeClientId = (import.meta as any).env?.VITE_KINDE_CLIENT_ID || "5f29e3191c244f62b1eba9c08a4e8969";
 
@@ -25,8 +29,8 @@ root.render(
     <KindeProvider
       clientId={kinDeClientId}
       domain={kinDeDomain}
-      logoutUri={origin}
-      redirectUri={`${origin}/callback`}
+      logoutUri={siteBase}
+      redirectUri={`${siteBase}/callback`}
       useInsecureForRefreshToken={import.meta.env.DEV}
     >
       <App />
