@@ -203,7 +203,12 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser 
                 <h3 className="text-xl font-bold text-[#101021] mb-4">Mis Certificaciones</h3>
                 {completedCourses.length > 0 ? (
                     <div className="space-y-4">
-                        {completedCourses.map(course => <CertificateCard key={course.id} course={course} />)}
+                        {completedCourses.map(course => {
+                          const cp = progress.courses[course.id];
+                          return (
+                            <CertificateCard key={course.id} course={course} userName={user.name} completedAt={cp?.completedAt || null} />
+                          );
+                        })}
                     </div>
                 ) : (
                     <p className="text-[#101021]/70">Aún no has completado ningún curso. ¡Sigue aprendiendo para ganar certificados!</p>

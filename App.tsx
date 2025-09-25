@@ -245,6 +245,10 @@ const App: React.FC = () => {
             });
             const percentage = totalActivities > 0 ? (totalCompleted / totalActivities) * 100 : 0;
 
+            // If course just got completed, set completedAt if not already set
+            const isNowCompleted = totalCompleted === totalActivities && totalActivities > 0;
+            const nextCompletedAt = isNowCompleted && !courseProgress.completedAt ? new Date().toISOString() : courseProgress.completedAt;
+
             return {
                 ...prevProgress,
                 courses: {
@@ -253,6 +257,7 @@ const App: React.FC = () => {
                         ...courseProgress,
                         completionStatus: newCompletionStatus,
                         percentage,
+                        completedAt: nextCompletedAt,
                     }
                 }
             }

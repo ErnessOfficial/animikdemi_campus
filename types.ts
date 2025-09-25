@@ -109,6 +109,7 @@ export interface CourseProgress {
   answers?: {
     [activityId: string]: any;
   };
+  completedAt?: string; // ISO date when course was fully completed
 }
 
 export interface UserProgress {
