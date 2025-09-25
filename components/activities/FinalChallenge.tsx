@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const FinalChallenge: React.FC = () => {
+const FinalChallenge: React.FC<{ onReadyToComplete?: (ready: boolean) => void }> = ({ onReadyToComplete }) => {
+  const [text, setText] = useState('');
+  useEffect(() => {
+    onReadyToComplete?.(text.trim().length > 0);
+  }, [text, onReadyToComplete]);
   return (
     <div className="bg-gradient-to-br from-[#101021] to-[#24668e] p-8 rounded-xl shadow-2xl text-[#fffafa]">
       <div className="text-center mb-8">
@@ -29,6 +33,8 @@ const FinalChallenge: React.FC = () => {
           rows={6}
           className="w-full p-4 border border-[#fffafa]/20 rounded-md bg-[#101021] text-[#fffafa] focus:ring-2 focus:ring-[#dd566f] focus:border-[#dd566f] transition placeholder-[#fffafa]/50"
           placeholder="Ejemplo: Para desafiar mi creencia de 'no soy bueno/a hablando en público', me comprometo a participar activamente con una pregunta o comentario en la próxima reunión de equipo de esta semana."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></textarea>
       </div>
     </div>

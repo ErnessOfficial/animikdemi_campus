@@ -2,14 +2,15 @@ import React from 'react';
 
 interface VideoPlayerProps {
   src: string;
+  onEnded?: () => void;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, onEnded }) => {
   return (
     <div className="w-full max-w-3xl mx-auto bg-black rounded-lg overflow-hidden shadow-2xl">
       <div className="aspect-w-16 aspect-h-9">
         {src ? (
-          <video controls className="w-full h-full object-contain bg-black">
+          <video controls className="w-full h-full object-contain bg-black" onEnded={onEnded}>
             <source src={src} type="video/mp4" />
             Tu navegador no soporta el elemento de video.
           </video>

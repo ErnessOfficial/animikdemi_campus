@@ -32,9 +32,17 @@ export const courseData: Course = {
         {
           id: 'm1a1',
           type: 'video',
-          title: 'Bienvenida al Viaje',
+          title: 'Te Doy la Bienvenida a este Viaje',
           description: 'Una introducción a los conceptos clave del autoconocimiento y lo que exploraremos en este curso.',
           videoSrc: assetPath('videos/intro.mp4'),
+          content: [
+            "Ya estás a un paso de comenzar el recorrido por los lugares dentro de ti que a veces olvidamos visitar, pero lo importante es que vas a reencontrarte con alguien que te está esperando con muchas ansias y emoción de reconectar contigo y de aquí en adelante fortalecer vuestra unión. Te reencontrarás contigo, con esa parte de ti que por las prisas, las circunstancias y un sin fin de cosas más que no son tu culpa, se fue quedando atrás. Pero eso es hasta este momento.",
+            "La falta de autoconocimiento emocional puede manifestarse de diversas maneras, afectando la vida personal y las interacciones con el entorno. Las personas con un bajo nivel de autoconocimiento a menudo exhiben una incapacidad para entender cómo se sienten los demás, llegando incluso a creer que otras personas son 'demasiado sensibles' a las emociones. Tienden a la atribución externa, culpando a otros por los problemas o fracasos en lugar de asumir responsabilidades.",
+            "Cuando les sobrevienen emociones muy intensas, pueden sentirse desbordados, ya que no tienen práctica en lidiar con emociones menos intensas. Esto se traduce frecuentemente en relaciones interpersonales deficientes o conflictivas, debido a la falta de habilidades necesarias para mantener vínculos fructíferos. Los conflictos recurrentes son comunes, ya que no se comunican de forma correcta en momentos de desacuerdo.",
+            "Otros indicadores incluyen la dificultad para alcanzar metas, un vocabulario emocional limitado que restringe la expresión de estados afectivos, y una actitud defensiva donde todo es percibido como un ataque personal, impidiendo la aceptación de críticas constructivas. El contacto social puede resultar agotador, llevando a la evitación de interacciones. También se observa una tendencia a basarse en prejuicios rígidos y a anclarse en el error sin aprender de él.",
+            "Además, estas personas pueden experimentar una presencia elevada de emociones desagradables como miedo, tristeza, culpa, ira y aburrimiento, y tener una notable dificultad para identificar y nombrar sus propios estados emocionales.",
+            "Espero que te haya llenado de motivación el video, así que te espero en la siguiente estación."
+          ]
         },
         {
           id: 'm1a2',
@@ -47,13 +55,18 @@ export const courseData: Course = {
             "• Autoevaluación precisa: Conocer nuestras fortalezas y debilidades.",
             "• Confianza en uno mismo: Seguridad en la valoración que hacemos sobre nosotros mismos y sobre nuestras capacidades.",
             "En este módulo, sentaremos las bases para que puedas construir un mapa detallado de tu mundo interior. ¡Empecemos!"
-          ]
+          ],
+          imageSrc: assetPath('images/autoconocimiento001.png')
         },
         {
           id: 'm1a3',
           type: 'quiz',
           title: 'Reflexión Inicial',
           description: 'Un breve cuestionario para que tomes conciencia de tu estado actual de autoconocimiento.',
+          ui: {
+            optionBgColor: '#dfe2e2',
+            optionTextColor: '#101021'
+          },
           questions: [
             {
               question: 'Cuando enfrentas un desafío inesperado, ¿cuál es tu reacción más común?',
@@ -98,15 +111,15 @@ export const courseData: Course = {
           description: 'Un ejercicio de audio para ayudarte a identificar tus valores fundamentales de una manera intuitiva y profunda.',
           audioSrc: assetPath('audios/meditacion.mp3'),
           content: [
-            "(Música suave de fondo)",
-            "Encuentra una postura cómoda, sentado o acostado. Cierra los ojos suavemente.",
-            "Toma tres respiraciones profundas. Inhalando por la nariz, llenando tus pulmones por completo. Y exhalando lentamente por la boca, soltando cualquier tensión.",
-            "Ahora, trae a tu mente un momento en tu vida en el que te sentiste profundamente feliz y satisfecho/a. Un momento en el que todo se sentía bien, en el que sentías que estabas siendo tú mismo/a.",
-            "Revive ese momento. ¿Qué estabas haciendo? ¿Con quién estabas? ¿Qué cualidades o principios estaban presentes en esa situación? Quizás era la creatividad, la conexión, la libertad, la seguridad...",
-            "No lo pienses demasiado. Solo deja que las palabras o sensaciones emerjan. Esos son tus valores en acción.",
-            "(Pausa)",
-            "Ahora, poco a poco, trae tu conciencia de vuelta a la habitación. Mueve suavemente los dedos de las manos y los pies. Y cuando estés listo/a, abre los ojos.",
-            "Anota las palabras o sentimientos que surgieron. Esos son pistas importantes sobre lo que realmente valoras."
+            "Detente un momento.",
+            "Este es tu espacio para respirar y recuperar la calma.",
+            "Cierra suavemente los ojos, si lo deseas. Toma aire lentamente por la nariz… y suéltalo despacio por la boca. Inhala calma… exhala tensión…",
+            "Hazlo una vez más… Siente cómo con cada respiración tu cuerpo comienza a relajarse. Lleva tu atención a tus hombros. Déjalos caer, suelta el peso. Relaja tu mandíbula, tu frente… y permite que tu cuerpo descanse.",
+            "Si algún pensamiento aparece, obsérvalo como si fuera una nube en el cielo. Déjalo pasar… y vuelve a tu respiración. Inhala calma. Exhala preocupación.",
+            "Permanece unos instantes aquí… simplemente respirando… sintiendo paz en este momento.",
+            "Ahora, suavemente, mueve tus manos, tus pies.",
+            "Abre los ojos despacio…",
+            "y recuerda: este estado de calma está siempre disponible dentro de ti."
           ]
         },
         {
@@ -121,6 +134,25 @@ export const courseData: Course = {
           type: 'upload',
           title: 'Comparte tu Creación',
           description: 'Sube una imagen de tu "Árbol de la Reflexión" o un documento con tus reflexiones para guardarlo en tu progreso.',
+          introText: 'Para entender tus valores, creencias y logros, puedes usar la metáfora del Árbol de la Reflexión. 🌳 Este módulo de autoconocimiento te guiará para que explores las raíces, el tronco, las ramas y los frutos de tu ser.',
+          infoCards: [
+            {
+              title: 'Valores (Las Raíces)',
+              color: '#f3e8ff',
+              body: 'Los valores son los principios fundamentales que guían tus decisiones y acciones en la vida. Son la base de tu identidad y lo que consideras más importante. Por ejemplo, si valoras la honestidad, es probable que la busques en tus relaciones y la practiques en tu día a día. Cierra los ojos y visualiza tu árbol. ¿Qué valores son los más importantes para ti? Piensa en qué te guía. ¿Es la familia, la libertad, el respeto, la creatividad? Imagina que cada uno de estos valores es una raíz fuerte que te ancla a la tierra. Escríbelos.'
+            },
+            {
+              title: 'Creencias (El Tronco)',
+              color: '#ffe4e6',
+              body: 'Las creencias son las ideas y suposiciones que has aceptado como verdaderas sobre ti mismo, los demás y el mundo. Actúan como el tronco de tu árbol, dando forma a tu percepción de la realidad. Si crees que eres capaz, te será más fácil enfrentar nuevos desafíos, mientras que una creencia limitante ("no soy lo suficientemente bueno") puede frenarte. Sigue visualizando tu árbol. Examina el tronco. ¿Qué ideas tienes sobre ti mismo? ¿Crees que eres digno de amor, que puedes superar obstáculos, que mereces el éxito? Identifica tanto tus creencias que te potencian como aquellas que te limitan. Escríbelas y decide cuáles quieres nutrir.'
+            },
+            {
+              title: 'Logros (Las Ramas y los Frutos)',
+              color: '#e0f2fe',
+              body: 'Los logros son las metas que has alcanzado, los hitos que has superado y las experiencias de las que te sientes orgulloso. Son los resultados visibles de tus acciones, y representan el crecimiento de tus ramas y la cosecha de tus frutos. Ahora, mira las ramas de tu árbol. Cada rama es un área de tu vida (familia, trabajo, estudios, hobbies). En las puntas de esas ramas, visualiza los frutos: tus logros. ¿Qué has conseguido? ¿Un título, un viaje, una amistad duradera, un proyecto personal que terminaste? Reconoce cada uno de estos logros, sin importar lo pequeños que parezcan, y escríbelos.'
+            }
+          ],
+          closingText: 'Al completar este ejercicio, no solo habrás identificado las partes de tu "árbol", sino que habrás reconocido la conexión entre ellas. Tus valores (raíces) alimentan tus creencias (tronco), y de ellas nacen tus acciones, que dan lugar a tus logros (ramas y frutos). 🌳'
         }
       ]
     },
@@ -143,9 +175,22 @@ export const courseData: Course = {
         },
         {
           id: 'm3a2',
+          type: 'interactiveInvisible',
+          title: 'La Trampa Invisible (Parte 1)',
+          description: 'Explora cómo las creencias limitantes funcionan como un muro interno y conecta con una experiencia personal para detectarlas.',
+        },
+        {
+          id: 'm3a3',
+          type: 'reframeWall',
+          title: 'Derribando el Muro (Parte 3)',
+          description: 'Convierte una creencia limitante en una potenciadora, busca tu contra-ejemplo y define una acción concreta.',
+        },
+        {
+          id: 'm3a4',
           type: 'cardGame',
           title: 'Juego de Pares: Identifica y Transforma',
           description: 'Encuentra las parejas de creencias limitantes y sus correspondientes creencias potenciadoras para entrenar tu mente a pensar de forma más constructiva.',
+          imageSrc: assetPath('images/juegomodulo3.png'),
           cards: [
             { id: 1, matchId: 1, text: 'No soy lo suficientemente bueno/a para ese puesto.', type: 'limiting' },
             { id: 2, matchId: 1, text: 'Tengo las habilidades y la capacidad de aprender para tener éxito.', type: 'empowering' },

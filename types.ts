@@ -47,10 +47,16 @@ export interface Card {
     type: 'limiting' | 'empowering';
 }
 
+export interface InfoCard {
+  title: string;
+  body: string;
+  color?: string;
+}
+
 export interface Activity {
   id: string;
   title: string;
-  type: 'video' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge';
+  type: 'video' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall';
   description: string;
   videoSrc?: string;
   audioSrc?: string;
@@ -58,6 +64,13 @@ export interface Activity {
   questions?: QuizQuestion[] | EvaluationQuestion[];
   cards?: Card[];
   imageSrc?: string;
+  ui?: {
+    optionBgColor?: string;
+    optionTextColor?: string;
+  };
+  introText?: string;
+  infoCards?: InfoCard[];
+  closingText?: string;
 }
 
 export interface Module {
@@ -93,6 +106,9 @@ export interface CourseProgress {
   lastAccessedActivityId: string | null;
   completionStatus: CompletionStatus;
   percentage: number;
+  answers?: {
+    [activityId: string]: any;
+  };
 }
 
 export interface UserProgress {

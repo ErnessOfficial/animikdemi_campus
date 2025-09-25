@@ -35,8 +35,8 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({ course, activeActivityId,
         <button onClick={onExit} className="text-sm text-[#24668e] hover:underline mb-2">
           <i className="fas fa-arrow-left mr-2"></i>Volver al Dashboard
         </button>
-        <h2 className="text-xl font-bold text-[#101021]">{course.title}</h2>
-        <p className="text-sm text-[#101021]/70">{course.subtitle}</p>
+        <h2 className="text-xl font-bold text-[#4c1760]">{course.title}</h2>
+        <p className="text-sm text-[#00385b] font-semibold">{course.subtitle}</p>
       </div>
       <div className="p-4 flex-grow overflow-y-auto">
         <div className="space-y-4">
@@ -47,7 +47,7 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({ course, activeActivityId,
                 className="w-full flex items-center justify-between text-left p-3 rounded-lg bg-[#101021]/5 hover:bg-[#101021]/10 transition-colors"
               >
                 <div className="flex-1">
-                  <h3 className="font-bold text-[#101021] text-md">{module.title}</h3>
+                  <h3 className="font-bold text-[#4c1760] text-md">{module.title}</h3>
                   <div className="w-full bg-[#101021]/20 rounded-full h-2 mt-2">
                     <div 
                       className="bg-[#24668e] h-2 rounded-full transition-all duration-500" 
@@ -68,8 +68,8 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({ course, activeActivityId,
                           onClick={() => onSelectActivity(activity.id)} 
                           className={`w-full text-left p-2.5 rounded-md text-sm transition-all ${
                             isActive 
-                              ? 'bg-[#6e4380]/20 text-[#6e4380] font-semibold' 
-                              : 'text-[#101021]/80 hover:bg-[#6e4380]/10 hover:text-[#6e4380]'
+                              ? 'bg-[#4c1760]/20 text-[#4c1760] font-semibold' 
+                              : 'text-[#101021]/80 hover:bg-[#4c1760]/10 hover:text-[#4c1760]'
                           }`}
                         >
                           <div className="flex items-center">

@@ -7,7 +7,7 @@ interface TextContentProps {
 
 const TextContent: React.FC<TextContentProps> = ({ content }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-[#101021]">
       {content.map((paragraph, index) => (
         <p key={index}>{paragraph.startsWith('•') ? <strong>{paragraph}</strong> : paragraph}</p>
       ))}
