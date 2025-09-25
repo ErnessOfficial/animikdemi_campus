@@ -3,9 +3,14 @@ import type { QuizQuestion } from '../../types';
 
 interface QuizProps {
   questions: QuizQuestion[];
+  ui?: {
+    optionBgColor?: string;
+    optionTextColor?: string;
+  };
+  onReadyToComplete?: (ready: boolean) => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ questions }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, ui, onReadyToComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [quizFinished, setQuizFinished] = useState(false);
@@ -18,6 +23,7 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setQuizFinished(true);
+      onReadyToComplete?.(true);
     }
   };
 
@@ -86,22 +92,25 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  // Not finished yet
+  if (onReadyToComplete) onReadyToComplete(false);
 
   return (
     <div className="p-4 sm:p-6 bg-transparent rounded-xl border border-[#101021]/10">
       <div className="mb-6">
-        <p className="text-sm font-semibold text-[#6e4380] mb-2">Pregunta {currentQuestionIndex + 1} de {questions.length}</p>
+        <p className="text-sm font-semibold text-[#00385b] mb-2">Pregunta {currentQuestionIndex + 1} de {questions.length}</p>
         <div className="w-full bg-[#101021]/20 rounded-full h-2.5">
-            <div className="bg-[#6e4380] h-2.5 rounded-full transition-all duration-500" style={{width: `${progress}%`}}></div>
+            <div className="bg-[#4c1760] h-2.5 rounded-full transition-all duration-500" style={{width: `${progress}%`}}></div>
         </div>
       </div>
-      <h3 className="text-xl font-semibold text-[#101021] mb-6">{currentQuestion.question}</h3>
+      <h3 className="text-xl font-semibold text-[#00385b] mb-6">{currentQuestion.question}</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {currentQuestion.options.map((option, index) => (
           <button
             key={index}
             onClick={() => handleAnswer(option.text)}
-            className="text-left w-full p-4 bg-white rounded-lg border-2 border-[#101021]/20 hover:border-[#6e4380] hover:bg-[#6e4380]/10 transition-all transform hover:scale-105"
+            className="text-left w-full p-4 rounded-lg border-2 border-[#101021]/20 hover:border-[#4c1760] transition-all transform hover:scale-105"
+            style={{ backgroundColor: ui?.optionBgColor || '#ffffff', color: ui?.optionTextColor || undefined }}
           >
             {option.text}
           </button>

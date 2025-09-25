@@ -63,6 +63,15 @@ const App: React.FC = () => {
                 hasTakenDiagnostic: false,
             };
             setUser(appUser);
+            // Cargar progreso desde localStorage si existe
+            const key = `anik:progress:v1:${appUser.name}`;
+            try {
+              const raw = localStorage.getItem(key);
+              if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.courses) setProgress(parsed);
+              }
+            } catch {}
             const timer = setTimeout(() => setShowDiagnostic(true), 800);
             return () => clearTimeout(timer);
         }
@@ -76,6 +85,15 @@ const App: React.FC = () => {
                 hasTakenDiagnostic: false, // This would be fetched from your DB
             };
             setUser(appUser);
+            // Cargar progreso desde localStorage si existe
+            const key = `anik:progress:v1:${appUser.name || 'user'}`;
+            try {
+              const raw = localStorage.getItem(key);
+              if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.courses) setProgress(parsed);
+              }
+            } catch {}
             
             if (!appUser.hasTakenDiagnostic) {
                  const timer = setTimeout(() => setShowDiagnostic(true), 1000);
@@ -85,6 +103,15 @@ const App: React.FC = () => {
             setUser(null);
         }
     }, [bypassAuth, isAuthenticated, kindeUser]);
+
+    // Persistir progreso en localStorage por usuario
+    useEffect(() => {
+      if (!user) return;
+      const key = `anik:progress:v1:${user.name || 'user'}`;
+      try {
+        localStorage.setItem(key, JSON.stringify(progress));
+      } catch {}
+    }, [user, progress]);
     
     // Handlers
     const handleNavigation = (newView: View) => {
@@ -158,6 +185,23 @@ const App: React.FC = () => {
         setActiveCourseId(courseId);
         setView('course-player');
     };
+
+    const updateLastAccessed = (courseId: string, activityId: string) => {
+        setProgress(prev => {
+            const courseProgress = prev.courses[courseId];
+            if (!courseProgress) return prev;
+            return {
+                ...prev,
+                courses: {
+                    ...prev.courses,
+                    [courseId]: {
+                        ...courseProgress,
+                        lastAccessedActivityId: activityId,
+                    }
+                }
+            };
+        });
+    };
     
     const handleUpdateUser = (updatedUser: Partial<User>) => {
         setUser(prev => prev ? ({ ...prev, ...updatedUser }) : null);
@@ -214,6 +258,27 @@ const App: React.FC = () => {
             }
         });
     };
+
+    const saveActivityAnswers = (courseId: string, activityId: string, data: any) => {
+        setProgress(prev => {
+            const courseProgress = prev.courses[courseId];
+            if (!courseProgress) return prev;
+            const updated: UserProgress = {
+                ...prev,
+                courses: {
+                    ...prev.courses,
+                    [courseId]: {
+                        ...courseProgress,
+                        answers: {
+                            ...(courseProgress.answers || {}),
+                            [activityId]: data,
+                        }
+                    }
+                }
+            };
+            return updated;
+        });
+    };
     
     // Render logic for authenticated user
     const renderContent = () => {
@@ -224,6 +289,8 @@ const App: React.FC = () => {
                             course={detailedCourse} 
                             progress={progress.courses[activeCourseId]}
                             markActivityAsCompleted={markActivityAsCompleted}
+                            saveActivityAnswers={saveActivityAnswers}
+                            updateLastAccessed={updateLastAccessed}
                             onExit={() => handleNavigation('dashboard')}
                         />;
             } else {

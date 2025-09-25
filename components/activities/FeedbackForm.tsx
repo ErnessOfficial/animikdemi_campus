@@ -1,6 +1,6 @@
-import React from 'react';
-
-const FeedbackForm: React.FC = () => {
+import React, { useEffect, useState } from 'react';
+const FeedbackForm: React.FC<{ onReadyToComplete?: (ready: boolean) => void }> = ({ onReadyToComplete }) => {
+  const [filled, setFilled] = useState(false);
   const scenarios = [
     {
       title: "Situación 1: El Feedback Vago",
@@ -28,6 +28,10 @@ const FeedbackForm: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    onReadyToComplete?.(filled);
+  }, [filled, onReadyToComplete]);
+
   return (
     <div className="space-y-8">
       <div className="p-4 bg-[#6e4380]/10 border-l-4 border-[#6e4380] text-[#6e4380] rounded-r-lg">
@@ -46,6 +50,7 @@ const FeedbackForm: React.FC = () => {
                   rows={4}
                   className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition"
                   placeholder={q.placeholder}
+                  onChange={(e) => setFilled(e.target.value.trim().length > 0 || filled)}
                 ></textarea>
               </div>
             ))}

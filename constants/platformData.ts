@@ -169,11 +169,12 @@ export const initialUserProgress: UserProgress = {
       completionStatus: {
         m1: { completed: false, activities: { m1a1: true, m1a2: false, m1a3: false, m1a4: false } },
         m2: { completed: false, activities: { m2a1: false, m2a2: false, m2a3: false } },
-        m3: { completed: false, activities: { m3a1: false, m3a2: false } },
+        m3: { completed: false, activities: { m3a1: false, m3a2: false, m3a3: false, m3a4: false } },
         m4: { completed: false, activities: { m4a1: false, m4a2: false } },
         m5: { completed: false, activities: { m5a1: false } },
       },
       percentage: 15,
+      answers: {}
     }
   }
 };

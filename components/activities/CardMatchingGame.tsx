@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { assetPath } from '../../utils/paths';
 import type { Card } from '../../types';
 
 interface CardMatchingGameProps {
   cards: Card[];
+  onReadyToComplete?: (ready: boolean) => void;
 }
 
-const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards }) => {
+const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards, onReadyToComplete }) => {
   const [cards, setCards] = useState<any[]>([]);
   const [flipped, setFlipped] = useState<number[]>([]);
   const [solved, setSolved] = useState<number[]>([]);
@@ -49,6 +51,9 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
   };
   
   const allSolved = solved.length === initialCards.length / 2;
+  useEffect(() => {
+    onReadyToComplete?.(allSolved);
+  }, [allSolved, onReadyToComplete]);
 
   return (
     <div>
@@ -66,7 +71,7 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
               >
                 {/* Back of card */}
                 <div className="absolute w-full h-full backface-hidden bg-[#6e4380] rounded-lg flex items-center justify-center cursor-pointer shadow-lg">
-                  <i className="fas fa-question text-4xl text-white"></i>
+                  <img src={assetPath('images/logo_animikdemi.png')} alt="Animikdemi" className="w-16 h-16 opacity-90" />
                 </div>
                 {/* Front of card */}
                 <div

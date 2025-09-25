@@ -2,6 +2,7 @@ import React from 'react';
 import type { User, UserProgress } from '../types';
 import { courseCatalog } from '../constants/platformData';
 import CourseCard from '../components/platform/CourseCard';
+import GamificationWidget from '../components/platform/GamificationWidget';
 
 interface DashboardProps {
     user: User;
@@ -34,9 +35,12 @@ const Dashboard: React.FC<DashboardProps> = ({ user, progress, onContinueCourse,
     return (
         <div className="animate-fade-in space-y-10">
             {/* Welcome Header */}
-            <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-8 rounded-xl shadow-lg text-white">
-                <h1 className="text-4xl font-extrabold">¡Bienvenido de nuevo, {user.name.split(' ')[0]}!</h1>
-                <p className="mt-2 text-lg opacity-80">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
+            <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-6 md:p-8 rounded-xl shadow-lg text-white flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 className="text-3xl md:text-4xl font-extrabold">¡Bienvenido de nuevo, {user.name.split(' ')[0]}!</h1>
+                    <p className="mt-2 text-lg opacity-80">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
+                </div>
+                <GamificationWidget progress={progress} catalog={courseCatalog} />
             </div>
 
             {/* Continue Learning */}

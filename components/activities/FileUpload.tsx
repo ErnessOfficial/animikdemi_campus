@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-const FileUpload: React.FC = () => {
+const FileUpload: React.FC<{ onReadyToComplete?: (ready: boolean) => void }> = ({ onReadyToComplete }) => {
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -9,6 +9,10 @@ const FileUpload: React.FC = () => {
       setFileName(event.target.files[0].name);
     }
   };
+
+  useEffect(() => {
+    onReadyToComplete?.(!!fileName);
+  }, [fileName, onReadyToComplete]);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();

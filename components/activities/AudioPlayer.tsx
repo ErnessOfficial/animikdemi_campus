@@ -3,14 +3,15 @@ import React from 'react';
 interface AudioPlayerProps {
   src: string;
   transcript?: string[];
+  onEnded?: () => void;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, transcript }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, transcript, onEnded }) => {
   return (
     <div>
       <div className="w-full max-w-3xl mx-auto bg-white p-4 rounded-lg shadow-lg border border-[#101021]/10">
         {src ? (
-          <audio controls className="w-full">
+          <audio controls className="w-full" onEnded={onEnded}>
             <source src={src} type="audio/mpeg" />
             Tu navegador no soporta el elemento de audio.
           </audio>
