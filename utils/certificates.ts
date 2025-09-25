@@ -7,7 +7,8 @@ export interface CertificateData {
   dateText: string; // already formatted
 }
 
-const defaultTemplate = 'images/certificados-animikdemi/certificado-animik-template.png';
+// Nota: la carpeta en public está nombrada como 'certifcados-animikdemi' (sin la segunda 'i')
+const defaultTemplate = 'images/certifcados-animikdemi/certificado-animik-template.png';
 
 // Simple text wrap
 function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
@@ -83,4 +84,3 @@ export async function downloadCertificate(opts: CertificateData, filename: strin
   a.remove();
   URL.revokeObjectURL(url);
 }
-
