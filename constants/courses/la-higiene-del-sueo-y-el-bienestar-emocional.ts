@@ -21,7 +21,7 @@ export const course: Course = {
   "modules": [
     {
       "id": "m1",
-      "title": "El sueño como pilar de la salud integral",
+      "title": "Módulo 1: El sueño como pilar de la salud integral",
       "activities": [
         {
           "id": "m1a1",
@@ -71,7 +71,7 @@ export const course: Course = {
     },
     {
       "id": "m2",
-      "title": "Higiene del sueño: hábitos y rutinas saludables",
+      "title": "Módulo 2: Higiene del sueño: hábitos y rutinas saludables",
       "activities": [
         {
           "id": "m2a1",
@@ -103,7 +103,7 @@ export const course: Course = {
     },
     {
       "id": "m3",
-      "title": "Sueño y emociones: un círculo bidireccional",
+      "title": "Módulo 3: Sueño y emociones: un círculo bidireccional",
       "activities": [
         {
           "id": "m3a1",
@@ -182,7 +182,7 @@ export const course: Course = {
     },
     {
       "id": "m4",
-      "title": "Estrategias para mejorar el descanso y la regulación emocional",
+      "title": "Módulo 4: Estrategias para mejorar el descanso y la regulación emocional",
       "activities": [
         {
           "id": "m4a1",
@@ -204,7 +204,7 @@ export const course: Course = {
     },
     {
       "id": "m5",
-      "title": "Construyendo mi propio plan de bienestar nocturno",
+      "title": "Módulo 5: Construyendo mi propio plan de bienestar nocturno",
       "activities": [
         {
           "id": "m5a1",

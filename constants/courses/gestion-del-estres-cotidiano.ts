@@ -21,7 +21,7 @@ export const course: Course = {
   modules: [
     {
       id: 'm1',
-      title: 'Introducción al Estrés',
+      title: 'Módulo 1: Introducción al Estrés',
       activities: [
         {
           id: 'm1a1',
@@ -51,7 +51,7 @@ export const course: Course = {
     },
     {
       id: 'm2',
-      title: 'Herramientas para Manejar el Estrés',
+      title: 'Módulo 2: Herramientas para Manejar el Estrés',
       activities: [
         {
           id: 'm2a1',
@@ -75,7 +75,7 @@ export const course: Course = {
     },
     {
       id: 'm3',
-      title: 'Construyendo Resiliencia',
+      title: 'Módulo 3: Construyendo Resiliencia',
       activities: [
         {
           id: 'm3a1',
