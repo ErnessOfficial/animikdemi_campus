@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Course, UserProgress } from '../types';
+import { estimateCourseDurationMinutes, formatDuration } from '../utils/course';
 
 interface CourseDetailPageProps {
   course: Course;
@@ -24,6 +25,12 @@ const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, progress, o
           <span className="font-bold text-[#6e4380]">{course.category.toUpperCase()}</span>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-[#101021] mt-2">{course.title}</h1>
           <p className="mt-4 text-lg text-[#101021]/80">{course.subtitle}</p>
+          {estimateCourseDurationMinutes(course) > 0 && (
+            <div className="mt-2 text-sm text-[#101021]/70 flex items-center gap-2">
+              <i className="far fa-clock text-[#24668e]"></i>
+              <span>Duración estimada: {formatDuration(estimateCourseDurationMinutes(course))}</span>
+            </div>
+          )}
           {isEnrolled ? (
             <button 
                 onClick={() => onGoToCourse(course.id)}

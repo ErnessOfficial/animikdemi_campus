@@ -8,9 +8,15 @@ interface TextContentProps {
 const TextContent: React.FC<TextContentProps> = ({ content }) => {
   return (
     <div className="space-y-4 text-[#101021]">
-      {content.map((paragraph, index) => (
-        <p key={index}>{paragraph.startsWith('•') ? <strong>{paragraph}</strong> : paragraph}</p>
-      ))}
+      {content.map((paragraph, index) => {
+        if (paragraph.startsWith('•')) {
+          return <p key={index}><strong>{paragraph.substring(1).trim()}</strong></p>;
+        }
+        if (paragraph.startsWith('i:')) {
+          return <p key={index} className="italic">{paragraph.substring(2).trim()}</p>;
+        }
+        return <p key={index}>{paragraph}</p>;
+      })}
     </div>
   );
 };

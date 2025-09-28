@@ -11,6 +11,7 @@ export const courseDataMindfulness: Course = {
   broadCategories: ['Gestión Emocional'],
   coverImage: assetPath('images/course_cover_4.png'),
   instructor: mockInstructor,
+  estimatedDurationMinutes: 150,
   learningObjectives: [
     'Comprender los principios fundamentales del mindfulness y sus beneficios.',
     'Utilizar la respiración como una herramienta para calmar el sistema nervioso.',

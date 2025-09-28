@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Course, CompletionStatus } from '../../types';
+import { estimateCourseDurationMinutes, formatDuration } from '../../utils/course';
 
 interface CourseSidebarProps {
   course: Course;
@@ -37,6 +38,12 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({ course, activeActivityId,
         </button>
         <h2 className="text-xl font-bold text-[#4c1760]">{course.title}</h2>
         <p className="text-sm text-[#00385b] font-semibold">{course.subtitle}</p>
+        {estimateCourseDurationMinutes(course) > 0 && (
+          <div className="mt-1 text-xs text-[#101021]/70 flex items-center gap-1">
+            <i className="far fa-clock text-[#24668e]"></i>
+            <span>{formatDuration(estimateCourseDurationMinutes(course))}</span>
+          </div>
+        )}
       </div>
       <div className="p-4 flex-grow overflow-y-auto">
         <div className="space-y-4">
