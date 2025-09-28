@@ -56,7 +56,7 @@ export interface InfoCard {
 export interface Activity {
   id: string;
   title: string;
-  type: 'video' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall';
+  type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe';
   description: string;
   videoSrc?: string;
   audioSrc?: string;
@@ -64,6 +64,13 @@ export interface Activity {
   questions?: QuizQuestion[] | EvaluationQuestion[];
   cards?: Card[];
   imageSrc?: string;
+  imageAltSrc?: string;
+  hideHeader?: boolean;
+  flipGroups?: Array<{
+    title: string;
+    color?: string;
+    cards: Array<{ front: string; back: string }>;
+  }>;
   ui?: {
     optionBgColor?: string;
     optionTextColor?: string;
@@ -88,6 +95,7 @@ export interface Course {
   broadCategories: ('Autoconocimiento' | 'Gestión Emocional' | 'Habilidades Sociales')[];
   coverImage: string;
   instructor: Instructor;
+  estimatedDurationMinutes?: number;
   learningObjectives: string[];
   modules: Module[];
 }

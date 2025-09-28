@@ -16,6 +16,10 @@ import CourseSidebar from '../components/course/CourseSidebar';
 import InfoCards from '../components/activities/InfoCards';
 import InvisibleWall from '../components/activities/InvisibleWall';
 import ReframeWall from '../components/activities/ReframeWall';
+import YouTubePlayer from '../components/activities/YouTubePlayer';
+import FlipCards from '../components/activities/FlipCards';
+import PillarsInteractive from '../components/activities/PillarsInteractive';
+import PondGame from '../components/activities/PondGame';
 
 interface CoursePlayerProps {
   course: Course;
@@ -37,12 +41,53 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
                 )}
               </div>
             );
+        case 'youtube':
+            return (
+              <div className="space-y-6">
+                <YouTubePlayer url={activity.videoSrc || ''} />
+                {activity.content && activity.content.length > 0 && (
+                  <TextContent content={activity.content as string[]} />
+                )}
+              </div>
+            );
         case 'text':
             return <TextContent content={activity.content as string[]} />;
+        case 'iframe':
+            // Render HTML content inside an iframe using srcDoc when provided,
+            // otherwise fall back to a URL in videoSrc.
+            return (
+              <div className="w-full">
+                {activity.content && activity.content.length > 0 ? (
+                  <iframe
+                    title={activity.title}
+                    className="w-full border rounded-lg shadow-sm"
+                    style={{ minHeight: 800 }}
+                    srcDoc={(activity.content as string[]).join('\n')}
+                  />
+                ) : (
+                  <iframe
+                    title={activity.title}
+                    className="w-full border rounded-lg shadow-sm"
+                    style={{ minHeight: 800 }}
+                    src={activity.videoSrc || ''}
+                  />
+                )}
+              </div>
+            );
         case 'quiz':
             return <Quiz questions={activity.questions as any[]} ui={activity.ui} onReadyToComplete={onReadyToComplete} />;
         case 'evaluation':
-            return <ModuleEvaluation questions={activity.questions as any[]} />;
+            return (
+              <div className="space-y-6">
+                {activity.content && activity.content.length > 0 && (
+                  <TextContent content={activity.content as string[]} />
+                )}
+                {activity.audioSrc && (
+                  <AudioPlayer src={activity.audioSrc} onEnded={() => { /* audio no bloquea */ }} />
+                )}
+                <ModuleEvaluation questions={activity.questions as any[]} onReadyToComplete={onReadyToComplete} />
+              </div>
+            );
         case 'reflectionTree':
             return <ReflectionTree onReadyToComplete={onReadyToComplete} />;
         case 'audio':
@@ -60,6 +105,27 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
                   <p className="text-[#101021]">{activity.closingText}</p>
                 )}
                 <FileUpload onReadyToComplete={onReadyToComplete} />
+              </div>
+            );
+        case 'flipCards':
+            return (
+              <FlipCards
+                heading={activity.description}
+                imageSrc={activity.imageSrc}
+                note={activity.introText}
+                groups={activity.flipGroups || []}
+                onReadyToComplete={onReadyToComplete}
+              />
+            );
+        case 'pillarsInteractive':
+            return <PillarsInteractive onReadyToComplete={onReadyToComplete} />;
+        case 'pondGame':
+            return (
+              <div className="space-y-6">
+                {activity.content && activity.content.length > 0 && (
+                  <TextContent content={activity.content as string[]} />
+                )}
+                <PondGame onReadyToComplete={onReadyToComplete} />
               </div>
             );
         case 'feedbackForm':
@@ -80,6 +146,18 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
 
 const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActivityAsCompleted, onExit, saveActivityAnswers, updateLastAccessed }) => {
   const [activeActivityId, setActiveActivityId] = useState<string>(progress.lastAccessedActivityId || course.modules[0].activities[0].id);
+  const [toast, setToast] = useState<string | null>(null);
+  const showToast = (msg: string) => {
+    setToast(msg);
+    window.setTimeout(() => setToast(null), 2200);
+  };
+  const [zoomSrc, setZoomSrc] = useState<string | null>(null);
+  const closeZoom = () => setZoomSrc(null);
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeZoom(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const handleSelectActivity = (activityId: string) => {
     setActiveActivityId(activityId);
@@ -108,6 +186,9 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
     if (nextActivityId) {
       setActiveActivityId(nextActivityId);
       updateLastAccessed?.(course.id, nextActivityId);
+      showToast('Progreso guardado. Avanzando a la siguiente actividad...');
+    } else {
+      showToast('Actividad completada.');
     }
   };
 
@@ -130,7 +211,9 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
   const [canComplete, setCanComplete] = useState<boolean>(true);
 
   const requiresInteraction = (type: Activity['type']) => {
-    return type !== 'text';
+    // No gating for textual or YouTube embeds (no ended event)
+    if (type === 'text' || type === 'youtube' || type === 'iframe') return false;
+    return true;
   };
 
   React.useEffect(() => {
@@ -142,6 +225,8 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
     switch (activity.type) {
       case 'video':
         return 'Reproduce el video hasta el final.';
+      case 'youtube':
+        return null;
       case 'audio':
         return 'Reproduce el audio hasta el final.';
       case 'quiz':
@@ -166,8 +251,8 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
   };
   const isCompleted = activeModule && activeActivity ? progress.completionStatus[activeModule.id]?.activities[activeActivity.id] || false : false;
 
-  return (
-    <div className="flex flex-col md:flex-row gap-8 animate-fade-in">
+    return (
+      <div className="flex flex-col md:flex-row gap-8 animate-fade-in">
         <div className="w-full md:w-80 lg:w-96 flex-shrink-0">
             <CourseSidebar
                 course={course}
@@ -180,15 +265,32 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
         <div className="flex-1">
              {activeModule && activeActivity ? (
                 <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-[#101021]/10">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-[#4c1760] mb-2">{activeActivity.title}</h2>
-                    <p className="text-[#00385b] font-semibold mb-6">{activeActivity.description}</p>
-                    {(activeActivity.type === 'reflectionTree' || activeActivity.type === 'cardGame') && activeActivity.imageSrc && (
+                    {!activeActivity.hideHeader && (
+                      <>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-[#4c1760] mb-2">{activeActivity.title}</h2>
+                        <p className="text-[#00385b] font-semibold mb-6">{activeActivity.description}</p>
+                      </>
+                    )}
+                    {activeActivity.imageSrc && activeActivity.type !== 'flipCards' && (
                       <div className="mb-6 flex justify-center">
-                        <img
-                          src={activeActivity.imageSrc}
-                          alt={`Ilustración para ${activeActivity.title}`}
-                          className="rounded-lg shadow-md max-w-full h-auto sm:max-w-lg"
-                        />
+                        {activeActivity.imageAltSrc ? (
+                          <picture>
+                            <source srcSet={activeActivity.imageSrc} type="image/svg+xml" />
+                            <img
+                              src={activeActivity.imageAltSrc}
+                              alt={`Ilustración para ${activeActivity.title}`}
+                              className="rounded-lg shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
+                              onClick={() => setZoomSrc(activeActivity.imageAltSrc || activeActivity.imageSrc!)}
+                            />
+                          </picture>
+                        ) : (
+                          <img
+                            src={activeActivity.imageSrc}
+                            alt={`Ilustración para ${activeActivity.title}`}
+                            className="rounded-lg shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
+                            onClick={() => setZoomSrc(activeActivity.imageSrc!)}
+                          />
+                        )}
                       </div>
                     )}
                     <div className="prose max-w-none prose-slate">
@@ -199,19 +301,11 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
                           onReadyToComplete={(ready) => setCanComplete(!!ready)}
                         />
                     </div>
-                    {activeActivity.type !== 'reflectionTree' && activeActivity.imageSrc && (
-                      <div className="mt-8 flex justify-center">
-                        <img 
-                          src={activeActivity.imageSrc} 
-                          alt={`Ilustración para ${activeActivity.title}`} 
-                          className="rounded-lg shadow-md max-w-full h-auto sm:max-w-md" 
-                        />
-                      </div>
-                    )}
+                    
                     {!isCompleted && (
                         <div className="mt-8 flex items-center justify-between">
                             <button
-                                onClick={() => { updateLastAccessed?.(course.id, activeActivityId); onExit(); }}
+                                onClick={() => { updateLastAccessed?.(course.id, activeActivityId); showToast('Progreso guardado.'); setTimeout(() => onExit(), 800); }}
                                 className="bg-[#101021]/10 text-[#101021] font-semibold py-2 px-4 rounded-lg hover:bg-[#101021]/20 transition"
                             >
                                 Guardar y salir
@@ -240,8 +334,27 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
                 </div>
             )}
         </div>
-    </div>
-  );
-};
+        {toast && (
+          <div className="fixed bottom-6 right-6 bg-[#24668e] text-white px-4 py-3 rounded-lg shadow-lg text-sm sm:text-base animate-fade-in">
+            <i className="fas fa-check-circle mr-2 text-white/90"></i>{toast}
+          </div>
+        )}
+        {zoomSrc && (
+          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={closeZoom}>
+            <div className="relative max-w-[95vw] max-h-[90vh] bg-white p-3 sm:p-4 rounded" onClick={(e) => e.stopPropagation()}>
+              <img src={zoomSrc} alt="Infografía ampliada" className="w-auto h-auto max-w-[90vw] max-h-[82vh] rounded shadow-2xl" />
+              <button
+                aria-label="Cerrar"
+                onClick={closeZoom}
+                className="absolute -top-3 -right-3 bg-white text-[#101021] rounded-full w-9 h-9 shadow flex items-center justify-center hover:bg-[#f0f2f5]"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
 export default CoursePlayer;

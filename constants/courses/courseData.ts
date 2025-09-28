@@ -17,6 +17,7 @@ export const courseData: Course = {
   broadCategories: ['Autoconocimiento', 'Gestión Emocional'],
   coverImage: assetPath('images/course_cover_1.png'),
   instructor: mockInstructor,
+  estimatedDurationMinutes: 240,
   learningObjectives: [
     'Identificar y priorizar tus valores personales fundamentales.',
     'Reconocer y diferenciar entre creencias limitantes y potenciadoras.',

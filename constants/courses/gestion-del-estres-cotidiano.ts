@@ -12,6 +12,7 @@ export const course: Course = {
   broadCategories: ['Gestión Emocional'],
   coverImage: assetPath('images/estres_portada.png'),
   instructor: mockInstructor,
+  estimatedDurationMinutes: 75,
   learningObjectives: [
     'Identificar las principales fuentes de estrés en la vida cotidiana.',
     'Aplicar técnicas de respiración y relajación para calmar la mente.',

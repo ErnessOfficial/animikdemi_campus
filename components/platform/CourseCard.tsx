@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Course } from '../../types';
+import { estimateCourseDurationMinutes, formatDuration } from '../../utils/course';
 
 interface CourseCardProps {
   course: Course;
@@ -30,6 +31,12 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, progress, onSelect, isC
       <div className="p-5">
         <h3 className="text-lg font-bold text-[#101021] truncate">{course.title}</h3>
         <p className="text-sm text-[#101021]/70 mt-1 h-10">{course.subtitle}</p>
+        {estimateCourseDurationMinutes(course) > 0 && (
+          <div className="mt-2 text-xs text-[#101021]/70 flex items-center gap-2">
+            <i className="far fa-clock text-[#24668e]"></i>
+            <span>{formatDuration(estimateCourseDurationMinutes(course))}</span>
+          </div>
+        )}
         
         {progress !== undefined && (
           <div className="mt-4">

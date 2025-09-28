@@ -99,24 +99,6 @@ const placeholderCourses: Course[] = [
     modules: [], // Simplified for catalog view
   },
   {
-    id: 'sueno-consciente-101',
-    title: 'El Arte del Descanso',
-    subtitle: 'Optimiza tu sueño para una vida más enérgica y saludable.',
-    description: 'Descubre las claves científicas y prácticas ancestrales para mejorar la calidad de tu sueño. Este curso te enseñará a crear rituales nocturnos, gestionar los pensamientos que te impiden dormir y a entender tu propio ciclo de descanso para despertar renovado cada mañana.',
-    category: "Sueño & Descanso consciente",
-    broadCategories: ['Gestión Emocional'],
-    coverImage: assetPath('images/course_cover_5.png'),
-    instructor: mockInstructor,
-    learningObjectives: [
-        'Entender las fases del sueño y su importancia.',
-        'Crear un ambiente óptimo para el descanso.',
-        'Practicar técnicas de relajación antes de dormir.',
-        'Identificar y modificar hábitos que perjudican el sueño.',
-        'Desarrollar una rutina de sueño personalizada.'
-    ],
-    modules: [],
-  },
-  {
     id: 'bienestar-trabajo-101',
     title: 'Bienestar Laboral: Metodología PILAR',
     subtitle: 'Construye resiliencia y propósito en tu entorno profesional.',
