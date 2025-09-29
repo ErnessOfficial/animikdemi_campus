@@ -118,7 +118,7 @@ export const course: Course = {
           type: 'video',
           title: 'Video Animado: El Mito del "Siempre Ocupado"',
           description: 'Explora cómo la cultura actual glorifica el agotamiento y por qué es contraproducente.',
-          videoSrc: '/videos/mito_siempre_ocupado.mp4',
+          videoSrc: assetPath('videos/mito_siempre_ocupado.mp4'),
           content: [
             '• Transcripción del Video',
             'i:"¿Alguna vez has escuchado esa frase silenciosa que ronda en nuestra mente… “ya descansaré cuando termine todo”? Ese es el mito del agotamiento: la creencia de que solo podemos parar cuando no damos más, cuando el cuerpo colapsa, cuando la mente ya no responde. Pero piensa… ¿no es absurdo? Es como esperar a que el coche se quede sin gasolina en medio de la autopista para recién ir a la gasolinera. Como beber agua solo cuando la sed ya duele en la garganta. Nos han enseñado a confundir agotamiento con productividad. A sentir culpa por cerrar los ojos cinco minutos, por apagar el móvil, por decir “hoy no puedo más”. El mito nos dice que descansar es un premio, cuando en realidad es una necesidad biológica y emocional. El descanso no es el final del camino después del cansancio extremo. El descanso es parte del camino. Es el aire que sostiene el fuego, no la ceniza que queda después de quemarnos. Romper con este mito es un acto de rebeldía. Es aprender a escucharnos antes de que el cuerpo grite, antes de que la mente se fracture, antes de que la emoción nos desborde. Porque descansar no es rendirse. Descansar es resistir. Es cuidar el motor que nos mantiene vivos, creativos y humanos. La pregunta es… ¿quieres seguir creyendo en el mito del agotamiento… o empezar a escribir una nueva historia con tu descanso como protagonista?"'
@@ -132,7 +132,7 @@ export const course: Course = {
           content: [
             'Para conocer el significado de descanso para ti es importante que exploremos dentro de tus más profundas reflexiones, por eso es momento de que hagamos un ejercicio de reflexión guiada. Busca un lugar tranquilo, donde nada pueda perturbarte ni interrumpirte, ponte unos audífonos, ya que ayudará a que la experiencia sea mucho más relajante y cuando esté todo listo reproduce el audio y escúchalo atentamente siguiendo las instrucciones. Una vez que hayas terminado de escuchar el audio, continúa con la pregunta de abajo.'
           ],
-          audioSrc: '/audios/reflexion_guiada.mp3',
+          audioSrc: assetPath('audios/reflexion_guiada.mp3'),
           questions: [
             { prompt: '¿Qué significa para ti la palabra "descanso"?' }
           ]
