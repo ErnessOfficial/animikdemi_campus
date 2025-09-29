@@ -9,7 +9,7 @@ export const course: Course = {
   description: 'Este curso te guía a través de un viaje reflexivo para entender el descanso no como un lujo, sino como una habilidad esencial. Aprenderás a diferenciar sueño y descanso, explorarás los pilares del descanso consciente y diseñarás rituales personalizados para mejorar tu salud emocional y física.',
   category: 'Autoconciencia & Regulación emocional',
   broadCategories: ['Gestión Emocional'],
-  coverImage: '/images/cover_el_arte_del_descanso.png',
+  coverImage: assetPath('images/cover_el_arte_del_descanso.png'),
   instructor: mockInstructor,
   estimatedDurationMinutes: 180,
   learningObjectives: [
@@ -30,7 +30,7 @@ export const course: Course = {
           hideHeader: true,
           title: 'Contexto y Recursos Teóricos',
           description: 'Explora las diferencias entre sueño y descanso, y su importancia para el bienestar.',
-          imageSrc: '/images/cover_el_arte_del_descanso.png',
+          imageSrc: assetPath('images/cover_el_arte_del_descanso.png'),
           introText: 'Haz clic en cada tarjeta para girarla y descubrir la definición completa del concepto.',
           flipGroups: [
             {
