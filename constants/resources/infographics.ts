@@ -12,7 +12,7 @@ export const infographics: ResourceItem[] = [
   },
   {
     title: 'Infografía: Comunicación Asertiva — Pasos Prácticos',
-    url: 'https://example.com/infografia-comunicacion-asertiva'
+    url: 'https://ErnessOfficial.github.io/infografia_Comunicacion_Asertiva/'
   }
 ];
 
