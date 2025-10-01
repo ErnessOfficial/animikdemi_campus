@@ -11,11 +11,11 @@ const ComplementaryResourcesPage: React.FC<Props> = ({ onBack }) => {
     <div>
       <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] text-white rounded-xl p-6 shadow mb-6">
         <h1 className="text-2xl font-extrabold">Recursos Complementarios</h1>
-        <p className="mt-2 text-white/90">Aqui encontraras otras herramnientas y materiales que te ayudaran en la construcción de tu aprendizaje desde capsulas formativas express, creadas para crear bases o consolidar tu aprendizaje sobre algun tema  hasta recursos externos de mucho interes. Solo entra y echa un vistazo</p>
+        <p className="mt-2 text-white/90">Aquí encontrarás otras herramientas y materiales que te ayudarán en la construcción de tu aprendizaje: desde cápsulas formativas express, creadas para sentar bases o consolidar tu aprendizaje sobre algún tema, hasta recursos externos de mucho interés. Solo entra y echa un vistazo.</p>
       </div>
       <ResourceList
-        heading="Listado de Recursos  Complementarios"
-        subtitle="filtra por palabra clave o titulo para encontrar lo que te interesa"
+        heading="Listado de Recursos Complementarios"
+        subtitle="Filtra por palabra clave o título para encontrar lo que te interesa."
         items={complementary}
         onBack={onBack}
       />
