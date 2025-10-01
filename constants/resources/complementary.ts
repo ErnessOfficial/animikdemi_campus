@@ -12,11 +12,10 @@ export const complementary: ResourceItem[] = [
   },
   {
     title: 'Recurso: Respiración 4x4 (video demostración)',
-    url: 'https://example.com/respiracion-4x4'
+    url: 'https://ernessofficial.github.io/RESPIRACION_CONSCIENTE_infografia/'
   },
   {
     title: 'Blog: Comunicación asertiva en el trabajo (guía práctica)',
     url: 'https://example.com/comunicacion-asertiva-trabajo'
   }
 ];
-
