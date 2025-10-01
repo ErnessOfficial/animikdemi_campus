@@ -8,7 +8,7 @@ import type { ResourceItem } from '../../components/resources/ResourceList';
 export const complementary: ResourceItem[] = [
   {
     title: 'Artículo: Estrategias para reducir el estrés en 5 minutos',
-    url: 'https://example.com/articulo-estrategias-estres'
+    url: 'https://drive.google.com/file/d/12pqG6lDJvXOIzrrkqdWLh3kVIaOOkZFd/view?usp=drive_link'
   },
   {
     title: 'Recurso: Respiración 4x4 (video demostración)',
@@ -16,6 +16,6 @@ export const complementary: ResourceItem[] = [
   },
   {
     title: 'Blog: Comunicación asertiva en el trabajo (guía práctica)',
-    url: 'https://example.com/comunicacion-asertiva-trabajo'
+    url: 'https://ernessofficial.github.io/Recursointeractivo_ComunicacionAsertiva/'
   }
 ];
