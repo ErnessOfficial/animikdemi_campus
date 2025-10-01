@@ -33,7 +33,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate }) => {
         <ResourceCard
           imageSrc={assetPath('images/recursos_complementarios.png')}
           title="Recursos Complementarios"
-          description="Artículos y enlaces externos para ampliar tus fuentes y conectar con el mundo de AnImiKdemi."
+          description="Aqui encontraras otras herramnientas y materiales que te ayudaran en la construcción de tu aprendizaje desde capsulas formativas express, creadas para crear bases o consolidar tu aprendizaje sobre algun tema  hasta recursos externos de mucho interes. Solo entra y echa un vistazo"
           onExplore={() => onNavigate('resources-complementary')}
         />
       </div>
