@@ -8,20 +8,40 @@ import type { ResourceItem } from '../../components/resources/ResourceList';
 
 export const guides: ResourceItem[] = [
   {
-    title: 'Guía del Curso: Estrategias Prácticas de Calma (PDF)',
-    url: 'https://docs.google.com/document/d/1osqZT8Ld3ZlyXsuJVMcok4oaUSBL12suWNV2qn2WgfU/edit?usp=sharing'
+    title: 'Guía-Desconexión Digital Antes Dormir',
+    url: 'https://drive.google.com/file/d/19d04wM_snqGUtXP33Sawvky3KpNgSH2i/view?usp=drive_link'
   },
   {
-    title: 'Manual Práctico: Autoconocimiento (Ejercicios)',
-    url: 'https://drive.google.com/your-file-id-2'
+    title: 'Guía de Ejercicios de Autorregulación Emocional by Animikdemi',
+    url: 'https://drive.google.com/file/d/1io6rFr8qMcxXoeaTAZ66WZFaauUgMIXu/view?usp=drive_link'
   },
   {
-    title: 'Guía del Curso: Mindfulness - Conectando con tu Calma Interior (PDF)',
-    url: 'https://drive.google.com/your-file-id-3'
+    title: 'Guía del Curso: Mindfulness - Estrategias Prácticas de Calma (PDF)',
+    url: 'https://drive.google.com/file/d/1P6b22P88CQWwl-yLq0bGyi7wnDZYahCt/view?usp=drive_link'
   },
   {
     title: 'Manual de Prácticas Mindfulness (Ejercicios)',
-    url: 'https://drive.google.com/your-file-id-4'
+    url: 'https://drive.google.com/file/d/1RjokOl5d9EkrHkVruM49ZAKZv178zKNC/view?usp=drive_link'
+  },
+  {
+    title: 'Guía estructural  del  programa  ¿Qué me dice mi Ansiedad?',
+    url: 'https://drive.google.com/file/d/1acJo9SYyW2jhsfXwmtM3aFoTaNdXXBbP/view?usp=drive_link'
+  },
+  {
+    title: 'Guia general- PROGRAMA DE “CANALIZACIÓN, PREVENCIÓN Y GESTIÓN DEL ESTRÉS LABORAL" (mc-1,2,3 y 4)',
+    url: 'https://drive.google.com/file/d/1IQ31nUW3GdNTUcgKItiuh18CygNowiGg/view?usp=drive_link'
+  },
+  {
+    title: 'Guía pdf - Ruta interactiva del bienestar emocional',
+    url: 'https://drive.google.com/file/d/1kOyO9d7WA6EUWXDFYFVfnA_bOE1ZiQXv/view?usp=drive_link'
+  },
+  {
+    title: 'Guía Practica Cómo poner límites en el trabajo sin perder la cercanía',
+    url: 'https://drive.google.com/file/d/1Bv0AM9YTepX_YBjQsDwaayRYY23Re4Ae/view?usp=drive_link'
+  },
+  {
+    title: 'Plan de Capacitación - Comunicación Asertiva para el Liderazgo y la Colaboración Efectiva',
+    url: 'https://drive.google.com/file/d/1ZLvmS6TatE4XMHVAMVVFjexFKGSkLdGD/view?usp=drive_link'
   }
 ];
 
