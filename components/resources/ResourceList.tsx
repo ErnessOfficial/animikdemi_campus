@@ -39,7 +39,7 @@ const ResourceList: React.FC<ResourceListProps> = ({ heading, subtitle, items, o
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar por título..."
+            placeholder="Buscar por título o palabra clave..."
             className="w-full bg-[#f0f2f5] rounded-lg py-2 pl-9 pr-3 border border-transparent focus:bg-white focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition"
           />
         </div>
@@ -63,4 +63,3 @@ const ResourceList: React.FC<ResourceListProps> = ({ heading, subtitle, items, o
 };
 
 export default ResourceList;
-
