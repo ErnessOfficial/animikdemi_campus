@@ -15,7 +15,7 @@ export const complementary: ResourceItem[] = [
     url: 'https://ernessofficial.github.io/RESPIRACION_CONSCIENTE_infografia/'
   },
   {
-    title: 'Blog: Comunicación asertiva en el trabajo (guía práctica)',
+    title: 'Cápsula Formativa: Comunicación asertiva para el Liderazgo',
     url: 'https://ernessofficial.github.io/Recursointeractivo_ComunicacionAsertiva/'
   }
 ];
