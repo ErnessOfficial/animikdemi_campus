@@ -17,5 +17,9 @@ export const complementary: ResourceItem[] = [
   {
     title: 'Cápsula Formativa: Comunicación asertiva para el Liderazgo',
     url: 'https://ernessofficial.github.io/Recursointeractivo_ComunicacionAsertiva/'
+  },
+  {
+    title: 'AUDIO-RESUMEN: Como reducir el estrés en 5 minutos - Avalado por OMS',
+    url: 'https://drive.google.com/file/d/1lT8WAYejlpaW6-Jest8cjYFw3kIC7s1O/view?usp=sharing'
   }
 ];
