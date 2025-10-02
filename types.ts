@@ -56,7 +56,7 @@ export interface InfoCard {
 export interface Activity {
   id: string;
   title: string;
-  type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe';
+  type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe' | 'interactiveGame';
   description: string;
   videoSrc?: string;
   audioSrc?: string;
@@ -78,6 +78,9 @@ export interface Activity {
   introText?: string;
   infoCards?: InfoCard[];
   closingText?: string;
+  // Interactive Game (custom)
+  gameType?: string;
+  instructions?: string;
 }
 
 export interface Module {
