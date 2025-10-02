@@ -45,6 +45,39 @@ export const course: Course = {
                 { text: 'Problemas de sueño', feedback: 'No, el insomnio es una consecuencia frecuente.' },
               ],
             },
+            {
+              question: '¿Cuál de estas frases describe mejor tu nivel de estrés actual?',
+              options: [
+                { text: 'Casi no siento estrés, estoy bastante equilibrado/a.', feedback: 'Genial, es lo ideal. Igualmente es bueno fortalecer nuestras herramientas para evitar el estrés.' },
+                { text: 'Tengo momentos de estrés, pero logro controlarlos.', feedback: 'Este curso sera de gran utilidad para ti, ya lo veras.' },
+                { text: 'El estrés domina gran parte de mis días.', feedback: 'Eres muy valiente y responsable al dar este paso y buscar soluciones.' },
+              ],
+            },
+            {
+              question: 'Cuando enfrentas un imprevisto (ejemplo: atasco, retraso, discusión), tu reacción más frecuente es…',
+              options: [
+                { text: 'Mantener la calma y buscar una solución.', feedback: 'Muy bien, vas por el camino correcto.' },
+                { text: 'Frustrarme pero recuperarme rápidamente.', feedback: 'Suele pasar, pero trabajaremos para evitar sentimientos negativos.' },
+                { text: 'Quedar atrapado/a en pensamientos negativos.', feedback: 'Debemos trabajar en eso, pero no te procupes que lo haremos juntos.' },
+                { text: 'Sentirme sobrepasado/a, sin saber cómo reaccionar.', feedback: 'El bloqueo mental es un sintoma comun de estrés. Debemos enfocarnos en superarlo.' },
+              ],
+            },
+            {
+              question: '¿Como consideras que se encuentra tu capacidad de desconectar y relajarte?',
+              options: [
+                { text: 'Lo hago con facilidad: encuentro momentos de calma a diario.', feedback: 'Fantastico, sigue así.' },
+                { text: 'Me cuesta un poco, pero logro relajarme varias veces por semana.', feedback: 'Veras que con práctica sera cada día mas fácil' },
+                { text: 'Relajarme me resulta difícil, casi no me doy esos espacios.', feedback: 'Es comprensible, pero es importante que te permitas esos momentos de descanso.' },
+              ],
+            },
+            {
+              question: 'Cuando piensas en el futuro, ¿cómo ves tu relación con el estrés?',
+              options: [
+                { text: 'Creo que puedo mantenerlo bajo control.', feedback: 'Genial, es lo ideal. Igualmente es bueno fortalecer nuestras herramientas para evitar el estrés.' },
+                { text: 'Sé que debo mejorar algunas estrategias.', feedback: 'Es un buen reconocimiento. Juntos trabajaremos en ello.' },
+                { text: 'Me siento abrumado/a y no sé cómo manejarlo.', feedback: 'Es un primer paso reconocerlo. Trabajaremos en estrategias para afrontarlo.' },
+              ],
+            },
           ],
         },
       ],
