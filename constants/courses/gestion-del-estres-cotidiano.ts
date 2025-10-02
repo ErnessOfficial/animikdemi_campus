@@ -86,8 +86,18 @@ export const course: Course = {
       id: 'm2',
       title: 'Módulo 2: Herramientas para Manejar el Estrés',
       activities: [
+        // 👉 NUEVA ACTIVIDAD: Juego interactivo de autocuidado
         {
           id: 'm2a1',
+          type: 'interactiveGame',
+          title: 'Juego: ¿Qué harías en esta situación?',
+          description: 'Pon a prueba tus habilidades de autocuidado en situaciones reales de estrés.',
+          gameType: 'autocuidado-basico', // referencia interna para cargar el juego correcto
+          instructions: 'Elige la opción más saludable en cada escenario. Recibirás retroalimentación inmediata.',
+        },
+        // 👇 Actividad anterior ahora pasa a ser m2a2
+        {
+          id: 'm2a2',
           type: 'text',
           title: 'Técnicas básicas de autocuidado',
           description: 'Conoce prácticas simples que puedes incorporar en tu día a día para reducir el impacto del estrés.',
@@ -98,7 +108,7 @@ export const course: Course = {
           ],
         },
         {
-          id: 'm2a2',
+          id: 'm2a3',
           type: 'audio',
           title: 'Práctica guiada: Respiración 4x4',
           description: 'Ejercicio de respiración cuadrada para calmar cuerpo y mente en minutos.',
