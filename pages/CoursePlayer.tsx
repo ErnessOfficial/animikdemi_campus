@@ -20,6 +20,7 @@ import YouTubePlayer from '../components/activities/YouTubePlayer';
 import FlipCards from '../components/activities/FlipCards';
 import PillarsInteractive from '../components/activities/PillarsInteractive';
 import PondGame from '../components/activities/PondGame';
+import InteractiveGameActivity from '../components/activities/InteractiveGameActivity';
 
 interface CoursePlayerProps {
   course: Course;
@@ -92,6 +93,15 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
             return <ReflectionTree onReadyToComplete={onReadyToComplete} />;
         case 'audio':
             return <AudioPlayer src={activity.audioSrc || ''} transcript={activity.content as string[] | undefined} onEnded={() => onReadyToComplete?.(true)} />;
+        case 'interactiveGame':
+            return (
+              <InteractiveGameActivity
+                title={activity.title}
+                description={activity.description}
+                instructions={activity.instructions}
+                onComplete={() => onReadyToComplete?.(true)}
+              />
+            );
         case 'upload':
             return (
               <div className="space-y-6">
