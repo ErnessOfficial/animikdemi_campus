@@ -1,9 +1,13 @@
 import type { Course } from '../../types';
+import { assetPath } from '../../utils/paths';
 
 // TODO: Asegúrate de importar tu instructor si es necesario
 // import { mockInstructor } from './courseData';
 
-export const course: Course = {
+// Nota: Definimos el curso en forma "cruda" (raw) usando la estructura que incluye
+// parts/resources y luego lo normalizamos a la estructura estándar de la plataforma
+// (modules[].activities[]) sin tocar el núcleo del proyecto.
+const rawCourse: any = {
   "id": "inteligencia-emocional-aplicada---nivel-1-",
   "title": "Inteligencia Emocional Aplicada - Nivel 1 ",
   "subtitle": "El viaje perfecto para   conocer como funciona tu inteligencia emocional y potenciarla a través de la reflexion practica. ",
@@ -399,6 +403,32 @@ export const course: Course = {
       ]
     }
   ]
+};
+
+// Normalización a la estructura esperada por la plataforma
+export const course: Course = {
+  id: rawCourse.id,
+  title: rawCourse.title,
+  subtitle: rawCourse.subtitle,
+  description: rawCourse.description,
+  category: rawCourse.category,
+  broadCategories: rawCourse.broadCategories || [],
+  coverImage: typeof rawCourse.coverImage === 'string' && rawCourse.coverImage.startsWith('/images/')
+    ? assetPath(rawCourse.coverImage.replace(/^\//, ''))
+    : rawCourse.coverImage,
+  instructor: rawCourse.instructor,
+  estimatedDurationMinutes: rawCourse.estimatedDurationMinutes,
+  learningObjectives: rawCourse.learningObjectives,
+  modules: (rawCourse.modules || []).map((m: any) => {
+    const activities = Array.isArray(m.activities) && m.activities.length > 0
+      ? m.activities
+      : (m.parts || []).flatMap((p: any) => Array.isArray(p.resources) ? p.resources : []);
+    return {
+      id: m.id,
+      title: m.title,
+      activities,
+    };
+  })
 };
 
 export default course;
