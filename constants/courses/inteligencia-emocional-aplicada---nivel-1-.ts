@@ -44,7 +44,7 @@ const rawCourse: any = {
               "content": [
                 "A lo largo de este primer nivel del programa de Inteligencia Emocional Aplicada, podras comenzar a construir ideas claras y reflexionar sobre como funciona y como se desarrollan los procesos emocionales."
               ],
-              "content2": [
+              [
                 "En este primer modulo nos adentraremos en la conciencia y el etiquetado emocional, para que puedas identificar y nombrar de manera precisa lo que sientes y de que manera afecta tus relaciones y tu comportamiento "
               ]
             },
@@ -55,7 +55,7 @@ const rawCourse: any = {
               "type": "iframe",
               "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview",
               "description2": "Transcripción del Video",
-              "content3": [
+              "content": [
                 "¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.",
                 "En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.",
                 "El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales, cada uno diseñado para construir una base sólida en tu desarrollo emocional:",
