@@ -38,29 +38,105 @@ const rawCourse: any = {
           "resources": [
             {
               "id": "m1p1r1",
-              "title": "Nueva Actividad (text)",
+              "title": "Bienvenida y contexto sobre la Inteligencia Emocional",
               "description": "Introducción ",
               "type": "text",
               "content": [
-                "<h2 style=\"font-size: 1.35rem; color: var(--text-color); margin: 0.5rem 0px;\"><b style=\"background-color: rgb(255, 243, 160);\">Bienvenida y Contexto sobre el contenido </b></h2>"
+                "A lo largo de este primer nivel del programa de Inteligencia Emocional Aplicada, podras comenzar a construir ideas claras y reflexionar sobre como funciona y como se desarrollan los procesos emocionales."
+              ],
+              "content2": [
+                "En este primer modulo nos adentraremos en la conciencia y el etiquetado emocional, para que puedas identificar y nombrar de manera precisa lo que sientes y de que manera afecta tus relaciones y tu comportamiento "
               ]
             },
             {
               "id": "m1p1r2",
-              "title": "Nueva Actividad (video)",
-              "description": "video de bienvenida ",
+              "title": "Video de Bienvenida",
+              "description": "Reproduce el Video hasta el final y al terminar marca como completado ",
               "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview"
-            },
-            {
-              "id": "m1p1r3",
-              "title": "Nueva Actividad (text)",
-              "description": "Descripción de la actividad",
-              "type": "text",
-              "content": [
-                "<h3 style=\"font-size: 1.15rem; color: var(--text-color); margin: 0.5rem 0px;\"><span style=\"background-color: rgb(182, 247, 177);\">Transcripción del Video: </span></h3><div><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">¡Hola! Te damos la&nbsp;<b>más cordial bienvenida</b>&nbsp;a&nbsp;<b>Animikdemi</b>, el primer nivel de nuestro programa de&nbsp;<b>Inteligencia Emocional Aplicada</b>. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.</p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">En este espacio&nbsp;<b>interactivo</b>&nbsp;y&nbsp;<b>dinámico</b>, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.</p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">El Nivel 1 de Animikdemi está estructurado en&nbsp;<b>cuatro módulos fundamentales</b>, cada uno diseñado para construir una base sólida en tu desarrollo emocional:</p><ol start=\"1\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"><li><p><b>Conciencia y Etiquetado Emocional:</b>&nbsp;Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!</p></li><li><p><b>Neurociencia de la Regulación y Control de Impulsos:</b>&nbsp;Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.</p></li><li><p><b>Autocompasión y Resiliencia:</b>&nbsp;Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con&nbsp;<b>fuerza</b>&nbsp;y&nbsp;<b>valentía</b>.</p></li><li><p><b>Empatía para Relaciones con Criterio:</b>&nbsp;Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un&nbsp;<b>propósito claro</b>.</p></li></ol><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">Recuerda: este es un curso&nbsp;<b>interactivo</b>. Tu participación activa, tu reflexión y tu apertura a la práctica son la llave maestra para desbloquear todo su potencial. Prepárate para experimentar, aprender y crecer.</p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">¡Es hora de empezar! Da el primer paso hacia una versión más consciente, regulada y&nbsp;<b>poderosa</b>&nbsp;de ti mismo. ¡Bienvenido a Animikdemi!</p></div>"
-              ]
-            },
+              "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview",
+              "description2": "Transcripción del Video",
+              "content3": [
+                "¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.",
+                "En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.",
+                "El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales, cada uno diseñado para construir una base sólida en tu desarrollo emocional:",
+                "1. Conciencia y Etiquetado Emocional: Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!",
+                "2. Neurociencia de la Regulación y Control de Impulsos: Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.",
+                "3. Autocompasión y Resiliencia: Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con fuerza y valentía.",
+                "4. Empatía para Relaciones con Criterio: Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un propósito claro.",
+                "Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tu apertura a la práctica son la llave maestra para desbloquear todo su potencial. Prepárate para experimentar, aprender y crecer.",
+                 "¡Es hora de empezar! Da el primer paso hacia una versión más consciente, regulada y poderosa de ti mismo. ¡Bienvenido a Animikdemi!"
+               ],
+                "title2": "Quiz",
+                "description3": "Reflexiona con cada pregunta para conocer tu nivel de conciencia y habilidades en el etiquetado emocional",
+                "questions": [
+                  {
+                    "question": "Cuando sientes que tu corazón late más rápido y tus manos sudan, ¿qué emoción básica estás experimentando?",
+                    "options": [
+                      "Alegría",
+                      "Miedo o Ansiedad",
+                      "Tristeza",
+                      "Ira"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correcto. El aumento del ritmo cardíaco y la sudoración son síntomas físicos típicos del miedo o la ansiedad, que preparan al cuerpo para la respuesta de lucha o huida."
+                  },
+                  {
+                    "question": "Si alguien te dice algo que te molesta y sientes tensión en los músculos de la mandíbula y puños cerrados, ¿qué emoción estás sintiendo?",
+                    "options": [
+                      "Tristeza",
+                      "Ira o Enojo",
+                      "Miedo",
+                      "Sorpresa"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correcto. La tensión muscular, especialmente en la mandíbula y puños cerrados, son indicadores físicos de ira o enojo, que preparan al cuerpo para la confrontación."
+                  },
+                  {
+                    "question": "¿Cuál de las siguientes NO es una emoción básica universal según la teoría de Paul Ekman?",
+                    "options": [
+                      "Alegría",
+                      "Tristeza",
+                      "Culpa",
+                      "Sorpresa"
+                    ],
+                    "correctAnswer": 2,
+                    "feedback": "Correcto. La culpa no es considerada una emoción básica universal. Las emociones básicas universales son: alegría, tristeza, ira, miedo, sorpresa y asco."
+                  },
+                  {
+                    "question": "Cuando identificas correctamente una emoción en ti mismo, ¿qué habilidad de inteligencia emocional estás desarrollando?",
+                    "options": [
+                      "Autorregulación",
+                      "Autoconciencia",
+                      "Empatía",
+                      "Habilidades sociales"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correcto. La autoconciencia es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos. Es el primer paso en el desarrollo de la inteligencia emocional."
+                  },
+                  {
+                    "question": "Si sientes una sensación de vacío en el estómago y ganas de llorar cuando alguien cercano se va, ¿qué emoción estás experimentando?",
+                    "options": [
+                      "Miedo",
+                      "Tristeza",
+                      "Ira",
+                      "Alegría"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correcto. La sensación de vacío en el estómago y las ganas de llorar son síntomas físicos característicos de la tristeza, especialmente en situaciones de pérdida o separación."
+                  },
+                  {
+                    "question": "¿Cuál es el beneficio principal de desarrollar un vocabulario emocional más amplio?",
+                    "options": [
+                      "Impresionar a los demás",
+                      "Comunicar mejor tus necesidades y sentimientos",
+                      "Evitar sentir emociones negativas",
+                      "Controlar las emociones de otros"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correcto. Tener un vocabulario emocional más amplio te permite identificar, nombrar y comunicar mejor tus emociones, lo que facilita la expresión de necesidades y la construcción de relaciones más saludables."
+                  }
+                ]
+              },
             {
               "id": "m1p1r4",
               "title": "Nueva Actividad (quiz)",
