@@ -34,7 +34,7 @@ const rawCourse: any = {
       "parts": [
         {
           "id": "m1p1",
-          "title": "Punto 1: Bienvenida y Contexto sobre el curso",
+          "title": "Video de Bienvenida",
           "resources": [
             {
               "id": "m1p1r1",
@@ -138,11 +138,11 @@ const rawCourse: any = {
         },
         {
           "id": "m1p2",
-          "title": "Punto 2: La Emoción y el etiquetado de emociones",
+          "title": "La emoción: una respuesta compleja, de corta duración",
           "resources": [
             {
               "id": "m1p2r1",
-              "title": "Lectura para Reflexionar",
+              "title": "Lectura para reflexionar",
               "description": "La Emoción: Una Respuesta Compleja de Corta Duración",
               "type": "text",
               "content": [
@@ -200,7 +200,7 @@ const rawCourse: any = {
         },
         {
           "id": "m1p3",
-          "title": "Punto 3: Importancia del etiquetado Emocional",
+          "title": "Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones",
           "resources": [
             {
               "id": "m1p3r1",
@@ -210,23 +210,23 @@ const rawCourse: any = {
               "content": [
                 "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Estudio de Caso: Vocabulario Emocional</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            max-width: 800px;\n            margin: 0 auto;\n            padding: 20px;\n            line-height: 1.6;\n            background-color: #f9f9f9;\n        }\n        .container {\n            background-color: white;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n        }\n        h1 {\n            color: #2c3e50;\n            text-align: center;\n            border-bottom: 3px solid #3498db;\n            padding-bottom: 10px;\n        }\n        .case-section {\n            margin: 20px 0;\n            padding: 15px;\n            background-color: #ecf0f1;\n            border-left: 4px solid #3498db;\n        }\n        .reflection {\n            background-color: #e8f5e8;\n            border-left: 4px solid #27ae60;\n            padding: 15px;\n            margin: 20px 0;\n        }\n        .reflection h3 {\n            color: #27ae60;\n            margin-top: 0;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones</h1>\n        \n        <div class=\"case-section\">\n            <h2>Situación:</h2>\n            <p>María, una gerente de proyectos de 35 años, se encuentra constantemente abrumada en su trabajo. Las fechas de entrega son ajustadas, el equipo a menudo no cumple con las expectativas y las reuniones suelen ser tensas. Últimamente, María se siente irritable, duerme mal y se encuentra discutiendo con su pareja con más frecuencia. Sabe que está estresada, pero no sabe cómo manejarlo. Simplemente dice \"estoy estresada\" y sigue adelante, intentando suprimir sus sentimientos.</p>\n            \n            <p>Un día, su jefe le pide que lidere un proyecto particularmente desafiante con un cliente difícil. La reacción inicial de María es un torrente de frustración, ansiedad y resentimiento, pero lo ignora, pensando que solo está \"estresada\".</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>El Problema:</h2>\n            <p>Al no reconocer y nombrar sus emociones específicas (frustración, ansiedad, resentimiento), María no puede abordar la causa raíz de su malestar. En lugar de comunicar sus preocupaciones de manera asertiva a su jefe (por ejemplo, \"Siento ansiedad ante la idea de liderar este proyecto con este cliente en particular, debido a experiencias pasadas. ¿Podemos hablar sobre mis preocupaciones y posibles estrategias?\"), ella acepta el proyecto a regañadientes, acumulando más presión sobre sí misma.</p>\n            \n            <p>Esto conduce a una mayor irritabilidad, errores en el trabajo y una sensación general de agotamiento. Finalmente, María tiene una fuerte discusión con su jefe, expresando su frustración de manera poco profesional, lo que daña su relación laboral y la deja sintiéndose culpable y arrepentida.</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>La Solución Potencial:</h2>\n            <p>Si María hubiera desarrollado un vocabulario emocional más rico y hubiera sido capaz de identificar y etiquetar sus emociones específicas, podría haber manejado la situación de manera diferente. Podría haber reconocido que sentía ansiedad y frustración, y haber utilizado esta información para comunicarse de manera más efectiva, establecer límites y buscar soluciones proactivas.</p>\n        </div>\n        \n        <div class=\"reflection\">\n            <h3>Preguntas para la reflexión:</h3>\n            <ol>\n                <li><strong>¿Cómo crees que la situación de María hubiera sido diferente si hubiera podido identificar y nombrar sus emociones con mayor precisión?</strong></li>\n                <li><strong>¿Qué estrategias podrías sugerirle a María para ayudarla a desarrollar un vocabulario emocional más amplio y a aprender a gestionar sus emociones de manera más efectiva en el futuro?</strong></li>\n            </ol>\n        </div>\n    </div>\n</body>\n</html>"
               ]
+            },
+            {
+              "id": "m1p3r2",
+              "title": "Da Play al video y conoce acerca del Diario Emocional",
+              "description": "Video sobre el diario emocional y cómo puede ser tu aliado",
+              "type": "iframe",
+              "videoSrc": "https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview"
             }
           ]
         },
         {
           "id": "m1p4",
-          "title": "Punto 4: El diario Emocional",
+          "title": "Ya puedes comenzar tu diario emocional",
           "resources": [
             {
               "id": "m1p4r1",
-              "title": "Da Play al video y conoce acerca del Diario Emocional",
-              "description": "Video sobre el diario emocional y cómo puede ser tu aliado",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview"
-            },
-            {
-              "id": "m1p4r2",
-              "title": "Ya Puedes Comenzar tu Diario Emocional",
+              "title": "Herramienta interactiva para comenzar tu diario emocional",
               "description": "Herramienta interactiva para comenzar tu diario emocional",
               "type": "iframe",
               "content": [
@@ -234,7 +234,7 @@ const rawCourse: any = {
               ]
             },
             {
-              "id": "m1p4r3",
+              "id": "m1p4r2",
               "title": "Un breve repaso por este gran paso en tu aprendizaje sobre tus emociones",
               "description": "Quiz de repaso sobre el contenido del módulo",
               "type": "quiz",
