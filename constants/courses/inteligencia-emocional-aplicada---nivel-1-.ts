@@ -34,218 +34,277 @@ const rawCourse: any = {
       "parts": [
         {
           "id": "m1p1",
-          "title": "Parte 1",
+          "title": "Punto 1: Bienvenida y Contexto sobre el curso",
           "resources": [
             {
               "id": "m1p1r1",
-              "title": "Bienvenida y contexto sobre la Inteligencia Emocional",
-              "description": "Introducción ",
-              "type": "text",
-              "content": [
-                "A lo largo de este primer nivel del programa de Inteligencia Emocional Aplicada, podras comenzar a construir ideas claras y reflexionar sobre como funciona y como se desarrollan los procesos emocionales."
-              ],
-              [
-                "En este primer modulo nos adentraremos en la conciencia y el etiquetado emocional, para que puedas identificar y nombrar de manera precisa lo que sientes y de que manera afecta tus relaciones y tu comportamiento "
-              ]
+              "title": "Video de Bienvenida",
+              "description": "Reproduce el video hasta el final y al terminar marca como completado",
+              "type": "iframe",
+              "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview"
             },
             {
               "id": "m1p1r2",
-              "title": "Video de Bienvenida",
-              "description": "Reproduce el Video hasta el final y al terminar marca como completado ",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview",
-              "description2": "Transcripción del Video",
+              "title": "Transcripción del Video",
+              "description": "Contenido completo del video de bienvenida",
+              "type": "text",
               "content": [
                 "¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.",
                 "En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.",
                 "El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales, cada uno diseñado para construir una base sólida en tu desarrollo emocional:",
-                "1. Conciencia y Etiquetado Emocional: Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!",
-                "2. Neurociencia de la Regulación y Control de Impulsos: Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.",
-                "3. Autocompasión y Resiliencia: Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con fuerza y valentía.",
-                "4. Empatía para Relaciones con Criterio: Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un propósito claro.",
+                "• Conciencia y Etiquetado Emocional: Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!",
+                "• Neurociencia de la Regulación y Control de Impulsos: Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.",
+                "• Autocompasión y Resiliencia: Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con fuerza y valentía.",
+                "• Empatía para Relaciones con Criterio: Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un propósito claro.",
                 "Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tu apertura a la práctica son la llave maestra para desbloquear todo su potencial. Prepárate para experimentar, aprender y crecer.",
-                 "¡Es hora de empezar! Da el primer paso hacia una versión más consciente, regulada y poderosa de ti mismo. ¡Bienvenido a Animikdemi!"
-               ],
-                "title2": "Quiz",
-                "description3": "Reflexiona con cada pregunta para conocer tu nivel de conciencia y habilidades en el etiquetado emocional",
-                "questions": [
-                  {
-                    "question": "Cuando sientes que tu corazón late más rápido y tus manos sudan, ¿qué emoción básica estás experimentando?",
-                    "options": [
-                      "Alegría",
-                      "Miedo o Ansiedad",
-                      "Tristeza",
-                      "Ira"
-                    ],
-                    "correctAnswer": 1,
-                    "feedback": "Correcto. El aumento del ritmo cardíaco y la sudoración son síntomas físicos típicos del miedo o la ansiedad, que preparan al cuerpo para la respuesta de lucha o huida."
-                  },
-                  {
-                    "question": "Si alguien te dice algo que te molesta y sientes tensión en los músculos de la mandíbula y puños cerrados, ¿qué emoción estás sintiendo?",
-                    "options": [
-                      "Tristeza",
-                      "Ira o Enojo",
-                      "Miedo",
-                      "Sorpresa"
-                    ],
-                    "correctAnswer": 1,
-                    "feedback": "Correcto. La tensión muscular, especialmente en la mandíbula y puños cerrados, son indicadores físicos de ira o enojo, que preparan al cuerpo para la confrontación."
-                  },
-                  {
-                    "question": "¿Cuál de las siguientes NO es una emoción básica universal según la teoría de Paul Ekman?",
-                    "options": [
-                      "Alegría",
-                      "Tristeza",
-                      "Culpa",
-                      "Sorpresa"
-                    ],
-                    "correctAnswer": 2,
-                    "feedback": "Correcto. La culpa no es considerada una emoción básica universal. Las emociones básicas universales son: alegría, tristeza, ira, miedo, sorpresa y asco."
-                  },
-                  {
-                    "question": "Cuando identificas correctamente una emoción en ti mismo, ¿qué habilidad de inteligencia emocional estás desarrollando?",
-                    "options": [
-                      "Autorregulación",
-                      "Autoconciencia",
-                      "Empatía",
-                      "Habilidades sociales"
-                    ],
-                    "correctAnswer": 1,
-                    "feedback": "Correcto. La autoconciencia es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos. Es el primer paso en el desarrollo de la inteligencia emocional."
-                  },
-                  {
-                    "question": "Si sientes una sensación de vacío en el estómago y ganas de llorar cuando alguien cercano se va, ¿qué emoción estás experimentando?",
-                    "options": [
-                      "Miedo",
-                      "Tristeza",
-                      "Ira",
-                      "Alegría"
-                    ],
-                    "correctAnswer": 1,
-                    "feedback": "Correcto. La sensación de vacío en el estómago y las ganas de llorar son síntomas físicos característicos de la tristeza, especialmente en situaciones de pérdida o separación."
-                  },
-                  {
-                    "question": "¿Cuál es el beneficio principal de desarrollar un vocabulario emocional más amplio?",
-                    "options": [
-                      "Impresionar a los demás",
-                      "Comunicar mejor tus necesidades y sentimientos",
-                      "Evitar sentir emociones negativas",
-                      "Controlar las emociones de otros"
-                    ],
-                    "correctAnswer": 1,
-                    "feedback": "Correcto. Tener un vocabulario emocional más amplio te permite identificar, nombrar y comunicar mejor tus emociones, lo que facilita la expresión de necesidades y la construcción de relaciones más saludables."
-                  }
-                ]
-              },
-            {
-              "id": "m1p1r4",
-              "title": "Nueva Actividad (quiz)",
-              "description": "un quiz diagnóstico de 6 preguntas para evaluar conocimiento y uso de vocabulario emocional ",
-              "type": "quiz",
-              "questions": []
+                "¡Es hora de empezar! Da el primer paso hacia una versión más consciente, regulada y poderosa de ti mismo. ¡Bienvenido a Animikdemi!"
+              ]
             },
             {
-              "id": "m1p1r5",
-              "title": "Quiz HTML - Nueva Actividad (quiz)",
-              "description": "Versión HTML interactiva generada por IA",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Nueva Actividad (quiz)</title>\n    <style>\n        body {\n            font-family: sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n        }\n\n        .container {\n            width: 80%;\n            max-width: 600px;\n            background-color: #fff;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n\n        .progress-bar {\n            width: 100%;\n            height: 10px;\n            background-color: #ddd;\n            border-radius: 5px;\n            margin-bottom: 20px;\n        }\n\n        .progress {\n            height: 100%;\n            width: 0%;\n            background-color: #4CAF50;\n            border-radius: 5px;\n        }\n\n        .question {\n            margin-bottom: 20px;\n        }\n\n        .options {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .option {\n            padding: 10px;\n            margin-bottom: 10px;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            cursor: pointer;\n            background-color: #f9f9f9;\n        }\n\n        .option:hover {\n            background-color: #eee;\n        }\n\n        .correct {\n            background-color: #d4edda;\n            border-color: #c3e6cb;\n        }\n\n        .incorrect {\n            background-color: #f8d7da;\n            border-color: #f5c6cb;\n        }\n\n        #result {\n            text-align: center;\n            font-size: 1.2em;\n            margin-top: 20px;\n        }\n\n        @media (max-width: 600px) {\n            .container {\n                width: 95%;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"container\">\n        <h1>Nueva Actividad (quiz)</h1>\n        <div class=\"progress-bar\">\n            <div class=\"progress\" id=\"progress\"></div>\n        </div>\n\n        <div class=\"question\" id=\"question\"></div>\n        <div class=\"options\" id=\"options\"></div>\n\n        <div id=\"result\"></div>\n    </div>\n\n    <script>\n        const questions = [\n            {\n                question: \"¿Cómo te sientes cuando logras un objetivo que parecía difícil?\",\n                options: [\"Triste\", \"Orgulloso/a\", \"Indiferente\", \"Enojado/a\"],\n                answer: 1\n            },\n            {\n                question: \"¿Qué emoción experimentas al ver a alguien sufriendo?\",\n                options: [\"Alegría\", \"Empatía\", \"Envidia\", \"Aburrimiento\"],\n                answer: 1\n            },\n            {\n                question: \"¿Cuál de estas palabras describe mejor la sensación de perder algo valioso?\",\n                options: [\"Júbilo\", \"Alivio\", \"Duelo\", \"Entusiasmo\"],\n                answer: 2\n            },\n            {\n                question: \"¿Cómo reaccionarías ante una crítica constructiva?\",\n                options: [\"Resentimiento\", \"Curiosidad\", \"Indignación\", \"Rechazo\"],\n                answer: 1\n            },\n            {\n                question: \"¿Qué sientes al ayudar a alguien que lo necesita?\",\n                options: [\"Culpa\", \"Satisfacción\", \"Frustración\", \"Vacío\"],\n                answer: 1\n            },\n            {\n                question: \"¿Cuál es tu reacción más común ante la injusticia?\",\n                options: [\"Apatía\", \"Ira\", \"Complacencia\", \"Sumisión\"],\n                answer: 1\n            }\n        ];\n\n        let currentQuestion = 0;\n        let score = 0;\n        let progressBar = document.getElementById(\"progress\");\n        let questionElement = document.getElementById(\"question\");\n        let optionsElement = document.getElementById(\"options\");\n        let resultElement = document.getElementById(\"result\");\n\n        function loadQuestion() {\n            const questionData = questions[currentQuestion];\n            questionElement.innerText = `Pregunta ${currentQuestion + 1}: ${questionData.question}`;\n            optionsElement.innerHTML = \"\";\n\n            questionData.options.forEach((option, index) => {\n                const button = document.createElement(\"div\");\n                button.classList.add(\"option\");\n                button.innerText = option;\n                button.addEventListener(\"click\", () => checkAnswer(index));\n                optionsElement.appendChild(button);\n            });\n\n            updateProgressBar();\n        }\n\n        function checkAnswer(selectedIndex) {\n            const questionData = questions[currentQuestion];\n            const options = document.querySelectorAll(\".option\");\n\n            options.forEach((option, index) => {\n                if (index === questionData.answer) {\n                    option.classList.add(\"correct\");\n                } else if (index === selectedIndex) {\n                    option.classList.add(\"incorrect\");\n                }\n            });\n\n            if (selectedIndex === questionData.answer) {\n                score++;\n            }\n\n            setTimeout(() => {\n                currentQuestion++;\n                if (currentQuestion < questions.length) {\n                    loadQuestion();\n                } else {\n                    showResult();\n                }\n            }, 1000); // Espera 1 segundo antes de cargar la siguiente pregunta\n        }\n\n        function updateProgressBar() {\n            const progress = ((currentQuestion + 1) / questions.length) * 100;\n            progressBar.style.width = `${progress}%`;\n        }\n\n        function showResult() {\n            questionElement.style.display = \"none\";\n            optionsElement.style.display = \"none\";\n            progressBar.style.display = \"none\";\n\n            let message = \"\";\n            if (score >= 5) {\n                message = \"¡Excelente! Tienes un buen dominio del vocabulario emocional.\";\n            } else if (score >= 3) {\n                message = \"Bien. Puedes mejorar tu conocimiento del vocabulario emocional.\";\n            } else {\n                message = \"Es importante que sigas aprendiendo sobre vocabulario emocional.\";\n            }\n\n            resultElement.innerText = `Tu puntaje es ${score} de ${questions.length}. ${message}`;\n        }\n\n        loadQuestion();\n    </script>\n\n</body>\n</html>"
+              "id": "m1p1r3",
+              "title": "Quiz de Vocabulario Emocional",
+              "description": "Reflexiona con cada pregunta para conocer tu nivel de conciencia y habilidades en el etiquetado emocional",
+              "type": "quiz",
+              "questions": [
+                {
+                  "question": "Cuando sientes que tu corazón late más rápido y tus manos sudan, ¿qué emoción básica estás experimentando?",
+                  "options": [
+                    "Alegría",
+                    "Miedo o Ansiedad",
+                    "Tristeza",
+                    "Ira"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. El aumento del ritmo cardíaco y la sudoración son síntomas físicos típicos del miedo o la ansiedad, que preparan al cuerpo para la respuesta de lucha o huida."
+                },
+                {
+                  "question": "Si alguien te dice algo que te molesta y sientes tensión en los músculos de la mandíbula y puños cerrados, ¿qué emoción estás sintiendo?",
+                  "options": [
+                    "Tristeza",
+                    "Ira o Enojo",
+                    "Miedo",
+                    "Sorpresa"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. La tensión muscular, especialmente en la mandíbula y puños cerrados, son indicadores físicos de ira o enojo, que preparan al cuerpo para la confrontación."
+                },
+                {
+                  "question": "¿Cuál de las siguientes NO es una emoción básica universal según la teoría de Paul Ekman?",
+                  "options": [
+                    "Alegría",
+                    "Tristeza",
+                    "Culpa",
+                    "Sorpresa"
+                  ],
+                  "correctAnswer": 2,
+                  "feedback": "Correcto. La culpa no es considerada una emoción básica universal. Las emociones básicas universales son: alegría, tristeza, ira, miedo, sorpresa y asco."
+                },
+                {
+                  "question": "Cuando identificas correctamente una emoción en ti mismo, ¿qué habilidad de inteligencia emocional estás desarrollando?",
+                  "options": [
+                    "Autorregulación",
+                    "Autoconciencia",
+                    "Empatía",
+                    "Habilidades sociales"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. La autoconciencia es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos. Es el primer paso en el desarrollo de la inteligencia emocional."
+                },
+                {
+                  "question": "Si sientes una sensación de vacío en el estómago y ganas de llorar cuando alguien cercano se va, ¿qué emoción estás experimentando?",
+                  "options": [
+                    "Miedo",
+                    "Tristeza",
+                    "Ira",
+                    "Alegría"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. La sensación de vacío en el estómago y las ganas de llorar son síntomas físicos característicos de la tristeza, especialmente en situaciones de pérdida o separación."
+                },
+                {
+                  "question": "¿Cuál es el beneficio principal de desarrollar un vocabulario emocional más amplio?",
+                  "options": [
+                    "Impresionar a los demás",
+                    "Comunicar mejor tus necesidades y sentimientos",
+                    "Evitar sentir emociones negativas",
+                    "Controlar las emociones de otros"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. Tener un vocabulario emocional más amplio te permite identificar, nombrar y comunicar mejor tus emociones, lo que facilita la expresión de necesidades y la construcción de relaciones más saludables."
+                }
               ]
             }
           ]
         },
         {
           "id": "m1p2",
-          "title": "Parte 2",
+          "title": "Punto 2: La Emoción y el etiquetado de emociones",
           "resources": [
             {
               "id": "m1p2r1",
-              "title": "Nueva Actividad (text)",
-              "description": "Lectura reflexiva ",
+              "title": "Lectura para Reflexionar",
+              "description": "La Emoción: Una Respuesta Compleja de Corta Duración",
               "type": "text",
               "content": [
-                "<h1 style=\"font-size: 1.75rem; color: var(--text-color); margin: 0.5rem 0px;\"><span style=\"background-color: rgb(255, 243, 160);\">Lectura para Reflexionar </span></h1><div><h3 style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">La Emoción: Una Respuesta Compleja de Corta Duración</h3><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"></p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">A menudo, experimentamos una emoción como una ráfaga. Es una respuesta&nbsp;<b>intensa y de corta duración</b>&nbsp;que nuestro organismo genera ante un estímulo relevante (algo que vemos, recordamos o anticipamos). Aunque se siente como una sola cosa, la emoción es un fenómeno integrado que se manifiesta a través de&nbsp;<b>tres componentes</b>&nbsp;interconectados.</p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"></p><h4 style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"><span style=\"background-color: rgb(182, 247, 177);\">1. Componente Corporal (Fisiológico) 🏃</span></h4><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"></p><p style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\">Este es el aspecto que sientes en tu cuerpo. Cuando experimentas una emoción, tu sistema nervioso autónomo se activa, provocando&nbsp;<b>cambios físicos</b>&nbsp;inmediatos. Estos cambios son universales y automáticos.</p><ul style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); white-space: normal;\"><li><p><b>Ejemplos:</b>&nbsp;Un aumento en el ritmo cardíaco (miedo/entusiasmo), tensión muscular (ira/ansiedad), sudoración en las manos (ansiedad), ruborización (vergüenza), o la sensación de \"vacío\" en el estómago (miedo/nerviosismo).</p></li><li><p><b>Función:</b>&nbsp;Prepara al cuerpo para la acción (lucha, huida o paralización).</p></li></ul></div>"
+                "A menudo, experimentamos una emoción como una ráfaga. Es una respuesta intensa y de corta duración que nuestro organismo genera ante un estímulo relevante (algo que vemos, recordamos o anticipamos). Aunque se siente como una sola cosa, la emoción es un fenómeno integrado que se manifiesta a través de tres componentes interconectados.",
+                "1. Componente Corporal (Fisiológico) 🏃",
+                "Este es el aspecto que sientes en tu cuerpo. Cuando experimentas una emoción, tu sistema nervioso autónomo se activa, provocando cambios físicos inmediatos. Estos cambios son universales y automáticos.",
+                "Ejemplos: Un aumento en el ritmo cardíaco (miedo/entusiasmo), tensión muscular (ira/ansiedad), sudoración en las manos (ansiedad), ruborización (vergüenza), o la sensación de \"vacío\" en el estómago (miedo/nerviosismo).",
+                "Función: Prepara al cuerpo para la acción (lucha, huida o paralización)."
               ]
             },
             {
               "id": "m1p2r2",
-              "title": "Nueva Actividad (image)",
-              "description": "Imagen decorativa",
+              "title": "Imagen 1: Componente Fisiológico",
+              "description": "Representación visual del componente corporal de las emociones",
               "type": "text",
               "content": [
-                "<img src=\"/images/ie_nivel1_mod1_01.png\" alt=\"Nueva Actividad (image)\" style=\"width:100%;height:auto;border-radius:8px;\" />"
+                "<img src=\"/images/ie_nivel1_mod1_01.png\" alt=\"Componente Fisiológico de las Emociones\" style=\"width:100%;height:auto;border-radius:8px;\" />"
               ]
             },
             {
               "id": "m1p2r3",
-              "title": "Nueva Actividad (text)",
-              "description": "lectura  continuación",
+              "title": "2. Componente Cognitivo (Pensamientos) 🤔",
+              "description": "La interpretación y evaluación de las emociones",
               "type": "text",
               "content": [
-                "<h4 style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><span style=\"background-color: rgb(182, 247, 177);\">2. Componente Cognitivo (Pensamientos) 🤔</span></h4><p style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"></p><p style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Este componente es la&nbsp;<b>interpretación, evaluación y etiquetado</b>&nbsp;que le damos a la situación y a nuestras sensaciones corporales. Nuestros pensamientos dan sentido a la experiencia emocional.</p><ul style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><li><p><b>Ejemplos:</b></p><ul><li><p>Si sientes el corazón acelerado, tu mente puede decir:&nbsp;<i>\"Estoy en peligro\"</i>&nbsp;(Miedo) o&nbsp;<i>\"¡Esto es emocionante!\"</i>&nbsp;(Alegría).</p></li><li><p>Si un compañero te ignora, tu mente puede interpretar:&nbsp;<i>\"No le importo\"</i>&nbsp;(Tristeza) o&nbsp;<i>\"¡Qué grosero es!\"</i>(Ira).</p></li></ul></li><li><p><b>Función:</b>&nbsp;Nos ayuda a comprender la causa de la emoción y a decidir una respuesta consciente.</p></li></ul>"
+                "Este componente es la interpretación, evaluación y etiquetado que le damos a la situación y a nuestras sensaciones corporales. Nuestros pensamientos dan sentido a la experiencia emocional.",
+                "Ejemplos:",
+                "• Si sientes el corazón acelerado, tu mente puede decir: \"Estoy en peligro\" (Miedo) o \"¡Esto es emocionante!\" (Alegría).",
+                "• Si un compañero te ignora, tu mente puede interpretar: \"No le importo\" (Tristeza) o \"¡Qué grosero es!\" (Ira).",
+                "Función: Nos ayuda a comprender la causa de la emoción y a decidir una respuesta consciente."
               ]
             },
             {
               "id": "m1p2r4",
-              "title": "Nueva Actividad (image)",
-              "description": "imagen decorativa",
+              "title": "Imagen 2: Componente Cognitivo",
+              "description": "Representación visual del componente cognitivo de las emociones",
               "type": "text",
               "content": [
-                "<img src=\"/images/ie_nivel1_mod1_02.png\" alt=\"Nueva Actividad (image)\" style=\"width:100%;height:auto;border-radius:8px;\" />"
+                "<img src=\"/images/ie_nivel1_mod1_02.png\" alt=\"Componente Cognitivo de las Emociones\" style=\"width:100%;height:auto;border-radius:8px;\" />"
               ]
             },
             {
               "id": "m1p2r5",
-              "title": "Nueva Actividad (text)",
-              "description": "lectura continuación ",
+              "title": "3. Componente Conductual (Acción) 🗣️",
+              "description": "La expresión observable de las emociones",
               "type": "text",
               "content": [
-                "<h4 style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><span style=\"background-color: rgb(182, 247, 177);\">3. Componente Conductual (Acción) 🗣️</span></h4><p style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"></p><p style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Es la&nbsp;<b>expresión observable</b>&nbsp;de la emoción. Incluye nuestras acciones, las expresiones faciales, el tono de voz y el lenguaje corporal.</p><ul style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><li><p><b>Ejemplos:</b>&nbsp;Gritar o fruncir el ceño (ira), llorar o encoger los hombros (tristeza), sonreír o saltar (alegría), evitar el contacto visual o huir (miedo).</p></li><li><p><b>Función:</b>&nbsp;Comunicar nuestro estado interno a otros y motivar una acción que resuelva o afronte el estímulo inicial.</p></li></ul><p style=\"white-space: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><b>💡 En resumen:</b>&nbsp;La emoción no es solo lo que&nbsp;<i>sientes</i>, sino lo que&nbsp;<i>piensas</i>&nbsp;y lo que&nbsp;<i>haces</i>&nbsp;al respecto.</p>"
+                "Es la expresión observable de la emoción. Incluye nuestras acciones, las expresiones faciales, el tono de voz y el lenguaje corporal.",
+                "Ejemplos: Gritar o fruncir el ceño (ira), llorar o encoger los hombros (tristeza), sonreír o saltar (alegría), evitar el contacto visual o huir (miedo).",
+                "Función: Comunicar nuestro estado interno a otros y motivar una acción que resuelva o afronte el estímulo inicial.",
+                "💡 En resumen: La emoción no es solo lo que sientes, sino lo que piensas y lo que haces al respecto."
               ]
             }
           ]
         },
         {
           "id": "m1p3",
-          "title": "Parte 3",
+          "title": "Punto 3: Importancia del etiquetado Emocional",
           "resources": [
             {
               "id": "m1p3r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "caso practico ",
+              "title": "Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones",
+              "description": "Análisis de caso práctico sobre el impacto del vocabulario emocional",
               "type": "iframe",
               "content": [
-                "```html\n<!DOCTYPE html>\n<html>\n<head>\n<title>Estudio de Caso: Vocabulario Emocional</title>\n</head>\n<body>\n\n<h1>Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones</h1>\n\n<p><strong>Situación:</strong> María, una gerente de proyectos de 35 años, se encuentra constantemente abrumada en su trabajo. Las fechas de entrega son ajustadas, el equipo a menudo no cumple con las expectativas y las reuniones suelen ser tensas. Últimamente, María se siente irritable, duerme mal y se encuentra discutiendo con su pareja con más frecuencia. Sabe que está estresada, pero no sabe cómo manejarlo. Simplemente dice \"estoy estresada\" y sigue adelante, intentando suprimir sus sentimientos. Un día, su jefe le pide que lidere un proyecto particularmente desafiante con un cliente difícil. La reacción inicial de María es un torrente de frustración, ansiedad y resentimiento, pero lo ignora, pensando que solo está \"estresada\".</p>\n\n<p>Al no reconocer y nombrar sus emociones específicas (frustración, ansiedad, resentimiento), María no puede abordar la causa raíz de su malestar. En lugar de comunicar sus preocupaciones de manera asertiva a su jefe (por ejemplo, \"Siento ansiedad ante la idea de liderar este proyecto con este cliente en particular, debido a experiencias pasadas. ¿Podemos hablar sobre mis preocupaciones y posibles estrategias?\"), ella acepta el proyecto a regañadientes, acumulando más presión sobre sí misma.  Esto conduce a una mayor irritabilidad, errores en el trabajo y una sensación general de agotamiento. Finalmente, María tiene una fuerte discusión con su jefe, expresando su frustración de manera poco profesional, lo que daña su relación laboral y la deja sintiéndose culpable y arrepentida.</p>\n\n<p>Si María hubiera desarrollado un vocabulario emocional más rico y hubiera sido capaz de identificar y etiquetar sus emociones específicas, podría haber manejado la situación de manera diferente.  Podría haber reconocido que sentía ansiedad y frustración, y haber utilizado esta información para comunicarse de manera más efectiva, establecer límites y buscar soluciones proactivas.</p>\n\n<p><strong>Preguntas para la reflexión:</strong></p>\n\n<p>1. ¿Cómo crees que la situación de María hubiera sido diferente si hubiera podido identificar y nombrar sus emociones con mayor precisión?</p>\n\n<p>2. ¿Qué estrategias podrías sugerirle a María para ayudarla a desarrollar un vocabulario emocional más amplio y a aprender a gestionar sus emociones de manera más efectiva en el futuro?</p>\n\n</body>\n</html>\n```"
+                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Estudio de Caso: Vocabulario Emocional</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            max-width: 800px;\n            margin: 0 auto;\n            padding: 20px;\n            line-height: 1.6;\n            background-color: #f9f9f9;\n        }\n        .container {\n            background-color: white;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n        }\n        h1 {\n            color: #2c3e50;\n            text-align: center;\n            border-bottom: 3px solid #3498db;\n            padding-bottom: 10px;\n        }\n        .case-section {\n            margin: 20px 0;\n            padding: 15px;\n            background-color: #ecf0f1;\n            border-left: 4px solid #3498db;\n        }\n        .reflection {\n            background-color: #e8f5e8;\n            border-left: 4px solid #27ae60;\n            padding: 15px;\n            margin: 20px 0;\n        }\n        .reflection h3 {\n            color: #27ae60;\n            margin-top: 0;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones</h1>\n        \n        <div class=\"case-section\">\n            <h2>Situación:</h2>\n            <p>María, una gerente de proyectos de 35 años, se encuentra constantemente abrumada en su trabajo. Las fechas de entrega son ajustadas, el equipo a menudo no cumple con las expectativas y las reuniones suelen ser tensas. Últimamente, María se siente irritable, duerme mal y se encuentra discutiendo con su pareja con más frecuencia. Sabe que está estresada, pero no sabe cómo manejarlo. Simplemente dice \"estoy estresada\" y sigue adelante, intentando suprimir sus sentimientos.</p>\n            \n            <p>Un día, su jefe le pide que lidere un proyecto particularmente desafiante con un cliente difícil. La reacción inicial de María es un torrente de frustración, ansiedad y resentimiento, pero lo ignora, pensando que solo está \"estresada\".</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>El Problema:</h2>\n            <p>Al no reconocer y nombrar sus emociones específicas (frustración, ansiedad, resentimiento), María no puede abordar la causa raíz de su malestar. En lugar de comunicar sus preocupaciones de manera asertiva a su jefe (por ejemplo, \"Siento ansiedad ante la idea de liderar este proyecto con este cliente en particular, debido a experiencias pasadas. ¿Podemos hablar sobre mis preocupaciones y posibles estrategias?\"), ella acepta el proyecto a regañadientes, acumulando más presión sobre sí misma.</p>\n            \n            <p>Esto conduce a una mayor irritabilidad, errores en el trabajo y una sensación general de agotamiento. Finalmente, María tiene una fuerte discusión con su jefe, expresando su frustración de manera poco profesional, lo que daña su relación laboral y la deja sintiéndose culpable y arrepentida.</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>La Solución Potencial:</h2>\n            <p>Si María hubiera desarrollado un vocabulario emocional más rico y hubiera sido capaz de identificar y etiquetar sus emociones específicas, podría haber manejado la situación de manera diferente. Podría haber reconocido que sentía ansiedad y frustración, y haber utilizado esta información para comunicarse de manera más efectiva, establecer límites y buscar soluciones proactivas.</p>\n        </div>\n        \n        <div class=\"reflection\">\n            <h3>Preguntas para la reflexión:</h3>\n            <ol>\n                <li><strong>¿Cómo crees que la situación de María hubiera sido diferente si hubiera podido identificar y nombrar sus emociones con mayor precisión?</strong></li>\n                <li><strong>¿Qué estrategias podrías sugerirle a María para ayudarla a desarrollar un vocabulario emocional más amplio y a aprender a gestionar sus emociones de manera más efectiva en el futuro?</strong></li>\n            </ol>\n        </div>\n    </div>\n</body>\n</html>"
               ]
             }
           ]
         },
         {
           "id": "m1p4",
-          "title": "Parte 4",
+          "title": "Punto 4: El diario Emocional",
           "resources": [
             {
               "id": "m1p4r1",
-              "title": "Nueva Actividad (video)",
-              "description": "El ABC del autoconocimiento ",
+              "title": "Da Play al video y conoce acerca del Diario Emocional",
+              "description": "Video sobre el diario emocional y cómo puede ser tu aliado",
               "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1-UZ6yXNHnJ3ELK_KsJASklt3hYWQTZQt/preview"
+              "videoSrc": "https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview"
             },
             {
               "id": "m1p4r2",
-              "title": "Nueva Actividad (quiz)",
-              "description": "un quiz formativo de 8 preguntas con 4 opciones de respuesta  sobre las emociones y el autoconocimiento ",
-              "type": "quiz",
-              "questions": []
+              "title": "Ya Puedes Comenzar tu Diario Emocional",
+              "description": "Herramienta interactiva para comenzar tu diario emocional",
+              "type": "iframe",
+              "content": [
+                "<iframe src=\"https://ernessofficial.github.io/Animindex-basic/\" width=\"100%\" height=\"600\" frameborder=\"0\" style=\"border-radius: 8px;\"></iframe>"
+              ]
             },
             {
               "id": "m1p4r3",
-              "title": "Quiz HTML - Nueva Actividad (quiz)",
-              "description": "Versión HTML interactiva generada por IA",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Nueva Actividad (quiz)</title>\n    <style>\n        body {\n            font-family: sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n        }\n\n        .quiz-container {\n            background-color: #fff;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n            width: 80%;\n            max-width: 600px;\n            padding: 20px;\n            margin: 20px;\n        }\n\n        .progress-bar {\n            background-color: #ddd;\n            height: 10px;\n            border-radius: 5px;\n            margin-bottom: 20px;\n        }\n\n        .progress {\n            background-color: #4CAF50;\n            height: 10px;\n            border-radius: 5px;\n            width: 0%;\n        }\n\n        .question {\n            margin-bottom: 20px;\n        }\n\n        .options button {\n            display: block;\n            width: 100%;\n            padding: 10px;\n            margin-bottom: 10px;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            background-color: #eee;\n            text-align: left;\n            cursor: pointer;\n        }\n\n        .options button:hover {\n            background-color: #ddd;\n        }\n\n        .options button.correct {\n            background-color: #a3e4a9;\n        }\n\n        .options button.incorrect {\n            background-color: #f5b7b1;\n        }\n\n        #result {\n            margin-top: 20px;\n            font-weight: bold;\n            text-align: center;\n        }\n\n        @media (max-width: 600px) {\n            .quiz-container {\n                width: 95%;\n                margin: 10px;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"quiz-container\">\n        <h1>Nueva Actividad (quiz)</h1>\n        <div class=\"progress-bar\">\n            <div class=\"progress\" id=\"progress\"></div>\n        </div>\n        <div class=\"question\" id=\"question\"></div>\n        <div class=\"options\" id=\"options\"></div>\n        <div id=\"result\"></div>\n    </div>\n\n    <script>\n        const questions = [\n            {\n                question: \"¿Qué es una emoción?\",\n                options: [\n                    { text: \"Un pensamiento racional.\", correct: false },\n                    { text: \"Una respuesta física y mental a un estímulo.\", correct: true },\n                    { text: \"Una decisión lógica.\", correct: false },\n                    { text: \"Un recuerdo del pasado.\", correct: false }\n                ]\n            },\n            {\n                question: \"¿Cuál de las siguientes NO es una emoción básica?\",\n                options: [\n                    { text: \"Alegría\", correct: false },\n                    { text: \"Tristeza\", correct: false },\n                    { text: \"Sorpresa\", correct: false },\n                    { text: \"Confusión\", correct: true }\n                ]\n            },\n            {\n                question: \"¿Qué significa 'autoconocimiento'?\",\n                options: [\n                    { text: \"Conocer a otras personas.\", correct: false },\n                    { text: \"Entender tus propias emociones, fortalezas y debilidades.\", correct: true },\n                    { text: \"Ser famoso.\", correct: false },\n                    { text: \"Tener muchos amigos.\", correct: false }\n                ]\n            },\n            {\n                question: \"¿Por qué es importante el autoconocimiento?\",\n                options: [\n                    { text: \"Para impresionar a los demás.\", correct: false },\n                    { text: \"Para tomar mejores decisiones y mejorar tus relaciones.\", correct: true },\n                    { text: \"Para evitar sentir emociones negativas.\", correct: false },\n                    { text: \"Para ser siempre feliz.\", correct: false }\n                ]\n            },\n            {\n                 question: \"¿Cómo puedes mejorar tu autoconocimiento?\",\n                options: [\n                    { text: \"Ignorando tus sentimientos.\", correct: false },\n                    { text: \"Reflexionando sobre tus experiencias y pidiendo feedback.\", correct: true },\n                    { text: \"Evitando situaciones desafiantes.\", correct: false },\n                    { text: \"Siguiendo siempre lo que dice la mayoría.\", correct: false }\n                ]\n            },\n             {\n                question: \"¿Qué es la empatía?\",\n                options: [\n                    { text: \"Sentir lástima por alguien.\", correct: false },\n                    { text: \"Entender y compartir los sentimientos de otra persona.\", correct: true },\n                    { text: \"Dar consejos no solicitados.\", correct: false },\n                    { text: \"Ignorar los problemas de los demás.\", correct: false }\n                ]\n            },\n             {\n                question: \"¿Qué significa 'gestionar las emociones'?\",\n                options: [\n                    { text: \"Suprimir tus emociones.\", correct: false },\n                    { text: \"Reconocer, entender y regular tus emociones de manera saludable.\", correct: true },\n                    { text: \"Dejar que tus emociones te controlen.\", correct: false },\n                    { text: \"Culpar a otros por tus sentimientos.\", correct: false }\n                ]\n            },\n            {\n                question: \"¿Cuál de estas acciones NO es una buena forma de gestionar el estrés?\",\n                options: [\n                    { text: \"Hacer ejercicio regularmente.\", correct: false },\n                    { text: \"Dormir lo suficiente.\", correct: false },\n                    { text: \"Consumir alcohol en exceso.\", correct: true },\n                    { text: \"Practicar técnicas de relajación.\", correct: false }\n                ]\n            }\n        ];\n\n        let currentQuestion = 0;\n        let score = 0;\n\n        const questionElement = document.getElementById(\"question\");\n        const optionsElement = document.getElementById(\"options\");\n        const resultElement = document.getElementById(\"result\");\n        const progressElement = document.getElementById(\"progress\");\n\n        function loadQuestion() {\n            const questionData = questions[currentQuestion];\n            questionElement.innerText = questionData.question;\n\n            optionsElement.innerHTML = \"\";\n            questionData.options.forEach((option, index) => {\n                const button = document.createElement(\"button\");\n                button.innerText = option.text;\n                button.addEventListener(\"click\", () => selectAnswer(option.correct, button));\n                optionsElement.appendChild(button);\n            });\n\n            updateProgress();\n        }\n\n        function selectAnswer(correct, button) {\n            const buttons = document.querySelectorAll(\".options button\");\n            buttons.forEach(btn => btn.disabled = true);\n\n            if (correct) {\n                score++;\n                button.classList.add(\"correct\");\n            } else {\n                button.classList.add(\"incorrect\");\n            }\n\n            setTimeout(() => {\n                currentQuestion++;\n                if (currentQuestion < questions.length) {\n                    loadQuestion();\n                } else {\n                    showResult();\n                }\n            }, 1000);\n        }\n\n        function updateProgress() {\n            const progress = (currentQuestion / questions.length) * 100;\n            progressElement.style.width = `${progress}%`;\n        }\n\n        function showResult() {\n            questionElement.style.display = \"none\";\n            optionsElement.style.display = \"none\";\n            progressElement.style.display = \"none\";\n\n            let message = \"\";\n            if (score >= 6) {\n                message = \"¡Excelente! Demuestras un buen conocimiento sobre emociones y autoconocimiento.\";\n            } else if (score >= 4) {\n                message = \"¡Bien! Sigue aprendiendo sobre tus emociones y cómo gestionarlas.\";\n            } else {\n                message = \"Necesitas repasar un poco más sobre emociones y autoconocimiento. ¡No te rindas!\";\n            }\n\n            resultElement.innerText = `Tu puntaje final es: ${score} de ${questions.length}. ${message}`;\n        }\n\n        loadQuestion();\n    </script>\n\n</body>\n</html>"
+              "title": "Un breve repaso por este gran paso en tu aprendizaje sobre tus emociones",
+              "description": "Quiz de repaso sobre el contenido del módulo",
+              "type": "quiz",
+              "questions": [
+                {
+                  "question": "¿Cuáles son los tres componentes principales de una emoción?",
+                  "options": [
+                    "Pensamiento, acción y reacción",
+                    "Corporal, cognitivo y conductual",
+                    "Físico, mental y social",
+                    "Interno, externo y temporal"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. Los tres componentes de una emoción son: corporal (fisiológico), cognitivo (pensamientos) y conductual (acciones)."
+                },
+                {
+                  "question": "¿Por qué es importante desarrollar un vocabulario emocional amplio?",
+                  "options": [
+                    "Para impresionar a los demás",
+                    "Para identificar, nombrar y comunicar mejor las emociones",
+                    "Para evitar sentir emociones negativas",
+                    "Para controlar las emociones de otros"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. Un vocabulario emocional amplio nos permite identificar, nombrar y comunicar mejor nuestras emociones, facilitando la expresión de necesidades y la construcción de relaciones saludables."
+                },
+                {
+                  "question": "¿Qué es la autoconciencia emocional?",
+                  "options": [
+                    "La capacidad de controlar las emociones de otros",
+                    "La capacidad de reconocer y entender tus propias emociones",
+                    "La habilidad de ocultar tus emociones",
+                    "La capacidad de sentir solo emociones positivas"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. La autoconciencia emocional es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos."
+                },
+                {
+                  "question": "¿Cuál es el primer paso para gestionar las emociones de manera efectiva?",
+                  "options": [
+                    "Suprimir las emociones negativas",
+                    "Identificar y nombrar la emoción que estás sintiendo",
+                    "Ignorar las sensaciones físicas",
+                    "Buscar distracciones inmediatas"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. El primer paso para gestionar las emociones de manera efectiva es identificar y nombrar la emoción que estás sintiendo."
+                },
+                {
+                  "question": "¿Qué herramienta práctica se menciona para desarrollar la autoconciencia emocional?",
+                  "options": [
+                    "La meditación",
+                    "El diario emocional",
+                    "La terapia",
+                    "Los ejercicios físicos"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. El diario emocional es una herramienta práctica que ayuda a desarrollar la autoconciencia emocional mediante el registro y reflexión sobre las emociones."
+                },
+                {
+                  "question": "Según el estudio de caso de María, ¿cuál fue el problema principal?",
+                  "options": [
+                    "Tenía demasiado trabajo",
+                    "No podía identificar y nombrar sus emociones específicas",
+                    "Su jefe era muy exigente",
+                    "No tenía suficiente experiencia"
+                  ],
+                  "correctAnswer": 1,
+                  "feedback": "Correcto. El problema principal de María era que no podía identificar y nombrar sus emociones específicas, lo que le impedía abordar la causa raíz de su malestar."
+                }
               ]
             }
           ]
