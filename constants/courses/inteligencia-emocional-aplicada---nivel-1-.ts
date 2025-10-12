@@ -41,13 +41,9 @@ export const course: Course = {
             'Dale play para conocer la estructura del Nivel 1, su enfoque práctico e interactivo, y cómo aprovechar cada módulo.',
           videoSrc:
             'https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/view?usp=sharing',
-        },
-        {
-          id: 'm1a2',
-          type: 'text',
-          title: 'Transcripción del video — Bienvenida',
-          description: 'Lee la transcripción y, al final, realiza el Quiz de Vocabulario Emocional.',
           content: [
+            'Transcripción del video — Bienvenida',
+            'Lee la transcripción y, al final, realiza el Quiz de Vocabulario Emocional.',
             '¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.',
             'En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.',
             'El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales:',
@@ -57,6 +53,7 @@ export const course: Course = {
             '4) Empatía para Relaciones con Criterio — comprender al otro sin perder tu propio límite.',
             'Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tus prácticas son la llave para desbloquear su potencial. ¡Bienvenido/a a Animikdemi!'
           ],
+          // 'realiza el quiz a continuación para reforzar tu aprendizaje.' // <-- removed duplicate description
         },
         {
           id: 'm1a3',
