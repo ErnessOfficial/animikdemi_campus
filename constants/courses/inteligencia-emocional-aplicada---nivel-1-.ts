@@ -1,569 +1,556 @@
 import type { Course } from '../../types';
-import { assetPath } from '../../utils/paths';
+import { mockInstructor } from './courseData';
 
-// TODO: Asegúrate de importar tu instructor si es necesario
-// import { mockInstructor } from './courseData';
-
-// Nota: Definimos el curso en forma "cruda" (raw) usando la estructura que incluye
-// parts/resources y luego lo normalizamos a la estructura estándar de la plataforma
-// (modules[].activities[]) sin tocar el núcleo del proyecto.
-const rawCourse: any = {
-  "id": "inteligencia-emocional-aplicada---nivel-1-",
-  "title": "Inteligencia Emocional Aplicada - Nivel 1 ",
-  "subtitle": "El viaje perfecto para   conocer como funciona tu inteligencia emocional y potenciarla a través de la reflexion practica. ",
-  "description": "El programa de inteligencia emocional aplicada, consta de 2 niveles de 4 módulos cada uno de ellos con los que tendrás  la oportunidad  de Navegar tus emociones y forjar tu bienestar mediante un proceso de aprendizaje reflexivo . El Nivel 1  ofrece herramientas prácticas para el desarrollo de la Autoconciencia y la Autorregulación emocional. Podrás evaluar tus experiencias  experiencias para conectar la teoría con la acción. El enfoque valora la práctica continua y aborda la neurociencia emocional. \n\nResultados esperados: Mayor autoconocimiento, control de impulsos, manejo exitoso de la adversidad y fortalecimiento del bienestar integral y las relaciones.",
-  "category": "Autoconciencia & Regulación emocional (núcleo formativo)",
-  "broadCategories": [],
-  "coverImage": "/images/inteligencia-emocional-aplicada---nivel-1-_portada.png",
-  "instructor": {
-    "name": "Admin",
-    "title": "Instructor",
-    "avatarUrl": "/images/avatars/default.png",
-    "bio": "Bio del instructor."
-  },
-  "learningObjectives": [
-    "Al finalizar el Módulo 1, serás capaz de identificar al menos tres emociones primarias en sí mismos y en los demás con un 80% de precisión.",
-    "Al finalizar el módulo2, conocerás las áreas cerebrales clave involucradas en la regulación emocional y el control de impulsos, describiendo su función específica .",
-    "Al finalizar el Módulo 3,  podrás conocer  y aplicar  estrategias de autocompasión en situaciones de estrés, demostrando un aumento en su capacidad de recuperación emocional evaluada .",
-    "Al finalizar el módulo 4, podrás reconocer  comportamientos empáticos en interacciones cotidianas simuladas, demostrando comprensión de su impacto en la construcción de relaciones interpersonales positivas."
-  ],
-  "modules": [
-    {
-      "id": "m1",
-      "title": "Módulo 1: Conciencia y Etiquetado Emocional",
-      "parts": [
-        {
-          "id": "m1p1",
-          "title": "Video de Bienvenida",
-          "resources": [
-            {
-              "id": "m1p1r1",
-              "title": "Video de Bienvenida",
-              "description": "Reproduce el video hasta el final y al terminar marca como completado",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/preview"
-            },
-            {
-              "id": "m1p1r2",
-              "title": "Transcripción del Video",
-              "description": "Contenido completo del video de bienvenida",
-              "type": "text",
-              "content": [
-                "¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.",
-                "En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.",
-                "El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales, cada uno diseñado para construir una base sólida en tu desarrollo emocional:",
-                "• Conciencia y Etiquetado Emocional: Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!",
-                "• Neurociencia de la Regulación y Control de Impulsos: Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.",
-                "• Autocompasión y Resiliencia: Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con fuerza y valentía.",
-                "• Empatía para Relaciones con Criterio: Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un propósito claro.",
-                "Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tu apertura a la práctica son la llave maestra para desbloquear todo su potencial. Prepárate para experimentar, aprender y crecer.",
-                "¡Es hora de empezar! Da el primer paso hacia una versión más consciente, regulada y poderosa de ti mismo. ¡Bienvenido a Animikdemi!"
-              ]
-            },
-            {
-              "id": "m1p1r3",
-              "title": "Quiz de Vocabulario Emocional",
-              "description": "Reflexiona con cada pregunta para conocer tu nivel de conciencia y habilidades en el etiquetado emocional",
-              "type": "quiz",
-              "questions": [
-                {
-                  "question": "Cuando sientes que tu corazón late más rápido y tus manos sudan, ¿qué emoción básica estás experimentando?",
-                  "options": [
-                    "Alegría",
-                    "Miedo o Ansiedad",
-                    "Tristeza",
-                    "Ira"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. El aumento del ritmo cardíaco y la sudoración son síntomas físicos típicos del miedo o la ansiedad, que preparan al cuerpo para la respuesta de lucha o huida."
-                },
-                {
-                  "question": "Si alguien te dice algo que te molesta y sientes tensión en los músculos de la mandíbula y puños cerrados, ¿qué emoción estás sintiendo?",
-                  "options": [
-                    "Tristeza",
-                    "Ira o Enojo",
-                    "Miedo",
-                    "Sorpresa"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. La tensión muscular, especialmente en la mandíbula y puños cerrados, son indicadores físicos de ira o enojo, que preparan al cuerpo para la confrontación."
-                },
-                {
-                  "question": "¿Cuál de las siguientes NO es una emoción básica universal según la teoría de Paul Ekman?",
-                  "options": [
-                    "Alegría",
-                    "Tristeza",
-                    "Culpa",
-                    "Sorpresa"
-                  ],
-                  "correctAnswer": 2,
-                  "feedback": "Correcto. La culpa no es considerada una emoción básica universal. Las emociones básicas universales son: alegría, tristeza, ira, miedo, sorpresa y asco."
-                },
-                {
-                  "question": "Cuando identificas correctamente una emoción en ti mismo, ¿qué habilidad de inteligencia emocional estás desarrollando?",
-                  "options": [
-                    "Autorregulación",
-                    "Autoconciencia",
-                    "Empatía",
-                    "Habilidades sociales"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. La autoconciencia es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos. Es el primer paso en el desarrollo de la inteligencia emocional."
-                },
-                {
-                  "question": "Si sientes una sensación de vacío en el estómago y ganas de llorar cuando alguien cercano se va, ¿qué emoción estás experimentando?",
-                  "options": [
-                    "Miedo",
-                    "Tristeza",
-                    "Ira",
-                    "Alegría"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. La sensación de vacío en el estómago y las ganas de llorar son síntomas físicos característicos de la tristeza, especialmente en situaciones de pérdida o separación."
-                },
-                {
-                  "question": "¿Cuál es el beneficio principal de desarrollar un vocabulario emocional más amplio?",
-                  "options": [
-                    "Impresionar a los demás",
-                    "Comunicar mejor tus necesidades y sentimientos",
-                    "Evitar sentir emociones negativas",
-                    "Controlar las emociones de otros"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. Tener un vocabulario emocional más amplio te permite identificar, nombrar y comunicar mejor tus emociones, lo que facilita la expresión de necesidades y la construcción de relaciones más saludables."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m1p2",
-          "title": "La emoción: una respuesta compleja, de corta duración",
-          "resources": [
-            {
-              "id": "m1p2r1",
-              "title": "Lectura para reflexionar",
-              "description": "La Emoción: Una Respuesta Compleja de Corta Duración",
-              "type": "text",
-              "content": [
-                "A menudo, experimentamos una emoción como una ráfaga. Es una respuesta intensa y de corta duración que nuestro organismo genera ante un estímulo relevante (algo que vemos, recordamos o anticipamos). Aunque se siente como una sola cosa, la emoción es un fenómeno integrado que se manifiesta a través de tres componentes interconectados.",
-                "1. Componente Corporal (Fisiológico) 🏃",
-                "Este es el aspecto que sientes en tu cuerpo. Cuando experimentas una emoción, tu sistema nervioso autónomo se activa, provocando cambios físicos inmediatos. Estos cambios son universales y automáticos.",
-                "Ejemplos: Un aumento en el ritmo cardíaco (miedo/entusiasmo), tensión muscular (ira/ansiedad), sudoración en las manos (ansiedad), ruborización (vergüenza), o la sensación de \"vacío\" en el estómago (miedo/nerviosismo).",
-                "Función: Prepara al cuerpo para la acción (lucha, huida o paralización)."
-              ]
-            },
-            {
-              "id": "m1p2r2",
-              "title": "Imagen 1: Componente Fisiológico",
-              "description": "Representación visual del componente corporal de las emociones",
-              "type": "text",
-              "content": [
-                "<img src=\"/images/ie_nivel1_mod1_01.png\" alt=\"Componente Fisiológico de las Emociones\" style=\"width:100%;height:auto;border-radius:8px;\" />"
-              ]
-            },
-            {
-              "id": "m1p2r3",
-              "title": "2. Componente Cognitivo (Pensamientos) 🤔",
-              "description": "La interpretación y evaluación de las emociones",
-              "type": "text",
-              "content": [
-                "Este componente es la interpretación, evaluación y etiquetado que le damos a la situación y a nuestras sensaciones corporales. Nuestros pensamientos dan sentido a la experiencia emocional.",
-                "Ejemplos:",
-                "• Si sientes el corazón acelerado, tu mente puede decir: \"Estoy en peligro\" (Miedo) o \"¡Esto es emocionante!\" (Alegría).",
-                "• Si un compañero te ignora, tu mente puede interpretar: \"No le importo\" (Tristeza) o \"¡Qué grosero es!\" (Ira).",
-                "Función: Nos ayuda a comprender la causa de la emoción y a decidir una respuesta consciente."
-              ]
-            },
-            {
-              "id": "m1p2r4",
-              "title": "Imagen 2: Componente Cognitivo",
-              "description": "Representación visual del componente cognitivo de las emociones",
-              "type": "text",
-              "content": [
-                "<img src=\"/images/ie_nivel1_mod1_02.png\" alt=\"Componente Cognitivo de las Emociones\" style=\"width:100%;height:auto;border-radius:8px;\" />"
-              ]
-            },
-            {
-              "id": "m1p2r5",
-              "title": "3. Componente Conductual (Acción) 🗣️",
-              "description": "La expresión observable de las emociones",
-              "type": "text",
-              "content": [
-                "Es la expresión observable de la emoción. Incluye nuestras acciones, las expresiones faciales, el tono de voz y el lenguaje corporal.",
-                "Ejemplos: Gritar o fruncir el ceño (ira), llorar o encoger los hombros (tristeza), sonreír o saltar (alegría), evitar el contacto visual o huir (miedo).",
-                "Función: Comunicar nuestro estado interno a otros y motivar una acción que resuelva o afronte el estímulo inicial.",
-                "💡 En resumen: La emoción no es solo lo que sientes, sino lo que piensas y lo que haces al respecto."
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m1p3",
-          "title": "Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones",
-          "resources": [
-            {
-              "id": "m1p3r1",
-              "title": "Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones",
-              "description": "Análisis de caso práctico sobre el impacto del vocabulario emocional",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Estudio de Caso: Vocabulario Emocional</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            max-width: 800px;\n            margin: 0 auto;\n            padding: 20px;\n            line-height: 1.6;\n            background-color: #f9f9f9;\n        }\n        .container {\n            background-color: white;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n        }\n        h1 {\n            color: #2c3e50;\n            text-align: center;\n            border-bottom: 3px solid #3498db;\n            padding-bottom: 10px;\n        }\n        .case-section {\n            margin: 20px 0;\n            padding: 15px;\n            background-color: #ecf0f1;\n            border-left: 4px solid #3498db;\n        }\n        .reflection {\n            background-color: #e8f5e8;\n            border-left: 4px solid #27ae60;\n            padding: 15px;\n            margin: 20px 0;\n        }\n        .reflection h3 {\n            color: #27ae60;\n            margin-top: 0;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>Estudio de Caso: La Importancia de Nombrar y Etiquetar las Emociones</h1>\n        \n        <div class=\"case-section\">\n            <h2>Situación:</h2>\n            <p>María, una gerente de proyectos de 35 años, se encuentra constantemente abrumada en su trabajo. Las fechas de entrega son ajustadas, el equipo a menudo no cumple con las expectativas y las reuniones suelen ser tensas. Últimamente, María se siente irritable, duerme mal y se encuentra discutiendo con su pareja con más frecuencia. Sabe que está estresada, pero no sabe cómo manejarlo. Simplemente dice \"estoy estresada\" y sigue adelante, intentando suprimir sus sentimientos.</p>\n            \n            <p>Un día, su jefe le pide que lidere un proyecto particularmente desafiante con un cliente difícil. La reacción inicial de María es un torrente de frustración, ansiedad y resentimiento, pero lo ignora, pensando que solo está \"estresada\".</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>El Problema:</h2>\n            <p>Al no reconocer y nombrar sus emociones específicas (frustración, ansiedad, resentimiento), María no puede abordar la causa raíz de su malestar. En lugar de comunicar sus preocupaciones de manera asertiva a su jefe (por ejemplo, \"Siento ansiedad ante la idea de liderar este proyecto con este cliente en particular, debido a experiencias pasadas. ¿Podemos hablar sobre mis preocupaciones y posibles estrategias?\"), ella acepta el proyecto a regañadientes, acumulando más presión sobre sí misma.</p>\n            \n            <p>Esto conduce a una mayor irritabilidad, errores en el trabajo y una sensación general de agotamiento. Finalmente, María tiene una fuerte discusión con su jefe, expresando su frustración de manera poco profesional, lo que daña su relación laboral y la deja sintiéndose culpable y arrepentida.</p>\n        </div>\n        \n        <div class=\"case-section\">\n            <h2>La Solución Potencial:</h2>\n            <p>Si María hubiera desarrollado un vocabulario emocional más rico y hubiera sido capaz de identificar y etiquetar sus emociones específicas, podría haber manejado la situación de manera diferente. Podría haber reconocido que sentía ansiedad y frustración, y haber utilizado esta información para comunicarse de manera más efectiva, establecer límites y buscar soluciones proactivas.</p>\n        </div>\n        \n        <div class=\"reflection\">\n            <h3>Preguntas para la reflexión:</h3>\n            <ol>\n                <li><strong>¿Cómo crees que la situación de María hubiera sido diferente si hubiera podido identificar y nombrar sus emociones con mayor precisión?</strong></li>\n                <li><strong>¿Qué estrategias podrías sugerirle a María para ayudarla a desarrollar un vocabulario emocional más amplio y a aprender a gestionar sus emociones de manera más efectiva en el futuro?</strong></li>\n            </ol>\n        </div>\n    </div>\n</body>\n</html>"
-              ]
-            },
-            {
-              "id": "m1p3r2",
-              "title": "Da Play al video y conoce acerca del Diario Emocional",
-              "description": "Video sobre el diario emocional y cómo puede ser tu aliado",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview"
-            }
-          ]
-        },
-        {
-          "id": "m1p4",
-          "title": "Ya puedes comenzar tu diario emocional",
-          "resources": [
-            {
-              "id": "m1p4r1",
-              "title": "Herramienta interactiva para comenzar tu diario emocional",
-              "description": "Herramienta interactiva para comenzar tu diario emocional",
-              "type": "iframe",
-              "content": [
-                "<iframe src=\"https://ernessofficial.github.io/Animindex-basic/\" width=\"100%\" height=\"600\" frameborder=\"0\" style=\"border-radius: 8px;\"></iframe>"
-              ]
-            },
-            {
-              "id": "m1p4r2",
-              "title": "Un breve repaso por este gran paso en tu aprendizaje sobre tus emociones",
-              "description": "Quiz de repaso sobre el contenido del módulo",
-              "type": "quiz",
-              "questions": [
-                {
-                  "question": "¿Cuáles son los tres componentes principales de una emoción?",
-                  "options": [
-                    "Pensamiento, acción y reacción",
-                    "Corporal, cognitivo y conductual",
-                    "Físico, mental y social",
-                    "Interno, externo y temporal"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. Los tres componentes de una emoción son: corporal (fisiológico), cognitivo (pensamientos) y conductual (acciones)."
-                },
-                {
-                  "question": "¿Por qué es importante desarrollar un vocabulario emocional amplio?",
-                  "options": [
-                    "Para impresionar a los demás",
-                    "Para identificar, nombrar y comunicar mejor las emociones",
-                    "Para evitar sentir emociones negativas",
-                    "Para controlar las emociones de otros"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. Un vocabulario emocional amplio nos permite identificar, nombrar y comunicar mejor nuestras emociones, facilitando la expresión de necesidades y la construcción de relaciones saludables."
-                },
-                {
-                  "question": "¿Qué es la autoconciencia emocional?",
-                  "options": [
-                    "La capacidad de controlar las emociones de otros",
-                    "La capacidad de reconocer y entender tus propias emociones",
-                    "La habilidad de ocultar tus emociones",
-                    "La capacidad de sentir solo emociones positivas"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. La autoconciencia emocional es la capacidad de reconocer y entender tus propias emociones, pensamientos y comportamientos."
-                },
-                {
-                  "question": "¿Cuál es el primer paso para gestionar las emociones de manera efectiva?",
-                  "options": [
-                    "Suprimir las emociones negativas",
-                    "Identificar y nombrar la emoción que estás sintiendo",
-                    "Ignorar las sensaciones físicas",
-                    "Buscar distracciones inmediatas"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. El primer paso para gestionar las emociones de manera efectiva es identificar y nombrar la emoción que estás sintiendo."
-                },
-                {
-                  "question": "¿Qué herramienta práctica se menciona para desarrollar la autoconciencia emocional?",
-                  "options": [
-                    "La meditación",
-                    "El diario emocional",
-                    "La terapia",
-                    "Los ejercicios físicos"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. El diario emocional es una herramienta práctica que ayuda a desarrollar la autoconciencia emocional mediante el registro y reflexión sobre las emociones."
-                },
-                {
-                  "question": "Según el estudio de caso de María, ¿cuál fue el problema principal?",
-                  "options": [
-                    "Tenía demasiado trabajo",
-                    "No podía identificar y nombrar sus emociones específicas",
-                    "Su jefe era muy exigente",
-                    "No tenía suficiente experiencia"
-                  ],
-                  "correctAnswer": 1,
-                  "feedback": "Correcto. El problema principal de María era que no podía identificar y nombrar sus emociones específicas, lo que le impedía abordar la causa raíz de su malestar."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "m2",
-      "title": "Módulo 2: Neurociencia de la Regulación y Control de Impulsos",
-      "parts": [
-        {
-          "id": "m2p1",
-          "title": "Parte 1",
-          "resources": [
-            {
-              "id": "m2p1r1",
-              "title": "Nueva Actividad (video)",
-              "description": "como empezar tu diario emocional ",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview"
-            },
-            {
-              "id": "m2p1r2",
-              "title": "Nueva Actividad (quiz)",
-              "description": "quiz diagnóstico para medir nivel de conocimiento sobre el diario emocional ",
-              "type": "quiz",
-              "questions": []
-            },
-            {
-              "id": "m2p1r3",
-              "title": "Quiz HTML - Nueva Actividad (quiz)",
-              "description": "Versión HTML interactiva generada por IA",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Nueva Actividad (quiz)</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n        }\n\n        .quiz-container {\n            background-color: #fff;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n            width: 80%;\n            max-width: 600px;\n            padding: 20px;\n            margin: 20px;\n            text-align: center;\n        }\n\n        h1 {\n            color: #333;\n        }\n\n        .question {\n            margin-bottom: 20px;\n        }\n\n        .options {\n            display: flex;\n            flex-direction: column;\n            align-items: flex-start;\n        }\n\n        .option {\n            margin-bottom: 10px;\n            padding: 10px;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            width: 90%;\n            text-align: left;\n            cursor: pointer;\n            background-color: #f9f9f9;\n        }\n\n        .option:hover {\n            background-color: #e9e9e9;\n        }\n\n        .correct {\n            background-color: #d4edda;\n            border-color: #c3e6cb;\n            color: #155724;\n        }\n\n        .incorrect {\n            background-color: #f8d7da;\n            border-color: #f5c6cb;\n            color: #721c24;\n        }\n\n        .progress-bar {\n            height: 10px;\n            background-color: #ddd;\n            border-radius: 5px;\n            margin-bottom: 20px;\n        }\n\n        .progress {\n            height: 10px;\n            background-color: #4CAF50;\n            border-radius: 5px;\n            width: 0%;\n        }\n\n        .result {\n            font-weight: bold;\n            margin-top: 20px;\n        }\n\n        @media (max-width: 600px) {\n            .quiz-container {\n                width: 95%;\n                margin: 10px;\n                padding: 10px;\n            }\n             .option {\n                width: 85%;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"quiz-container\">\n        <h1>Nueva Actividad (quiz)</h1>\n        <p>Quiz diagnóstico para medir nivel de conocimiento sobre el diario emocional.</p>\n\n        <div class=\"progress-bar\">\n            <div class=\"progress\" id=\"progress\"></div>\n        </div>\n\n        <div id=\"question-container\" class=\"question\"></div>\n\n        <div id=\"options-container\" class=\"options\"></div>\n\n        <div id=\"result\" class=\"result\" style=\"display: none;\"></div>\n    </div>\n\n    <script>\n        const questions = [\n            {\n                question: \"¿Qué es un diario emocional?\",\n                options: [\n                    { text: \"Un registro de eventos diarios sin enfoque en emociones.\", correct: false },\n                    { text: \"Un cuaderno para expresar y explorar sentimientos y emociones.\", correct: true },\n                    { text: \"Una lista de tareas pendientes.\", correct: false }\n                ]\n            },\n            {\n                question: \"¿Cuál es uno de los beneficios de llevar un diario emocional?\",\n                options: [\n                    { text: \"Aumentar el estrés y la ansiedad.\", correct: false },\n                    { text: \"Mejorar la autoconciencia y la regulación emocional.\", correct: true },\n                    { text: \"Olvidar rápidamente los problemas.\", correct: false }\n                ]\n            },\n            {\n                question: \"¿Qué tipo de contenido es adecuado para un diario emocional?\",\n                options: [\n                    { text: \"Solo eventos positivos.\", correct: false },\n                    { text: \"Solo eventos negativos.\", correct: false },\n                    { text: \"Sentimientos, pensamientos, recuerdos y reflexiones sobre experiencias.\", correct: true }\n                ]\n            },\n            {\n                question: \"¿Con qué frecuencia se recomienda escribir en un diario emocional?\",\n                options: [\n                    { text: \"Solo cuando se sienta extremadamente mal.\", correct: false },\n                    { text: \"Una vez al mes.\", correct: false },\n                    { text: \"Regularmente, según las necesidades y preferencias personales.\", correct: true }\n                ]\n            }\n        ];\n\n        let currentQuestionIndex = 0;\n        let score = 0;\n\n        const questionContainer = document.getElementById('question-container');\n        const optionsContainer = document.getElementById('options-container');\n        const resultContainer = document.getElementById('result');\n        const progressBar = document.getElementById('progress');\n\n        function loadQuestion() {\n            const currentQuestion = questions[currentQuestionIndex];\n            questionContainer.textContent = currentQuestion.question;\n\n            optionsContainer.innerHTML = '';\n            currentQuestion.options.forEach((option, index) => {\n                const button = document.createElement('div');\n                button.classList.add('option');\n                button.textContent = option.text;\n                button.addEventListener('click', () => checkAnswer(option.correct, button));\n                optionsContainer.appendChild(button);\n            });\n        }\n\n        function checkAnswer(isCorrect, selectedButton) {\n            const options = document.querySelectorAll('.option');\n            options.forEach(option => {\n                option.disabled = true;\n            });\n\n            if (isCorrect) {\n                score++;\n                selectedButton.classList.add('correct');\n            } else {\n                selectedButton.classList.add('incorrect');\n\n            }\n\n            setTimeout(() => {\n                currentQuestionIndex++;\n                if (currentQuestionIndex < questions.length) {\n                    updateProgressBar();\n                    loadQuestion();\n                    options.forEach(option => {\n                        option.disabled = false;\n                        option.classList.remove('correct', 'incorrect');\n                    });\n                } else {\n                    showResult();\n                }\n            }, 1000);\n        }\n\n        function updateProgressBar() {\n            const progress = (currentQuestionIndex / questions.length) * 100;\n            progressBar.style.width = `${progress}%`;\n        }\n\n\n        function showResult() {\n            questionContainer.style.display = 'none';\n            optionsContainer.style.display = 'none';\n            resultContainer.style.display = 'block';\n\n            let message = \"\";\n            if (score === questions.length) {\n                message = \"¡Excelente! Demuestras un conocimiento sólido sobre el diario emocional.\";\n            } else if (score >= questions.length / 2) {\n                message = \"¡Bien! Tienes un buen entendimiento del diario emocional. ¡Sigue aprendiendo!\";\n            } else {\n                message = \"Es recomendable que explores más sobre el diario emocional. ¡Ánimo!\";\n            }\n\n            resultContainer.textContent = `Tu puntaje es: ${score} de ${questions.length}. ${message}`;\n        }\n\n        loadQuestion();\n        updateProgressBar();\n    </script>\n\n</body>\n</html>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m2p2",
-          "title": "Parte 2",
-          "resources": [
-            {
-              "id": "m2p2r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "modelo SPER en el diario emocional ",
-              "type": "iframe",
-              "content": [
-                "```html\n<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Infografía Interactiva: Modelo S-P-E-R en el Diario Emocional Estructurado</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n        }\n\n        .container {\n            max-width: 960px;\n            margin: 20px auto;\n            background-color: #fff;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n\n        .section {\n            margin-bottom: 20px;\n            border: 1px solid #ddd;\n            padding: 15px;\n            border-radius: 5px;\n            position: relative; /* Para posicionar el tooltip */\n        }\n\n        .section h2 {\n            color: #555;\n            margin-bottom: 10px;\n        }\n\n        .tooltip {\n            position: absolute;\n            top: 10px;\n            right: 10px;\n            background-color: #eee;\n            border: 1px solid #ccc;\n            padding: 5px;\n            border-radius: 5px;\n            font-size: 0.8em;\n            display: none; /* Oculto por defecto */\n            z-index: 10;\n        }\n\n        .section:hover .tooltip {\n            display: block; /* Mostrar al pasar el mouse */\n        }\n\n        .section p {\n            line-height: 1.6;\n        }\n\n        .section ul {\n            list-style-type: disc;\n            margin-left: 20px;\n        }\n\n        .section ul li {\n            margin-bottom: 5px;\n        }\n\n        /* Estilos específicos para los componentes S-P-E-R */\n        .sper-component {\n            background-color: #e9ecef;\n            padding: 10px;\n            margin-bottom: 10px;\n            border-radius: 5px;\n        }\n\n        .sper-component h3 {\n            color: #007bff;\n            margin-bottom: 5px;\n        }\n\n        /* Estilos para el ejemplo de diario emocional */\n        .journal-example {\n            border: 1px dashed #ccc;\n            padding: 10px;\n            margin-top: 20px;\n            background-color: #f9f9f9;\n        }\n\n        .journal-example h4 {\n            color: #777;\n        }\n\n        .interactive-element {\n          cursor: pointer;\n          color: blue;\n          text-decoration: underline;\n        }\n\n        .interactive-element:hover {\n          color: darkblue;\n        }\n\n    </style>\n    <script>\n      function toggleElement(elementId) {\n        var element = document.getElementById(elementId);\n        if (element.style.display === \"none\") {\n          element.style.display = \"block\";\n        } else {\n          element.style.display = \"none\";\n        }\n      }\n    </script>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>Modelo S-P-E-R en el Diario Emocional Estructurado</h1>\n\n        <div class=\"section\">\n            <h2>Conceptos Básicos</h2>\n            <p>El diario emocional estructurado es una herramienta para registrar y reflexionar sobre tus emociones, pensamientos y comportamientos en respuesta a eventos específicos.  Utilizar el modelo S-P-E-R te proporciona un marco para analizar las situaciones de manera más profunda, fomentando la autoconciencia y la gestión emocional.</p>\n\n            <p>El <span class=\"interactive-element\" onclick=\"toggleElement('queEsSPER')\">Modelo S-P-E-R</span>  es una metodología que ayuda a estructurar este proceso, permitiendo identificar los siguientes elementos clave:</p>\n            <ul>\n                <li><strong>S</strong>ituación: El evento o circunstancia que desencadenó la emoción.</li>\n                <li><strong>P</strong>ensamiento: Los pensamientos que tuviste en relación con la situación.</li>\n                <li><strong>E</strong>moción: La emoción o sentimiento que experimentaste.</li>\n                <li><strong>R</strong>espuesta: Tu comportamiento o acción en respuesta a la emoción.</li>\n            </ul>\n            <div id=\"queEsSPER\" style=\"display:none;\">\n                El modelo S-P-E-R es una simplificación de modelos cognitivo-conductuales más amplios.  Su objetivo es proporcionar una herramienta accesible y práctica para el auto-análisis emocional.  No es un reemplazo de terapia profesional, pero puede ser un complemento útil.\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>Propósito del Modelo S-P-E-R</h2>\n            <p>El propósito principal del modelo S-P-E-R es:</p>\n            <ul>\n                <li><strong>Aumentar la autoconciencia:</strong> Identificar las conexiones entre situaciones, pensamientos, emociones y respuestas.</li>\n                <li><strong>Mejorar la regulación emocional:</strong> Reconocer patrones de pensamiento y comportamiento que pueden ser modificados.</li>\n                <li><strong>Fomentar la resolución de problemas:</strong>  Analizar situaciones problemáticas desde una perspectiva más objetiva.</li>\n                <li><strong>Promover el bienestar emocional:</strong> Desarrollar estrategias de afrontamiento más saludables.</li>\n            </ul>\n            <p>En esencia, el modelo te ayuda a comprender <span class=\"interactive-element\" onclick=\"toggleElement('porqueFunciona')\">por qué reaccionas como reaccionas</span> y cómo puedes modificar tus respuestas en el futuro.</p>\n            <div id=\"porqueFunciona\" style=\"display:none;\">\n              El modelo funciona porque te obliga a desacelerar y observar tus propias reacciones. Al separar los componentes de la experiencia emocional, puedes identificar puntos de influencia para un cambio positivo.  Por ejemplo, al reconocer pensamientos negativos recurrentes, puedes trabajar para desafiarlos y reemplazarlos con pensamientos más realistas y adaptativos.\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>Componentes del Modelo S-P-E-R</h2>\n\n            <div class=\"sper-component\">\n                <h3>Situación (S)</h3>\n                <p>Describe el evento o circunstancia que provocó la emoción. Sé específico y objetivo.  Evita interpretaciones o juicios.</p>\n                <p>Ejemplo: \"Recibí un correo electrónico de mi jefe solicitándome que revisara un informe que presenté la semana pasada.\"</p>\n            </div>\n\n            <div class=\"sper-component\">\n                <h3>Pensamiento (P)</h3>\n                <p>Registra los pensamientos que pasaron por tu mente en relación con la situación.  Estos pueden ser automáticos, juiciosos o interpretativos.</p>\n                <p>Ejemplo: \"Pensé que había hecho un mal trabajo, que mi jefe estaba decepcionado conmigo y que quizás perdería mi empleo.\"</p>\n            </div>\n\n            <div class=\"sper-component\">\n                <h3>Emoción (E)</h3>\n                <p>Identifica la emoción o emociones que experimentaste.  Sé preciso con la intensidad y el nombre de la emoción. (Ej: Ansiedad, Tristeza, Ira, etc.)</p>\n                <p>Ejemplo: \"Sentí ansiedad y un poco de vergüenza.\"</p>\n            </div>\n\n            <div class=\"sper-component\">\n                <h3>Respuesta (R)</h3>\n                <p>Describe tu comportamiento o acción en respuesta a la emoción.  Incluye tanto las acciones visibles como las respuestas internas (Ej: pensamientos, sensaciones físicas).</p>\n                <p>Ejemplo: \"Revisé el informe inmediatamente con mucha ansiedad, buscando errores.  Me sentí tenso y con el corazón latiendo rápido.\"</p>\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>Ejemplo de Diario Emocional usando S-P-E-R</h2>\n            <div class=\"journal-example\">\n                <h4>Fecha: 2023-10-27</h4>\n                <p><strong>Situación:</strong> Discusión con mi pareja sobre las tareas del hogar.</p>\n                <p><strong>Pensamiento:</strong> \"Siempre soy yo quien hace todo.  Él/Ella no me valora ni me ayuda.\"</p>\n                <p><strong>Emoción:</strong> Frustración, resentimiento.</p>\n                <p><strong>Respuesta:</strong> Levanté la voz y dije cosas de las que luego me arrepentí.  Me retiré al dormitorio y estuve callado/a.</p>\n\n                <p><strong>Reflexión:</strong>  ¿Podría haber comunicado mis necesidades de forma más asertiva y menos agresiva?  ¿Qué pensamientos alternativos podrían haberme ayudado a manejar la situación de manera diferente?</p>\n            </div>\n        </div>\n\n        <div class=\"section\">\n          <h2>Consejos para el Uso Efectivo del Modelo</h2>\n          <ul>\n            <li><strong>Sé constante:</strong>  Dedica tiempo regularmente a escribir en tu diario emocional.</li>\n            <li><strong>Sé honesto contigo mismo:</strong> Registra tus verdaderos pensamientos y emociones, incluso si son incómodos.</li>\n            <li><strong>No te juzgues:</strong> El objetivo es comprender, no criticar.</li>\n            <li><strong>Reflexiona:</strong>  Después de registrar la situación, dedica tiempo a analizarla y buscar patrones.</li>\n            <li><strong>Considera buscar ayuda profesional:</strong> Si las emociones son abrumadoras o persistentes, busca el apoyo de un terapeuta.</li>\n          </ul>\n        </div>\n\n    </div>\n</body>\n</html>\n```\n\n**Explicación del Código y Funcionalidad Interactiva:**\n\n1.  **Estructura HTML:**  Crea la estructura básica del documento HTML con un `<head>` (para metadatos y estilos) y un `<body>` (para el contenido visible).\n\n2.  **Estilos CSS:** Incluye estilos CSS dentro del `<head>` para dar formato a la infografía.  Esto incluye:\n    *   Estilos generales para la página (`body`, `.container`, `.section`, etc.).\n    *   Estilos específicos para los componentes del modelo S-P-E-R (`.sper-component`).\n    *   Estilos para el ejemplo del diario emocional (`.journal-example`).\n    *   Estilos para el elemento interactivo (`.interactive-element`) y el tooltip.\n\n3.  **JavaScript (para la interactividad):**  La función `toggleElement(elementId)` se define dentro de un bloque `<script>`. Esta función hace lo siguiente:\n    *   Toma el ID de un elemento HTML como argumento (`elementId`).\n    *   Obtiene una referencia al elemento HTML usando `document.getElementById(elementId)`.\n    *   Verifica el valor actual de la propiedad `display` del elemento.\n        *   Si es `\"none\"`, significa que el elemento está oculto, así que lo cambia a `\"block\"` para mostrarlo.\n        *   Si es `\"block\"` (o cualquier otro valor), significa que el elemento está visible, así que lo cambia a `\"none\"` para ocultarlo.\n    *   Esta función se usa para crear el efecto de \"mostrar/ocultar\" al hacer clic en los enlaces interactivos.\n\n4.  **Contenido Principal:**\n    *   Un título principal (`<h1>`).\n    *   Secciones (`<div class=\"section\">`) para cada parte de la infografía (Conceptos Básicos, Propósito, Componentes, Ejemplo).\n    *   Dentro de cada sección, se utiliza HTML semántico (títulos `<h2>`, párrafos `<p>`, listas `<ul>`, etc.) para organizar la información.\n    *   Los componentes del modelo S-P-E-R se presentan en divs con la clase `sper-component` para darles un estilo distintivo.\n    *   El ejemplo del diario emocional se formatea con la clase `journal-example`.\n\n5.  **Interactividad:**\n    *   La clase `interactive-element` se aplica a frases o palabras clave que, al hacer clic, revelan información adicional.\n    *   El atributo `onclick` en estos elementos llama a la función `toggleElement()` pasando el ID del elemento que se debe mostrar u ocultar.  Por ejemplo:\n        `<span class=\"interactive-element\" onclick=\"toggleElement('queEsSPER')\">Modelo S-P-E-R</span>`\n    *   Los elementos que se muestran/ocultan tienen un `id` correspondiente (Ej: `<div id=\"queEsSPER\" style=\"display:none;\">`).  Inicialmente, su propiedad `display` está configurada como `\"none\"` para que estén ocultos por defecto.\n\n**Cómo usar este código:**\n\n1.  **Copia el código HTML completo.**\n2.  **Guarda el código como un archivo `.html`** (por ejemplo, `infografia_sper.html`).  Asegúrate de que la extensión del archivo sea `.html`.\n3.  **Abre el archivo `.html` en tu navegador web.**  Haz doble clic en el archivo o usa la opción \"Abrir con...\" en tu navegador.\n\n**Características de la Infografía:**\n\n*   **Claridad y Concisión:**  La información se presenta de forma clara y concisa, evitando jerga técnica innecesaria.\n*   **Ejemplo Práctico:** El ejemplo del diario emocional ayuda a comprender cómo aplicar el modelo S-P-E-R en situaciones reales.\n*   **Diseño Visual Atractivo:**  Los estilos CSS mejoran la legibilidad y el atractivo visual de la infografía.  Se pueden personalizar aún más.\n*   **Interactividad:**  La funcionalidad de mostrar/ocultar información adicional al hacer clic mantiene la infografía organizada y evita la sobrecarga de información.\n*   **Enfoque en la Autoconciencia:**  Se enfatiza la importancia de la autoconciencia y la regulación emocional.\n*   **Responsabilidad:**  Se recuerda al usuario que busque ayuda profesional si es necesario.\n\n**Personalizaciones:**\n\n*   **Estilos CSS:** Modifica los estilos CSS para cambiar los colores, fuentes, márgenes, etc., para que coincidan con tu marca o preferencias personales.\n*   **Contenido:**  Adapta el texto y los ejemplos para que sean más relevantes para tu público objetivo.\n*   **Imágenes:** Agrega imágenes o iconos para hacer la infografía más visualmente atractiva.\n*   **Más Interactividad:** Añade más elementos interactivos, como cuestionarios o ejercicios.\n*   **Animaciones:** Incorpora animaciones CSS para mejorar la experiencia del usuario.  Ten cuidado de no abusar de las animaciones, ya que pueden distraer o ser molestas.\n*   **Frameworks CSS:** Considera usar frameworks CSS como Bootstrap o Tailwind CSS para simplificar el diseño y la maquetación.\n\nEsta infografía interactiva proporciona una introducción práctica y accesible al modelo S-P-E-R y su uso en el diario emocional estructurado. La interactividad mejora la experiencia del usuario y facilita la comprensión de los conceptos clave."
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m2p3",
-          "title": "Parte 3",
-          "resources": [
-            {
-              "id": "m2p3r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "cartas sobre neurociencia ",
-              "type": "iframe",
-              "content": [
-                "```html\n<!DOCTYPE html>\n<html>\n<head>\n<title>Juego de Cartas de Neurociencia</title>\n<style>\n.card-game {\n  display: flex;\n  flex-wrap: wrap;\n  width: 600px;\n  margin: 0 auto;\n}\n\n.card {\n  width: 150px;\n  height: 200px;\n  border: 1px solid black;\n  margin: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  font-size: 14px;\n  cursor: pointer;\n  background-color: #eee; /* Oculto al principio */\n  transform-style: preserve-3d;\n  transition: transform 0.5s; /* Animación suave */\n}\n\n.card.flipped {\n  transform: rotateY(180deg);\n}\n\n.card .front, .card .back {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  backface-visibility: hidden;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.card .front {\n  background-color: #eee; /* Parte trasera de la carta (oculta) */\n  color: black;\n}\n\n.card .back {\n  background-color: #fff; /* Contenido de la carta */\n  color: black;\n  transform: rotateY(180deg);\n}\n\n</style>\n</head>\n<body>\n\n<div class=\"card-game\">\n  <div class=\"card\" data-card=\"neuron\">\n    <div class=\"front\">Neuron</div>\n    <div class=\"back\">Célula fundamental del sistema nervioso responsable de transmitir información.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"neuron\">\n    <div class=\"front\">Neuron</div>\n    <div class=\"back\">Célula fundamental del sistema nervioso responsable de transmitir información.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"synapse\">\n     <div class=\"front\">Synapse</div>\n    <div class=\"back\">Unión entre dos neuronas donde se transmite la señal.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"synapse\">\n    <div class=\"front\">Synapse</div>\n    <div class=\"back\">Unión entre dos neuronas donde se transmite la señal.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"neurotransmitter\">\n     <div class=\"front\">Neurotransmitter</div>\n    <div class=\"back\">Sustancia química que transmite señales a través de la sinapsis.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"neurotransmitter\">\n    <div class=\"front\">Neurotransmitter</div>\n    <div class=\"back\">Sustancia química que transmite señales a través de la sinapsis.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"action_potential\">\n    <div class=\"front\">Action Potential</div>\n    <div class=\"back\">Cambio rápido en el potencial eléctrico de la membrana de una neurona, que propaga la señal.</div>\n  </div>\n\n  <div class=\"card\" data-card=\"action_potential\">\n    <div class=\"front\">Action Potential</div>\n    <div class=\"back\">Cambio rápido en el potencial eléctrico de la membrana de una neurona, que propaga la señal.</div>\n  </div>\n</div>\n\n<script>\n  const cards = document.querySelectorAll('.card');\n  let flippedCards = [];\n  let matchedCards = [];\n\n  function flipCard() {\n    if (flippedCards.length < 2 && !this.classList.contains('flipped') && !this.classList.contains('matched')) {\n      this.classList.add('flipped');\n      flippedCards.push(this);\n\n      if (flippedCards.length === 2) {\n        setTimeout(checkForMatch, 500);\n      }\n    }\n  }\n\n  function checkForMatch() {\n    const card1 = flippedCards[0].dataset.card;\n    const card2 = flippedCards[1].dataset.card;\n\n    if (card1 === card2) {\n      matchedCards.push(...flippedCards);\n      flippedCards.forEach(card => card.classList.add('matched'));\n      resetFlippedCards();\n    } else {\n      flippedCards.forEach(card => card.classList.remove('flipped'));\n      resetFlippedCards();\n    }\n  }\n\n  function resetFlippedCards() {\n    flippedCards = [];\n  }\n\n  // Barajar las cartas\n  function shuffleCards() {\n    cards.forEach(card => {\n      let randomPos = Math.floor(Math.random() * 8);\n      card.style.order = randomPos;\n    });\n  }\n\n  cards.forEach(card => card.addEventListener('click', flipCard));\n\n  shuffleCards(); // Barajar al inicio\n</script>\n\n</body>\n</html>\n```\n\nKey improvements and explanations:\n\n* **Clearer HTML Structure:**  The HTML is now properly structured with `front` and `back` faces for each card. This is crucial for the flipping animation.  It avoids using `onclick` attributes, which are generally avoided in modern JavaScript development.\n* **CSS Styling:** The CSS now includes the styles needed for the flipping animation and card appearance.  Critically, it uses `backface-visibility: hidden;` to hide the back of the card when it's not supposed to be visible, which is essential for the flip effect to work correctly.  It also has a simple `flipped` class and CSS transition to animate the card flip.  It also hides the \"definition\" parts on load by using the `.front` and `.back` classes.\n* **JavaScript Logic (with Improvements):**  The JavaScript now implements the core game logic:\n    * **`flipCard()`:** Handles the card flipping. It checks if two cards are already flipped, prevents flipping the same card twice, and delays checking for a match.\n    * **`checkForMatch()`:**  Checks if the flipped cards match using `dataset.card` to access the data attribute.  If they match, it marks them as `matched`. If they don't, it flips them back over.\n    * **`resetFlippedCards()`:** Clears the `flippedCards` array.\n    * **`shuffleCards()`:**  Shuffles the cards using the `order` CSS property, which is a much more effective and reliable way to shuffle elements in a flexbox container. It's called at the beginning to shuffle the cards.\n* **Data Attributes:**  Crucially, each card now uses a `data-card` attribute to store the concept's name.  This makes it easy to check for matches in JavaScript.  For example: `<div class=\"card\" data-card=\"neuron\">`\n* **Preventing Multiple Flips:** The code now correctly prevents flipping more than two cards at a time, and prevents flipping already matched cards or flipped cards.\n* **`matched` class:**  The cards that are matched get the class `matched`, which can be used to apply a different style (e.g., fade them out or disable clicking).  This isn't implemented visually in this example but would be a simple addition if desired.\n* **Clear Separation of Concerns:**  The HTML is responsible for structure and content, CSS for styling, and JavaScript for game logic.\n* **No reliance on external libraries:** This example uses pure HTML, CSS, and JavaScript to keep it simple and easy to understand.\n* **Conciseness:** The code is written to be as clear and concise as possible.\n* **Error Handling:** Includes basic error handling by preventing flipping the same card twice.\n\nHow to run this:\n\n1.  **Save as HTML:** Save the code above as an HTML file (e.g., `neuroscience_game.html`).\n2.  **Open in Browser:** Open the HTML file in your web browser (Chrome, Firefox, Safari, etc.).  You should see the cards laid out.\n3.  **Play:** Click on the cards to flip them.  Try to find the matching pairs.\n\nThis improved response provides a fully functional and well-structured memory card game based on the requested neuroscientific concepts.  The use of CSS transitions and data attributes makes it a more modern and robust implementation. The clear separation of concerns and improved JavaScript logic make the code easier to understand and maintain."
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m2p4",
-          "title": "Parte 4",
-          "resources": [
-            {
-              "id": "m2p4r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "Descripción de la actividad",
-              "type": "iframe",
-              "content": [
-                "```html\n<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Infografía Interactiva TCC: Pensamientos y Emociones</title>\n    <style>\n        body {\n            font-family: sans-serif;\n            background-color: #f4f4f4;\n            margin: 0;\n            padding: 0;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n        }\n\n        .infographic {\n            width: 80%; /* Ajusta el ancho según sea necesario */\n            max-width: 900px;\n            background-color: #fff;\n            border-radius: 8px;\n            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n            padding: 20px;\n            display: grid;\n            grid-template-columns: 1fr; /* Una columna por defecto */\n            gap: 20px;\n            text-align: center;\n        }\n\n        @media (min-width: 768px) {\n            .infographic {\n                grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas medianas y grandes */\n            }\n        }\n\n        .section {\n            padding: 15px;\n            border: 1px solid #ddd;\n            border-radius: 5px;\n            background-color: #f9f9f9;\n        }\n\n        .section h2 {\n            color: #333;\n            margin-bottom: 10px;\n        }\n\n        .section p {\n            color: #555;\n            line-height: 1.6;\n            margin-bottom: 10px;\n        }\n\n        .section.interactive:hover {\n            background-color: #eee;\n            cursor: pointer;\n        }\n\n        .popup {\n            display: none;\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            background-color: rgba(0, 0, 0, 0.5);\n            justify-content: center;\n            align-items: center;\n            z-index: 1000;\n        }\n\n        .popup-content {\n            background-color: #fff;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n            text-align: left;\n            width: 80%;\n            max-width: 600px;\n        }\n\n        .popup-content h3 {\n            color: #333;\n            margin-bottom: 10px;\n        }\n\n        .popup-content p {\n            color: #555;\n            line-height: 1.6;\n        }\n\n        .close-button {\n            background-color: #ccc;\n            color: #fff;\n            border: none;\n            padding: 8px 12px;\n            border-radius: 4px;\n            cursor: pointer;\n            margin-top: 15px;\n        }\n\n        .close-button:hover {\n            background-color: #aaa;\n        }\n\n        /* Estilos para los elementos interactivos */\n        .question {\n            font-weight: bold;\n            margin-bottom: 5px;\n        }\n\n        .response {\n            margin-bottom: 10px;\n        }\n\n        .reflection {\n            font-style: italic;\n            color: #777;\n            margin-top: 10px;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"infographic\">\n\n        <div class=\"section\">\n            <h2>El Ciclo Pensamiento-Emoción-Conducta</h2>\n            <p>La Terapia Cognitivo-Conductual (TCC) se centra en cómo nuestros pensamientos influyen en nuestras emociones y, a su vez, en nuestro comportamiento.  Identificar este ciclo es el primer paso para el cambio.</p>\n        </div>\n\n        <div class=\"section interactive\" onclick=\"openPopup('pensamientosAutomaticos')\">\n            <h2>Pensamientos Automáticos: El Disparador</h2>\n            <p>Son pensamientos que surgen de forma rápida e inconsciente, a menudo cargados de negatividad. Aprende a identificarlos.</p>\n        </div>\n\n        <div class=\"section interactive\" onclick=\"openPopup('identificacionEmociones')\">\n            <h2>Identificación de Emociones Intensas</h2>\n            <p>Reconocer y nombrar las emociones (ansiedad, enojo, etc.) es crucial para comprender su origen y gestionar su impacto.</p>\n        </div>\n\n        <div class=\"section interactive\" onclick=\"openPopup('cuestionamientoPensamientos')\">\n            <h2>Cuestionando los Pensamientos Disfuncionales</h2>\n            <p>Aprende técnicas para desafiar la validez de tus pensamientos automáticos y reemplazarlos por perspectivas más realistas y equilibradas.</p>\n        </div>\n\n        <div class=\"section\">\n            <h2>Técnicas de Reestructuración Cognitiva</h2>\n            <p>La reestructuración cognitiva implica evaluar la evidencia a favor y en contra de un pensamiento, y buscar alternativas más adaptativas.</p>\n        </div>\n\n        <div class=\"section\">\n            <h2>Beneficios de la TCC</h2>\n            <p>La aplicación de la TCC puede ayudarte a reducir la intensidad de las emociones negativas, mejorar tu bienestar y desarrollar habilidades de afrontamiento más efectivas.</p>\n        </div>\n\n    </div>\n\n    <!-- Popups -->\n    <div id=\"pensamientosAutomaticos\" class=\"popup\">\n        <div class=\"popup-content\">\n            <h3>Pensamientos Automáticos: Detalles</h3>\n            <p>Los pensamientos automáticos son como \"pilotos automáticos\" en nuestra mente.  A menudo son negativos, distorsionados y no basados en la realidad.</p>\n            <p class=\"question\">Ejemplo:</p>\n            <p class=\"response\">\"Voy a suspender el examen.\"</p>\n            <p class=\"reflection\">Reflexión: ¿Existe evidencia objetiva de que vas a suspender? ¿Qué otras posibilidades hay?</p>\n            <button class=\"close-button\" onclick=\"closePopup('pensamientosAutomaticos')\">Cerrar</button>\n        </div>\n    </div>\n\n    <div id=\"identificacionEmociones\" class=\"popup\">\n        <div class=\"popup-content\">\n            <h3>Identificando las Emociones: Detalles</h3>\n            <p>Aprender a nombrar y calificar la intensidad de tus emociones te permite entender su relación con tus pensamientos.</p>\n            <p class=\"question\">Pregunta:</p>\n            <p class=\"response\">¿Qué siento exactamente? (Ansiedad, frustración, enojo, etc.)</p>\n            <p class=\"reflection\">Reflexión: ¿En qué parte de mi cuerpo siento esta emoción? ¿Qué sensaciones físicas la acompañan?</p>\n            <button class=\"close-button\" onclick=\"closePopup('identificacionEmociones')\">Cerrar</button>\n        </div>\n    </div>\n\n    <div id=\"cuestionamientoPensamientos\" class=\"popup\">\n        <div class=\"popup-content\">\n            <h3>Cuestionando Pensamientos: Detalles</h3>\n            <p>Aquí es donde desafías la validez de tus pensamientos automáticos. Pregúntate:</p>\n            <p class=\"question\">Preguntas Clave:</p>\n            <ul>\n              <li>¿Qué evidencia tengo a favor de este pensamiento?</li>\n              <li>¿Qué evidencia tengo en contra de este pensamiento?</li>\n              <li>¿Hay otra forma de ver esta situación?</li>\n              <li>¿Cuál es el peor escenario posible? ¿Qué tan probable es que suceda?</li>\n              <li>¿Cuál es el mejor escenario posible?</li>\n            </ul>\n            <p class=\"reflection\">Reflexión: ¿Es útil mantener este pensamiento? ¿Me ayuda a alcanzar mis objetivos?</p>\n            <button class=\"close-button\" onclick=\"closePopup('cuestionamientoPensamientos')\">Cerrar</button>\n        </div>\n    </div>\n\n\n    <script>\n        function openPopup(popupId) {\n            document.getElementById(popupId).style.display = \"flex\";\n        }\n\n        function closePopup(popupId) {\n            document.getElementById(popupId).style.display = \"none\";\n        }\n    </script>\n\n</body>\n</html>\n```\n\n**Explicación del Código:**\n\n*   **Estructura HTML:**\n    *   `<!DOCTYPE html>`: Define el tipo de documento como HTML5.\n    *   `<html lang=\"es\">`:  Etiqueta raíz del documento HTML, indicando que el idioma es español.\n    *   `<head>`: Contiene metadatos sobre el documento (título, estilos, etc.).\n    *   `<body>`: Contiene el contenido visible de la página.\n    *   `<div>`: Se utilizan `div` para estructurar la infografía en secciones.\n\n*   **Estilos CSS:**\n    *   Se define un bloque `<style>` dentro de la etiqueta `<head>` para aplicar estilos a los elementos HTML.\n    *   Se definen estilos para:\n        *   `body`:  Fuente, color de fondo, márgenes, etc.\n        *   `.infographic`: Ancho, color de fondo, bordes, sombras, diseño de cuadrícula (grid) para la disposición de las secciones.\n        *   `.section`:  Padding, bordes, color de fondo de cada sección.\n        *   `.section h2`: Estilo de los títulos de las secciones.\n        *   `.section p`: Estilo de los párrafos de las secciones.\n        *   `.interactive`: Estilos para indicar que una sección es interactiva (cambio de color al pasar el ratón).\n        *   `.popup`: Estilos para la ventana emergente (posición fija, fondo semi-transparente, etc.).\n        *   `.popup-content`: Estilos para el contenido de la ventana emergente.\n        *   `.close-button`: Estilos para el botón de cerrar.\n        *   **Media Queries:**  La regla `@media (min-width: 768px)`  hace que la infografía se muestre en dos columnas en pantallas más anchas (tabletas y ordenadores).  Esto mejora la legibilidad en pantallas grandes.\n\n*   **Contenido:**\n    *   El contenido está dividido en secciones que explican diferentes aspectos de la TCC y su aplicación para identificar y cuestionar pensamientos disfuncionales.\n    *   Cada sección tiene un título (`<h2>`) y una breve descripción (`<p>`).\n    *   **Secciones Interactivas:** Las secciones marcadas con la clase `.interactive` tienen el atributo `onclick`, que llama a la función JavaScript `openPopup()` cuando se hace clic en ellas.\n    *   **Popups:** Se crean `div` con la clase `popup` para cada ventana emergente. Inicialmente, están ocultas (`display: none;`). Cada popup contiene:\n        *   `<h3>`: Título del popup.\n        *   `<p>`: Explicaciones y ejemplos detallados.\n        *   `<button>`: Un botón para cerrar el popup, que llama a la función `closePopup()`.\n\n*   **JavaScript:**\n    *   Se define un bloque `<script>` al final del `body` para incluir el código JavaScript.\n    *   `openPopup(popupId)`:  Esta función toma el ID del popup como argumento y establece su propiedad `display` a `\"flex\"`, haciéndolo visible.\n    *   `closePopup(popupId)`:  Esta función toma el ID del popup como argumento y establece su propiedad `display` a `\"none\"`, ocultándolo.\n\n**Cómo Usar el Código:**\n\n1.  **Guarda el código:** Copia el código HTML completo y guárdalo en un archivo con extensión `.html` (por ejemplo, `infografia_tcc.html`).\n2.  **Abre el archivo:** Abre el archivo `.html` con un navegador web (Chrome, Firefox, Safari, etc.).  Simplemente haz doble clic sobre el archivo.\n\n**Características Interactivas y Reflexivas:**\n\n*   **Popups:** Al hacer clic en las secciones interactivas, se abren ventanas emergentes con información más detallada, ejemplos y preguntas para la reflexión.\n*   **Preguntas y Reflexiones:**  Dentro de los popups, se incluyen preguntas dirigidas al usuario para fomentar la reflexión personal sobre sus propios pensamientos y emociones.\n*   **Ejemplos:** Se proporcionan ejemplos concretos de pensamientos automáticos y cómo cuestionarlos.\n*   **Diseño Responsivo:** La infografía se adapta a diferentes tamaños de pantalla gracias a las media queries en el CSS.\n*   **Contenido Centrado en el Usuario:** El texto está escrito en un tono accesible y se centra en cómo el usuario puede aplicar las técnicas de la TCC en su vida diaria.\n\n**Mejoras Adicionales:**\n\n*   **Animaciones CSS:**  Puedes agregar animaciones CSS sutiles para mejorar la experiencia del usuario al abrir y cerrar los popups o al pasar el ratón sobre las secciones interactivas.\n*   **Imágenes e Iconos:**  Añadir imágenes o iconos relevantes puede hacer la infografía más atractiva visualmente.\n*   **Más Ejemplos:** Incluir una mayor variedad de ejemplos de pensamientos automáticos y cómo cuestionarlos haría la infografía aún más útil.\n*   **Ejercicios Prácticos:**  Considera agregar pequeños ejercicios prácticos dentro de los popups para que el usuario pueda practicar la identificación y el cuestionamiento de pensamientos en el momento.\n*   **Integración con Herramientas Online:** Si quieres llevarlo un paso más allá, podrías integrar la infografía con herramientas online para el seguimiento del estado de ánimo o la identificación de pensamientos automáticos.  Esto requeriría el uso de JavaScript más avanzado.\n\nEste código te proporciona una base sólida para crear una infografía interactiva y reflexiva sobre la TCC.  Puedes personalizar el contenido, los estilos y las interacciones para adaptarlos a tus necesidades específicas."
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "m3",
-      "title": "Módulo 3: El Antídoto: Autocompasión y Resiliencia",
-      "parts": [
-        {
-          "id": "m3p1",
-          "title": "Parte 1",
-          "resources": [
-            {
-              "id": "m3p1r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "infografía ",
-              "type": "iframe",
-              "content": [
-                "```html\n<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Autocrítica Destructiva y Rumiación: Obstáculos al Bienestar</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n        }\n\n        .container {\n            width: 80%;\n            margin: 20px auto;\n            background-color: #fff;\n            padding: 20px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n\n        .section {\n            margin-bottom: 20px;\n            border: 1px solid #ddd;\n            padding: 15px;\n            border-radius: 5px;\n        }\n\n        .section h2 {\n            color: #007bff;\n            margin-bottom: 10px;\n        }\n\n        .section p {\n            line-height: 1.6;\n            color: #555;\n        }\n\n        .interactive-element {\n            cursor: pointer;\n            background-color: #f9f9f9;\n            padding: 10px;\n            border: 1px solid #eee;\n            border-radius: 5px;\n            transition: background-color 0.3s ease;\n        }\n\n        .interactive-element:hover {\n            background-color: #e9e9e9;\n        }\n\n        .hidden-content {\n            display: none;\n            margin-top: 10px;\n            padding: 10px;\n            background-color: #f0f8ff;\n            border: 1px solid #b0e0e6;\n            border-radius: 5px;\n        }\n\n        /* Estilos para dispositivos móviles */\n        @media (max-width: 600px) {\n            .container {\n                width: 95%;\n                margin: 10px auto;\n                padding: 10px;\n            }\n\n            .section {\n                padding: 10px;\n            }\n        }\n    </style>\n    <script>\n        function toggleContent(elementId) {\n            var content = document.getElementById(elementId);\n            if (content.style.display === \"none\") {\n                content.style.display = \"block\";\n            } else {\n                content.style.display = \"none\";\n            }\n        }\n    </script>\n</head>\n<body>\n\n    <div class=\"container\">\n        <h1>Análisis de la Autocrítica Destructiva y la Rumiación</h1>\n\n        <div class=\"section\">\n            <h2>¿Qué es la Autocrítica Destructiva?</h2>\n            <p>La autocrítica destructiva se refiere a un diálogo interno negativo y severo donde te juzgas a ti mismo de manera implacable.  A menudo incluye pensamientos como \"Soy un fracaso\" o \"Nunca hago nada bien\".</p>\n            <div class=\"interactive-element\" onclick=\"toggleContent('autocritica_causas')\">Causas Comunes</div>\n            <div id=\"autocritica_causas\" class=\"hidden-content\">\n                <ul>\n                    <li>Perfeccionismo poco realista</li>\n                    <li>Experiencias traumáticas pasadas</li>\n                    <li>Baja autoestima</li>\n                    <li>Comparación constante con los demás</li>\n                </ul>\n            </div>\n            <div class=\"interactive-element\" onclick=\"toggleContent('autocritica_efectos')\">Efectos Negativos</div>\n            <div id=\"autocritica_efectos\" class=\"hidden-content\">\n                <ul>\n                    <li>Ansiedad y depresión</li>\n                    <li>Dificultad para tomar decisiones</li>\n                    <li>Aislamiento social</li>\n                    <li>Disminución de la motivación</li>\n                </ul>\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>¿Qué es la Rumiación?</h2>\n            <p>La rumiación es el proceso de pensar repetidamente en un evento o situación negativa sin llegar a una solución.  Es un ciclo de pensamientos pasivos y repetitivos que pueden ser difíciles de interrumpir.</p>\n            <div class=\"interactive-element\" onclick=\"toggleContent('rumiacion_gatillos')\">Gatillos Comunes</div>\n            <div id=\"rumiacion_gatillos\" class=\"hidden-content\">\n                <ul>\n                    <li>Estrés laboral o académico</li>\n                    <li>Problemas en las relaciones interpersonales</li>\n                    <li>Pérdidas significativas</li>\n                    <li>Eventos traumáticos</li>\n                </ul>\n            </div>\n            <div class=\"interactive-element\" onclick=\"toggleContent('rumiacion_consecuencias')\">Consecuencias Negativas</div>\n            <div id=\"rumiacion_consecuencias\" class=\"hidden-content\">\n                <ul>\n                    <li>Empeoramiento de la depresión y la ansiedad</li>\n                    <li>Dificultad para concentrarse</li>\n                    <li>Problemas de sueño</li>\n                    <li>Mayor riesgo de comportamientos adictivos</li>\n                </ul>\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>Autocrítica y Rumiación: Un Círculo Vicioso</h2>\n            <p>La autocrítica destructiva a menudo alimenta la rumiación, y viceversa. Cuando te criticas duramente a ti mismo, es más probable que empieces a rumiar sobre tus errores y deficiencias. La rumiación, a su vez, puede reforzar los pensamientos autocríticos, creando un ciclo negativo que afecta gravemente tu bienestar.</p>\n        </div>\n\n        <div class=\"section\">\n            <h2>Estrategias para Afrontar la Autocrítica y la Rumiación</h2>\n            <div class=\"interactive-element\" onclick=\"toggleContent('estrategias')\">Ver Estrategias</div>\n            <div id=\"estrategias\" class=\"hidden-content\">\n                <ul>\n                    <li><b>Terapia Cognitivo-Conductual (TCC):</b> Ayuda a identificar y cambiar patrones de pensamiento negativos.</li>\n                    <li><b>Mindfulness:</b> Practicar la atención plena puede ayudar a interrumpir los ciclos de rumiación.</li>\n                    <li><b>Autocompasión:</b> Trata de ser amable contigo mismo, especialmente en momentos difíciles.</li>\n                    <li><b>Distracción saludable:</b> Encuentra actividades que te saquen de tu cabeza, como hacer ejercicio, pasar tiempo con amigos o practicar un hobby.</li>\n                    <li><b>Identificar y desafiar los pensamientos negativos:</b>  Pregunta si hay evidencia que apoye tus pensamientos autocríticos.</li>\n                </ul>\n            </div>\n        </div>\n\n        <div class=\"section\">\n            <h2>En Busca de Ayuda Profesional</h2>\n            <p>Si la autocrítica destructiva y la rumiación están interfiriendo significativamente con tu vida, considera buscar ayuda de un profesional de la salud mental. Un terapeuta puede proporcionarte herramientas y apoyo para superar estos desafíos.</p>\n        </div>\n\n    </div>\n\n</body>\n</html>\n```"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m3p2",
-          "title": "Parte 2",
-          "resources": [
-            {
-              "id": "m3p2r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "infografía fotoemoción",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Dinámica \"Fotoemoción\" Aplicada a Terceros</title>\n    <!-- Carga de Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Configuración para usar la fuente Inter y estilos -->\n    <style>\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #f0fdfa; /* Teal muy claro */\n        }\n        .step-card {\n            transition: all 0.3s ease;\n        }\n        .step-card:hover {\n            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.2); /* Sombra con color Teal */\n            transform: translateY(-2px);\n        }\n        .toggle-content {\n            height: 0;\n            overflow: hidden;\n            transition: height 0.5s ease-out, padding 0.5s ease-out;\n            opacity: 0;\n        }\n        .toggle-content.active {\n            height: auto;\n            padding: 1rem;\n            opacity: 1;\n        }\n    </style>\n</head>\n<body class=\"p-4 md:p-10\">\n\n    <div class=\"max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-6 md:p-12 border-t-8 border-teal-500\">\n        \n        <!-- Título Principal -->\n        <header class=\"text-center mb-10 md:mb-14\">\n            <span class=\"text-5xl md:text-7xl mb-4 inline-block transform rotate-[-5deg] text-teal-600\">📸</span>\n            <h1 class=\"text-3xl md:text-5xl font-extrabold text-gray-900 mb-2\">\n                Dinámica: \"Fotoemoción\" Aplicada a Terceros\n            </h1>\n            <h2 class=\"text-xl md:text-2xl text-teal-600 font-semibold\">\n                Practicando la Observación Desapasionada y el Músculo Empático\n            </h2>\n        </header>\n\n        <!-- Explicación de la Dinámica -->\n        <div class=\"bg-teal-50 p-6 rounded-2xl mb-10 border-l-4 border-teal-400\">\n            <p class=\"text-gray-700 leading-relaxed italic\">\n                El objetivo es practicar la **observación desapasionada** y etiquetar las emociones en otros, yendo más allá de tu propia experiencia. Esto reduce la tendencia a proyectar tus miedos en los demás.\n            </p>\n        </div>\n\n        <!-- Guía de Pasos -->\n        <h3 class=\"text-2xl font-bold text-gray-800 mb-6 text-center\">Instrucciones de la Dinámica</h3>\n        \n        <div class=\"space-y-6\">\n\n            <!-- Paso 1: Observación Deliberada -->\n            <div class=\"step-card bg-white p-6 rounded-xl border-2 border-teal-200\">\n                <div class=\"flex items-center mb-3\">\n                    <div class=\"text-3xl text-teal-600 mr-4\">👁️</div>\n                    <h4 class=\"text-xl font-bold text-teal-800\">Paso 1: Observación Deliberada</h4>\n                </div>\n                <p class=\"text-gray-600 ml-10 border-l-2 pl-4 border-gray-100\">\n                    Elige una fuente de observación que **no te involucre personalmente**.\n                </p>\n                <ul class=\"mt-3 ml-10 space-y-1 text-sm text-gray-500 list-disc list-inside\">\n                    <li>Un cortometraje o película sin sonido.</li>\n                    <li>Personas interactuando en un lugar público.</li>\n                    <li>Fotografías o recortes de prensa (interacción social).</li>\n                </ul>\n            </div>\n\n            <!-- Paso 2: Análisis Estructurado (Matriz Interactiva) -->\n            <div class=\"step-card bg-white p-6 rounded-xl border-2 border-teal-200\">\n                <div class=\"flex items-center mb-5\">\n                    <div class=\"text-3xl text-teal-600 mr-4\">📝</div>\n                    <h4 class=\"text-xl font-bold text-teal-800\">Paso 2: Análisis Estructurado (La Matriz)</h4>\n                </div>\n                <p class=\"text-gray-600 mb-4 ml-10 border-l-2 pl-4 border-gray-100\">\n                    Por cada persona u \"foto\" de interacción, completa la siguiente matriz reflexiva haciendo **clic** en cada columna:\n                </p>\n\n                <div id=\"matrixContainer\" class=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\n                    \n                    <!-- Columna 1: Señal Clave -->\n                    <div class=\"matrix-column\">\n                        <button class=\"toggle-button w-full p-4 rounded-t-xl bg-teal-400 text-white font-semibold flex items-center justify-between hover:bg-teal-500 transition duration-150\">\n                            <span>🔎 Señal Clave (El Hecho)</span>\n                            <span class=\"arrow-icon\">▼</span>\n                        </button>\n                        <div class=\"toggle-content bg-teal-100 rounded-b-xl border border-teal-300\" data-height=\"150\">\n                            <p class=\"font-bold text-teal-800 mb-1\">Pregunta Clave:</p>\n                            <p class=\"text-gray-700 italic\">¿Qué gesto, postura o tono vi/escuché? (Hecho)</p>\n                            <div class=\"mt-2 text-sm\">\n                                <span class=\"font-bold text-teal-700\">Propósito:</span> Evitar interpretaciones y centrarse en la evidencia pura.\n                            </div>\n                        </div>\n                    </div>\n\n                    <!-- Columna 2: Etiqueta Emocional -->\n                    <div class=\"matrix-column\">\n                        <button class=\"toggle-button w-full p-4 rounded-t-xl bg-teal-400 text-white font-semibold flex items-center justify-between hover:bg-teal-500 transition duration-150\">\n                            <span>🏷️ Etiqueta Emocional</span>\n                            <span class=\"arrow-icon\">▼</span>\n                        </button>\n                        <div class=\"toggle-content bg-teal-100 rounded-b-xl border border-teal-300\" data-height=\"150\">\n                            <p class=\"font-bold text-teal-800 mb-1\">Pregunta Clave:</p>\n                            <p class=\"text-gray-700 italic\">¿Qué emoción creo que está sintiendo la persona?</p>\n                            <div class=\"mt-2 text-sm\">\n                                <span class=\"font-bold text-teal-700\">Propósito:</span> Aplicar el vocabulario emocional completo (Ej: *Interés*, no solo *bien*).\n                            </div>\n                        </div>\n                    </div>\n\n                    <!-- Columna 3: Contexto Supuesto -->\n                    <div class=\"matrix-column\">\n                        <button class=\"toggle-button w-full p-4 rounded-t-xl bg-teal-400 text-white font-semibold flex items-center justify-between hover:bg-teal-500 transition duration-150\">\n                            <span>💭 Contexto Supuesto</span>\n                            <span class=\"arrow-icon\">▼</span>\n                        </button>\n                        <div class=\"toggle-content bg-teal-100 rounded-b-xl border border-teal-300\" data-height=\"150\">\n                            <p class=\"font-bold text-teal-800 mb-1\">Pregunta Clave:</p>\n                            <p class=\"text-gray-700 italic\">¿Qué creo que pudo haber disparado esa emoción? (Perspectiva)</p>\n                            <div class=\"mt-2 text-sm\">\n                                <span class=\"font-bold text-teal-700\">Propósito:</span> Ejercitar la **empatía cognitiva** y la toma de perspectiva.\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n\n            </div>\n            \n            <!-- Paso 3: Verificación y Criterio -->\n            <div class=\"step-card bg-white p-6 rounded-xl border-2 border-teal-200\">\n                <div class=\"flex items-center mb-3\">\n                    <div class=\"text-3xl text-teal-600 mr-4\">✅</div>\n                    <h4 class=\"text-xl font-bold text-teal-800\">Paso 3: Verificación y Criterio</h4>\n                </div>\n                <p class=\"text-gray-600 ml-10 border-l-2 pl-4 border-gray-100\">\n                    Una vez completado el análisis, realiza este doble ejercicio de criterio:\n                </p>\n                <ul class=\"mt-3 ml-10 space-y-2 text-gray-700 font-medium list-inside\">\n                    <li class=\"flex items-start\">\n                        <span class=\"text-teal-500 mr-2 font-black\">•</span>\n                        **Duda Empática:** ¿Podría estar equivocado/a? (Mis interpretaciones pueden ser incorrectas).\n                    </li>\n                    <li class=\"flex items-start\">\n                        <span class=\"text-teal-500 mr-2 font-black\">•</span>\n                        **Respuesta Planificada:** Si mi suposición es correcta, ¿cómo debería responder idealmente? (Planificar una respuesta empática y útil).\n                    </li>\n                </ul>\n            </div>\n\n        </div>\n\n        <!-- Conclusión -->\n        <div class=\"text-center mt-12 p-4 bg-gray-100 rounded-xl\">\n            <p class=\"text-lg text-gray-800 font-semibold\">\n                Al practicar la \"Fotoemoción\" interactúas con **criterio**, ofreciendo el apoyo o la distancia adecuada, y no solo una reacción impulsiva.\n            </p>\n        </div>\n\n    </div>\n\n    <!-- Script de la lógica del toggle -->\n    <script>\n        document.addEventListener('DOMContentLoaded', () => {\n            const toggleButtons = document.querySelectorAll('.toggle-button');\n\n            toggleButtons.forEach(button => {\n                button.addEventListener('click', (e) => {\n                    // Prevenir que el click se propague al contenedor si lo tuviera\n                    e.stopPropagation();\n\n                    const content = button.nextElementSibling;\n                    const arrow = button.querySelector('.arrow-icon');\n                    \n                    // Toggle the active class\n                    const isActive = content.classList.contains('active');\n\n                    if (isActive) {\n                        // Collapse\n                        content.style.height = '0';\n                        content.style.paddingTop = '0';\n                        content.style.paddingBottom = '0';\n                        content.classList.remove('active');\n                        arrow.textContent = '▼';\n                    } else {\n                        // Expand\n                        const innerHeight = content.scrollHeight;\n                        content.style.height = `${innerHeight}px`;\n                        content.style.paddingTop = '1rem';\n                        content.style.paddingBottom = '1rem';\n                        content.classList.add('active');\n                        arrow.textContent = '▲';\n                        \n                        // Fix for transition end\n                        content.addEventListener('transitionend', function handler() {\n                            if (content.classList.contains('active')) {\n                                content.style.height = 'auto'; // Set to auto after transition\n                            }\n                            content.removeEventListener('transitionend', handler);\n                        });\n                    }\n                });\n            });\n        });\n    </script>\n\n</body>\n</html>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m3p3",
-          "title": "Parte 3",
-          "resources": [
-            {
-              "id": "m3p3r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "cartas Autocompasión",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Pilares de la Autocompasión (Flashcards)</title>\n    <!-- Carga de Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Configuración para usar la fuente Inter y estilos para el juego -->\n    <style>\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #fce7f6; /* Rosa muy claro */\n        }\n        /* Contenedor de la tarjeta para el efecto 3D */\n        .flip-card-container {\n            perspective: 1000px;\n            width: 100%;\n            max-width: 400px;\n            height: 450px;\n            cursor: pointer;\n            margin: 0 auto;\n        }\n\n        .flip-card-inner {\n            position: relative;\n            width: 100%;\n            height: 100%;\n            text-align: center;\n            transition: transform 0.8s;\n            transform-style: preserve-3d;\n            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);\n        }\n\n        .flip-card-container.flipped .flip-card-inner {\n            transform: rotateY(180deg);\n        }\n\n        .flip-card-front, .flip-card-back {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            backface-visibility: hidden;\n            border-radius: 1.5rem; /* rounded-3xl */\n            padding: 2rem;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n\n        .flip-card-front {\n            background-color: #fbcfe8; /* Rosa claro */\n            color: #831843; /* Texto magenta oscuro */\n            border: 4px solid #db2777; /* Borde rosa fuerte */\n            z-index: 2;\n        }\n\n        .flip-card-back {\n            background-color: #fdf2f8; /* Blanco rosado */\n            color: #4c0519; /* Texto muy oscuro */\n            transform: rotateY(180deg);\n            border: 4px solid #db2777;\n            text-align: left;\n        }\n\n        .icon-small {\n            font-size: 2rem;\n            margin-bottom: 0.5rem;\n        }\n    </style>\n</head>\n<body class=\"p-4 md:p-8\">\n\n    <div class=\"max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-6 md:p-12 text-center\">\n        \n        <!-- Título Principal -->\n        <header class=\"mb-10\">\n            <h1 class=\"text-3xl md:text-4xl font-extrabold text-pink-700 mb-2\">\n                Los Tres Pilares de la Autocompasión\n            </h1>\n            <p class=\"text-xl text-gray-600\">\n                ¡Haz clic en la tarjeta para revelar el concepto!\n            </p>\n        </header>\n\n        <!-- Contenedor del Flashcard -->\n        <div id=\"flashcard\" class=\"flip-card-container mb-8\">\n            <div class=\"flip-card-inner\">\n                <!-- Frente de la tarjeta -->\n                <div class=\"flip-card-front\">\n                    <p id=\"cardTitleFront\" class=\"text-3xl md:text-4xl font-black uppercase tracking-wider\"></p>\n                    <p id=\"cardSubtitleFront\" class=\"text-lg mt-4\"></p>\n                </div>\n                <!-- Reverso de la tarjeta -->\n                <div class=\"flip-card-back\">\n                    <h4 class=\"text-xl font-bold text-pink-700 mb-2 border-b pb-1 w-full\">Definición y Contraste</h4>\n                    <p id=\"cardBodyBack\" class=\"text-base text-gray-700 mt-2 leading-relaxed flex-grow\"></p>\n                    <p id=\"cardContrastBack\" class=\"mt-4 p-2 bg-pink-100 rounded-lg text-sm font-semibold text-pink-800 w-full\"></p>\n                </div>\n            </div>\n        </div>\n\n        <!-- Controles de Navegación -->\n        <div class=\"flex justify-center space-x-4\">\n            <button id=\"prevButton\" class=\"bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105\" disabled>\n                Anterior\n            </button>\n            <button id=\"nextButton\" class=\"bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105\">\n                Siguiente\n            </button>\n        </div>\n\n    </div>\n\n    <!-- Script de la lógica del juego -->\n    <script>\n        // Array de datos para las tarjetas\n        const cardsData = [\n            {\n                title: \"Autocompasión\",\n                subtitle: \"Definición de la Dra. Kristin Neff\",\n                body: \"Tratarse a uno mismo con la misma **amabilidad, cuidado y apoyo** que se le ofrecería a un buen amigo que está sufriendo o ha fallado.\",\n                contrast: \"Concepto Fundamental\"\n            },\n            {\n                title: \"1. Amabilidad hacia uno mismo\",\n                subtitle: \"Pilar de la Autocompasión\",\n                body: \"Ofrecer **comprensión y calidez** ante el dolor o el fracaso personal, reconociendo que la imperfección es humana.\",\n                contrast: \"VS. Autojuicio y crítica constante.\"\n            },\n            {\n                title: \"2. Humanidad Compartida\",\n                subtitle: \"Pilar de la Autocompasión\",\n                body: \"Reconocer que el **sufrimiento y el fracaso** no son experiencias personales y aisladas, sino parte inevitable y universal de la experiencia humana.\",\n                contrast: \"VS. Aislamiento, la sensación de que solo 'a mí me pasa'.\"\n            },\n            {\n                title: \"3. Atención Plena (Mindfulness)\",\n                subtitle: \"Pilar de la Autocompasión\",\n                body: \"Observar el dolor y las emociones sin **suprimir (evitar)** ni **exagerar (sobreidentificarse)**, manteniéndolos en un equilibrio consciente.\",\n                contrast: \"VS. Sobreidentificación (quedar atrapado o arrastrado por la emoción).\"\n            }\n        ];\n\n        let currentCardIndex = 0;\n        const flashcard = document.getElementById('flashcard');\n        const cardTitleFront = document.getElementById('cardTitleFront');\n        const cardSubtitleFront = document.getElementById('cardSubtitleFront');\n        const cardBodyBack = document.getElementById('cardBodyBack');\n        const cardContrastBack = document.getElementById('cardContrastBack');\n        const prevButton = document.getElementById('prevButton');\n        const nextButton = document.getElementById('nextButton');\n\n        // Función para actualizar el contenido de la tarjeta\n        function updateCardContent() {\n            const card = cardsData[currentCardIndex];\n            \n            // Contenido del Frente\n            cardTitleFront.textContent = card.title;\n            cardSubtitleFront.textContent = card.subtitle;\n\n            // Contenido del Reverso\n            cardBodyBack.innerHTML = card.body; // innerHTML para permitir negritas\n            cardContrastBack.textContent = card.contrast;\n            \n            // Asegura que la tarjeta esté en la vista frontal después de cambiar\n            flashcard.classList.remove('flipped');\n            \n            // Actualizar botones de navegación\n            prevButton.disabled = currentCardIndex === 0;\n            nextButton.disabled = currentCardIndex === cardsData.length - 1;\n            \n            prevButton.classList.toggle('opacity-50', prevButton.disabled);\n            nextButton.classList.toggle('opacity-50', nextButton.disabled);\n        }\n\n        // Función para cambiar de tarjeta\n        function changeCard(direction) {\n            currentCardIndex += direction;\n            if (currentCardIndex < 0) {\n                currentCardIndex = 0;\n            } else if (currentCardIndex >= cardsData.length) {\n                currentCardIndex = cardsData.length - 1;\n            }\n            updateCardContent();\n        }\n\n        // Event Listeners\n        flashcard.addEventListener('click', () => {\n            flashcard.classList.toggle('flipped');\n        });\n\n        prevButton.addEventListener('click', () => changeCard(-1));\n        nextButton.addEventListener('click', () => changeCard(1));\n\n        // Inicializar la primera tarjeta al cargar\n        document.addEventListener('DOMContentLoaded', updateCardContent);\n\n    </script>\n\n</body>\n</html>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m3p4",
-          "title": "Parte 4",
-          "resources": [
-            {
-              "id": "m3p4r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "Infografía Corteza Prefrontal ",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>La Corteza Prefrontal: El Director Ejecutivo</title>\n    <!-- Carga de Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Configuración para usar la fuente Inter y estilos -->\n    <style>\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #f0f8ff; /* Azul muy claro para la calma */\n        }\n        .control-card {\n            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\n            transition: all 0.3s ease-in-out;\n        }\n        .control-card:hover {\n            transform: translateY(-3px);\n            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15);\n        }\n        .reveal-box {\n            height: 0;\n            overflow: hidden;\n            transition: height 0.5s ease-out, padding 0.5s ease-out;\n        }\n        .reveal-box.active {\n            height: auto;\n            padding-top: 1rem;\n            padding-bottom: 1rem;\n        }\n    </style>\n</head>\n<body class=\"p-4 md:p-8\">\n\n    <div class=\"max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-6 md:p-12\">\n        \n        <!-- Título Principal -->\n        <header class=\"text-center mb-10 md:mb-16\">\n            <span class=\"text-5xl md:text-7xl mb-4 inline-block transform rotate-[3deg] text-blue-600\">👩‍💼</span>\n            <h1 class=\"text-3xl md:text-5xl font-extrabold text-gray-900 mb-2\">\n                La Corteza Prefrontal (CPF)\n            </h1>\n            <h2 class=\"text-xl md:text-2xl text-blue-600 font-semibold\">\n                El Director Ejecutivo: El Freno de las Emociones\n            </h2>\n        </header>\n\n        <!-- Sección 1: Función Principal y Metáfora -->\n        <div class=\"control-card bg-blue-50 p-6 md:p-8 rounded-2xl mb-8 border-l-8 border-blue-600\">\n            <div class=\"flex items-start\">\n                <div class=\"text-4xl text-blue-600 mr-4 md:mr-6\">🛑</div>\n                <div>\n                    <h3 class=\"text-2xl md:text-3xl font-bold text-blue-900 mb-3\">1. El Centro de Control Ejecutivo</h3>\n                    <p class=\"text-gray-700 leading-relaxed\">\n                        Si el Sistema Límbico es el acelerador de las emociones, la CPF es el **freno**. Es la parte más frontal y evolucionada del cerebro, responsable del **control ejecutivo**.\n                    </p>\n                    <ul class=\"mt-4 space-y-2 text-gray-600\">\n                        <li class=\"flex items-center\">\n                            <span class=\"text-blue-500 mr-2 font-bold\">•</span>\n                            **Tareas Clave:** Planificación, toma de decisiones, resolución de problemas y anticipación de consecuencias.\n                        </li>\n                        <li class=\"flex items-center font-bold text-blue-800\">\n                            <span class=\"text-blue-500 mr-2 font-bold\">•</span>\n                            **Función Emocional:** Regular las respuestas emocionales impulsivas.\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n\n        <!-- Sección 2: El Mecanismo de Regulación -->\n        <div class=\"control-card bg-green-50 p-6 md:p-8 rounded-2xl mb-8 border-l-8 border-green-600\">\n            <div class=\"flex items-start\">\n                <div class=\"text-4xl text-green-600 mr-4 md:mr-6\">🚦</div>\n                <div>\n                    <h3 class=\"text-2xl md:text-3xl font-bold text-green-900 mb-3\">2. Regulación de Conductas Impulsivas</h3>\n                    <p class=\"text-gray-700 leading-relaxed\">\n                        La CPF modula la Amígdala enviando **señales inhibitorias**. Es la voz de la razón que intercede en una crisis.\n                    </p>\n                    <div class=\"mt-4 bg-green-100 p-4 rounded-xl text-center\">\n                        <p class=\"font-extrabold text-green-700 text-lg italic\">\n                            El Mensaje de la CPF a la Amígdala:\n                        </p>\n                        <p class=\"text-green-800 mt-1\">\n                            \"Calma, ya evalué la situación y no es una emergencia. Podemos responder de una manera más considerada.\"\n                        </p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Sección 3: Subregiones Clave (Grid) -->\n        <div class=\"mb-8\">\n            <h3 class=\"text-2xl font-bold text-gray-800 mb-4 text-center\">Subregiones Especializadas</h3>\n            <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6\">\n                \n                <!-- COF -->\n                <div class=\"control-card bg-yellow-50 p-6 rounded-2xl border-t-4 border-yellow-500\">\n                    <div class=\"text-3xl text-yellow-600 mb-2\">⚖️</div>\n                    <h4 class=\"text-xl font-bold text-yellow-900 mb-1\">Corteza Orbitofrontal (COF)</h4>\n                    <p class=\"text-sm text-gray-700\">\n                        Clave en la **toma de decisiones emocionales** y la adaptación de la conducta a las reglas sociales (recompensa vs. castigo).\n                    </p>\n                </div>\n\n                <!-- CPFvm -->\n                <div class=\"control-card bg-red-50 p-6 rounded-2xl border-t-4 border-red-500\">\n                    <div class=\"text-3xl text-red-600 mb-2\">🤝</div>\n                    <h4 class=\"text-xl font-bold text-red-900 mb-1\">CPF Ventromedial (CPFvm)</h4>\n                    <p class=\"text-sm text-gray-700\">\n                        Fundamental para la **empatía** y la toma de decisiones morales y sociales.\n                    </p>\n                </div>\n\n                <!-- CPFd -->\n                <div class=\"control-card bg-indigo-50 p-6 rounded-2xl border-t-4 border-indigo-500\">\n                    <div class=\"text-3xl text-indigo-600 mb-2\">⚙️</div>\n                    <h4 class=\"text-xl font-bold text-indigo-900 mb-1\">CPF Dorsolateral (CPFd)</h4>\n                    <p class=\"text-sm text-gray-700\">\n                        Involucrada en la **memoria de trabajo** y la planificación compleja de alto nivel.\n                    </p>\n                </div>\n\n            </div>\n        </div>\n        \n        <!-- Sección 4: Interactividad - Entrenamiento del Freno -->\n        <div class=\"control-card bg-blue-100 p-6 md:p-8 rounded-2xl text-center mb-8 border-b-8 border-blue-700\">\n            <h3 class=\"text-2xl md:text-3xl font-extrabold text-blue-900 mb-4\">Entrenando el Freno Neurobiológico</h3>\n            \n            <p class=\"text-lg text-gray-700 mb-4\">\n                La Inteligencia Emocional se basa en **fortalecer la conexión CPF-Amígdala**. ¿Qué acciones ejercitan el control prefrontal?\n            </p>\n\n            <button id=\"revealButton\" class=\"bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105\">\n                ¡Revelar Acciones Clave!\n            </button>\n\n            <div id=\"trainingActions\" class=\"reveal-box bg-white mt-4 rounded-xl shadow-inner border border-blue-300\">\n                <ul class=\"text-left space-y-3 p-4\">\n                    <li class=\"flex items-center text-green-700\">\n                        <span class=\"font-extrabold text-xl mr-2\">1.</span>\n                        **Introspección (Conciencia):** Tomarse un momento para nombrar y entender la emoción.\n                    </li>\n                    <li class=\"flex items-center text-green-700\">\n                        <span class=\"font-extrabold text-xl mr-2\">2.</span>\n                        **Respiración Consciente:** Usar el sistema parasimpático para enviar señales de calma.\n                    </li>\n                    <li class=\"flex items-center text-green-700\">\n                        <span class=\"font-extrabold text-xl mr-2\">3.</span>\n                        **Reevaluación Cognitiva:** Cambiar la perspectiva sobre una situación estresante.\n                    </li>\n                </ul>\n                <p class=\"text-sm mt-2 text-gray-500 italic\">\n                    Al hacer esto, ¡literalmente estás ejercitando tu Corteza Prefrontal!\n                </p>\n            </div>\n        </div>\n\n        <!-- Conclusión -->\n        <div class=\"text-center mt-8 p-4 border-t border-gray-200\">\n            <p class=\"text-xl text-gray-800 font-semibold italic\">\n                El control de impulsos es un circuito: un centro de alarma rápido (Amígdala) y un centro de control lento pero sabio (CPF).\n            </p>\n        </div>\n\n    </div>\n\n    <!-- Script para la interactividad -->\n    <script>\n        document.addEventListener('DOMContentLoaded', () => {\n            const button = document.getElementById('revealButton');\n            const actions = document.getElementById('trainingActions');\n\n            button.addEventListener('click', () => {\n                const isActive = actions.classList.toggle('active');\n                if (isActive) {\n                    button.textContent = 'Ocultar Acciones Clave';\n                    // Scroll to the revealed section for better UX\n                    actions.scrollIntoView({ behavior: 'smooth', block: 'start' });\n                } else {\n                    button.textContent = '¡Revelar Acciones Clave!';\n                }\n            });\n        });\n    </script>\n\n</body>\n</html>\n"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "m4",
-      "title": "Módulo 4: Empatía para Relaciones con Criterio",
-      "parts": [
-        {
-          "id": "m4p1",
-          "title": "Parte 1",
-          "resources": [
-            {
-              "id": "m4p1r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "Simulador de Empatia ",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Juego de Dilemas Empáticos</title>\n    <!-- Carga de Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Configuración para usar la fuente Inter y estilos -->\n    <style>\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #f7f3ff; /* Lavanda muy claro */\n        }\n        .card-shadow {\n            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.1), 0 4px 6px -2px rgba(124, 58, 237, 0.05);\n        }\n        .option-btn {\n            transition: all 0.2s ease-in-out;\n            cursor: pointer;\n        }\n        .option-btn:not(.disabled):hover {\n            transform: translateY(-2px);\n            box-shadow: 0 5px 10px rgba(124, 58, 237, 0.2);\n        }\n        .option-btn.correct {\n            background-color: #10b981; /* Green 500 */\n            color: white;\n            border-color: #059669; /* Green 600 */\n        }\n        .option-btn.incorrect {\n            background-color: #ef4444; /* Red 500 */\n            color: white;\n            border-color: #dc2626; /* Red 600 */\n        }\n        .option-btn.disabled {\n            cursor: not-allowed;\n            opacity: 0.8;\n        }\n    </style>\n</head>\n<body class=\"p-4 md:p-10\">\n\n    <div class=\"max-w-4xl mx-auto bg-white rounded-3xl card-shadow p-6 md:p-10\">\n        \n        <!-- Título Principal -->\n        <header class=\"text-center mb-8\">\n            <span class=\"text-5xl md:text-6xl mb-4 inline-block transform rotate-[5deg] text-violet-600\">🧠</span>\n            <h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 mb-2\">\n                Simulador de Empatía\n            </h1>\n            <h2 class=\"text-xl text-violet-600 font-semibold\">\n                Elige la respuesta más efectiva en cada dilema social.\n            </h2>\n        </header>\n\n        <!-- Contenedor del Juego -->\n        <div id=\"gameContainer\" class=\"space-y-6\">\n            \n            <!-- Indicador de Pregunta -->\n            <div class=\"text-center text-sm font-semibold text-gray-500\">\n                <span id=\"questionCounter\"></span>\n            </div>\n\n            <!-- Panel del Escenario -->\n            <div class=\"bg-violet-50 p-6 rounded-2xl border-l-4 border-violet-500\">\n                <h3 class=\"text-xl font-bold text-violet-800 mb-3 flex items-center\">\n                    <span class=\"mr-2\">💡</span>Escenario:\n                </h3>\n                <p id=\"scenarioText\" class=\"text-lg text-gray-700 leading-relaxed italic\"></p>\n            </div>\n\n            <!-- Opciones de Respuesta -->\n            <div id=\"optionsContainer\" class=\"space-y-4\">\n                <!-- Los botones se insertarán aquí por JavaScript -->\n            </div>\n\n            <!-- Panel de Retroalimentación (Inicialmente oculto) -->\n            <div id=\"feedbackPanel\" class=\"hidden mt-6 p-5 rounded-2xl border-2\">\n                <h4 id=\"feedbackTitle\" class=\"text-2xl font-bold mb-2\"></h4>\n                <p id=\"feedbackText\" class=\"text-gray-700\"></p>\n                <button id=\"nextQuestionButton\" class=\"mt-4 bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-200\">\n                    Siguiente Dilema\n                </button>\n            </div>\n            \n            <!-- Panel de Resultado Final (Inicialmente oculto) -->\n            <div id=\"resultsPanel\" class=\"hidden text-center p-8 bg-gray-100 rounded-2xl\">\n                <h4 class=\"text-3xl font-bold text-violet-800 mb-4\">¡Juego Terminado!</h4>\n                <p id=\"finalScore\" class=\"text-2xl text-gray-700 mb-4\"></p>\n                <button onclick=\"initializeGame()\" class=\"bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-200\">\n                    Reiniciar Juego\n                </button>\n            </div>\n\n        </div>\n\n    </div>\n\n    <!-- Script de la lógica del juego -->\n    <script>\n        // Definición de los dilemas\n        const dilemmas = [\n            {\n                scenario: \"Un colega te dice que está muy estresado y ha perdido la fecha límite de un proyecto importante. Está visiblemente frustrado.\",\n                options: [\n                    { text: \"Señalar que la gestión del tiempo es clave y que debe priorizar mejor.\", isCorrect: false },\n                    { text: \"Ofrecerle escucharle sin juzgar y preguntar cómo puedes apoyarle.\", isCorrect: true },\n                    { text: \"Contarle una anécdota de una vez que perdiste una fecha límite para que se sienta mejor.\", isCorrect: false }\n                ],\n                explanation: \"La **empatía se centra en la emoción del otro primero, no en la solución o el juicio** (Regulación CPF). Ofrecer apoyo valida su estrés y le da espacio para procesar su emoción, lo cual es el primer paso para la solución efectiva.\"\n            },\n            {\n                scenario: \"Tu vecina te cuenta que su mascota (muy querida) falleció, y está muy afectada.\",\n                options: [\n                    { text: \"Decir: 'Entiendo que estés triste. Su pérdida es un dolor real.'\", isCorrect: true },\n                    { text: \"Decir: 'Es solo un animal, deberías superarlo rápido. Distráete.'\", isCorrect: false },\n                    { text: \"Preguntarle inmediatamente si ya compró otra mascota para reemplazarla.\", isCorrect: false }\n                ],\n                explanation: \"La respuesta empática **valida el dolor sin minimizarlo** (Humanidad Compartida). Al reconocer que su pérdida es un 'dolor real', demuestras empatía afectiva y cognitiva.\"\n            },\n            {\n                scenario: \"En una reunión, un compañero presenta una idea que ya se había descartado hace meses. Nadie dice nada.\",\n                options: [\n                    { text: \"Interrumpir y decir: 'Esa idea no es nueva, ya la rechazamos en marzo.'\", isCorrect: false },\n                    { text: \"Dejar que termine y luego, en privado, preguntarle sobre la investigación detrás de su idea y señalar gentilmente el contexto.\", isCorrect: true },\n                    { text: \"Hacer una broma sobre las 'ideas viejas' para aligerar la tensión.\", isCorrect: false }\n                ],\n                explanation: \"Mostrar **Amabilidad hacia el otro** (Pilar de la Autocompasión) y preservar su dignidad es clave. Abordar el tema en privado reconoce su esfuerzo mientras se corrige el error de contexto, usando la empatía cognitiva para anticipar sus sentimientos.\"\n            }\n        ];\n\n        let currentQuestionIndex = 0;\n        let score = 0;\n        let answered = false;\n\n        const scenarioText = document.getElementById('scenarioText');\n        const optionsContainer = document.getElementById('optionsContainer');\n        const feedbackPanel = document.getElementById('feedbackPanel');\n        const feedbackTitle = document.getElementById('feedbackTitle');\n        const feedbackText = document.getElementById('feedbackText');\n        const nextQuestionButton = document.getElementById('nextQuestionButton');\n        const resultsPanel = document.getElementById('resultsPanel');\n        const finalScore = document.getElementById('finalScore');\n        const questionCounter = document.getElementById('questionCounter');\n\n        // Inicializa el juego\n        function initializeGame() {\n            currentQuestionIndex = 0;\n            score = 0;\n            answered = false;\n            resultsPanel.classList.add('hidden');\n            feedbackPanel.classList.add('hidden');\n            document.getElementById('gameContainer').classList.remove('hidden');\n            loadQuestion();\n        }\n\n        // Carga la pregunta actual\n        function loadQuestion() {\n            if (currentQuestionIndex >= dilemmas.length) {\n                showResults();\n                return;\n            }\n\n            answered = false;\n            feedbackPanel.classList.add('hidden');\n            optionsContainer.innerHTML = '';\n            \n            const currentDilemma = dilemmas[currentQuestionIndex];\n            \n            questionCounter.textContent = `Dilema ${currentQuestionIndex + 1} de ${dilemmas.length}`;\n            scenarioText.textContent = currentDilemma.scenario;\n\n            currentDilemma.options.forEach((option, index) => {\n                const button = document.createElement('button');\n                button.textContent = option.text;\n                button.className = 'option-btn w-full p-4 rounded-xl text-left border-2 border-violet-300 bg-white text-gray-800 font-semibold shadow-md';\n                button.onclick = () => checkAnswer(index);\n                optionsContainer.appendChild(button);\n            });\n        }\n\n        // Verifica la respuesta seleccionada\n        function checkAnswer(selectedIndex) {\n            if (answered) return;\n            answered = true;\n\n            const currentDilemma = dilemmas[currentQuestionIndex];\n            const selectedOption = currentDilemma.options[selectedIndex];\n            const buttons = optionsContainer.querySelectorAll('.option-btn');\n\n            // Deshabilitar todos los botones\n            buttons.forEach(btn => btn.classList.add('disabled'));\n\n            if (selectedOption.isCorrect) {\n                score++;\n                buttons[selectedIndex].classList.add('correct');\n                feedbackPanel.classList.remove('hidden');\n                feedbackPanel.classList.remove('border-red-500');\n                feedbackPanel.classList.add('border-green-500', 'bg-green-50');\n                feedbackTitle.textContent = \"¡Respuesta Empática Correcta! 🎉\";\n            } else {\n                buttons[selectedIndex].classList.add('incorrect');\n                // Resaltar la respuesta correcta\n                currentDilemma.options.forEach((option, index) => {\n                    if (option.isCorrect) {\n                        buttons[index].classList.add('correct');\n                    }\n                });\n                feedbackPanel.classList.remove('hidden');\n                feedbackPanel.classList.remove('border-green-500');\n                feedbackPanel.classList.add('border-red-500', 'bg-red-50');\n                feedbackTitle.textContent = \"Respuesta Correcta: ¡A practicar más! 🧐\";\n            }\n\n            feedbackText.innerHTML = `<span class=\"font-bold\">Análisis Empático:</span> ${currentDilemma.explanation}`;\n        }\n\n        // Pasa a la siguiente pregunta\n        nextQuestionButton.addEventListener('click', () => {\n            currentQuestionIndex++;\n            loadQuestion();\n        });\n\n        // Muestra los resultados finales\n        function showResults() {\n            document.getElementById('gameContainer').classList.add('hidden');\n            resultsPanel.classList.remove('hidden');\n            const percentage = Math.round((score / dilemmas.length) * 100);\n            \n            let message = '';\n            if (percentage === 100) {\n                message = \"¡Felicidades! Tienes una **Inteligencia Emocional Calibrada**.\";\n            } else if (percentage >= 60) {\n                message = \"Muy bien. Has demostrado una **sólida comprensión de la empatía**. ¡Sigue practicando!\";\n            } else {\n                message = \"Buen esfuerzo. Revisa el concepto de **Amabilidad y Humanidad Compartida** para mejorar.\";\n            }\n\n            finalScore.innerHTML = `Acertaste ${score} de ${dilemmas.length} dilemas (${percentage}%).<br><span class=\"text-lg mt-2 inline-block font-normal\">${message}</span>`;\n        }\n\n        // Iniciar el juego al cargar la página\n        document.addEventListener('DOMContentLoaded', initializeGame);\n    </script>\n\n</body>\n</html>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m4p2",
-          "title": "Parte 2",
-          "resources": [
-            {
-              "id": "m4p2r1",
-              "title": "Nueva Actividad (quiz)",
-              "description": "un quiz de habilidades en el manejo de relaciónes con criterio en el contexto del bienestar emocional con 10 preguntas y feedback en cada pregunta ",
-              "type": "quiz",
-              "questions": []
-            },
-            {
-              "id": "m4p2r2",
-              "title": "Quiz HTML - Nueva Actividad (quiz)",
-              "description": "Versión HTML interactiva generada por IA",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Nueva Actividad (quiz)</title>\n    <style>\n        body {\n            font-family: sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n        }\n\n        .container {\n            max-width: 600px;\n            margin: 20px auto;\n            background-color: #fff;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n\n        .progress-bar {\n            width: 100%;\n            height: 10px;\n            background-color: #ddd;\n            border-radius: 5px;\n            margin-bottom: 20px;\n        }\n\n        .progress {\n            height: 100%;\n            background-color: #4CAF50;\n            border-radius: 5px;\n            width: 0%; /* Se actualiza con JavaScript */\n        }\n\n        .question {\n            margin-bottom: 20px;\n        }\n\n        .options {\n            list-style: none;\n            padding: 0;\n        }\n\n        .options li {\n            margin-bottom: 10px;\n        }\n\n        .options label {\n            display: block;\n            padding: 10px;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            cursor: pointer;\n            transition: background-color 0.3s;\n        }\n\n        .options label:hover {\n            background-color: #f0f0f0;\n        }\n\n        input[type=\"radio\"] {\n            display: none;\n        }\n\n        input[type=\"radio\"]:checked + label {\n            background-color: #c8e6c9;\n            border-color: #4CAF50;\n        }\n\n        .feedback {\n            margin-top: 10px;\n            padding: 10px;\n            border-radius: 5px;\n            font-style: italic;\n            display: none;\n        }\n\n        .correct-feedback {\n            background-color: #d4edda;\n            border: 1px solid #c3e6cb;\n            color: #155724;\n        }\n\n        .incorrect-feedback {\n            background-color: #f8d7da;\n            border: 1px solid #f5c6cb;\n            color: #721c24;\n        }\n\n        #results {\n            margin-top: 20px;\n            text-align: center;\n            font-weight: bold;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>Nueva Actividad (quiz)</h1>\n        <div class=\"progress-bar\">\n            <div class=\"progress\" id=\"progress\"></div>\n        </div>\n\n        <div id=\"quiz\">\n            </div>\n\n        <div id=\"results\" style=\"display:none;\">\n            <h2>Resultados:</h2>\n            <p id=\"score\"></p>\n            <p id=\"message\"></p>\n        </div>\n    </div>\n\n    <script>\n        const quizData = [\n            {\n                question: \"¿Qué es lo más importante al escuchar a alguien?\",\n                options: [\n                    { text: \"Preparar tu respuesta\", correct: false, feedback: \"Incorrecto. La escucha activa se centra en comprender al otro.\" },\n                    { text: \"Mostrar empatía y comprensión\", correct: true, feedback: \"¡Correcto! La empatía es clave para construir relaciones.\" },\n                    { text: \"Interrumpir para dar consejos\", correct: false, feedback: \"Incorrecto. Interrumpir impide la comunicación efectiva.\" }\n                ]\n            },\n            {\n                question: \"¿Cómo manejarías un conflicto con un compañero de trabajo?\",\n                options: [\n                    { text: \"Ignorar el problema\", correct: false, feedback: \"Incorrecto. Ignorar solo empeora la situación.\" },\n                    { text: \"Comunicar tus sentimientos de manera asertiva\", correct: true, feedback: \"¡Correcto! La comunicación asertiva resuelve conflictos.\" },\n                    { text: \"Culpar al otro\", correct: false, feedback: \"Incorrecto. Culpar genera resentimiento.\" }\n                ]\n            },\n            {\n                question: \"¿Qué significa 'establecer límites saludables' en una relación?\",\n                options: [\n                    { text: \"Controlar el comportamiento del otro\", correct: false, feedback: \"Incorrecto. Controlar es opuesto a un límite sano.\" },\n                    { text: \"Definir tus necesidades y comunicarlas claramente\", correct: true, feedback: \"¡Correcto! Los límites protegen tu bienestar.\" },\n                    { text: \"Aislarte de los demás\", correct: false, feedback: \"Incorrecto. Aislarte no es una solución saludable.\" }\n                ]\n            },\n            {\n                question: \"¿Cuál es el papel de la autocompasión en el bienestar emocional?\",\n                options: [\n                    { text: \"Debilitarte\", correct: false, feedback: \"Incorrecto. La autocompasión fortalece.\" },\n                    { text: \"Ser amable y comprensivo contigo mismo\", correct: true, feedback: \"¡Correcto! Es fundamental para la resiliencia.\" },\n                    { text: \"Ignorar tus errores\", correct: false, feedback: \"Incorrecto. Implica reconocerlos y aprender.\" }\n                ]\n            },\n            {\n                question: \"Si te sientes abrumado, ¿cuál es una estrategia efectiva?\",\n                options: [\n                    { text: \"Reprimir tus emociones\", correct: false, feedback: \"Incorrecto. Reprimir puede ser dañino.\" },\n                    { text: \"Identificar la causa y buscar apoyo\", correct: true, feedback: \"¡Correcto! Buscar apoyo es una señal de fortaleza.\" },\n                    { text: \"Aislarte del mundo\", correct: false, feedback: \"Incorrecto. Aislarte incrementa el sentimiento.\" }\n                ]\n            },\n              {\n                question: \"Ante una crítica constructiva, ¿cómo deberías reaccionar?\",\n                options: [\n                    { text: \"Ponerte a la defensiva y negarla\", correct: false, feedback: \"Incorrecto. Negar la crítica impide el crecimiento.\" },\n                    { text: \"Reflexionar sobre ella y aprender\", correct: true, feedback: \"¡Correcto! Aprovechar la crítica para mejorar es sabio.\" },\n                    { text: \"Ignorarla completamente\", correct: false, feedback: \"Incorrecto. Ignorar la crítica desaprovecha la oportunidad.\" }\n                ]\n            },\n            {\n                question: \"En una relación sana, ¿qué importancia tiene el respeto mutuo?\",\n                options: [\n                    { text: \"Poca importancia, lo importante es estar de acuerdo en todo\", correct: false, feedback: \"Incorrecto. El desacuerdo es natural y el respeto fundamental.\" },\n                    { text: \"Es fundamental para la confianza y el crecimiento\", correct: true, feedback: \"¡Correcto! El respeto construye bases sólidas.\" },\n                    { text: \"Es solo una formalidad\", correct: false, feedback: \"Incorrecto. El respeto es la esencia de una relación sana.\" }\n                ]\n            },\n            {\n                question: \"¿Cuál es el primer paso para gestionar tus emociones?\",\n                options: [\n                    { text: \"Ignorar cómo te sientes\", correct: false, feedback: \"Incorrecto. Ignorar las emociones no las hace desaparecer.\" },\n                    { text: \"Identificar y reconocer tus emociones\", correct: true, feedback: \"¡Correcto! El autoconocimiento es el punto de partida.\" },\n                    { text: \"Culpar a los demás por tus emociones\", correct: false, feedback: \"Incorrecto. Asume la responsabilidad de tus sentimientos.\" }\n                ]\n            },\n            {\n                question: \"¿Qué significa practicar la 'escucha activa'?\",\n                options: [\n                    { text: \"Interrumpir constantemente para dar tu opinión\", correct: false, feedback: \"Incorrecto. La escucha activa se centra en el otro.\" },\n                    { text: \"Prestar atención completa y demostrar interés\", correct: true, feedback: \"¡Correcto! La escucha activa es clave para la conexión.\" },\n                    { text: \"Simplemente esperar tu turno para hablar\", correct: false, feedback: \"Incorrecto. Implica comprender, no solo esperar.\" }\n                ]\n            },\n            {\n                question: \"¿Cómo fomentarías un ambiente de confianza en un equipo?\",\n                options: [\n                    { text: \"Promoviendo la competencia individual\", correct: false, feedback: \"Incorrecto. La competencia puede generar desconfianza.\" },\n                    { text: \"Fomentando la comunicación abierta y la colaboración\", correct: true, feedback: \"¡Correcto! La transparencia construye confianza.\" },\n                    { text: \"Ocultando información importante\", correct: false, feedback: \"Incorrecto. La opacidad mina la confianza.\" }\n                ]\n            }\n        ];\n\n        const quiz = document.getElementById('quiz');\n        const resultsDiv = document.getElementById('results');\n        const scoreDisplay = document.getElementById('score');\n        const messageDisplay = document.getElementById('message');\n        const progress = document.getElementById('progress');\n\n        let currentQuestion = 0;\n        let score = 0;\n\n        function loadQuestion() {\n            const questionData = quizData[currentQuestion];\n            const questionElement = document.createElement('div');\n            questionElement.classList.add('question');\n            questionElement.innerHTML = `<h2>${questionData.question}</h2>`;\n\n            const optionsList = document.createElement('ul');\n            optionsList.classList.add('options');\n\n            questionData.options.forEach((option, index) => {\n                const listItem = document.createElement('li');\n                listItem.innerHTML = `\n                    <input type=\"radio\" id=\"option${index}\" name=\"question\" value=\"${index}\">\n                    <label for=\"option${index}\">${option.text}</label>\n                    <div class=\"feedback ${option.correct ? 'correct-feedback' : 'incorrect-feedback'}\">${option.feedback}</div>\n                `;\n                optionsList.appendChild(listItem);\n            });\n\n            questionElement.appendChild(optionsList);\n            quiz.innerHTML = ''; // Clear previous question\n            quiz.appendChild(questionElement);\n            attachEventListeners();\n        }\n\n        function attachEventListeners() {\n            const options = document.querySelectorAll('input[name=\"question\"]');\n            options.forEach(option => {\n                option.addEventListener('change', handleAnswer);\n            });\n        }\n\n        function handleAnswer(event) {\n            const selectedOptionIndex = parseInt(event.target.value);\n            const isCorrect = quizData[currentQuestion].options[selectedOptionIndex].correct;\n            const feedbacks = document.querySelectorAll('.feedback');\n            feedbacks.forEach((feedback, index) => {\n              if (index == selectedOptionIndex) {\n                feedback.style.display = 'block';\n              } else {\n                feedback.style.display = 'none';\n              }\n\n            });\n\n            if (isCorrect) {\n                score++;\n            }\n\n            // Disable all options after answering\n            const options = document.querySelectorAll('input[name=\"question\"]');\n            options.forEach(option => {\n                option.disabled = true;\n                option.nextElementSibling.style.cursor = 'default'; // Make label non-clickable\n            });\n\n            // Move to the next question after a delay\n            setTimeout(() => {\n                currentQuestion++;\n                if (currentQuestion < quizData.length) {\n                    loadQuestion();\n                    updateProgress();\n                } else {\n                    showResults();\n                }\n            }, 1500); // Delay of 1.5 seconds (1500 milliseconds)\n\n        }\n\n\n        function updateProgress() {\n            const progressPercentage = (currentQuestion / quizData.length) * 100;\n            progress.style.width = `${progressPercentage}%`;\n        }\n\n        function showResults() {\n            quiz.style.display = 'none';\n            resultsDiv.style.display = 'block';\n\n            scoreDisplay.textContent = `Tu puntaje: ${score} de ${quizData.length}`;\n\n            let message = '';\n            if (score >= 8) {\n                message = \"¡Excelente! Demuestras un alto nivel de inteligencia emocional.\";\n            } else if (score >= 5) {\n                message = \"Bien. Tienes buenas habilidades, pero aún puedes mejorar.\";\n            } else {\n                message = \"Necesitas trabajar en tus habilidades de manejo de relaciones.\";\n            }\n\n            messageDisplay.textContent = message;\n        }\n\n        loadQuestion();\n        updateProgress();\n\n    </script>\n</body>\n</html>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m4p3",
-          "title": "Parte 3",
-          "resources": [
-            {
-              "id": "m4p3r1",
-              "title": "Nueva Actividad (iframe)",
-              "description": "Relaciones con criterio - Infografia ",
-              "type": "iframe",
-              "content": [
-                "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Desarrollo del Criterio Emocional</title>\n    <!-- Carga de Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <!-- Configuración para usar la fuente Inter y estilos -->\n    <style>\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #fff7ed; /* Naranja muy claro */\n        }\n        .main-card {\n            box-shadow: 0 15px 30px -5px rgba(249, 115, 22, 0.1), 0 4px 6px -2px rgba(249, 115, 22, 0.05);\n        }\n        .accordion-header {\n            cursor: pointer;\n            transition: background-color 0.2s;\n        }\n        .accordion-header:hover {\n            background-color: #fff7ed; /* Color muy suave al pasar el ratón */\n        }\n        .accordion-content {\n            height: 0;\n            overflow: hidden;\n            transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;\n            opacity: 0;\n            padding: 0 1.5rem; /* Asegurar padding inicial cero */\n        }\n        .accordion-content.active {\n            height: auto;\n            padding: 1rem 1.5rem 1.5rem 1.5rem;\n            opacity: 1;\n        }\n    </style>\n</head>\n<body class=\"p-4 md:p-10\">\n\n    <div class=\"max-w-5xl mx-auto bg-white rounded-3xl main-card p-6 md:p-12 border-t-8 border-amber-500\">\n        \n        <!-- Título Principal -->\n        <header class=\"text-center mb-10 md:mb-14\">\n            <span class=\"text-6xl md:text-7xl mb-4 inline-block transform rotate-[-3deg] text-amber-600\">⚖️</span>\n            <h1 class=\"text-3xl md:text-5xl font-extrabold text-gray-900 mb-2\">\n                Desarrollo del Criterio Emocional\n            </h1>\n            <h2 class=\"text-xl md:text-2xl text-amber-600 font-semibold\">\n                La Clave para Relaciones Sanas y Respuestas Calibradas\n            </h2>\n        </header>\n\n        <!-- Definición -->\n        <div class=\"bg-amber-50 p-6 rounded-2xl mb-10 border-l-4 border-amber-400\">\n            <p class=\"text-gray-700 leading-relaxed italic text-lg\">\n                El **Criterio Emocional** es la capacidad de usar la reflexión (CPF) para **modular las reacciones impulsivas** (Amígdala) en las interacciones, permitiendo una respuesta que es informada, empática y constructiva, no solo reactiva.\n            </p>\n        </div>\n\n        <!-- Sección 1: Cómo Desarrollar el Criterio (Acordeón Interactivo) -->\n        <h3 class=\"text-2xl font-bold text-gray-800 mb-6 border-b pb-2\">\n            Paso a Paso: Entrenando el Criterio\n        </h3>\n        \n        <div id=\"accordionContainer\" class=\"space-y-4\">\n\n            <!-- Paso 1: Observación Desapasionada -->\n            <div class=\"accordion-item bg-white border border-amber-200 rounded-xl overflow-hidden shadow-md\">\n                <div class=\"accordion-header p-4 md:p-6 flex justify-between items-center text-amber-700 font-bold\">\n                    <div class=\"flex items-center\">\n                        <span class=\"text-2xl mr-3\">🔍</span>\n                        <span class=\"text-lg\">1. Separar el Hecho de la Interpretación</span>\n                    </div>\n                    <span class=\"arrow-icon text-xl transition-transform duration-300\">▼</span>\n                </div>\n                <div class=\"accordion-content bg-amber-50\">\n                    <p class=\"text-gray-700\">\n                        Aplica la **Atención Plena** a la interacción. Céntrate en la **Señal Clave** (lo que se dijo o hizo) y evita saltar inmediatamente a tu **Juicio** (lo que crees que significa para ti). Este es el primer freno de la Amígdala.\n                    </p>\n                    <ul class=\"mt-3 text-sm text-gray-600 space-y-1\">\n                        <li>**Foco:** Lenguaje corporal, tono de voz, palabras exactas.</li>\n                        <li>**Evita:** Asumir intención, generalizar o proyectar tus miedos.</li>\n                    </ul>\n                </div>\n            </div>\n\n            <!-- Paso 2: Regulación Interna (Pausa Activa) -->\n            <div class=\"accordion-item bg-white border border-amber-200 rounded-xl overflow-hidden shadow-md\">\n                <div class=\"accordion-header p-4 md:p-6 flex justify-between items-center text-amber-700 font-bold\">\n                    <div class=\"flex items-center\">\n                        <span class=\"text-2xl mr-3\">⏸️</span>\n                        <span class=\"text-lg\">2. Activar la Pausa de la CPF</span>\n                    </div>\n                    <span class=\"arrow-icon text-xl transition-transform duration-300\">▼</span>\n                </div>\n                <div class=\"accordion-content bg-amber-50\">\n                    <p class=\"text-gray-700\">\n                        Antes de responder, utiliza tu **Corteza Prefrontal (CPF)** para ganar unos segundos cruciales. Esto previene el \"Secuestro Emocional\".\n                    </p>\n                    <ul class=\"mt-3 text-sm text-gray-600 space-y-1\">\n                        <li>**Técnica:** Respiración consciente profunda o nombrar mentalmente la emoción que sientes.</li>\n                        <li>**Propósito:** Dar tiempo a la CPF para enviar la señal **inhibitoria** a la Amígdala.</li>\n                    </ul>\n                </div>\n            </div>\n\n            <!-- Paso 3: Contextualización Empática -->\n            <div class=\"accordion-item bg-white border border-amber-200 rounded-xl overflow-hidden shadow-md\">\n                <div class=\"accordion-header p-4 md:p-6 flex justify-between items-center text-amber-700 font-bold\">\n                    <div class=\"flex items-center\">\n                        <span class=\"text-2xl mr-3\">🧭</span>\n                        <span class=\"text-lg\">3. Evaluar el Contexto y la Perspectiva</span>\n                    </div>\n                    <span class=\"arrow-icon text-xl transition-transform duration-300\">▼</span>\n                </div>\n                <div class=\"accordion-content bg-amber-50\">\n                    <p class=\"text-gray-700\">\n                        Utiliza la **Empatía Cognitiva**. Pregúntate: *¿Qué más podría estar sucediendo?* Considera los factores externos y la historia de la otra persona.\n                    </p>\n                    <ul class=\"mt-3 text-sm text-gray-600 space-y-1\">\n                        <li>**Enfoque:** Aplicar el principio de la **Humanidad Compartida** (todos cometemos errores o tenemos malos días).</li>\n                        <li>**Resultado:** Una respuesta más considerada y menos personal.</li>\n                    </ul>\n                </div>\n            </div>\n\n        </div>\n\n        <!-- Separador -->\n        <hr class=\"my-10 border-amber-100\">\n\n        <!-- Sección 2: Beneficios del Criterio Emocional -->\n        <h3 class=\"text-2xl font-bold text-gray-800 mb-8 text-center\">\n            Beneficios en tus Relaciones\n        </h3>\n        \n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6\">\n\n            <!-- Beneficio 1: Claridad y Confianza -->\n            <div class=\"p-6 bg-green-50 rounded-2xl border-2 border-green-300 text-center transition duration-300 hover:shadow-lg hover:border-green-400\">\n                <span class=\"text-4xl text-green-600 mb-3 block\">🤝</span>\n                <h4 class=\"text-xl font-bold text-green-800 mb-2\">Aumenta la Confianza</h4>\n                <p class=\"text-gray-700 text-sm\">\n                    Al responder con calma y no con impulsos, generas un entorno predecible y seguro. La otra persona confía en tu madurez emocional.\n                </p>\n            </div>\n\n            <!-- Beneficio 2: Resolución de Conflictos -->\n            <div class=\"p-6 bg-sky-50 rounded-2xl border-2 border-sky-300 text-center transition duration-300 hover:shadow-lg hover:border-sky-400\">\n                <span class=\"text-4xl text-sky-600 mb-3 block\">✅</span>\n                <h4 class=\"text-xl font-bold text-sky-800 mb-2\">Resolución Efectiva</h4>\n                <p class=\"text-gray-700 text-sm\">\n                    Te enfocas en el problema y no en la persona. El criterio te permite buscar soluciones en lugar de escalar la confrontación emocionalmente.\n                </p>\n            </div>\n\n            <!-- Beneficio 3: Menos Estrés -->\n            <div class=\"p-6 bg-red-50 rounded-2xl border-2 border-red-300 text-center transition duration-300 hover:shadow-lg hover:border-red-400\">\n                <span class=\"text-4xl text-red-600 mb-3 block\">🧘‍♀️</span>\n                <h4 class=\"text-xl font-bold text-red-800 mb-2\">Reduce el Desgaste</h4>\n                <p class=\"text-gray-700 text-sm\">\n                    Menos reacciones impulsivas significan menos arrepentimiento posterior. Esto baja tu nivel de estrés general y el de tus relaciones.\n                </p>\n            </div>\n\n        </div>\n\n    </div>\n\n    <!-- Script de la lógica del acordeón -->\n    <script>\n        document.addEventListener('DOMContentLoaded', () => {\n            const accordionItems = document.querySelectorAll('.accordion-item');\n\n            accordionItems.forEach(item => {\n                const header = item.querySelector('.accordion-header');\n                const content = item.querySelector('.accordion-content');\n                const arrow = item.querySelector('.arrow-icon');\n\n                header.addEventListener('click', () => {\n                    const isActive = content.classList.contains('active');\n                    \n                    // Cierra todos los demás\n                    accordionItems.forEach(otherItem => {\n                        const otherContent = otherItem.querySelector('.accordion-content');\n                        const otherArrow = otherItem.querySelector('.arrow-icon');\n                        if (otherContent.classList.contains('active') && otherContent !== content) {\n                            otherContent.style.height = '0';\n                            otherContent.classList.remove('active');\n                            otherArrow.textContent = '▼';\n                        }\n                    });\n\n                    if (!isActive) {\n                        // Expande el actual\n                        content.classList.add('active');\n                        arrow.textContent = '▲';\n                        \n                        // Necesitamos forzar el redibujo para que funcione correctamente la transición de altura\n                        // Set height to scrollHeight after adding padding in CSS\n                        const paddingHeight = 40; // Approx 1rem top + 1.5rem bottom padding\n                        const innerHeight = content.scrollHeight; \n                        content.style.height = `${innerHeight + paddingHeight}px`;\n\n                        // Para manejar la altura automática al finalizar la transición (opcional pero recomendado)\n                        content.addEventListener('transitionend', function handler() {\n                            if (content.classList.contains('active')) {\n                                content.style.height = 'auto'; \n                            }\n                            content.removeEventListener('transitionend', handler);\n                        }, { once: true });\n                    } else {\n                        // Colapsa el actual\n                        content.style.height = `${content.scrollHeight}px`; // Fija la altura antes de colapsar\n                        \n                        // Pequeño timeout para permitir que el navegador registre la altura\n                        setTimeout(() => {\n                            content.style.height = '0';\n                            content.classList.remove('active');\n                            arrow.textContent = '▼';\n                        }, 10);\n                    }\n                });\n            });\n        });\n    </script>\n\n</body>\n</html>\n"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "m4p4",
-          "title": "Parte 4",
-          "resources": [
-            {
-              "id": "m4p4r1",
-              "title": "Nueva Actividad (video)",
-              "description": "Video - Emociones reales ",
-              "type": "iframe",
-              "videoSrc": "https://drive.google.com/file/d/19Q81Vr7A1Ju7zJfcWJCCxvnUXZMHjxXw/preview"
-            },
-            {
-              "id": "m4p4r2",
-              "title": "Nueva Actividad (iframe)",
-              "description": "Diario emocional ",
-              "type": "iframe",
-              "content": [
-                "```html\n<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Diario Emocional Interactivo</title>\n    <style>\n        body {\n            font-family: sans-serif;\n            margin: 20px;\n        }\n        .entrada {\n            border: 1px solid #ccc;\n            padding: 10px;\n            margin-bottom: 10px;\n        }\n        textarea {\n            width: 100%;\n            height: 100px;\n            margin-bottom: 10px;\n        }\n        label {\n            display: block;\n            margin-bottom: 5px;\n        }\n        #emocion-selector {\n            margin-bottom: 10px;\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Mi Diario Emocional</h1>\n\n    <div id=\"nueva-entrada\">\n        <h2>Nueva Entrada</h2>\n        <label for=\"fecha\">Fecha:</label>\n        <input type=\"date\" id=\"fecha\">\n\n        <label for=\"emocion-selector\">¿Cómo te sientes hoy?</label>\n        <select id=\"emocion-selector\">\n            <option value=\"feliz\">Feliz</option>\n            <option value=\"triste\">Triste</option>\n            <option value=\"enojado\">Enojado</option>\n            <option value=\"ansioso\">Ansioso</option>\n            <option value=\"calmado\">Calmado</option>\n            <option value=\"otro\">Otro</option>\n        </select>\n\n        <label for=\"descripcion\">Descripción:</label>\n        <textarea id=\"descripcion\" placeholder=\"Escribe aquí tus pensamientos y sentimientos...\"></textarea>\n\n        <button onclick=\"agregarEntrada()\">Guardar Entrada</button>\n    </div>\n\n    <div id=\"entradas\">\n        <h2>Entradas Anteriores</h2>\n        <!-- Aquí se agregarán las entradas dinámicamente -->\n    </div>\n\n    <script>\n        function agregarEntrada() {\n            const fecha = document.getElementById(\"fecha\").value;\n            const emocion = document.getElementById(\"emocion-selector\").value;\n            const descripcion = document.getElementById(\"descripcion\").value;\n\n            if (!fecha || !descripcion) {\n                alert(\"Por favor, completa la fecha y la descripción.\");\n                return;\n            }\n\n            const entradasDiv = document.getElementById(\"entradas\");\n            const nuevaEntradaDiv = document.createElement(\"div\");\n            nuevaEntradaDiv.classList.add(\"entrada\");\n\n            nuevaEntradaDiv.innerHTML = `\n                <h3>${fecha} - ${emocion}</h3>\n                <p>${descripcion}</p>\n                <button onclick=\"eliminarEntrada(this)\">Eliminar</button>\n            `;\n\n            entradasDiv.appendChild(nuevaEntradaDiv);\n\n            // Limpiar el formulario\n            document.getElementById(\"fecha\").value = \"\";\n            document.getElementById(\"descripcion\").value = \"\";\n        }\n\n        function eliminarEntrada(boton) {\n            boton.parentNode.remove();\n        }\n    </script>\n\n</body>\n</html>\n```"
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-};
-
-// Normalización a la estructura esperada por la plataforma
 export const course: Course = {
-  id: rawCourse.id,
-  title: rawCourse.title,
-  subtitle: rawCourse.subtitle,
-  description: rawCourse.description,
-  category: rawCourse.category,
-  broadCategories: rawCourse.broadCategories || [],
-  coverImage: typeof rawCourse.coverImage === 'string' && rawCourse.coverImage.startsWith('/images/')
-    ? assetPath(rawCourse.coverImage.replace(/^\//, ''))
-    : rawCourse.coverImage,
-  instructor: rawCourse.instructor,
-  estimatedDurationMinutes: rawCourse.estimatedDurationMinutes,
-  learningObjectives: rawCourse.learningObjectives,
-  modules: (rawCourse.modules || []).map((m: any) => {
-    const activities = Array.isArray(m.activities) && m.activities.length > 0
-      ? m.activities
-      : (m.parts || []).flatMap((p: any) => Array.isArray(p.resources) ? p.resources : []);
-    return {
-      id: m.id,
-      title: m.title,
-      activities,
-    };
-  })
+  id: 'programa-inteligencia-emocional-nivel-1',
+  title: 'Programa de Inteligencia Emocional Aplicada - Nivel 1',
+  subtitle: 'Conciencia emocional, autorregulación, autocompasión y empatía práctica',
+  description:
+    'Un recorrido práctico y profundamente humano para desarrollar habilidades emocionales esenciales: reconocer, nombrar y regular emociones; cultivar autocompasión y resiliencia; y relacionarnos con empatía y criterio. Nivel 1 del programa de AnImiKdemi.',
+  category: 'Inteligencia Emocional Aplicada',
+  broadCategories: ['Autoconocimiento', 'Gestión Emocional', 'Habilidades Sociales'],
+  coverImage: '/images/iea_nivel1_cover.png',
+  instructor: mockInstructor,
+  learningObjectives: [
+    'Reconocer y etiquetar con precisión las emociones propias y ajenas.',
+    'Comprender los componentes neurobiológicos clave de la regulación e impulsar hábitos de control de impulsos.',
+    'Practicar autocompasión basada en evidencia para fortalecer la resiliencia cotidiana.',
+    'Aplicar empatía con límites y criterio para mejorar relaciones y comunicación.',
+  ],
+  modules: [
+    // ==========================
+    // MÓDULO 1
+    // ==========================
+    {
+      id: 'm1',
+      title: 'Conciencia y Etiquetado Emocional',
+      activities: [
+        // Punto 1 — Bienvenida y contexto
+        {
+          id: 'm1a1',
+          type: 'video',
+          title: 'Bienvenida y contexto del curso',
+          description:
+            'Introducción al Nivel 1 del Programa de Inteligencia Emocional Aplicada. Qué verás en cada módulo y cómo aprovechar la experiencia de forma práctica e interactiva.',
+          // Mantener la URL de Google Drive según indicación del usuario
+          videoSrc:
+            'https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/view?usp=sharing',
+        },
+        {
+          id: 'm1a2',
+          type: 'text',
+          title: 'Transcripción del Video — Bienvenida',
+          description: 'Texto de apoyo para acompañar el video de bienvenida.',
+          content: [
+            '¡Hola! Te damos la más cordial bienvenida a Animikdemi, el primer nivel de nuestro programa de Inteligencia Emocional Aplicada. Estás a punto de iniciar un viaje de autodescubrimiento y transformación diseñado para equiparte con habilidades emocionales esenciales para una vida más plena y consciente.',
+            'En este espacio interactivo y dinámico, no solo aprenderás teoría, sino que aplicarás herramientas prácticas para entender, gestionar y utilizar tus emociones de forma inteligente en tu día a día.',
+            'El Nivel 1 de Animikdemi está estructurado en cuatro módulos fundamentales, cada uno diseñado para construir una base sólida en tu desarrollo emocional:',
+            '1) Conciencia y Etiquetado Emocional: Aprenderás a reconocer y nombrar con precisión lo que sientes. ¡Entender el lenguaje de tus emociones es el primer paso para gobernarlas!',
+            '2) Neurociencia de la Regulación y Control de Impulsos: Descubrirás cómo funciona tu cerebro ante el estrés y las reacciones impulsivas, y desarrollarás estrategias efectivas para tomar el control.',
+            '3) Autocompasión y Resiliencia: Exploraremos el poder de la amabilidad hacia ti mismo, una clave fundamental para superar la adversidad y recuperarte con fuerza y valentía.',
+            '4) Empatía para Relaciones con Criterio: Finalmente, expandirás tu habilidad para entender a los demás, sentando las bases para construir conexiones auténticas, saludables y con un propósito claro.',
+            'Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tu apertura a la práctica son la llave maestra para desbloquear todo su potencial. Prepárate para experimentar, aprender y crecer. ¡Bienvenido a Animikdemi!'
+          ],
+        },
+        {
+          id: 'm1a3',
+          type: 'quiz',
+          title: 'Quiz — Vocabulario Emocional (6 preguntas)',
+          description: 'Evalúa tu vocabulario emocional básico antes de continuar.',
+          questions: [
+            {
+              question: '¿Qué significa etiquetar una emoción?',
+              options: [
+                { text: 'Ponerle un nombre preciso a lo que siento', feedback: 'Correcto. Nombrar con precisión mejora la autorregulación.' },
+                { text: 'Ignorar lo que siento para que pase', feedback: 'Incorrecto. Ignorar no es etiquetar.' },
+                { text: 'Expresar cualquier reacción sin filtro', feedback: 'Incorrecto. Etiquetar es reconocer, no reaccionar.' },
+                { text: 'Buscar la causa externa de mis emociones', feedback: 'Parcial. La causa puede ayudar, pero etiquetar es nombrar la emoción.' },
+              ],
+            },
+            {
+              question: '¿Cuál es un ejemplo de emoción básica?',
+              options: [
+                { text: 'Alegría', feedback: 'Correcto.' },
+                { text: 'Motivación', feedback: 'Incorrecto. Es un estado/motivador, no emoción básica.' },
+                { text: 'Autoestima', feedback: 'Incorrecto. Es un constructo, no emoción básica.' },
+                { text: 'Imaginación', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'El término «granularidad emocional» se refiere a…',
+              options: [
+                { text: 'La capacidad de diferenciar emociones sutiles', feedback: 'Correcto. Más granularidad = mayor regulación.' },
+                { text: 'La intensidad máxima de una emoción', feedback: 'Incorrecto.' },
+                { text: 'El tiempo que dura una emoción', feedback: 'Incorrecto.' },
+                { text: 'El número de emociones que existen', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Cuando digo “tengo nerviosismo y anticipación”, estoy…',
+              options: [
+                { text: 'Etiquetando con mayor precisión', feedback: 'Correcto. Dos etiquetas finas aportan claridad.' },
+                { text: 'Confundiéndome más', feedback: 'Incorrecto.' },
+                { text: 'Evitando mis emociones', feedback: 'Incorrecto.' },
+                { text: 'Sobreintelectualizando', feedback: 'No necesariamente. La fineza ayuda a la regulación.' },
+              ],
+            },
+            {
+              question: '¿Qué suele ocurrir cuando nombramos con precisión lo que sentimos?',
+              options: [
+                { text: 'Disminuye la reactividad y aumenta la claridad', feedback: 'Correcto. Nombrar regula.' },
+                { text: 'Aumenta la intensidad siempre', feedback: 'Incorrecto.' },
+                { text: 'Se vuelven permanentes', feedback: 'Incorrecto.' },
+                { text: 'Desaparecen en segundos', feedback: 'No necesariamente; pero ayuda a gestionarlas.' },
+              ],
+            },
+            {
+              question: 'Selecciona la opción con dos emociones diferentes:',
+              options: [
+                { text: 'Tristeza y melancolía', feedback: 'Parcial. Son cercanas, pero válidas como matices.' },
+                { text: 'Rabia y frustración', feedback: 'Correcto. Comparten base, pero son distintas.' },
+                { text: 'Cansancio y agotamiento', feedback: 'No son emociones; son estados físicos.' },
+                { text: 'Pensamiento y juicio', feedback: 'No son emociones.' },
+              ],
+            },
+          ],
+        },
+
+        // Punto 2 — La emoción y el etiquetado
+        {
+          id: 'm1a4',
+          type: 'text',
+          title: 'Lectura para reflexionar: La Emoción',
+          description:
+            'Comprende la emoción como una respuesta compleja y breve con componentes fisiológicos, cognitivos y conductuales.',
+          content: [
+            'Una emoción suele vivirse como una ráfaga: una respuesta intensa y de corta duración que nuestro organismo genera ante un estímulo relevante (algo que vemos, recordamos o anticipamos).',
+            '1. Componente Fisiológico (Cuerpo) 🧠🫀: Cambios en ritmo cardiaco, respiración, tensión muscular y hormonas del estrés o del bienestar. Estas señales preparan al organismo para responder.',
+          ],
+        },
+        {
+          id: 'm1a5',
+          type: 'text',
+          title: 'Componente Cognitivo (Pensamientos) 🤔',
+          description: 'Interpretación y etiquetado que damos a la situación y al cuerpo.',
+          content: [
+            'Este componente es la interpretación, evaluación y etiquetado que le damos a la situación y a nuestras sensaciones corporales. Nuestros pensamientos dan sentido a la experiencia emocional: no es lo mismo etiquetar “miedo” que “anticipación”.',
+            'Desarrollar vocabulario emocional amplía nuestra capacidad de regulación. Más palabras, más opciones de acción consciente.',
+          ],
+        },
+        {
+          id: 'm1a6',
+          type: 'text',
+          title: 'Componente Conductual (Acción) 🗣️',
+          description: 'La emoción también se expresa en acciones, gestos y voz.',
+          content: [
+            'Es la expresión observable de la emoción. Incluye nuestras acciones, expresiones faciales, tono de voz y lenguaje corporal.',
+            'Ejemplos: gritar o fruncir el ceño (ira), llorar o encoger los hombros (tristeza), sonreír y abrir la postura (alegría).',
+          ],
+        },
+        { id: 'm1a7', type: 'text', title: 'Imagen: Circuito Emoción-Cuerpo', description: 'Infografía de apoyo.', content: ['[Imagen referencial]'], },
+        { id: 'm1a8', type: 'text', title: 'Imagen: Pensamientos y Etiquetas', description: 'Mapa mental de etiquetas emocionales.', content: ['[Imagen referencial]'], },
+
+        // Punto 3 — Importancia del etiquetado
+        {
+          id: 'm1a9',
+          type: 'text',
+          title: 'Estudio de Caso: Nombrar cambia la historia',
+          description: 'Caso práctico para reflexionar sobre la utilidad de etiquetar con precisión.',
+          content: [
+            'Situación: María, gerente de proyectos de 35 años, se siente abrumada por entregas ajustadas y reuniones tensas. Últimamente, está irritable, duerme mal y discute más con su pareja. Dice “estoy estresada”, pero no sabe si es frustración, ansiedad, miedo al error o sensación de injusticia.',
+            'Al diferenciar: “tensión + frustración + miedo a fallar”, María puede diseñar respuestas específicas: pausas activas para la tensión, negociación para la frustración, y pedir feedback para el miedo.',
+            'Preguntas para la reflexión: 1) ¿Cómo habría sido diferente su experiencia si hubiera podido nombrar emociones con precisión? 2) ¿Qué estrategias le sugerirías para ampliar su vocabulario emocional y gestionar mejor sus estados?'
+          ],
+        },
+
+        // Punto 4 — Diario emocional
+        {
+          id: 'm1a10',
+          type: 'text',
+          title: 'Video: ¿Qué es el Diario Emocional?',
+          description:
+            'Dale play y conoce cómo el Diario Emocional puede ser tu aliado cotidiano.',
+          content: [
+            'Video: https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/view?usp=sharing',
+          ],
+        },
+        {
+          id: 'm1a11',
+          type: 'text',
+          title: 'Ya puedes comenzar tu Diario Emocional',
+          description: 'Accede al recurso e inicia tu registro diario.',
+          content: [
+            'Iniciar diario: https://ernessofficial.github.io/Animindex-basic/',
+            'Sugerencia: registra activador, emoción (con etiqueta precisa), intensidad (0-10), pensamiento principal y acción elegida.',
+          ],
+        },
+        {
+          id: 'm1a12',
+          type: 'quiz',
+          title: 'Quiz — Diario Emocional (8 preguntas)',
+          description:
+            'Un breve repaso por este gran paso en tu aprendizaje sobre tus emociones.',
+          questions: [
+            {
+              question: '¿Qué elementos mínimos conviene registrar en un diario emocional?',
+              options: [
+                { text: 'Activador, emoción, intensidad, pensamiento y acción', feedback: 'Correcto. Ese esquema facilita la autorregulación.' },
+                { text: 'Solo la emoción', feedback: 'Insuficiente. Faltan activador, intensidad y acción.' },
+                { text: 'Solo el pensamiento', feedback: 'Insuficiente.' },
+                { text: 'Nada, solo reflexionar', feedback: 'Registrar ayuda a aprender de patrones.' },
+              ],
+            },
+            {
+              question: 'Completa: Más granularidad emocional =',
+              options: [
+                { text: 'Más opciones de regulación', feedback: 'Correcto.' },
+                { text: 'Más confusión', feedback: 'Incorrecto.' },
+                { text: 'Menos conciencia', feedback: 'Incorrecto.' },
+                { text: 'Igual que no etiquetar', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Una utilidad del diario emocional es…',
+              options: [
+                { text: 'Detectar patrones y elegir respuestas más conscientes', feedback: 'Correcto.' },
+                { text: 'Aumentar la rumiación', feedback: 'Incorrecto.' },
+                { text: 'Evitar hablar con otros', feedback: 'Incorrecto.' },
+                { text: 'Eliminar emociones negativas', feedback: 'Ninguna emoción debe “eliminarse”; se regula.' },
+              ],
+            },
+            {
+              question: '¿Qué escala simple puedes usar para la intensidad?',
+              options: [
+                { text: '0 a 10', feedback: 'Correcto.' },
+                { text: '0 a 3', feedback: 'Posible, pero menos granular.' },
+                { text: 'A/B/C', feedback: 'Demasiado vaga.' },
+                { text: 'Rojo/Verde', feedback: 'Metáfora útil, pero menos precisa.' },
+              ],
+            },
+            {
+              question: '¿Cuál es una acción reguladora compatible con tensión + frustración?',
+              options: [
+                { text: 'Pausa fisiológica + negociación del alcance', feedback: 'Correcto. Combina cuerpo y contexto.' },
+                { text: 'Ignorar la situación', feedback: 'Poco efectivo.' },
+                { text: 'Exigirte más sin pausa', feedback: 'Riesgo de agotamiento.' },
+                { text: 'Culpabilizar al equipo', feedback: 'No aporta regulación.' },
+              ],
+            },
+            {
+              question: 'Etiquetar “ansiedad anticipatoria” en vez de “estrés” es un ejemplo de…',
+              options: [
+                { text: 'Granularidad emocional', feedback: 'Correcto.' },
+                { text: 'Supresión emocional', feedback: 'Incorrecto.' },
+                { text: 'Catastrofismo', feedback: 'Incorrecto.' },
+                { text: 'Evitar sentir', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'El diario emocional funciona mejor cuando…',
+              options: [
+                { text: 'Se usa con constancia y curiosidad', feedback: 'Correcto.' },
+                { text: 'Solo en crisis extremas', feedback: 'Mejor si también en lo cotidiano.' },
+                { text: 'Se comparte siempre en público', feedback: 'No es necesario. Es personal.' },
+                { text: 'Se rellena una vez al año', feedback: 'Demasiado poco frecuente.' },
+              ],
+            },
+            {
+              question: 'Una barrera habitual para escribir es… y una solución es…',
+              options: [
+                { text: 'Falta de tiempo → micro-registros de 1 minuto', feedback: 'Correcto. Manténlo simple y sostenible.' },
+                { text: 'No tener emociones → esperar a sentir', feedback: 'Todos sentimos; observa señales sutiles.' },
+                { text: 'No saber escribir → no hacerlo', feedback: 'Siempre hay alternativas simples o voz a texto.' },
+                { text: 'Miedo a juzgarse → abandonar', feedback: 'Practica amabilidad y curiosidad.' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // ==========================
+    // MÓDULO 2
+    // ==========================
+    {
+      id: 'm2',
+      title: 'Neurociencia de la Regulación y Control de Impulsos',
+      activities: [
+        // Punto 1
+        {
+          id: 'm2a1',
+          type: 'text',
+          title: 'Mapa rápido del cerebro emocional',
+          description:
+            'Comprende el papel funcional de corteza prefrontal, sistema límbico y cuerpo en la regulación de impulsos.',
+          content: [
+            'La autorregulación integra tres capas: (1) Señales del cuerpo (interocepción), (2) Respuestas automáticas del sistema límbico, y (3) Dirección consciente de la corteza prefrontal.',
+            'Prefrontal = planificación y freno; Amígdala = detección de amenaza; Ínsula = lectura de estado corporal. Trabajan en equipo para modular la conducta.',
+          ],
+        },
+        // Punto 2
+        {
+          id: 'm2a2',
+          type: 'video',
+          title: 'Micro-hábitos de regulación (video)',
+          description:
+            'Demostración práctica de 3 micro-hábitos para bajar activación y decidir mejor.',
+          videoSrc: '/videos/micro_habitos_regulacion.mp4',
+        },
+        // Punto 3
+        {
+          id: 'm2a3',
+          type: 'audio',
+          title: 'Práctica guiada: Pausa fisiológica 2×2×4',
+          description:
+            'Audio breve para activar el freno prefrontal mediante respiración y atención corporal.',
+          audioSrc: '/audios/pausa_224.mp3',
+        },
+        // Punto 4
+        {
+          id: 'm2a4',
+          type: 'reflectionTree',
+          title: 'Árbol de decisiones ante el impulso',
+          description:
+            'Explora un mapa de opciones: Detectar señal → Pausar → Nombrar → Elegir micro-acción.',
+        },
+        // Recurso extra
+        {
+          id: 'm2a5',
+          type: 'text',
+          title: 'Checklist anti-impulso en 30 segundos',
+          description: 'Guía rápida imprimible para tu día a día.',
+          content: [
+            '1) Alto corporal (respira y descruza). 2) Nombra 1 emoción. 3) Evalúa riesgo/beneficio. 4) Elige la mínima acción eficaz. 5) Revisa resultado en 10 min.',
+          ],
+        },
+      ],
+    },
+
+    // ==========================
+    // MÓDULO 3
+    // ==========================
+    {
+      id: 'm3',
+      title: 'El Antídoto: Autocompasión y Resiliencia',
+      activities: [
+        // Punto 1
+        {
+          id: 'm3a1',
+          type: 'text',
+          title: 'Qué es autocompasión (y qué no es)',
+          description:
+            'Diferencia entre autocompasión, lástima y permisividad. La autocompasión fortalece, no debilita.',
+          content: [
+            'Autocompasión = bondad hacia uno mismo + humanidad compartida + mindfulness. No es autoindulgencia: implica actuar en favor del propio bienestar a largo plazo.',
+          ],
+        },
+        // Punto 2
+        {
+          id: 'm3a2',
+          type: 'audio',
+          title: 'Práctica: Mano en el pecho y frase de amabilidad',
+          description:
+            'Ejercicio breve para regular autocrítica y activar cuidado.',
+          audioSrc: '/audios/mano_en_el_pecho.mp3',
+        },
+        // Punto 3
+        {
+          id: 'm3a3',
+          type: 'text',
+          title: 'Resiliencia cotidiana',
+          description:
+            'Pequeñas acciones repetidas que te devuelven al centro tras un revés.',
+          content: [
+            '1) Rituales de recuperación (sueño, movimiento, conexión). 2) Reencuadre cognitivo. 3) Pedir ayuda a tiempo. 4) Propósito y valores como brújula.',
+          ],
+        },
+        // Punto 4
+        {
+          id: 'm3a4',
+          type: 'upload',
+          title: 'Mi kit de resiliencia',
+          description:
+            'Sube una página con tus 5 recordatorios de autocompasión + 3 acciones de resiliencia realistas para esta semana.',
+        },
+      ],
+    },
+
+    // ==========================
+    // MÓDULO 4
+    // ==========================
+    {
+      id: 'm4',
+      title: 'Empatía para Relaciones con Criterio',
+      activities: [
+        // Punto 1
+        {
+          id: 'm4a1',
+          type: 'text',
+          title: 'Empatía con límites saludables',
+          description:
+            'La empatía no es complacer: es comprender con criterio y cuidar el propio límite.',
+          content: [
+            'Componentes: curiosidad genuina, escucha activa, validación, y límites claros. Empatía efectiva = comprensión + acción responsable.',
+          ],
+        },
+        // Punto 2
+        {
+          id: 'm4a2',
+          type: 'video',
+          title: 'Demostración: Escucha activa en 3 niveles',
+          description:
+            'Video práctico para pasar de escuchar para responder a escuchar para comprender.',
+          videoSrc: '/videos/escucha_activa_niveles.mp4',
+        },
+        // Punto 3
+        {
+          id: 'm4a3',
+          type: 'text',
+          title: 'Comunicación con criterio',
+          description:
+            'Diálogo que une empatía y límites: observar, nombrar, pedir, acordar.',
+          content: [
+            'Modelo breve: 1) Observo X, 2) Me siento Y, 3) Necesito Z, 4) ¿Podemos acordar…? Mantén tono y cuerpo abiertos.',
+          ],
+        },
+        // Punto 4
+        {
+          id: 'm4a4',
+          type: 'feedbackForm',
+          title: 'Simulador de conversaciones difíciles',
+          description:
+            'Escoge un caso y practica un mensaje empático con criterio. Recibirás feedback del instructor.',
+        },
+      ],
+    },
+
+    // ==========================
+    // QUIZ FINAL (repaso de los 4 módulos)
+    // ==========================
+    {
+      id: 'm5',
+      title: 'Quiz Final Integrador',
+      activities: [
+        {
+          id: 'm5a1',
+          type: 'quiz',
+          title: 'Evaluación final — 12 preguntas',
+          description:
+            'Repaso reflexivo de los puntos más relevantes de los cuatro módulos. Lee con calma y elige la mejor respuesta.',
+          questions: [
+            {
+              question: 'Etiquetar con precisión una emoción favorece…',
+              options: [
+                { text: 'La autorregulación y la toma de perspectiva', feedback: 'Correcto. Nombrar reduce reactividad.' },
+                { text: 'La supresión emocional', feedback: 'Incorrecto.' },
+                { text: 'Respuestas impulsivas', feedback: 'Incorrecto.' },
+                { text: 'Desconexión del cuerpo', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Indica la tríada de la autocompasión:',
+              options: [
+                { text: 'Bondad hacia uno mismo, humanidad compartida, mindfulness', feedback: 'Correcto.' },
+                { text: 'Autoindulgencia, aislamiento, distracción', feedback: 'Incorrecto.' },
+                { text: 'Autoestima, comparación, exigencia', feedback: 'Incorrecto.' },
+                { text: 'Motivación, ambición, resiliencia', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Un micro-hábito eficaz para frenar el impulso es…',
+              options: [
+                { text: 'Respiración 2×2×4 con pausa atencional', feedback: 'Correcto. Activa el freno prefrontal.' },
+                { text: 'Responder inmediatamente', feedback: 'Incorrecto.' },
+                { text: 'Rumiación prolongada', feedback: 'Incorrecto.' },
+                { text: 'Aumentar el tono de voz', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: '¿Cuál es un componente conductual de la emoción?',
+              options: [
+                { text: 'Lenguaje corporal y acciones observables', feedback: 'Correcto.' },
+                { text: 'Cambios hormonales', feedback: 'Fisiológico, no conductual.' },
+                { text: 'Evaluación cognitiva', feedback: 'Cognitivo.' },
+                { text: 'Memoria autobiográfica', feedback: 'Relacionado, pero no conductual.' },
+              ],
+            },
+            {
+              question: 'La empatía con criterio implica…',
+              options: [
+                { text: 'Comprender y a la vez cuidar el propio límite', feedback: 'Correcto.' },
+                { text: 'Decir a todo que sí', feedback: 'Incorrecto.' },
+                { text: 'Evitar expresar necesidades', feedback: 'Incorrecto.' },
+                { text: 'Juzgar rápidamente', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Para registrar intensidad emocional puedes usar…',
+              options: [
+                { text: 'Escala de 0 a 10', feedback: 'Correcto.' },
+                { text: 'Solo palabras sueltas', feedback: 'Menos preciso.' },
+                { text: 'Colores sin referencia', feedback: 'Útil, pero menos granular.' },
+                { text: 'Ningún registro', feedback: 'No ayuda a aprender.' },
+              ],
+            },
+            {
+              question: 'En el caso de María, una acción alineada con “miedo a fallar” sería…',
+              options: [
+                { text: 'Pedir feedback y clarificar expectativas', feedback: 'Correcto. Atiende la causa percibida.' },
+                { text: 'Trabajar sin pausas', feedback: 'Riesgo de agotamiento.' },
+                { text: 'Evitar reuniones', feedback: 'No resuelve.' },
+                { text: 'Culpabilizar a otros', feedback: 'No ayuda.' },
+              ],
+            },
+            {
+              question: 'Resiliencia cotidiana se construye con…',
+              options: [
+                { text: 'Pequeñas acciones repetidas y apoyo', feedback: 'Correcto.' },
+                { text: 'Solo fuerza de voluntad', feedback: 'Incompleto.' },
+                { text: 'Evitar sentir', feedback: 'Incorrecto.' },
+                { text: 'Compararte constantemente', feedback: 'Contraproducente.' },
+              ],
+            },
+            {
+              question: 'La corteza prefrontal ayuda principalmente a…',
+              options: [
+                { text: 'Planificar y frenar impulsos', feedback: 'Correcto.' },
+                { text: 'Aumentar la reactividad', feedback: 'Incorrecto.' },
+                { text: 'Detectar amenaza primaria', feedback: 'Más propio de amígdala.' },
+                { text: 'Regular la temperatura', feedback: 'Función autonómica, no central aquí.' },
+              ],
+            },
+            {
+              question: 'Una técnica de comunicación con criterio es…',
+              options: [
+                { text: 'Observar, nombrar, pedir, acordar', feedback: 'Correcto.' },
+                { text: 'Interrumpir para corregir', feedback: 'Contraproducente.' },
+                { text: 'Generalizar (“siempre”, “nunca”)', feedback: 'Escala conflicto.' },
+                { text: 'Evitar decir cómo me siento', feedback: 'Reduce comprensión.' },
+              ],
+            },
+            {
+              question: 'Autocompasión en momentos de error significa…',
+              options: [
+                { text: 'Tratarte con amabilidad y aprender', feedback: 'Correcto.' },
+                { text: 'Negar lo ocurrido', feedback: 'Incorrecto.' },
+                { text: 'Castigarte para mejorar', feedback: 'No eficaz.' },
+                { text: 'Culpar a otros', feedback: 'No asume responsabilidad.' },
+              ],
+            },
+            {
+              question: 'Para gestionar una reacción impulsiva, lo primero es…',
+              options: [
+                { text: 'Pausar y volver al cuerpo', feedback: 'Correcto. Luego decidir.' },
+                { text: 'Responder rápido', feedback: 'Impulsivo.' },
+                { text: 'Justificarme', feedback: 'No ayuda.' },
+                { text: 'Buscar culpables', feedback: 'No regula.' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export default course;
