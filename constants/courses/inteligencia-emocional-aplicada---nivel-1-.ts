@@ -114,7 +114,7 @@ export const course: Course = {
 
         // PUNTO 2 — Lectura para Reflexionar (incluye los tres componentes + 2 imágenes)
         {
-          id: 'm1a4',
+          id: 'm1a2',
           type: 'text',
           title: 'Punto 2 · Lectura para reflexionar: La emoción y su etiquetado',
           description: 'Lee de corrido los 3 componentes y observa las imágenes de apoyo en esta misma pantalla.',
@@ -130,41 +130,26 @@ export const course: Course = {
 
         // PUNTO 3 — Estudio de caso + formulario para escribir y guardar
         {
-          id: 'm1a5',
+          id: 'm1a3',
           type: 'feedbackForm',
           title: 'Punto 3 · Estudio de caso: Nombrar cambia la historia',
           description:
             'Lee el caso y responde en los campos de texto. Usa “Guardar” para almacenar tus respuestas en tu progreso del curso.',
         },
 
-        // PUNTO 4 — Video Diario Emocional + Recurso embebido (misma pantalla)
+        // PUNTO 4 — Diario Emocional: Video + recursos + Quiz (misma pantalla)
         {
-          id: 'm1a6',
+          id: 'm1a4',
           type: 'video',
           title: 'Punto 4 · Diario Emocional — ¿Qué es y cómo usarlo?',
-          description: 'Reproductor embebido para ver el video dentro del Campus.',
+          description: 'Mira el video, revisa el recurso y completa el quiz.',
           videoSrc:
             'https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/view?usp=sharing',
-        },
-        {
-          id: 'm1a7',
-          type: 'text',
-          title: 'Recurso interactivo — Diario Emocional (embebido)',
-          description:
-            'Accede aquí al recurso interactivo (se abre embebido en el Campus).',
           content: [
+            'Recurso interactivo — Diario Emocional',
             'https://ernessofficial.github.io/Animindex-basic/',
             'Sugerencia de uso: registra activador, emoción (etiqueta precisa), intensidad (0-10), pensamiento principal y acción elegida.'
           ],
-        },
-
-        // PUNTO 5 — Quiz del Diario Emocional (8 preguntas)
-        {
-          id: 'm1a8',
-          type: 'quiz',
-          title: 'Punto 5 · Quiz — Diario Emocional (8 preguntas)',
-          description:
-            'Un breve repaso por este gran paso en tu aprendizaje sobre tus emociones.',
           questions: [
             {
               question: '¿Qué elementos mínimos conviene registrar en un diario emocional?',
@@ -193,53 +178,11 @@ export const course: Course = {
                 { text: 'Eliminar emociones “negativas”', feedback: 'No se trata de eliminar, sino de regular.' },
               ],
             },
-            {
-              question: '¿Qué escala simple puedes usar para la intensidad?',
-              options: [
-                { text: '0 a 10', feedback: 'Correcto.' },
-                { text: '0 a 3', feedback: 'Posible, menos granular.' },
-                { text: 'A/B/C', feedback: 'Demasiado vaga.' },
-                { text: 'Rojo/Verde', feedback: 'Metáfora útil, menos precisa.' },
-              ],
-            },
-            {
-              question: '¿Cuál es una acción reguladora compatible con tensión + frustración?',
-              options: [
-                { text: 'Pausa fisiológica + negociación del alcance', feedback: 'Correcto.' },
-                { text: 'Ignorar la situación', feedback: 'Poco efectivo.' },
-                { text: 'Exigirte más sin pausa', feedback: 'Riesgo de agotamiento.' },
-                { text: 'Culpabilizar al equipo', feedback: 'No aporta regulación.' },
-              ],
-            },
-            {
-              question: 'Etiquetar “ansiedad anticipatoria” en vez de “estrés” es un ejemplo de…',
-              options: [
-                { text: 'Granularidad emocional', feedback: 'Correcto.' },
-                { text: 'Supresión emocional', feedback: 'Incorrecto.' },
-                { text: 'Catastrofismo', feedback: 'Incorrecto.' },
-                { text: 'Evitar sentir', feedback: 'Incorrecto.' },
-              ],
-            },
-            {
-              question: 'El diario emocional funciona mejor cuando…',
-              options: [
-                { text: 'Se usa con constancia y curiosidad', feedback: 'Correcto.' },
-                { text: 'Solo en crisis extremas', feedback: 'Úsalo también en lo cotidiano.' },
-                { text: 'Se comparte siempre en público', feedback: 'No es necesario.' },
-                { text: 'Se rellena una vez al año', feedback: 'Muy infrecuente.' },
-              ],
-            },
-            {
-              question: 'Una barrera habitual para escribir es… y una solución es…',
-              options: [
-                { text: 'Falta de tiempo → micro‑registros de 1 minuto', feedback: 'Correcto.' },
-                { text: 'No tener emociones → esperar a sentir', feedback: 'Todos sentimos; observa señales sutiles.' },
-                { text: 'No saber escribir → no hacerlo', feedback: 'Usa notas breves o voz a texto.' },
-                { text: 'Miedo a juzgarse → abandonar', feedback: 'Practica amabilidad y curiosidad.' },
-              ],
-            },
           ],
         },
+        
+
+        
       ],
     },
 
