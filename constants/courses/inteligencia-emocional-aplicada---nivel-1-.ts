@@ -38,7 +38,7 @@ export const course: Course = {
           type: 'video',
           title: 'Punto 1 · Bienvenida y contexto del curso',
           description:
-            'Dale play para conocer la estructura del Nivel 1, su enfoque práctico e interactivo, y cómo aprovechar cada módulo.',
+            'Dale play para conocer la estructura del Nivel 1 y, al finalizar, responde el quiz para reforzar conceptos clave.',
           videoSrc:
             'https://drive.google.com/file/d/1jxCqgtCO4roxd6Uw3sf-kXXuiiA2xjUr/view?usp=sharing',
           content: [
@@ -53,13 +53,6 @@ export const course: Course = {
             '4) Empatía para Relaciones con Criterio — comprender al otro sin perder tu propio límite.',
             'Recuerda: este es un curso interactivo. Tu participación activa, tu reflexión y tus prácticas son la llave para desbloquear su potencial. ¡Bienvenido/a a Animikdemi!'
           ],
-          // 'realiza el quiz a continuación para reforzar tu aprendizaje.' // <-- removed duplicate description
-        },
-        {
-          id: 'm1a3',
-          type: 'quiz',
-          title: 'Punto 1 · Quiz — Vocabulario Emocional (6 preguntas)',
-          description: 'Realiza este breve quiz antes de avanzar al Punto 2.',
           questions: [
             {
               question: '¿Qué significa etiquetar una emoción?',
@@ -116,6 +109,7 @@ export const course: Course = {
               ],
             },
           ],
+          // 'realiza el quiz a continuación para reforzar tu aprendizaje.' // <-- removed duplicate description
         },
 
         // PUNTO 2 — Lectura para Reflexionar (incluye los tres componentes + 2 imágenes)
@@ -547,4 +541,3 @@ export const course: Course = {
 };
 
 export default course;
-

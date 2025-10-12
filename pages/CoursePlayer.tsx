@@ -31,16 +31,44 @@ interface CoursePlayerProps {
   updateLastAccessed?: (courseId: string, activityId: string) => void;
 }
 
+// Subcomponente para actividades de video que pueden incluir transcripción (content)
+// y, opcionalmente, un quiz en la misma pantalla. Marca como listo solo cuando
+// se haya terminado el video y, si hay preguntas, también el quiz.
+const CombinedVideoActivity: React.FC<{
+  activity: Activity;
+  onReadyToComplete?: (ready: boolean) => void;
+}> = ({ activity, onReadyToComplete }) => {
+  const [videoDone, setVideoDone] = React.useState(false);
+  const [quizDone, setQuizDone] = React.useState(false);
+  const hasQuiz = Array.isArray(activity.questions) && activity.questions.length > 0;
+
+  React.useEffect(() => {
+    // Si requiere interacción (video o video+quiz), deshabilitar hasta cumplir condiciones
+    if (hasQuiz) {
+      onReadyToComplete?.(videoDone && quizDone);
+    } else {
+      onReadyToComplete?.(videoDone);
+    }
+  }, [videoDone, quizDone, hasQuiz]);
+
+  return (
+    <div className="space-y-6">
+      <VideoPlayer src={activity.videoSrc || ''} onEnded={() => setVideoDone(true)} />
+      {activity.content && activity.content.length > 0 && (
+        <TextContent content={activity.content as string[]} />
+      )}
+      {hasQuiz && (
+        <Quiz questions={activity.questions as any[]} ui={activity.ui} onReadyToComplete={(ready) => setQuizDone(!!ready)} />
+      )}
+    </div>
+  );
+};
+
 const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnswers?: (data: any) => void; onReadyToComplete?: (ready: boolean) => void }> = ({ activity, answers, onSaveAnswers, onReadyToComplete }) => {
     switch (activity.type) {
         case 'video':
             return (
-              <div className="space-y-6">
-                <VideoPlayer src={activity.videoSrc || ''} onEnded={() => onReadyToComplete?.(true)} />
-                {activity.content && activity.content.length > 0 && (
-                  <TextContent content={activity.content as string[]} />
-                )}
-              </div>
+              <CombinedVideoActivity activity={activity} onReadyToComplete={onReadyToComplete} />
             );
         case 'youtube':
             return (
@@ -234,7 +262,9 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
     if (!activity) return null;
     switch (activity.type) {
       case 'video':
-        return 'Reproduce el video hasta el final.';
+        return Array.isArray(activity.questions) && activity.questions.length > 0
+          ? 'Reproduce el video y completa el quiz.'
+          : 'Reproduce el video hasta el final.';
       case 'youtube':
         return null;
       case 'audio':
