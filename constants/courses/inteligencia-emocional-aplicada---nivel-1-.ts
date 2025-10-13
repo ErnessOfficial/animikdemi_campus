@@ -1,5 +1,6 @@
 import type { Course } from '../../types';
 import { mockInstructor } from './courseData';
+import { assetPath } from '../../utils/paths';
 
 // Curso: Programa de Inteligencia Emocional Aplicada - Nivel 1
 // Nota de compatibilidad:
@@ -16,7 +17,7 @@ export const course: Course = {
     'Un recorrido práctico para desarrollar habilidades emocionales esenciales: reconocer y etiquetar emociones, regular impulsos, cultivar autocompasión y comunicarnos con empatía y criterio. Nivel 1 del programa de AnImiKdemi.',
   category: 'Inteligencia Emocional Aplicada',
   broadCategories: ['Autoconocimiento', 'Gestión Emocional', 'Habilidades Sociales'],
-  coverImage: '/images/iea_nivel1_cover.png',
+  coverImage: assetPath('images/iea_nivel1_cover.png'),
   instructor: mockInstructor,
   learningObjectives: [
     'Reconocer y etiquetar con precisión las emociones propias y ajenas.',
@@ -200,7 +201,7 @@ export const course: Course = {
           type: 'iframe',
           title: 'Punto 1 · Del impulso a la elección (recurso interactivo)',
           description: 'Interactúa con el ciclo Señal → Pausa → Etiqueta → Elección directamente en esta pantalla.',
-          videoSrc: '/interactive/m2a1-del-impulso-a-la-eleccion.html',
+          videoSrc: assetPath('interactive/m2a1-del-impulso-a-la-eleccion.html'),
         },
         // Punto 2 — Video corto .mp4 de micro‑hábitos (nuevo)
         {
@@ -208,7 +209,7 @@ export const course: Course = {
           type: 'video',
           title: 'Punto 2 · Micro‑hábitos de regulación (video corto)',
           description: 'Demostración práctica de 3 micro‑hábitos para bajar activación y decidir mejor.',
-          videoSrc: '/videos/micro_habitos_regulacion.mp4',
+          videoSrc: assetPath('videos/micro_habitos_regulacion.mp4'),
         },
         // Punto 3 — Juego de cartas: disparadores vs. respuestas regulatorias
         {
@@ -233,7 +234,7 @@ export const course: Course = {
           type: 'audio',
           title: 'Punto 4 · Pausa fisiológica 2×2×4 (práctica guiada)',
           description: 'Respira 2 segundos inhalar, 2 sostener, 4 exhalar — 3 ciclos.',
-          audioSrc: '/audios/pausa_224.mp3',
+          audioSrc: assetPath('audios/pausa_224.mp3'),
         },
       ],
     },
@@ -280,7 +281,7 @@ export const course: Course = {
           type: 'audio',
           title: 'Punto 3 · Pausa de amabilidad activa (3 min)',
           description: 'Práctica breve para suavizar la autocrítica y elegir una acción amable.',
-          audioSrc: '/audios/pausa_amabilidad.mp3',
+          audioSrc: assetPath('audios/pausa_amabilidad.mp3'),
         },
         // Punto 4 — Desafío final del módulo (distinto a uploads previos)
         {
@@ -320,7 +321,7 @@ export const course: Course = {
           type: 'audio',
           title: 'Punto 2 · Práctica: Escucha atenta 60‑60',
           description: '60 segundos escuchas, 60 segundos sintetizas; repite 2 rondas.',
-          audioSrc: '/audios/escucha_6060.mp3',
+          audioSrc: assetPath('audios/escucha_6060.mp3'),
         },
         // Punto 3 — Juego de cartas: necesidad ↔ petición clara
         {
