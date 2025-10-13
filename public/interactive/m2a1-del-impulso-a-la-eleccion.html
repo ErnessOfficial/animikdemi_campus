@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Del impulso a la elección</title>
+  <style>
+    .emotional-wellness-container { max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; }
+    .ciclo-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+    .ciclo-step { background: #f0f8ff; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .interactive-btn { margin-top: 10px; padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .interactive-btn:hover { filter: brightness(0.95); }
+    .feedback { margin-top: 20px; padding: 10px; background: #e0f7fa; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div id="bienestar-ciclo"></div>
+  <script>
+  (function(){
+    class BienestarEmocionalCiclo {
+      constructor(containerId){
+        this.container = document.getElementById(containerId);
+        if(!this.container){ console.error('No se encontró el contenedor con ID: ' + containerId); return; }
+        this.render();
+        this.initInteractions();
+      }
+      render(){
+        this.container.innerHTML = `
+          <div class="emotional-wellness-container">
+            <h1>Recorriendo el Ciclo Emocional</h1>
+            <p>Señal → Pausa → Etiqueta → Elección</p>
+            <div class="ciclo-container">
+              <div class="ciclo-step" id="senal">
+                <h3>1. Señal Corporal</h3>
+                <p>Interocepta: detecta tu latido, respiración y tensión.</p>
+                <button class="interactive-btn" data-step="senal">Detectar</button>
+              </div>
+              <div class="ciclo-step" id="pausa">
+                <h3>2. Amígdala Alerta → Freno Prefrontal</h3>
+                <p>Haz una pausa atencional. Respira profundamente.</p>
+                <button class="interactive-btn" data-step="pausa">Respirar</button>
+              </div>
+              <div class="ciclo-step" id="etiqueta">
+                <h3>3. Etiqueta Precisa</h3>
+                <p>Nombra la emoción con precisión (ej: ansiedad, frustración).</p>
+                <input type="text" id="emocion-input" placeholder="Nombra tu emoción">
+                <button class="interactive-btn" data-step="etiqueta">Etiquetar</button>
+              </div>
+              <div class="ciclo-step" id="eleccion">
+                <h3>4. Elección Mínima Eficaz</h3>
+                <p>Elige la acción más pequeña pero útil ahora.</p>
+                <input type="text" id="accion-input" placeholder="¿Qué harás?">
+                <button class="interactive-btn" data-step="eleccion">Elegir</button>
+              </div>
+            </div>
+            <div id="feedback" class="feedback"></div>
+          </div>
+        `;
+      }
+      initInteractions(){
+        const buttons = this.container.querySelectorAll('.interactive-btn');
+        buttons.forEach(btn=>{
+          btn.addEventListener('click', (e)=>{
+            const step = e.target.dataset.step;
+            this.handleStep(step);
+          });
+        });
+      }
+      handleStep(step){
+        const feedback = this.container.querySelector('#feedback');
+        if(!feedback) return;
+        if(step==='senal'){
+          feedback.innerHTML = '✅ ¡Detectaste una señal corporal! Respira profundamente.';
+        } else if(step==='pausa'){
+          this.simularRespiracion(feedback);
+        } else if(step==='etiqueta'){
+          const emocionInput = this.container.querySelector('#emocion-input');
+          const emocion = emocionInput && emocionInput.value ? emocionInput.value : '—';
+          feedback.innerHTML = `✅ Emoción etiquetada: <strong>${emocion}</strong>`;
+        } else if(step==='eleccion'){
+          const accionInput = this.container.querySelector('#accion-input');
+          const accion = accionInput && accionInput.value ? accionInput.value : '—';
+          feedback.innerHTML = `✅ Elección definida: <strong>${accion}</strong>`;
+        }
+      }
+      simularRespiracion(feedback){
+        feedback.innerHTML = '⏱️ Respira profundamente... inhala... exhala...';
+        setTimeout(()=>{
+          feedback.innerHTML = '✅ ¡Pausa completada! Tu cerebro ahora puede pensar con claridad.';
+        }, 3000);
+      }
+    }
+    function boot(){
+      if(document.getElementById('bienestar-ciclo')){ new BienestarEmocionalCiclo('bienestar-ciclo'); }
+    }
+    if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+  })();
+  </script>
+</body>
+</html>
+

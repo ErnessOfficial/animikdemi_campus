@@ -194,19 +194,13 @@ export const course: Course = {
       id: 'm2',
       title: 'Neurociencia de la Regulación y Control de Impulsos',
       activities: [
-        // Punto 1 — Mini‑presentación: "del impulso a la elección" (tarjetas)
+        // Punto 1 — Recurso interactivo embebido (HTML+CSS+JS inline)
         {
           id: 'm2a1',
-          type: 'text',
-          title: 'Punto 1 · Del impulso a la elección (mini‑presentación)',
-          description: 'Tarjetas conceptuales para recorrer el ciclo: Señal → Pausa → Etiqueta → Elección.',
-          content: [
-            'Tarjeta 1 — Señal corporal (interocepción): detecta latido, respiración y tensión.',
-            'Tarjeta 2 — Amígdala alerta: reacción automática ante posible amenaza.',
-            'Tarjeta 3 — Freno prefrontal: pausa atencional y respiración regulada.',
-            'Tarjeta 4 — Etiqueta precisa: nombra la emoción (granularidad).',
-            'Tarjeta 5 — Elección mínima eficaz: define la acción más pequeña y útil ahora.',
-          ],
+          type: 'iframe',
+          title: 'Punto 1 · Del impulso a la elección (recurso interactivo)',
+          description: 'Interactúa con el ciclo Señal → Pausa → Etiqueta → Elección directamente en esta pantalla.',
+          videoSrc: '/interactive/m2a1-del-impulso-a-la-eleccion.html',
         },
         // Punto 2 — Video corto .mp4 de micro‑hábitos (nuevo)
         {
