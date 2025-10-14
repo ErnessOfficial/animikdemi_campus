@@ -138,18 +138,41 @@ export const course: Course = {
             'Lee el caso y responde en los campos de texto. Usa “Guardar” para almacenar tus respuestas en tu progreso del curso.',
         },
 
-        // PUNTO 4 — Diario Emocional: Video + recursos + Quiz (misma pantalla)
+        // PUNTO 4 — Diario Emocional: Video + Recurso incrustado (misma pantalla)
         {
           id: 'm1a4',
-          type: 'video',
+          type: 'iframe',
           title: 'Punto 4 · Diario Emocional — ¿Qué es y cómo usarlo?',
-          description: 'Mira el video, revisa el recurso y completa el quiz.',
-          videoSrc:
-            'https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/view?usp=sharing',
+          description: 'Mira el video y explora el recurso incrustado (Animindex-basic).',
           content: [
-            'Recurso interactivo — Diario Emocional',
-            'https://ernessofficial.github.io/Animindex-basic/',
-            'Sugerencia de uso: registra activador, emoción (etiqueta precisa), intensidad (0-10), pensamiento principal y acción elegida.'
+            `<!doctype html>
+            <html lang="es">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <style>
+                body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #101021; }
+                .wrap { max-width: 1100px; margin: 0 auto; padding: 12px; }
+                .video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+                .heading { margin: 16px 0 8px; }
+                .badge { display: inline-block; background: #6e4380; color: #fff; font-weight: 800; padding: 10px 14px; border-radius: 10px; }
+                .note { margin: 8px 0 16px; color: #101021; opacity: 0.85; }
+                .embed { width: 100%; height: 900px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                @media (max-width: 640px) { .embed { height: 720px; } }
+              </style>
+            </head>
+            <body>
+              <div class="wrap">
+                <div class="video">
+                  <iframe src="https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview" allow="autoplay; encrypted-media" allowfullscreen title="Diario Emocional — Video"></iframe>
+                </div>
+                <div class="heading"><span class="badge">Recurso Interactivo — Diario Emocional</span></div>
+                <p class="note">Sugerencia de uso: registra activador, emoción (etiqueta precisa), intensidad (0–10), pensamiento principal y acción elegida.</p>
+                <iframe class="embed" src="https://ernessofficial.github.io/Animindex-basic/" title="Animindex-basic — Recurso Incrustado"></iframe>
+              </div>
+            </body>
+            </html>`
           ],
           questions: [
             {
