@@ -90,14 +90,14 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
                   <iframe
                     title={activity.title}
                     className="w-full border rounded-lg shadow-sm"
-                    style={{ minHeight: 800 }}
+                    style={{ minHeight: 1100 }}
                     srcDoc={(activity.content as string[]).join('\n')}
                   />
                 ) : (
                   <iframe
                     title={activity.title}
                     className="w-full border rounded-lg shadow-sm"
-                    style={{ minHeight: 800 }}
+                    style={{ minHeight: 1100 }}
                     src={activity.videoSrc || ''}
                   />
                 )}
