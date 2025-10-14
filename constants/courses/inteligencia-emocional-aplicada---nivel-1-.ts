@@ -271,17 +271,118 @@ export const course: Course = {
       id: 'm3',
       title: 'El Antídoto: Autocompasión y Resiliencia',
       activities: [
-        // Punto 1 — Mini‑presentación en tarjetas
+        // Punto 1 — Infografía interactiva embebida (srcDoc)
         {
           id: 'm3a1',
-          type: 'text',
-          title: 'Punto 1 · Autocompasión, no permisividad',
-          description: 'Tarjetas para comprender los 3 componentes y mitos frecuentes.',
+          type: 'iframe',
+          title: 'Punto 1 · Autocompasión vs. Permiso — Infografía Interactiva',
+          description: 'Explora los 3 componentes (bondad, humanidad compartida, mindfulness) y desmitifica la autocompasión con una visual interactiva.',
           content: [
-            'Tarjeta 1 — Bondad hacia uno mismo: habla contigo como a un buen amigo.',
-            'Tarjeta 2 — Humanidad compartida: no estás solo/a en la dificultad.',
-            'Tarjeta 3 — Mindfulness: observa sin juicio para elegir mejor.',
-            'Mito común: “ser blando”. Realidad: la autocompasión impulsa acciones saludables a largo plazo.',
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Autocompasión vs. Permiso – Infografía Interactiva</title>
+              <style>
+                body {
+                  font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+                  margin: 0; padding: 0;
+                  background: linear-gradient(135deg, #f5f7fa, #e4edf5);
+                  color: #333;
+                }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 24px; }
+                .infographic { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+                .card {
+                  background: white; border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+                  padding: 18px; width: 220px; text-align: center; cursor: pointer;
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.15); }
+                .card h3 { color: #2980b9; margin-top: 0; }
+                .card p { font-size: 0.9rem; color: #555; }
+                .card.active { background: #d1ecf1; border: 2px solid #3498db; }
+                .detail-panel {
+                  margin-top: 24px; padding: 20px; background: white; border-radius: 10px;
+                  box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: none;
+                }
+                .detail-panel h2 { color: #2c3e50; }
+                .myth-buster { background: #fff9e6; padding: 15px; border-radius: 8px; margin-top: 16px; border-left: 4px solid #f39c12; }
+                .myth-buster h3 { color: #c0392b; margin: 0 0 8px; }
+                button { background: #3498db; color: white; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 12px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Autocompasión vs. Permiso</h1>
+                <p class="subtitle">Una mirada profunda a la bondad, humanidad compartida, mindfulness y el mito de “ser blando”</p>
+                <div class="infographic">
+                  <div class="card" data-id="bondad">
+                    <h3>1. Bondad Hacia Uno Mismo</h3>
+                    <p>Tratarte con amabilidad, especialmente en momentos difíciles.</p>
+                  </div>
+                  <div class="card" data-id="humanidad">
+                    <h3>2. Humanidad Compartida</h3>
+                    <p>Reconocer que todos somos imperfectos y pasamos por dificultades.</p>
+                  </div>
+                  <div class="card" data-id="mindfulness">
+                    <h3>3. Mindfulness</h3>
+                    <p>Observar tus emociones sin juzgarlas ni reprimir.</p>
+                  </div>
+                  <div class="card" data-id="mito">
+                    <h3>4. Desmitificar</h3>
+                    <p>¿Ser compasivo es ser débil? ¡No!</p>
+                  </div>
+                </div>
+                <div class="detail-panel" id="detail-panel">
+                  <h2 id="detail-title">Detalle</h2>
+                  <p id="detail-content">Haz clic en una sección para ver más información.</p>
+                  <div class="myth-buster" id="myth-content" style="display:none;">
+                    <h3>❌ Mito: "La autocompasión es permisividad"</h3>
+                    <p>✔️ Realidad: La autocompasión fomenta la responsabilidad, no la evasión. Te permite aprender sin castigarte.</p>
+                  </div>
+                </div>
+              </div>
+              <script>
+                document.querySelectorAll('.card').forEach(card => {
+                  card.addEventListener('click', () => {
+                    const id = card.dataset.id;
+                    const panel = document.getElementById('detail-panel');
+                    const title = document.getElementById('detail-title');
+                    const content = document.getElementById('detail-content');
+                    const myth = document.getElementById('myth-content');
+                    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    switch(id) {
+                      case 'bondad':
+                        title.textContent = 'Bondad Hacia Uno Mismo';
+                        content.innerHTML = '<p>Implica tratar tu sufrimiento con amabilidad, en lugar de con dureza o autocrítica.</p><p>¿Cómo? Reconoce tus errores sin castigarte. Pregúntate: “¿Cómo me gustaría que me tratara un amigo en esta situación?”</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'humanidad':
+                        title.textContent = 'Humanidad Compartida';
+                        content.innerHTML = '<p>Te ayuda a no sentirte aislado. Todos cometemos errores. Todos sufrimos.</p><p>Es una forma de conexión humana. No estás solo.</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'mindfulness':
+                        title.textContent = 'Mindfulness';
+                        content.innerHTML = '<p>Observa tus emociones sin juzgarlas ni reprimir. No te sumerjas ni te alejes de ellas.</p><p>Permite que estén, sin reaccionar automáticamente.</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'mito':
+                        title.textContent = 'Desmitificar la Autocompasión';
+                        content.innerHTML = '<p>La autocompasión no significa consentir malos hábitos. Es una forma de motivación interna basada en el respeto.</p>';
+                        myth.style.display = 'block';
+                        break;
+                    }
+                    panel.style.display = 'block';
+                  });
+                });
+              </script>
+            </body>
+            </html>`
           ],
         },
         // Punto 2 — Juego de cartas: autocrítica ↔ reencuadre compasivo
