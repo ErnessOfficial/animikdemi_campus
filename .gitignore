@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ignorar backups y archivos pesados
+backups/
+*.tar.gz
+*.zip
+*.7z
