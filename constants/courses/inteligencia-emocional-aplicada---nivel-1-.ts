@@ -498,17 +498,96 @@ export const course: Course = {
       id: 'm4',
       title: 'Empatía para Relaciones con Criterio',
       activities: [
-        // Punto 1 — Mini‑presentación en tarjetas: empatía con límites
+        // Punto 1 — Juego didáctico de Escucha Activa y Curiosidad (embebido)
         {
           id: 'm4a1',
-          type: 'text',
-          title: 'Punto 1 · Empatía con límites saludables',
-          description: 'Tarjetas: curiosidad, escucha, validación y límites claros.',
+          type: 'iframe',
+          title: 'Punto 1 · Escucha Activa y Curiosidad — Juego Didáctico',
+          description: 'Reflexiona sobre empatía y hábitos saludables con un juego interactivo.',
           content: [
-            'Tarjeta 1 — Curiosidad genuina: pregunta para comprender, no para responder.',
-            'Tarjeta 2 — Escucha activa: parafrasea y verifica comprensión.',
-            'Tarjeta 3 — Validación emocional: reconocer la experiencia del otro.',
-            'Tarjeta 4 — Límite con criterio: cuida tu energía y tus acuerdos.',
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Escucha Activa y Curiosidad – Juego Didáctico</title>
+              <style>
+                body { font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; padding: 0; background: linear-gradient(135deg, #e0f7fa, #f5f5f5); color: #333; }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 24px; }
+                .intro { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 24px; }
+                .game-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+                .character { display: flex; align-items: center; margin: 20px 0; }
+                .avatar { width: 60px; height: 60px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; margin-right: 15px; }
+                .dialogue { background: #f0f8ff; padding: 15px; border-radius: 8px; flex-grow: 1; }
+                .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+                .option-btn { background: #e3f2fd; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-align: left; font-size: 1rem; }
+                .option-btn:hover { background: #bbdefb; }
+                .feedback { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+                .positive { background: #e8f5e9; color: #2e7d32; }
+                .negative { background: #ffebee; color: #c62828; }
+                button { background: #3498db; color: white; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Escucha Activa y Curiosidad</h1>
+                <p class="subtitle">Un juego para reflexionar sobre la empatía y los hábitos saludables</p>
+                <div class="intro">
+                  <h2>¿Por qué es importante la empatía?</h2>
+                  <p>La empatía, especialmente a través de la escucha activa y la curiosidad genuina, fortalece nuestras relaciones y mejora nuestro bienestar emocional. Escuchar sin juzgar, preguntar con interés y prestar atención plena son hábitos que nutren la conexión humana. Este juego te invita a reflexionar sobre cómo puedes aplicar estos hábitos en tu vida diaria.</p>
+                </div>
+                <div class="game-container">
+                  <h2>Escena: Tu amigo/a comparte un problema</h2>
+                  <div class="character">
+                    <div class="avatar">A</div>
+                    <div class="dialogue">“Últimamente me siento muy solo/a y no sé cómo manejarlo. Siento que nadie me entiende.”</div>
+                  </div>
+                  <div class="options">
+                    <button class="option-btn" data-response="escucha">Escuchar con atención y preguntar: ¿Qué te gustaría que hiciéramos?</button>
+                    <button class="option-btn" data-response="juzgar">Decir: “Deberías salir más, eso te ayudará”.</button>
+                    <button class="option-btn" data-response="ignorar">Cambiar de tema rápidamente.</button>
+                  </div>
+                  <div class="feedback" id="feedback">
+                    <p id="feedback-text"></p>
+                    <button id="next-btn" style="display:none;">Siguiente escena</button>
+                  </div>
+                </div>
+              </div>
+              <script>
+                const feedback = document.getElementById('feedback');
+                const feedbackText = document.getElementById('feedback-text');
+                const nextBtn = document.getElementById('next-btn');
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                  btn.addEventListener('click', () => {
+                    const response = btn.dataset.response;
+                    switch(response) {
+                      case 'escucha':
+                        feedbackText.innerHTML = '✅ ¡Buena elección! Mostrar curiosidad genuina y escuchar activamente fortalece la conexión y el bienestar emocional. Ayudas a tu amigo/a a sentirse escuchado/a y comprendido/a.';
+                        feedback.className = 'feedback positive';
+                        break;
+                      case 'juzgar':
+                        feedbackText.innerHTML = '❌ Esta respuesta puede hacer que tu amigo/a se sienta juzgado/a o incomprendido/a. Intenta escuchar antes de dar consejos.';
+                        feedback.className = 'feedback negative';
+                        break;
+                      case 'ignorar':
+                        feedbackText.innerHTML = '❌ Ignorar el problema puede alejar la relación. Mostrar interés genuino es clave para el bienestar emocional de ambos.';
+                        feedback.className = 'feedback negative';
+                        break;
+                    }
+                    feedback.style.display = 'block';
+                    nextBtn.style.display = 'block';
+                  });
+                });
+                nextBtn.addEventListener('click', () => {
+                  alert('Gracias por participar. Recuerda: escuchar con curiosidad genuina es un hábito saludable que fortalece el bienestar emocional.');
+                  feedback.style.display = 'none';
+                  nextBtn.style.display = 'none';
+                });
+              </script>
+            </body>
+            </html>`
           ],
         },
         // Punto 2 — Audio: “Escucha atenta 60‑60” (novedad)
