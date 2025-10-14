@@ -201,7 +201,7 @@ export const course: Course = {
           type: 'iframe',
           title: 'Punto 1 · Del impulso a la elección (recurso interactivo)',
           description: 'Interactúa con el ciclo Señal → Pausa → Etiqueta → Elección directamente en esta pantalla.',
-          videoSrc: assetPath('interactive/m2a1-del-impulso-a-la-eleccion.html'),
+          videoSrc: assetPath('interactive/m2a1-del-impulso-a-la-eleccion.html?v=20251014-1'),
         },
         // Punto 2 — Video corto .mp4 de micro‑hábitos (nuevo)
         {
