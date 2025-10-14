@@ -344,6 +344,86 @@ export const course: Course = {
                     <p>✔️ Realidad: La autocompasión fomenta la responsabilidad, no la evasión. Te permite aprender sin castigarte.</p>
                   </div>
                 </div>
+                <div style="height: 28px"></div>
+                <h2 style="text-align:center;color:#2c3e50;font-size:1.4rem;margin:16px 0">Reflexionemos sobre la Validacion Emocional y Los Límites con Critero</h2>
+                <div class="vlc">
+                  <style>
+                    .vlc .container { max-width: 900px; margin: 0 auto; padding: 0; }
+                    .vlc .section { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+                    .vlc .interactive-card { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #3498db; }
+                    .vlc .btn { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+                    .vlc .btn:hover { background: #2980b9; }
+                    .vlc .scenario { margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; }
+                    .vlc .response-box { margin-top: 15px; display: none; }
+                    .vlc .feedback { padding: 10px; border-radius: 5px; margin-top: 10px; display: none; }
+                    .vlc .positive { background: #e8f5e9; color: #2e7d32; }
+                    .vlc .negative { background: #ffebee; color: #c62828; }
+                    .vlc .reflection { background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #f39c12; }
+                  </style>
+                  <div class="container">
+                    <div class="section">
+                      <h2>¿Qué es la validación emocional?</h2>
+                      <p>Reconocer, aceptar y comprender las emociones de otra persona sin necesariamente estar de acuerdo con su comportamiento.</p>
+                      <div class="interactive-card">
+                        <p><strong>Ejemplo:</strong> “Puedo ver que estás muy molesto con lo que pasó. Eso debe haber sido difícil.”</p>
+                        <button class="btn" onclick="document.getElementById('vlc-validacion').style.display = (document.getElementById('vlc-validacion').style.display==='block'?'none':'block')">Reflexiona</button>
+                        <div class="reflection" id="vlc-validacion" style="display:none;">
+                          <p>¿Cómo te sentirías si alguien te validara de esta manera? ¿Qué diferencia hay con que te digan: “No deberías sentirte así”?</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>¿Y los límites con criterio?</h2>
+                      <p>Establecer reglas claras y respetuosas que protejan tu bienestar y el de los demás, sin anular la emoción ajena.</p>
+                      <div class="interactive-card">
+                        <p><strong>Ejemplo:</strong> “Entiendo que estés molesto, pero no puedo seguir hablando si hay gritos.”</p>
+                        <button class="btn" onclick="document.getElementById('vlc-limites').style.display = (document.getElementById('vlc-limites').style.display==='block'?'none':'block')">Reflexiona</button>
+                        <div class="reflection" id="vlc-limites" style="display:none;">
+                          <p>¿Qué pasa cuando no pones límites? ¿Y cuando los pones de forma rígida?</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>Escenario práctico</h2>
+                      <div class="scenario">
+                        <p>Tu amigo/a viene a contarte que se siente frustrado/a porque su pareja no lo/la escucha. Dice que está pensando en terminar la relación.</p>
+                        <button class="btn" onclick="document.getElementById('vlc-response-box').style.display='block'">¿Cómo respondes?</button>
+                        <div class="response-box" id="vlc-response-box">
+                          <button class="btn" data-response="validar">Validar y preguntar: “Eso debe ser frustrante. ¿Qué necesitas?”</button>
+                          <button class="btn" data-response="condonar">Decir: “Sí, tu pareja está mal, haz lo que tengas que hacer.”</button>
+                          <button class="btn" data-response="limitar">Decir: “Te entiendo, pero no decidas nada hoy. Piénsalo bien.”</button>
+                        </div>
+                        <div class="feedback" id="vlc-scenario-feedback"></div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>Reflexión final</h2>
+                      <div class="reflection">
+                        <p>La validación emocional no significa que estés de acuerdo con todo. Es reconocer la emoción de otro como válida. Los límites con criterio no son castigos, sino cuidado mutuo.</p>
+                        <p>¿Qué límites has puesto últimamente sin invalidar emociones? ¿Qué validaciones has dado que no significaron permisividad?</p>
+                      </div>
+                    </div>
+                  </div>
+                  <script>
+                    document.querySelectorAll('.vlc [data-response]').forEach(btn => {
+                      btn.addEventListener('click', () => {
+                        const response = btn.getAttribute('data-response');
+                        const feedback = document.getElementById('vlc-scenario-feedback');
+                        if(response==='validar'){
+                          feedback.innerHTML = '✅ ¡Excelente! Validaste la emoción y mostraste curiosidad. Esto fortalece la relación y permite explorar soluciones juntos.';
+                          feedback.className = 'feedback positive';
+                        } else if(response==='condonar'){
+                          feedback.innerHTML = '❌ Esta respuesta puede invalidar la posibilidad de reflexión o crecimiento. ¿Estás apoyando el comportamiento o la emoción?';
+                          feedback.className = 'feedback negative';
+                        } else {
+                          feedback.innerHTML = '🟡 Esta respuesta es útil si hay riesgo de decisiones impulsivas. Pero ¿estás validando la emoción? Puedes hacer ambas cosas.';
+                          feedback.className = 'feedback negative';
+                        }
+                        feedback.style.display = 'block';
+                      });
+                    });
+                  </script>
+                </div>
               </div>
               <script>
                 document.querySelectorAll('.card').forEach(card => {
