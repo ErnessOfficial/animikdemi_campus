@@ -17,7 +17,7 @@ export const course: Course = {
     'Un recorrido práctico para desarrollar habilidades emocionales esenciales: reconocer y etiquetar emociones, regular impulsos, cultivar autocompasión y comunicarnos con empatía y criterio. Nivel 1 del programa de AnImiKdemi.',
   category: 'Inteligencia Emocional Aplicada',
   broadCategories: ['Autoconocimiento', 'Gestión Emocional', 'Habilidades Sociales'],
-  coverImage: assetPath('images/iea_nivel1_cover.png'),
+  coverImage: assetPath('images/inteligencia-emocional-aplicada---nivel-1-_portada.png'),
   instructor: mockInstructor,
   learningObjectives: [
     'Reconocer y etiquetar con precisión las emociones propias y ajenas.',
