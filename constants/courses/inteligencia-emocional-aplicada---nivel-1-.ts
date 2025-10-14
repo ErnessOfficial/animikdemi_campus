@@ -158,8 +158,9 @@ export const course: Course = {
                 .heading { margin: 16px 0 8px; }
                 .badge { display: inline-block; background: #6e4380; color: #fff; font-weight: 800; padding: 10px 14px; border-radius: 10px; }
                 .note { margin: 8px 0 16px; color: #101021; opacity: 0.85; }
-                .embed { width: 100%; height: 900px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-                @media (max-width: 640px) { .embed { height: 720px; } }
+                .embed { width: 100%; height: 1200px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                @media (max-width: 1024px) { .embed { height: 1100px; } }
+                @media (max-width: 640px) { .embed { height: 1000px; } }
               </style>
             </head>
             <body>
