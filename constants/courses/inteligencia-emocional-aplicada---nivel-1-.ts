@@ -158,9 +158,9 @@ export const course: Course = {
                 .heading { margin: 16px 0 8px; }
                 .badge { display: inline-block; background: #6e4380; color: #fff; font-weight: 800; padding: 10px 14px; border-radius: 10px; }
                 .note { margin: 8px 0 16px; color: #101021; opacity: 0.85; }
-                .embed { width: 100%; height: 1200px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-                @media (max-width: 1024px) { .embed { height: 1100px; } }
-                @media (max-width: 640px) { .embed { height: 1000px; } }
+                .embed { width: 100%; height: 1300px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                @media (max-width: 1024px) { .embed { height: 1200px; } }
+                @media (max-width: 640px) { .embed { height: 1100px; } }
               </style>
             </head>
             <body>
@@ -408,13 +408,84 @@ export const course: Course = {
           description: 'Práctica breve para suavizar la autocrítica y elegir una acción amable.',
           audioSrc: assetPath('audios/pausa_amabilidad.mp3'),
         },
-        // Punto 4 — Desafío final del módulo (distinto a uploads previos)
+        // Punto 4 — Infografía interactiva: Fortalece tu Resiliencia (embebida)
         {
           id: 'm3a4',
-          type: 'finalChallenge',
-          title: 'Punto 4 · Desafío: Resiliencia en 72 horas',
-          description:
-            'Define 1 contratiempo reciente y completa: (1) qué pasó, (2) qué sentiste/etiqueta, (3) qué reencuadre compasivo aplicarás, (4) 2 micro‑acciones realistas antes de 72 h.',
+          type: 'iframe',
+          title: 'Punto 4 · Fortalece Tu Resiliencia — Infografía Interactiva',
+          description: 'Conoce los pilares prácticos de la resiliencia y define acciones concretas desde la visual interactiva.',
+          content: [
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Fortalece Tu Resiliencia – Infografía Interactiva</title>
+              <style>
+                body { font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; padding: 0; background: linear-gradient(135deg, #e0f7fa, #f5f5f5); color: #333; }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.4rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 26px; }
+                .resiliencia-tree { width: 100%; height: 300px; background: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect fill=\"%23f0f8ff\" width=\"100\" height=\"100\"/><circle fill=\"%234CAF50\" cx=\"50\" cy=\"50\" r=\"30\"/></svg>'); background-size: cover; margin: 20px 0; position: relative; display: flex; justify-content: center; align-items: center; }
+                .resiliencia-tree img { width: 150px; height: auto; }
+                .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+                .pilar { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease; }
+                .pilar:hover { transform: scale(1.05); }
+                .pilar h3 { color: #2980b9; margin-top: 0; }
+                .detalle-pilar { margin-top: 20px; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: none; }
+                .detalle-pilar h2 { color: #2c3e50; }
+                .accion { margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px; font-style: italic; }
+                button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Fortalece Tu Resiliencia</h1>
+                <p class="subtitle">Conoce los pilares que te ayudan a recuperarte y crecer ante la adversidad</p>
+                <div class="resiliencia-tree">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nIzQ0QzVFNicvPjx0ZXh0IHg9JzUwJyB5PSc1NScgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnPkI8L3RleHQ+PC9zdmc+" alt="Árbol de resiliencia">
+                </div>
+                <div class="pilares">
+                  <div class="pilar" data-id="conexion"><h3>Conexión con Uno Mismo</h3><p>Autoconocimiento y regulación emocional</p></div>
+                  <div class="pilar" data-id="apoyo"><h3>Red de Apoyo</h3><p>Conexión con otros y apoyo social</p></div>
+                  <div class="pilar" data-id="adaptabilidad"><h3>Adaptabilidad</h3><p>Flexibilidad ante el cambio</p></div>
+                  <div class="pilar" data-id="soluciones"><h3>Enfoque en Soluciones</h3><p>Pensamiento práctico y proactivo</p></div>
+                  <div class="pilar" data-id="autoeficacia"><h3>Autoeficacia</h3><p>Confianza en tus propias habilidades</p></div>
+                  <div class="pilar" data-id="optimismo"><h3>Optimismo Realista</h3><p>Esperanza con base en la realidad</p></div>
+                </div>
+                <div class="detalle-pilar" id="detalle-pilar">
+                  <h2 id="titulo-pilar">Haz clic en un pilar</h2>
+                  <p id="descripcion-pilar">Selecciona un pilar para ver su descripción y una acción práctica.</p>
+                  <div class="accion" id="accion-pilar"></div>
+                </div>
+              </div>
+              <script>
+                const pilaresData = {
+                  conexion: { titulo: 'Conexión con Uno Mismo', descripcion: 'Conocer tus emociones, fortalezas y límites te permite responder con claridad ante la adversidad.', accion: 'Toma 5 minutos hoy para escribir: ¿Qué estoy sintiendo ahora? ¿Qué necesito?' },
+                  apoyo: { titulo: 'Red de Apoyo', descripcion: 'Contar con personas de confianza fortalece tu capacidad de afrontamiento.', accion: 'Habla con alguien en quien confíes. Comparte lo que estás viviendo.' },
+                  adaptabilidad: { titulo: 'Adaptabilidad', descripcion: 'Aceptar el cambio y ajustarte a nuevas circunstancias es clave para la resiliencia.', accion: 'Reflexiona: ¿Qué puedo aprender de esta situación? ¿Cómo puedo adaptarme?' },
+                  soluciones: { titulo: 'Enfoque en Soluciones', descripcion: 'Dirigir la atención a lo que puedes hacer, no solo en lo que no puedes.', accion: 'Escribe una lista con 3 acciones concretas que puedes tomar hoy para mejorar tu situación.' },
+                  autoeficacia: { titulo: 'Autoeficacia', descripcion: 'Creer en tu capacidad para superar desafíos fortalece tu confianza.', accion: 'Recuerda una situación pasada en la que superaste un reto. ¿Qué habilidades usaste?' },
+                  optimismo: { titulo: 'Optimismo Realista', descripcion: 'Mantener la esperanza sin ignorar la realidad te permite seguir adelante.', accion: 'Busca una luz pequeña en tu situación actual. Puede ser una persona, un valor o una oportunidad.' }
+                };
+                document.querySelectorAll('.pilar').forEach(pilar => {
+                  pilar.addEventListener('click', () => {
+                    const id = pilar.dataset.id;
+                    const detalle = document.getElementById('detalle-pilar');
+                    const titulo = document.getElementById('titulo-pilar');
+                    const descripcion = document.getElementById('descripcion-pilar');
+                    const accion = document.getElementById('accion-pilar');
+                    const data = pilaresData[id];
+                    titulo.textContent = data.titulo;
+                    descripcion.textContent = data.descripcion;
+                    accion.textContent = data.accion;
+                    detalle.style.display = 'block';
+                  });
+                });
+              </script>
+            </body>
+            </html>`
+          ]
         },
       ],
     },
