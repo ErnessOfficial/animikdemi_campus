@@ -233,7 +233,7 @@ export const course: Course = {
           type: 'video',
           title: 'Punto 2 · Micro‑hábitos de regulación (video corto)',
           description: 'Demostración práctica de 3 micro‑hábitos para bajar activación y decidir mejor.',
-          videoSrc: assetPath('videos/micro_habitos_regulacion.mp4'),
+          videoSrc: assetPath('videos/escucha-activa-recurso.webm'),
         },
         // Punto 3 — Juego de cartas: disparadores vs. respuestas regulatorias
         {
