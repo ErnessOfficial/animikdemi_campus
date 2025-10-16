@@ -231,9 +231,9 @@ export const course: Course = {
         {
           id: 'm2a2',
           type: 'video',
-          title: 'Punto 2 · Escucha Activa (video corto)',
-          description: 'Presta atención al desarrollo de la historia planteada en el video y reflexiona sobre la situación que plantea.',
-          videoSrc: assetPath('videos/escucha-activa-recurso.webm'),
+          title: 'Punto 2 · Disparadores y Respuestas Regulatorias (video corto)',
+          description: 'Aqui tienes 4 casos comunes y 4 micro-respuestas prácticas para bajar la activación y decidir mejor.',
+          videoSrc: assetPath('videos/microrespuestas-casos.mp4'),
         },
         // Punto 3 — Juego de cartas: disparadores vs. respuestas regulatorias
         {
@@ -614,7 +614,7 @@ export const course: Course = {
               <div class="container">
                 <div class="video" style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.15); margin-bottom: 24px;">
                   <video controls style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;">
-                    <source src="/videos/escucha-activa-recurso.mov" type="video/mp4">
+                    <source src="/videos/escucha-activa-recurso.webm" type="video/webm">
                     Your browser does not support the video tag.
                   </video>
                 </div>
