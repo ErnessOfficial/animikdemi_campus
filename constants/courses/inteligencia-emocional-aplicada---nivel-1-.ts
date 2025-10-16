@@ -31,7 +31,7 @@ export const course: Course = {
     // ==========================================================
     {
       id: 'm1',
-      title: 'Conciencia y Etiquetado Emocional',
+      title: 'Módulo 1: Conciencia y Etiquetado Emocional',
       activities: [
         // PUNTO 1 — Video + Transcripción + Quiz (en secuencia inmediata)
         {
@@ -217,7 +217,7 @@ export const course: Course = {
     // ==========================================================
     {
       id: 'm2',
-      title: 'Neurociencia de la Regulación y Control de Impulsos',
+      title: 'Módulo 2: Neurociencia de la Regulación y Control de Impulsos',
       activities: [
         // Punto 1 — Recurso interactivo embebido (HTML+CSS+JS inline)
         {
@@ -269,7 +269,7 @@ export const course: Course = {
     // ==========================================================
     {
       id: 'm3',
-      title: 'El Antídoto: Autocompasión y Resiliencia',
+      title: 'Módulo 3: El Antídoto: Autocompasión y Resiliencia',
       activities: [
         // Punto 1 — Infografía interactiva embebida (srcDoc)
         {
@@ -505,7 +505,7 @@ export const course: Course = {
                 .container { max-width: 900px; margin: 0 auto; padding: 20px; }
                 h1 { text-align: center; color: #2c3e50; font-size: 2.4rem; margin-bottom: 10px; }
                 .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 26px; }
-                .resiliencia-tree { width: 100%; height: 300px; background: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect fill=\"%23f0f8ff\" width=\"100\" height=\"100\"/><circle fill=\"%234CAF50\" cx=\"50\" cy=\"50\" r=\"30\"/></svg>'); background-size: cover; margin: 20px 0; position: relative; display: flex; justify-content: center; align-items: center; }
+                .resiliencia-tree { width: 100%; height: 300px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f0f8ff" width="100" height="100"/><circle fill="%234CAF50" cx="50" cy="50" r="30"/></svg>'); background-size: cover; margin: 20px 0; position: relative; display: flex; justify-content: center; align-items: center; }
                 .resiliencia-tree img { width: 150px; height: auto; }
                 .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
                 .pilar { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease; }
@@ -523,7 +523,7 @@ export const course: Course = {
                 <h1>Fortalece Tu Resiliencia</h1>
                 <p class="subtitle">Conoce los pilares que te ayudan a recuperarte y crecer ante la adversidad</p>
                 <div class="resiliencia-tree">
-                  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nIzQ0QzVFNicvPjx0ZXh0IHg9JzUwJyB5PSc1NScgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnPkI8L3RleHQ+PC9zdmc+" alt="Árbol de resiliencia">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nIzQ0QzVFNicvPjx0ZXh0IHg9JzUwJyB5PSc1NScgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnPkI8L3RleHQ+PC9zdmc=" alt="Árbol de resiliencia">
                 </div>
                 <div class="pilares">
                   <div class="pilar" data-id="conexion"><h3>Conexión con Uno Mismo</h3><p>Autoconocimiento y regulación emocional</p></div>
@@ -576,7 +576,7 @@ export const course: Course = {
     // ==========================================================
     {
       id: 'm4',
-      title: 'Empatía para Relaciones con Criterio',
+      title: 'Módulo 4: Empatía para Relaciones con Criterio',
       activities: [
         // Punto 1 — Juego didáctico de Escucha Activa y Curiosidad (embebido)
         {
@@ -601,8 +601,8 @@ export const course: Course = {
                 .avatar { width: 60px; height: 60px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; margin-right: 15px; }
                 .dialogue { background: #f0f8ff; padding: 15px; border-radius: 8px; flex-grow: 1; }
                 .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-                .option-btn { background: #e3f2fd; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-align: left; font-size: 1rem; }
-                .option-btn:hover { background: #bbdefb; }
+                .option-btn { background: #003366; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-align: left; font-size: 1rem; }
+                .option-btn:hover { background: #004080; }
                 .feedback { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
                 .positive { background: #e8f5e9; color: #2e7d32; }
                 .negative { background: #ffebee; color: #c62828; }
@@ -612,6 +612,12 @@ export const course: Course = {
             </head>
             <body>
               <div class="container">
+                <div class="video" style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.15); margin-bottom: 24px;">
+                  <video controls style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;">
+                    <source src="/videos/escucha-activa-recurso.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
                 <h1>Escucha Activa y Curiosidad</h1>
                 <p class="subtitle">Un juego para reflexionar sobre la empatía y los hábitos saludables</p>
                 <div class="intro">
@@ -619,15 +625,12 @@ export const course: Course = {
                   <p>La empatía, especialmente a través de la escucha activa y la curiosidad genuina, fortalece nuestras relaciones y mejora nuestro bienestar emocional. Escuchar sin juzgar, preguntar con interés y prestar atención plena son hábitos que nutren la conexión humana. Este juego te invita a reflexionar sobre cómo puedes aplicar estos hábitos en tu vida diaria.</p>
                 </div>
                 <div class="game-container">
-                  <h2>Escena: Tu amigo/a comparte un problema</h2>
+                  <h2 id="scene-title"></h2>
                   <div class="character">
-                    <div class="avatar">A</div>
-                    <div class="dialogue">“Últimamente me siento muy solo/a y no sé cómo manejarlo. Siento que nadie me entiende.”</div>
+                    <div id="character-avatar" class="avatar"></div>
+                    <div id="character-dialogue" class="dialogue"></div>
                   </div>
-                  <div class="options">
-                    <button class="option-btn" data-response="escucha">Escuchar con atención y preguntar: ¿Qué te gustaría que hiciéramos?</button>
-                    <button class="option-btn" data-response="juzgar">Decir: “Deberías salir más, eso te ayudará”.</button>
-                    <button class="option-btn" data-response="ignorar">Cambiar de tema rápidamente.</button>
+                  <div id="options-container" class="options">
                   </div>
                   <div class="feedback" id="feedback">
                     <p id="feedback-text"></p>
@@ -636,35 +639,109 @@ export const course: Course = {
                 </div>
               </div>
               <script>
-                const feedback = document.getElementById('feedback');
-                const feedbackText = document.getElementById('feedback-text');
+                const scenes = [
+                  {
+                    title: "Escena A: Tu amigo/a comparte un problema",
+                    avatar: "A",
+                    dialogue: "Últimamente me siento muy solo/a y no sé cómo manejarlo. Siento que nadie me entiende.",
+                    options: [
+                      { text: "Escuchar con atención y preguntar: ¿Qué te gustaría que hiciéramos?", feedback: "✅ ¡Buena elección! Mostrar curiosidad genuina y escuchar activamente fortalece la conexión y el bienestar emocional. Ayudas a tu amigo/a a sentirse escuchado/a y comprendido/a.", level: "Alto" },
+                      { text: "Decir: “Deberías salir más, eso te ayudará”.", feedback: "❌ Esta respuesta puede hacer que tu amigo/a se sienta juzgado/a o incomprendido/a. Intenta escuchar antes de dar consejos.", level: "Bajo" },
+                      { text: "Cambiar de tema rápidamente.", feedback: "❌ Ignorar el problema puede alejar la relación. Mostrar interés genuino es clave para el bienestar emocional de ambos.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha B: Tu pareja está visiblemente molesta",
+                    avatar: "B",
+                    dialogue: "No puedo creer lo que acaba de pasar. Mi jefe me ha criticado injustamente delante de todo el equipo por un error menor. Estoy furioso/a.",
+                    options: [
+                      { text: "¿Qué necesitas de mí ahora? ¿Quieres desahogarte o que busquemos una solución?", feedback: "Alto: Demuestra escucha activa al pausar y reconocer el estado emocional. Muestra curiosidad empática al preguntar directamente por las necesidades de la otra persona, priorizando su bienestar emocional sobre una solución inmediata. Este es un hábito saludable que valida los sentimientos.", level: "Alto" },
+                      { text: "Relájate, no es para tanto. Ya se te pasará, siempre exagera las cosas.", feedback: "Bajo: Invalida el sentimiento de la pareja y minimiza su experiencia. Esto es una barrera para la empatía y un ejemplo de no escucha. Daña la confianza y la seguridad en la relación. Hábito no saludable.", level: "Bajo" },
+                      { text: "Bueno, ¿qué hacemos de cenar? Hablemos de otra cosa.", feedback: "Bajo: Evita el conflicto y la emoción, lo que es un bloqueo a la conexión emocional y la escucha activa. Niega la oportunidad de apoyo y curiosidad genuina sobre la situación. Hábito no saludable de evitación.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha C: Un/a compañero/a de trabajo te comenta",
+                    avatar: "C",
+                    dialogue: "He decidido empezar a estudiar un curso a distancia por las noches. Sé que será difícil equilibrarlo con el trabajo, pero estoy muy ilusionado/a.",
+                    options: [
+                      { text: "¿Qué te motivó a tomar esta decisión? Cuéntame más sobre el curso y cómo te sientes al respecto.", feedback: "Alto: Muestra curiosidad genuina e interés en el proceso de pensamiento y los sentimientos del compañero/a. Refuerza la escucha activa y la empatía al enfocarse en su motivación e ilusión. Fomenta un hábito saludable de apoyo a los proyectos personales.", level: "Alto" },
+                      { text: "Yo no lo haría, es demasiada carga. Deberías enfocarte solo en el trabajo.", feedback: "Bajo: Ofrece un juicio o consejo no solicitado basado en la propia perspectiva, sin empatía por la ilusión o esfuerzo del otro. Bloquea la curiosidad y la conexión al desanimar. Hábito no saludable de crítica.", level: "Bajo" },
+                      { text: "Genial. Hablando de estudios, ¿sabes si tenemos que entregar el informe mañana?", feedback: "Bajo: Una respuesta superficial que cambia el foco al trabajo inmediatamente, mostrando falta de escucha y desinterés por la vida personal del compañero/a. Hábito no saludable de priorizar la tarea sobre la relación.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha D: Hablando con un/a familiar estresado/a",
+                    avatar: "D",
+                    dialogue: "Ya no sé qué hacer con tantas responsabilidades. Siento que estoy fallándole a todo el mundo y que nunca voy a salir de este agujero.",
+                    options: [
+                      { text: "Parece que te sientes abrumado/a y con mucha presión, ¿verdad? ¿Hay algo que te agobia más en este momento?", feedback: "Alto: Emplea escucha activa a través de la técnica de reflejo (validación emocional), lo cual es muy empático. La pregunta posterior abre un espacio a la curiosidad profunda para entender la raíz del problema. Hábito saludable de validación y profundización.", level: "Alto" },
+                      { text: "Anímate, solo tienes que organizarte mejor. ¡No seas tan dramático/a!", feedback: "Bajo: Minimiza y cuestiona la intensidad de la emoción, lo cual es opuesto a la empatía. Ignora la necesidad de ser escuchado/a y ofrece una solución simplista. Hábito no saludable que genera distancia emocional.", level: "Bajo" },
+                      { text: "Ay, a mí me pasó algo parecido cuando...", feedback: "Medio/Bajo: Aunque busca conectar, desvía el foco de la otra persona a ti mismo/a, interrumpiendo la escucha activa.", level: "Medio/Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha E: Un/a amigo/a con una decisión importante",
+                    avatar: "E",
+                    dialogue: "Voy a dejar mi trabajo para empezar mi propio negocio, pero la verdad es que estoy aterrado/a. Es un salto de fe muy grande.",
+                    options: [
+                      { text: "¿Qué es lo que más te asusta y qué es lo que más te ilusiona de este nuevo camino?", feedback: "Alto: Muestra empatía al reconocer la emoción dual (miedo e ilusión). El refuerzo positivo a la valentía es un hábito saludable de apoyo. La curiosidad se centra en las emociones y expectativas del amigo/a, fomentando la apertura.", level: "Alto" },
+                      { text: "Estás loco/a. Eso es muy arriesgado. ¿Estás seguro/a de que quieres hipotecar tu futuro así?", feedback: "Bajo: Genera miedo e inseguridad en lugar de apoyo. Es una respuesta de juicio que anula la empatía y la escucha. El tono es de reproche, lo que es un hábito no saludable de crítica destructiva.", level: "Bajo" },
+                      { text: "¡Bueno, si quiebras, siempre puedes volver a vivir en casa de tus padres! ¡Jaja!", feedback: "Bajo: Intenta ayudar, pero evita abordar la emoción real (el miedo), demostrando falta de empatía por la seriedad del momento. Bloquea la escucha profunda al usar el humor como distracción. Hábito no saludable de trivializar.", level: "Bajo" }
+                    ]
+                  }
+                ];
+
+                let currentSceneIndex = 0;
+
+                const sceneTitleEl = document.getElementById('scene-title');
+                const avatarEl = document.getElementById('character-avatar');
+                const dialogueEl = document.getElementById('character-dialogue');
+                const optionsContainerEl = document.getElementById('options-container');
+                const feedbackEl = document.getElementById('feedback');
+                const feedbackTextEl = document.getElementById('feedback-text');
                 const nextBtn = document.getElementById('next-btn');
-                document.querySelectorAll('.option-btn').forEach(btn => {
-                  btn.addEventListener('click', () => {
-                    const response = btn.dataset.response;
-                    switch(response) {
-                      case 'escucha':
-                        feedbackText.innerHTML = '✅ ¡Buena elección! Mostrar curiosidad genuina y escuchar activamente fortalece la conexión y el bienestar emocional. Ayudas a tu amigo/a a sentirse escuchado/a y comprendido/a.';
-                        feedback.className = 'feedback positive';
-                        break;
-                      case 'juzgar':
-                        feedbackText.innerHTML = '❌ Esta respuesta puede hacer que tu amigo/a se sienta juzgado/a o incomprendido/a. Intenta escuchar antes de dar consejos.';
-                        feedback.className = 'feedback negative';
-                        break;
-                      case 'ignorar':
-                        feedbackText.innerHTML = '❌ Ignorar el problema puede alejar la relación. Mostrar interés genuino es clave para el bienestar emocional de ambos.';
-                        feedback.className = 'feedback negative';
-                        break;
-                    }
-                    feedback.style.display = 'block';
-                    nextBtn.style.display = 'block';
+
+                function renderScene(index) {
+                  const scene = scenes[index];
+                  sceneTitleEl.textContent = scene.title;
+                  avatarEl.textContent = scene.avatar;
+                  dialogueEl.textContent = scene.dialogue;
+                  
+                  optionsContainerEl.innerHTML = '';
+                  scene.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option.text;
+                    button.addEventListener('click', () => {
+                      feedbackTextEl.innerHTML = option.feedback;
+                      if (option.level === 'Alto') {
+                        feedbackEl.className = 'feedback positive';
+                      } else {
+                        feedbackEl.className = 'feedback negative';
+                      }
+                      feedbackEl.style.display = 'block';
+                      nextBtn.style.display = 'block';
+                    });
+                    optionsContainerEl.appendChild(button);
                   });
-                });
-                nextBtn.addEventListener('click', () => {
-                  alert('Gracias por participar. Recuerda: escuchar con curiosidad genuina es un hábito saludable que fortalece el bienestar emocional.');
-                  feedback.style.display = 'none';
+
+                  feedbackEl.style.display = 'none';
                   nextBtn.style.display = 'none';
+                }
+
+                nextBtn.addEventListener('click', () => {
+                  currentSceneIndex++;
+                  if (currentSceneIndex < scenes.length) {
+                    renderScene(currentSceneIndex);
+                  } else {
+                    alert('¡Has completado todas las escenas! Gracias por participar. Recuerda: escuchar con curiosidad genuina es un hábito saludable que fortalece el bienestar emocional.');
+                    currentSceneIndex = 0; // Optional: reset to play again
+                    renderScene(currentSceneIndex);
+                  }
                 });
+
+                renderScene(currentSceneIndex);
               </script>
             </body>
             </html>`
@@ -709,7 +786,7 @@ export const course: Course = {
     // ==========================================================
     {
       id: 'm5',
-      title: 'Quiz Final Integrador',
+      title: 'Módulo 5: Quiz Final Integrador',
       activities: [
         {
           id: 'm5a1',
