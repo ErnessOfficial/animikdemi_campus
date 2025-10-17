@@ -110,7 +110,6 @@ export const course: Course = {
               ],
             },
           ],
-          // 'realiza el quiz a continuación para reforzar tu aprendizaje.' // <-- removed duplicate description
         },
         {
           id: 'm1a2',
@@ -120,4 +119,1116 @@ export const course: Course = {
           content: [
             'Esta presentación interactiva desarrolla en detalle los tres componentes de las emociones (fisiológico, cognitivo y conductual) a través de una estructura de slides navegables con elementos didácticos como hotspots clicables para explicaciones ampliadas, un quiz reflexivo de 6 preguntas (mezcla de opción múltiple y verdadero/falso) con feedback inmediato, y un módulo de reflexión personal con prompts guiados para journaling emocional. El diseño incentiva el aprendizaje reflexivo al invitar al usuario a conectar el contenido con experiencias propias, promoviendo la regulación emocional',
             `<!DOCTYPE html>
-<html lang=
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componentes de las Emociones: Presentación Interactiva</title>
+    <style>
+        /* CSS con BEM para scoping */
+        .rdi-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .rdi-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .rdi-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .rdi-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .rdi-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .rdi-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .rdi-slide {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .rdi-slide-active {
+            display: block;
+        }
+
+        .rdi-hotspot {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .rdi-popup {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+            width: 300px;
+        }
+
+        .rdi-hotspot:hover .rdi-popup {
+            display: block;
+        }
+
+        .rdi-quiz {
+            margin-top: 20px;
+        }
+
+        .rdi-quiz-question {
+            margin-bottom: 20px;
+        }
+
+        .rdi-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .rdi-feedback-correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .rdi-feedback-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .rdi-reflection {
+            margin-top: 20px;
+        }
+
+        .rdi-reflection textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .rdi-summary {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Accesibilidad */
+        .rdi-btn:focus, .rdi-hotspot:focus {
+            outline: 2px solid #007bff;
+        }
+
+        @media (max-width: 600px) {
+            .rdi-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rdi-container">
+        <header class="rdi-header">
+            <h1>Componentes de las Emociones</h1>
+            <p>Una presentación interactiva para explorar y reflexionar sobre las emociones como ráfagas intensas y cortas ante estímulos relevantes.</p>
+        </header>
+
+        <nav class="rdi-nav">
+            <button class="rdi-btn" id="rdi-prev" onclick="changeSlide(-1)" disabled>Anterior</button>
+            <span id="rdi-slide-indicator">Slide 1 de 5</span>
+            <button class="rdi-btn" id="rdi-next" onclick="changeSlide(1)">Siguiente</button>
+        </nav>
+
+        <main>
+            <section id="slide1" class="rdi-slide rdi-slide-active">
+                <h2>Introducción a las Emociones</h2>
+                <p>Las emociones son respuestas intensas y de corta duración que surgen ante estímulos relevantes, como algo que vemos, recordamos o anticipamos. Según la psicología emocional, incluyen tres componentes principales: fisiológico, cognitivo y conductual. Estas ráfagas nos ayudan a adaptarnos al entorno, pero entenderlas promueve el bienestar emocional.</p>
+                <img src="https://online.uwa.edu/wp-content/uploads/2019/05/Our-Basic-Emotions-Infographic-UWA.jpg" alt="Infografía general de emociones" style="max-width: 100%; height: auto;" aria-label="Infografía ilustrativa de componentes emocionales">
+                <p>Explora cada componente en los siguientes slides y reflexiona sobre cómo se manifiestan en tu vida.</p>
+            </section>
+
+            <section id="slide2" class="rdi-slide">
+                <h2>1. Componente Fisiológico (Cuerpo) 🧠🫀</h2>
+                <p>Este componente involucra cambios corporales que preparan al organismo para responder. Basado en explicaciones psicológicas, incluye activación del sistema nervioso autónomo, liberando hormonas como adrenalina (para estrés) o endorfinas (para bienestar). Estos cambios son automáticos y universales, pero su intensidad varía por persona.</p>
+                <div class="rdi-hotspot" tabindex="0">
+                    <strong>Detalles ampliados:</strong>
+                    <div class="rdi-popup">
+                        <p>Ejemplos detallados: Aumento del ritmo cardíaco en miedo (prepara para huir), sudoración en ansiedad, o relajación muscular en alegría. Estas señales fisiológicas activan sistemas como el simpático para acción y parasimpático para recuperación.</p>
+                    </div>
+                </div>
+                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente fisiológico" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente fisiológico de las emociones">
+                <p>Reflexiona: ¿Qué sensaciones corporales notas cuando estás estresado?</p>
+            </section>
+
+            <section id="slide3" class="rdi-slide">
+                <h2>2. Componente Cognitivo (Pensamientos) 🤔</h2>
+                <p>Implica la interpretación, evaluación y etiquetado de la situación y sensaciones. No es lo mismo etiquetar “miedo” que “anticipación”. Un vocabulario emocional rico mejora la regulación, según teorías como la de Schachter-Singer, donde la cognición interpreta la arousal fisiológica.</p>
+                <div class="rdi-hotspot" tabindex="0">
+                    <strong>Detalles ampliados:</strong>
+                    <div class="rdi-popup">
+                        <p>Ejemplos: En una situación ambigua, pensar “esto es un desafío” (positivo) vs. “esto es una amenaza” (negativo). La cognición incluye appraisals primarios (¿es relevante?) y secundarios (¿puedo manejarlo?), influyendo en la intensidad emocional.</p>
+                    </div>
+                </div>
+                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente cognitivo" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente cognitivo de las emociones">
+                <p>Reflexiona: ¿Cómo cambian tus emociones al reetiquetar un pensamiento?</p>
+            </section>
+
+            <section id="slide4" class="rdi-slide">
+                <h2>3. Componente Conductual (Acción) 🗣️</h2>
+                <p>Es la expresión observable: acciones, gestos, tono de voz y postura. Ejemplos incluyen gritar o fruncir el ceño en ira, llorar o encoger hombros en tristeza, o sonreír y abrir la postura en alegría. Este componente es culturalmente influido pero tiene bases universales, como en las expresiones faciales de Ekman.</p>
+                <div class="rdi-hotspot" tabindex="0">
+                    <strong>Detalles ampliados:</strong>
+                    <div class="rdi-popup">
+                        <p>Ejemplos detallados: En ira, acciones impulsivas como golpear; en tristeza, aislamiento; en alegría, acercamiento social. El comportamiento retroalimenta los otros componentes, como cuando una sonrisa induce bienestar fisiológico.</p>
+                    </div>
+                </div>
+                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente conductual" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente conductual de las emociones">
+                <p>Reflexiona: ¿Qué comportamientos emocionales te ayudan o perjudican?</p>
+            </section>
+
+            <section id="slide5" class="rdi-slide">
+                <h2>Reflexión y Quiz</h2>
+                <div class="rdi-quiz">
+                    <h3>Quiz Reflexivo (6 Preguntas)</h3>
+                    <div class="rdi-quiz-question">
+                        <p>1. El componente fisiológico prepara el cuerpo para acción. (Verdadero/Falso)</p>
+                        <label><input type="radio" name="q1" value="true"> Verdadero</label>
+                        <label><input type="radio" name="q1" value="false"> Falso</label>
+                        <div id="fb1" class="rdi-feedback"></div>
+                    </div>
+                    <div class="rdi-quiz-question">
+                        <p>2. ¿Qué incluye el componente cognitivo?</p>
+                        <label><input type="radio" name="q2" value="a"> Cambios en el ritmo cardíaco</label>
+                        <label><input type="radio" name="q2" value="b"> Interpretación y etiquetado</label>
+                        <label><input type="radio" name="q2" value="c"> Gestos observables</label>
+                        <div id="fb2" class="rdi-feedback"></div>
+                    </div>
+                    <div class="rdi-quiz-question">
+                        <p>3. Gritar es un ejemplo del componente conductual en ira. (Verdadero/Falso)</p>
+                        <label><input type="radio" name="q3" value="true"> Verdadero</label>
+                        <label><input type="radio" name="q3" value="false"> Falso</label>
+                        <div id="fb3" class="rdi-feedback"></div>
+                    </div>
+                    <div class="rdi-quiz-question">
+                        <p>4. Un vocabulario emocional rico ayuda en la regulación. (Verdadero/Falso)</p>
+                        <label><input type="radio" name="q4" value="true"> Verdadero</label>
+                        <label><input type="radio" name="q4" value="false"> Falso</label>
+                        <div id="fb4" class="rdi-feedback"></div>
+                    </div>
+                    <div class="rdi-quiz-question">
+                        <p>5. ¿Qué componente involucra hormonas como adrenalina?</p>
+                        <label><input type="radio" name="q5" value="a"> Cognitivo</label>
+                        <label><input type="radio" name="q5" value="b"> Fisiológico</label>
+                        <label><input type="radio" name="q5" value="c"> Conductual</label>
+                        <div id="fb5" class="rdi-feedback"></div>
+                    </div>
+                    <div class="rdi-quiz-question">
+                        <p>6. Las emociones son siempre de larga duración. (Verdadero/Falso)</p>
+                        <label><input type="radio" name="q6" value="true"> Verdadero</label>
+                        <label><input type="radio" name="q6" value="false"> Falso</label>
+                        <div id="fb6" class="rdi-feedback"></div>
+                    </div>
+                    <button class="rdi-btn" onclick="checkQuiz()">Enviar Respuestas</button>
+                    <div id="quiz-summary" class="rdi-summary" hidden></div>
+                </div>
+                <div class="rdi-reflection">
+                    <h3>Reflexión Personal</h3>
+                    <p>Prompt: Describe una emoción reciente identificando sus tres componentes.</p>
+                    <textarea id="reflection-text" aria-label="Escribe tu reflexión emocional"></textarea>
+                    <button class="rdi-btn" onclick="saveReflection()">Guardar Reflexión</button>
+                    <div id="saved-reflections"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer style="text-align: center; margin-top: 20px; font-size: 0.8em; color: #666;">
+            <p>Desarrollado para Bienestar Emocional. Accesible y autocontenido.</p>
+        </footer>
+    </div>
+
+    <script>
+        const progressKey = 'rdi-emotions-progress';
+        let currentSlide = 1;
+        const totalSlides = 5;
+        let progress = JSON.parse(localStorage.getItem(progressKey)) || { slide: 1, reflections: [] };
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            document.querySelectorAll('.rdi-slide').forEach(slide => slide.classList.remove('rdi-slide-active'));
+            document.getElementById(`slide${currentSlide}`).classList.add('rdi-slide-active');
+            document.getElementById('rdi-prev').disabled = currentSlide === 1;
+            document.getElementById('rdi-next').disabled = currentSlide === totalSlides;
+            document.getElementById('rdi-slide-indicator').textContent = `Slide ${currentSlide} de ${totalSlides}`;
+            if (currentSlide > progress.slide) {
+                progress.slide = currentSlide;
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+            }
+        }
+
+        function checkQuiz() {
+            const answers = {
+                q1: 'true', // Verdadero
+                q2: 'b',    // Interpretación y etiquetado
+                q3: 'true', // Verdadero
+                q4: 'true', // Verdadero
+                q5: 'b',    // Fisiológico
+                q6: 'false' // Falso
+            };
+            let score = 0;
+            for (let i = 1; i <= 6; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const fbEl = document.getElementById(`fb${i}`);
+                fbEl.style.display = 'block';
+                if (selected && selected.value === answers[`q${i}`]) {
+                    fbEl.textContent = '¡Correcto! Reflexiona sobre cómo aplica esto a tu vida.';
+                    fbEl.className = 'rdi-feedback rdi-feedback-correct';
+                    score++;
+                } else {
+                    fbEl.textContent = 'Incorrecto. Revisa el slide correspondiente para más detalles.';
+                    fbEl.className = 'rdi-feedback rdi-feedback-incorrect';
+                }
+            }
+            const summaryEl = document.getElementById('quiz-summary');
+            summaryEl.textContent = `Puntuación: ${score}/6. ¡Sigue practicando la reflexión emocional!`;
+            summaryEl.hidden = false;
+        }
+
+        function saveReflection() {
+            const text = document.getElementById('reflection-text').value.trim();
+            if (text) {
+                progress.reflections.push(text);
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+                loadReflections();
+                document.getElementById('reflection-text').value = '';
+                alert('Reflexión guardada. Puedes revisarla aquí.');
+            }
+        }
+
+        function loadReflections() {
+            const reflectionsEl = document.getElementById('saved-reflections');
+            reflectionsEl.innerHTML = '<h4>Tus Reflexiones Guardadas:</h4>';
+            progress.reflections.forEach((ref, index) => {
+                reflectionsEl.innerHTML += `<p>${index + 1}. ${ref}</p>`;
+            });
+        }
+
+        // Inicializar
+        changeSlide(0); // Set to slide 1
+        if (progress.slide > 1) currentSlide = progress.slide - 1; // Para navegar al último
+        changeSlide(1);
+        loadReflections();
+    </script>
+</body>
+</html>`
+          ]
+        },
+        // PUNTO 3 — Estudio de caso + formulario para escribir y guardar
+        {
+          id: 'm1a3',
+          type: 'feedbackForm',
+          title: 'Punto 3 · Estudio de caso: Nombrar cambia la historia',
+          description:
+            'Lee el caso y responde en los campos de texto. Usa “Guardar” para almacenar tus respuestas en tu progreso del curso.',
+        },
+
+        // PUNTO 4 — Diario Emocional: Video + Recurso incrustado (misma pantalla)
+        {
+          id: 'm1a4',
+          type: 'iframe',
+          title: 'Punto 4 · Diario Emocional — ¿Qué es y cómo usarlo?',
+          description: 'Mira el video y explora el recurso incrustado (Animindex-basic).',
+          content: [
+            `<!doctype html>
+            <html lang="es">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <style>
+                body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #101021; }
+                .wrap { max-width: 1100px; margin: 0 auto; padding: 12px; }
+                .video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+                .heading { margin: 16px 0 8px; }
+                .badge { display: inline-block; background: #6e4380; color: #fff; font-weight: 800; padding: 10px 14px; border-radius: 10px; }
+                .note { margin: 8px 0 16px; color: #101021; opacity: 0.85; }
+                .embed { width: 100%; height: 1300px; border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+                @media (max-width: 1024px) { .embed { height: 1200px; } }
+                @media (max-width: 640px) { .embed { height: 1100px; } }
+              </style>
+            </head>
+            <body>
+              <div class="wrap">
+                <div class="video">
+                  <iframe src="https://drive.google.com/file/d/1p1mFBU08zTocHveE06feLEY8njPd8Vnn/preview" allow="autoplay; encrypted-media" allowfullscreen title="Diario Emocional — Video"></iframe>
+                </div>
+                <div class="heading"><span class="badge">Recurso Interactivo — Diario Emocional</span></div>
+                <p class="note">Sugerencia de uso: registra activador, emoción (etiqueta precisa), intensidad (0–10), pensamiento principal y acción elegida.</p>
+                <iframe class="embed" src="https://ernessofficial.github.io/Animindex-basic/" title="Animindex-basic — Recurso Incrustado"></iframe>
+              </div>
+            </body>
+            </html>`
+          ],
+          questions: [
+            {
+              question: '¿Qué elementos mínimos conviene registrar en un diario emocional?',
+              options: [
+                { text: 'Activador, emoción, intensidad, pensamiento y acción', feedback: 'Correcto. Facilita la autorregulación.' },
+                { text: 'Solo la emoción', feedback: 'Insuficiente.' },
+                { text: 'Solo el pensamiento', feedback: 'Insuficiente.' },
+                { text: 'Nada, solo reflexionar', feedback: 'Registrar ayuda a aprender de patrones.' },
+              ],
+            },
+            {
+              question: 'Completa: Más granularidad emocional =',
+              options: [
+                { text: 'Más opciones de regulación', feedback: 'Correcto.' },
+                { text: 'Más confusión', feedback: 'Incorrecto.' },
+                { text: 'Menos conciencia', feedback: 'Incorrecto.' },
+                { text: 'Igual que no etiquetar', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Una utilidad del diario emocional es…',
+              options: [
+                { text: 'Detectar patrones y elegir respuestas más conscientes', feedback: 'Correcto.' },
+                { text: 'Aumentar la rumiación', feedback: 'Incorrecto.' },
+                { text: 'Evitar hablar con otros', feedback: 'Incorrecto.' },
+                { text: 'Eliminar emociones “negativas”', feedback: 'No se trata de eliminar, sino de regular.' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // ==========================================================
+    // MÓDULO 2 — NEUROCIENCIA DE LA REGULACIÓN Y CONTROL DE IMPULSOS
+    // (contenido más interactivo, sin repetir recursos previos)
+    // ==========================================================
+    {
+      id: 'm2',
+      title: 'Módulo 2: Neurociencia de la Regulación y Control de Impulsos',
+      activities: [
+        // Punto 1 — Recurso interactivo embebido (HTML+CSS+JS inline)
+        {
+          id: 'm2a1',
+          type: 'iframe',
+          title: 'Punto 1 · Del impulso a la elección (recurso interactivo)',
+          description: 'Interactúa con el ciclo Señal → Pausa → Etiqueta → Elección directamente en esta pantalla.',
+          videoSrc: assetPath('interactive/m2a1-del-impulso-a-la-eleccion.html?v=20251014-1'),
+        },
+        // Punto 2 — Video corto .mp4 de micro‑hábitos (nuevo)
+        {
+          id: 'm2a2',
+          type: 'video',
+          title: 'Punto 2 · Disparadores y Respuestas Regulatorias (video corto)',
+          description: 'Aqui tienes 4 casos comunes y 4 micro-respuestas prácticas para bajar la activación y decidir mejor.',
+          videoSrc: assetPath('videos/microrespuestas-casos.mp4'),
+        },
+        // Punto 3 — Juego de cartas: disparadores vs. respuestas regulatorias
+        {
+          id: 'm2a3',
+          type: 'cardGame',
+          title: 'Punto 3 · Juego: Disparador ↔ Respuesta regulatoria',
+          description: 'Empareja disparadores comunes con micro‑respuestas efectivas.',
+          cards: [
+            { id: 1, matchId: 101, text: 'Correo urgente a última hora', type: 'limiting' },
+            { id: 2, matchId: 102, text: 'Comentario crítico en reunión', type: 'limiting' },
+            { id: 3, matchId: 103, text: 'Notificación constante en el móvil', type: 'limiting' },
+            { id: 4, matchId: 104, text: 'Tráfico/espera inesperada', type: 'limiting' },
+            { id: 101, matchId: 1, text: 'Respiración 2×2×4 + clarificar prioridad', type: 'empowering' },
+            { id: 102, matchId: 2, text: 'Pausa de 10 segundos + parafraseo', type: 'empowering' },
+            { id: 103, matchId: 3, text: 'Silenciar 20 min + lote de respuestas', type: 'empowering' },
+            { id: 104, matchId: 4, text: 'Escaneo corporal + música neutra', type: 'empowering' },
+          ],
+        },
+        // Punto 4 — Audio de práctica (nuevo, distinto al m1)
+        {
+          id: 'm2a4',
+          type: 'audio',
+          title: 'Punto 4 · Pausa fisiológica 2×2×4 (práctica guiada)',
+          description: 'Respira 2 segundos inhalar, 2 sostener, 4 exhalar — 3 ciclos. Relajate y escucha la guía del audio.',
+          audioSrc: assetPath('audios/pausafisiologica-guiada.mp3'),
+        },
+      ],
+    },
+
+    // ==========================================================
+    // MÓDULO 3 — EL ANTÍDOTO: AUTOCOMPASIÓN Y RESILIENCIA
+    // (nuevo contenido interactivo, sin repetir m2)
+    // ==========================================================
+    {
+      id: 'm3',
+      title: 'Módulo 3: El Antídoto: Autocompasión y Resiliencia',
+      activities: [
+        // Punto 1 — Infografía interactiva embebida (srcDoc)
+        {
+          id: 'm3a1',
+          type: 'iframe',
+          title: 'Punto 1 · Autocompasión vs. Permiso — Infografía Interactiva',
+          description: 'Explora los 3 componentes (bondad, humanidad compartida, mindfulness) y desmitifica la autocompasión con una visual interactiva.',
+          content: [
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Autocompasión vs. Permiso – Infografía Interactiva</title>
+              <style>
+                body {
+                  font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+                  margin: 0; padding: 0;
+                  background: linear-gradient(135deg, #f5f7fa, #e4edf5);
+                  color: #333;
+                }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 24px; }
+                .infographic { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+                .card {
+                  background: white; border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+                  padding: 18px; width: 220px; text-align: center; cursor: pointer;
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.15); }
+                .card h3 { color: #2980b9; margin-top: 0; }
+                .card p { font-size: 0.9rem; color: #555; }
+                .card.active { background: #d1ecf1; border: 2px solid #3498db; }
+                .detail-panel {
+                  margin-top: 24px; padding: 20px; background: white; border-radius: 10px;
+                  box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: none;
+                }
+                .detail-panel h2 { color: #2c3e50; }
+                .myth-buster { background: #fff9e6; padding: 15px; border-radius: 8px; margin-top: 16px; border-left: 4px solid #f39c12; }
+                .myth-buster h3 { color: #c0392b; margin: 0 0 8px; }
+                button { background: #3498db; color: white; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 12px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Autocompasión vs. Permiso</h1>
+                <p class="subtitle">Una mirada profunda a la bondad, humanidad compartida, mindfulness y el mito de “ser blando”</p>
+                <div class="infographic">
+                  <div class="card" data-id="bondad">
+                    <h3>1. Bondad Hacia Uno Mismo</h3>
+                    <p>Tratarte con amabilidad, especialmente en momentos difíciles.</p>
+                  </div>
+                  <div class="card" data-id="humanidad">
+                    <h3>2. Humanidad Compartida</h3>
+                    <p>Reconocer que todos somos imperfectos y pasamos por dificultades.</p>
+                  </div>
+                  <div class="card" data-id="mindfulness">
+                    <h3>3. Mindfulness</h3>
+                    <p>Observar tus emociones sin juzgarlas ni reprimir.</p>
+                  </div>
+                  <div class="card" data-id="mito">
+                    <h3>4. Desmitificar</h3>
+                    <p>¿Ser compasivo es ser débil? ¡No!</p>
+                  </div>
+                </div>
+                <div class="detail-panel" id="detail-panel">
+                  <h2 id="detail-title">Detalle</h2>
+                  <p id="detail-content">Haz clic en una sección para ver más información.</p>
+                  <div class="myth-buster" id="myth-content" style="display:none;">
+                    <h3>❌ Mito: "La autocompasión es permisividad"</h3>
+                    <p>✔️ Realidad: La autocompasión fomenta la responsabilidad, no la evasión. Te permite aprender sin castigarte.</p>
+                  </div>
+                </div>
+                <div style="height: 28px"></div>
+                <h2 style="text-align:center;color:#2c3e50;font-size:1.4rem;margin:16px 0">Reflexionemos sobre la Validacion Emocional y Los Límites con Critero</h2>
+                <div class="vlc">
+                  <style>
+                    .vlc .container { max-width: 900px; margin: 0 auto; padding: 0; }
+                    .vlc .section { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+                    .vlc .interactive-card { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #3498db; }
+                    .vlc .btn { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+                    .vlc .btn:hover { background: #2980b9; }
+                    .vlc .scenario { margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; }
+                    .vlc .response-box { margin-top: 15px; display: none; }
+                    .vlc .feedback { padding: 10px; border-radius: 5px; margin-top: 10px; display: none; }
+                    .vlc .positive { background: #e8f5e9; color: #2e7d32; }
+                    .vlc .negative { background: #ffebee; color: #c62828; }
+                    .vlc .reflection { background: #fff8e1; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #f39c12; }
+                  </style>
+                  <div class="container">
+                    <div class="section">
+                      <h2>¿Qué es la validación emocional?</h2>
+                      <p>Reconocer, aceptar y comprender las emociones de otra persona sin necesariamente estar de acuerdo con su comportamiento.</p>
+                      <div class="interactive-card">
+                        <p><strong>Ejemplo:</strong> “Puedo ver que estás muy molesto con lo que pasó. Eso debe haber sido difícil.”</p>
+                        <button class="btn" onclick="document.getElementById('vlc-validacion').style.display = (document.getElementById('vlc-validacion').style.display==='block'?'none':'block')">Reflexiona</button>
+                        <div class="reflection" id="vlc-validacion" style="display:none;">
+                          <p>¿Cómo te sentirías si alguien te validara de esta manera? ¿Qué diferencia hay con que te digan: “No deberías sentirte así”?</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>¿Y los límites con criterio?</h2>
+                      <p>Establecer reglas claras y respetuosas que protejan tu bienestar y el de los demás, sin anular la emoción ajena.</p>
+                      <div class="interactive-card">
+                        <p><strong>Ejemplo:</strong> “Entiendo que estés molesto, pero no puedo seguir hablando si hay gritos.”</p>
+                        <button class="btn" onclick="document.getElementById('vlc-limites').style.display = (document.getElementById('vlc-limites').style.display==='block'?'none':'block')">Reflexiona</button>
+                        <div class="reflection" id="vlc-limites" style="display:none;">
+                          <p>¿Qué pasa cuando no pones límites? ¿Y cuando los pones de forma rígida?</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>Escenario práctico</h2>
+                      <div class="scenario">
+                        <p>Tu amigo/a viene a contarte que se siente frustrado/a porque su pareja no lo/la escucha. Dice que está pensando en terminar la relación.</p>
+                        <button class="btn" onclick="document.getElementById('vlc-response-box').style.display='block'">¿Cómo respondes?</button>
+                        <div class="response-box" id="vlc-response-box">
+                          <button class="btn" data-response="validar">Validar y preguntar: “Eso debe ser frustrante. ¿Qué necesitas?”</button>
+                          <button class="btn" data-response="condonar">Decir: “Sí, tu pareja está mal, haz lo que tengas que hacer.”</button>
+                          <button class="btn" data-response="limitar">Decir: “Te entiendo, pero no decidas nada hoy. Piénsalo bien.”</button>
+                        </div>
+                        <div class="feedback" id="vlc-scenario-feedback"></div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h2>Reflexión final</h2>
+                      <div class="reflection">
+                        <p>La validación emocional no significa que estés de acuerdo con todo. Es reconocer la emoción de otro como válida. Los límites con criterio no son castigos, sino cuidado mutuo.</p>
+                        <p>¿Qué límites has puesto últimamente sin invalidar emociones? ¿Qué validaciones has dado que no significaron permisividad?</p>
+                      </div>
+                    </div>
+                  </div>
+                  <script>
+                    document.querySelectorAll('.vlc [data-response]').forEach(btn => {
+                      btn.addEventListener('click', () => {
+                        const response = btn.getAttribute('data-response');
+                        const feedback = document.getElementById('vlc-scenario-feedback');
+                        if(response==='validar'){
+                          feedback.innerHTML = '✅ ¡Excelente! Validaste la emoción y mostraste curiosidad. Esto fortalece la relación y permite explorar soluciones juntos.';
+                          feedback.className = 'feedback positive';
+                        } else if(response==='condonar'){
+                          feedback.innerHTML = '❌ Esta respuesta puede invalidar la posibilidad de reflexión o crecimiento. ¿Estás apoyando el comportamiento o la emoción?';
+                          feedback.className = 'feedback negative';
+                        } else {
+                          feedback.innerHTML = '🟡 Esta respuesta es útil si hay riesgo de decisiones impulsivas. Pero ¿estás validando la emoción? Puedes hacer ambas cosas.';
+                          feedback.className = 'feedback negative';
+                        }
+                        feedback.style.display = 'block';
+                      });
+                    });
+                  </script>
+                </div>
+              </div>
+              <script>
+                document.querySelectorAll('.card').forEach(card => {
+                  card.addEventListener('click', () => {
+                    const id = card.dataset.id;
+                    const panel = document.getElementById('detail-panel');
+                    const title = document.getElementById('detail-title');
+                    const content = document.getElementById('detail-content');
+                    const myth = document.getElementById('myth-content');
+                    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    switch(id) {
+                      case 'bondad':
+                        title.textContent = 'Bondad Hacia Uno Mismo';
+                        content.innerHTML = '<p>Implica tratar tu sufrimiento con amabilidad, en lugar de con dureza o autocrítica.</p><p>¿Cómo? Reconoce tus errores sin castigarte. Pregúntate: “¿Cómo me gustaría que me tratara un amigo en esta situación?”</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'humanidad':
+                        title.textContent = 'Humanidad Compartida';
+                        content.innerHTML = '<p>Te ayuda a no sentirte aislado. Todos cometemos errores. Todos sufrimos.</p><p>Es una forma de conexión humana. No estás solo.</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'mindfulness':
+                        title.textContent = 'Mindfulness';
+                        content.innerHTML = '<p>Observa tus emociones sin juzgarlas ni reprimir. No te sumerjas ni te alejes de ellas.</p><p>Permite que estén, sin reaccionar automáticamente.</p>';
+                        myth.style.display = 'none';
+                        break;
+                      case 'mito':
+                        title.textContent = 'Desmitificar la Autocompasión';
+                        content.innerHTML = '<p>La autocompasión no significa consentir malos hábitos. Es una forma de motivación interna basada en el respeto.</p>';
+                        myth.style.display = 'block';
+                        break;
+                    }
+                    panel.style.display = 'block';
+                  });
+                });
+              </script>
+            </body>
+            </html>`
+          ],
+        },
+        // Punto 2 — Juego de cartas: autocrítica ↔ reencuadre compasivo
+        {
+          id: 'm3a2',
+          type: 'cardGame',
+          title: 'Punto 2 · Juego: De la autocrítica al cuidado efectivo',
+          description: 'Empareja frases de autocrítica con respuestas compasivas y accionables.',
+          cards: [
+            { id: 1, matchId: 201, text: '“Siempre arruino todo”', type: 'limiting' },
+            { id: 2, matchId: 202, text: '“No debería sentirme así”', type: 'limiting' },
+            { id: 3, matchId: 203, text: '“Si descanso, soy flojo/a”', type: 'limiting' },
+            { id: 201, matchId: 1, text: '“Estoy aprendiendo; ¿qué micro‑paso ahora?”', type: 'empowering' },
+            { id: 202, matchId: 2, text: '“Es humano sentir; respiro y nombro lo que hay”', type: 'empowering' },
+            { id: 203, matchId: 3, text: '“Descansar repone recursos; agendo 10 min”', type: 'empowering' },
+          ],
+        },
+        // Punto 3 — Audio nuevo: “Pausa de amabilidad activa”
+        {
+          id: 'm3a3',
+          type: 'audio',
+          title: 'Punto 3 · Pausa de amabilidad activa (3 min)',
+          description: 'Práctica breve para suavizar la autocrítica y elegir una acción amable. (NOTA: Relajate y escucha el audio.)',
+          audioSrc: assetPath('audios/pausa-amabilidad-activa.mp3'),
+        },
+        // Punto 4 — Infografía interactiva: Fortalece tu Resiliencia (embebida)
+        {
+          id: 'm3a4',
+          type: 'iframe',
+          title: 'Punto 4 · Fortalece Tu Resiliencia — Infografía Interactiva',
+          description: 'Conoce los pilares prácticos de la resiliencia y define acciones concretas desde la visual interactiva.',
+          content: [
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Fortalece Tu Resiliencia – Infografía Interactiva</title>
+              <style>
+                body { font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; padding: 0; background: linear-gradient(135deg, #e0f7fa, #f5f5f5); color: #333; }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.4rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 26px; }
+                .resiliencia-tree { width: 100%; height: 300px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f0f8ff" width="100" height="100"/><circle fill="%234CAF50" cx="50" cy="50" r="30"/></svg>'); background-size: cover; margin: 20px 0; position: relative; display: flex; justify-content: center; align-items: center; }
+                .resiliencia-tree img { width: 150px; height: auto; }
+                .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+                .pilar { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease; }
+                .pilar:hover { transform: scale(1.05); }
+                .pilar h3 { color: #2980b9; margin-top: 0; }
+                .detalle-pilar { margin-top: 20px; padding: 15px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: none; }
+                .detalle-pilar h2 { color: #2c3e50; }
+                .accion { margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px; font-style: italic; }
+                button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>Fortalece Tu Resiliencia</h1>
+                <p class="subtitle">Conoce los pilares que te ayudan a recuperarte y crecer ante la adversidad</p>
+                <div class="resiliencia-tree">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nIzQ0QzVFNicvPjx0ZXh0IHg9JzUwJyB5PSc1NScgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnPkI8L3RleHQ+PC9zdmc=" alt="Árbol de resiliencia">
+                </div>
+                <div class="pilares">
+                  <div class="pilar" data-id="conexion"><h3>Conexión con Uno Mismo</h3><p>Autoconocimiento y regulación emocional</p></div>
+                  <div class="pilar" data-id="apoyo"><h3>Red de Apoyo</h3><p>Conexión con otros y apoyo social</p></div>
+                  <div class="pilar" data-id="adaptabilidad"><h3>Adaptabilidad</h3><p>Flexibilidad ante el cambio</p></div>
+                  <div class="pilar" data-id="soluciones"><h3>Enfoque en Soluciones</h3><p>Pensamiento práctico y proactivo</p></div>
+                  <div class="pilar" data-id="autoeficacia"><h3>Autoeficacia</h3><p>Confianza en tus propias habilidades</p></div>
+                  <div class="pilar" data-id="optimismo"><h3>Optimismo Realista</h3><p>Esperanza con base en la realidad</p></div>
+                </div>
+                <div class="detalle-pilar" id="detalle-pilar">
+                  <h2 id="titulo-pilar">Haz clic en un pilar</h2>
+                  <p id="descripcion-pilar">Selecciona un pilar para ver su descripción y una acción práctica.</p>
+                  <div class="accion" id="accion-pilar"></div>
+                </div>
+              </div>
+              <script>
+                const pilaresData = {
+                  conexion: { titulo: 'Conexión con Uno Mismo', descripcion: 'Conocer tus emociones, fortalezas y límites te permite responder con claridad ante la adversidad.', accion: 'Toma 5 minutos hoy para escribir: ¿Qué estoy sintiendo ahora? ¿Qué necesito?' },
+                  apoyo: { titulo: 'Red de Apoyo', descripcion: 'Contar con personas de confianza fortalece tu capacidad de afrontamiento.', accion: 'Habla con alguien en quien confíes. Comparte lo que estás viviendo.' },
+                  adaptabilidad: { titulo: 'Adaptabilidad', descripcion: 'Aceptar el cambio y ajustarte a nuevas circunstancias es clave para la resiliencia.', accion: 'Reflexiona: ¿Qué puedo aprender de esta situación? ¿Cómo puedo adaptarme?' },
+                  soluciones: { titulo: 'Enfoque en Soluciones', descripcion: 'Dirigir la atención a lo que puedes hacer, no solo en lo que no puedes.', accion: 'Escribe una lista con 3 acciones concretas que puedes tomar hoy para mejorar tu situación.' },
+                  autoeficacia: { titulo: 'Autoeficacia', descripcion: 'Creer en tu capacidad para superar desafíos fortalece tu confianza.', accion: 'Recuerda una situación pasada en la que superaste un reto. ¿Qué habilidades usaste?' },
+                  optimismo: { titulo: 'Optimismo Realista', descripcion: 'Mantener la esperanza sin ignorar la realidad te permite seguir adelante.', accion: 'Busca una luz pequeña en tu situación actual. Puede ser una persona, un valor o una oportunidad.' }
+                };
+                document.querySelectorAll('.pilar').forEach(pilar => {
+                  pilar.addEventListener('click', () => {
+                    const id = pilar.dataset.id;
+                    const detalle = document.getElementById('detalle-pilar');
+                    const titulo = document.getElementById('titulo-pilar');
+                    const descripcion = document.getElementById('descripcion-pilar');
+                    const accion = document.getElementById('accion-pilar');
+                    const data = pilaresData[id];
+                    titulo.textContent = data.titulo;
+                    descripcion.textContent = data.descripcion;
+                    accion.textContent = data.accion;
+                    detalle.style.display = 'block';
+                  });
+                });
+              </script>
+            </body>
+            </html>`
+          ]
+        },
+      ],
+    },
+
+    // ==========================================================
+    // MÓDULO 4 — EMPATÍA PARA RELACIONES CON CRITERIO
+    // (nuevo y sin repetir recursos tal cual; adaptado a la temática)
+    // ==========================================================
+    {
+      id: 'm4',
+      title: 'Módulo 4: Empatía para Relaciones con Criterio',
+      activities: [
+        // Punto 1 — Juego didáctico de Escucha Activa y Curiosidad (embebido)
+        {
+          id: 'm4a1',
+          type: 'iframe',
+          title: 'Punto 1 · Escucha Activa y Curiosidad — Juego Didáctico',
+          description: 'Reflexiona sobre empatía y hábitos saludables con un juego interactivo.',
+          content: [
+            `<!DOCTYPE html>
+            <html lang="es">
+            <head>
+              <meta charset="UTF-8">
+              <title>Escucha Activa y Curiosidad – Juego Didáctico</title>
+              <style>
+                body { font-family: 'Segoe UI', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; padding: 0; background: linear-gradient(135deg, #e0f7fa, #f5f5f5); color: #333; }
+                .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+                h1 { text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 10px; }
+                .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 24px; }
+                .intro { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 24px; }
+                .game-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+                .character { display: flex; align-items: center; margin: 20px 0; }
+                .avatar { width: 60px; height: 60px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; margin-right: 15px; }
+                .dialogue { background: #f0f8ff; padding: 15px; border-radius: 8px; flex-grow: 1; }
+                .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+                .option-btn { background: #003366; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-align: left; font-size: 1rem; }
+                .option-btn:hover { background: #004080; }
+                .feedback { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+                .positive { background: #e8f5e9; color: #2e7d32; }
+                .negative { background: #ffebee; color: #c62828; }
+                button { background: #3498db; color: white; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+                button:hover { background: #2980b9; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <div class="video" style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.15); margin-bottom: 24px;">
+                  <video controls style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;">
+                    <source src="/videos/escucha-activa-recurso.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <h1>Escucha Activa y Curiosidad</h1>
+                <p class="subtitle">Un juego para reflexionar sobre la empatía y los hábitos saludables</p>
+                <div class="intro">
+                  <h2>¿Por qué es importante la empatía?</h2>
+                  <p>La empatía, especialmente a través de la escucha activa y la curiosidad genuina, fortalece nuestras relaciones y mejora nuestro bienestar emocional. Escuchar sin juzgar, preguntar con interés y prestar atención plena son hábitos que nutren la conexión humana. Este juego te invita a reflexionar sobre cómo puedes aplicar estos hábitos en tu vida diaria.</p>
+                </div>
+                <div class="game-container">
+                  <h2 id="scene-title"></h2>
+                  <div class="character">
+                    <div id="character-avatar" class="avatar"></div>
+                    <div id="character-dialogue" class="dialogue"></div>
+                  </div>
+                  <div id="options-container" class="options">
+                  </div>
+                  <div class="feedback" id="feedback">
+                    <p id="feedback-text"></p>
+                    <button id="next-btn" style="display:none;">Siguiente escena</button>
+                  </div>
+                </div>
+              </div>
+              <script>
+                const scenes = [
+                  {
+                    title: "Escena A: Tu amigo/a comparte un problema",
+                    avatar: "A",
+                    dialogue: "Últimamente me siento muy solo/a y no sé cómo manejarlo. Siento que nadie me entiende.",
+                    options: [
+                      { text: "Escuchar con atención y preguntar: ¿Qué te gustaría que hiciéramos?", feedback: "✅ ¡Buena elección! Mostrar curiosidad genuina y escuchar activamente fortalece la conexión y el bienestar emocional. Ayudas a tu amigo/a a sentirse escuchado/a y comprendido/a.", level: "Alto" },
+                      { text: "Decir: “Deberías salir más, eso te ayudará”.", feedback: "❌ Esta respuesta puede hacer que tu amigo/a se sienta juzgado/a o incomprendido/a. Intenta escuchar antes de dar consejos.", level: "Bajo" },
+                      { text: "Cambiar de tema rápidamente.", feedback: "❌ Ignorar el problema puede alejar la relación. Mostrar interés genuino es clave para el bienestar emocional de ambos.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha B: Tu pareja está visiblemente molesta",
+                    avatar: "B",
+                    dialogue: "No puedo creer lo que acaba de pasar. Mi jefe me ha criticado injustamente delante de todo el equipo por un error menor. Estoy furioso/a.",
+                    options: [
+                      { text: "¿Qué necesitas de mí ahora? ¿Quieres desahogarte o que busquemos una solución?", feedback: "Alto: Demuestra escucha activa al pausar y reconocer el estado emocional. Muestra curiosidad empática al preguntar directamente por las necesidades de la otra persona, priorizando su bienestar emocional sobre una solución inmediata. Este es un hábito saludable que valida los sentimientos.", level: "Alto" },
+                      { text: "Relájate, no es para tanto. Ya se te pasará, siempre exagera las cosas.", feedback: "Bajo: Invalida el sentimiento de la pareja y minimiza su experiencia. Esto es una barrera para la empatía y un ejemplo de no escucha. Daña la confianza y la seguridad en la relación. Hábito no saludable.", level: "Bajo" },
+                      { text: "Bueno, ¿qué hacemos de cenar? Hablemos de otra cosa.", feedback: "Bajo: Evita el conflicto y la emoción, lo que es un bloqueo a la conexión emocional y la escucha activa. Niega la oportunidad de apoyo y curiosidad genuina sobre la situación. Hábito no saludable de evitación.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha C: Un/a compañero/a de trabajo te comenta",
+                    avatar: "C",
+                    dialogue: "He decidido empezar a estudiar un curso a distancia por las noches. Sé que será difícil equilibrarlo con el trabajo, pero estoy muy ilusionado/a.",
+                    options: [
+                      { text: "¿Qué te motivó a tomar esta decisión? Cuéntame más sobre el curso y cómo te sientes al respecto.", feedback: "Alto: Muestra curiosidad genuina e interés en el proceso de pensamiento y los sentimientos del compañero/a. Refuerza la escucha activa y la empatía al enfocarse en su motivación e ilusión. Fomenta un hábito saludable de apoyo a los proyectos personales.", level: "Alto" },
+                      { text: "Yo no lo haría, es demasiada carga. Deberías enfocarte solo en el trabajo.", feedback: "Bajo: Ofrece un juicio o consejo no solicitado basado en la propia perspectiva, sin empatía por la ilusión o esfuerzo del otro. Bloquea la curiosidad y la conexión al desanimar. Hábito no saludable de crítica.", level: "Bajo" },
+                      { text: "Genial. Hablando de estudios, ¿sabes si tenemos que entregar el informe mañana?", feedback: "Bajo: Una respuesta superficial que cambia el foco al trabajo inmediatamente, mostrando falta de escucha y desinterés por la vida personal del compañero/a. Hábito no saludable de priorizar la tarea sobre la relación.", level: "Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha D: Hablando con un/a familiar estresado/a",
+                    avatar: "D",
+                    dialogue: "Ya no sé qué hacer con tantas responsabilidades. Siento que estoy fallándole a todo el mundo y que nunca voy a salir de este agujero.",
+                    options: [
+                      { text: "Parece que te sientes abrumado/a y con mucha presión, ¿verdad? ¿Hay algo que te agobia más en este momento?", feedback: "Alto: Emplea escucha activa a través de la técnica de reflejo (validación emocional), lo cual es muy empático. La pregunta posterior abre un espacio a la curiosidad profunda para entender la raíz del problema. Hábito saludable de validación y profundización.", level: "Alto" },
+                      { text: "Anímate, solo tienes que organizarte mejor. ¡No seas tan dramático/a!", feedback: "Bajo: Minimiza y cuestiona la intensidad de la emoción, lo cual es opuesto a la empatía. Ignora la necesidad de ser escuchado/a y ofrece una solución simplista. Hábito no saludable que genera distancia emocional.", level: "Bajo" },
+                      { text: "Ay, a mí me pasó algo parecido cuando...", feedback: "Medio/Bajo: Aunque busca conectar, desvía el foco de la otra persona a ti mismo/a, interrumpiendo la escucha activa.", level: "Medio/Bajo" }
+                    ]
+                  },
+                  {
+                    title: "Ficha E: Un/a amigo/a con una decisión importante",
+                    avatar: "E",
+                    dialogue: "Voy a dejar mi trabajo para empezar mi propio negocio, pero la verdad es que estoy aterrado/a. Es un salto de fe muy grande.",
+                    options: [
+                      { text: "¿Qué es lo que más te asusta y qué es lo que más te ilusiona de este nuevo camino?", feedback: "Alto: Muestra empatía al reconocer la emoción dual (miedo e ilusión). El refuerzo positivo a la valentía es un hábito saludable de apoyo. La curiosidad se centra en las emociones y expectativas del amigo/a, fomentando la apertura.", level: "Alto" },
+                      { text: "Estás loco/a. Eso es muy arriesgado. ¿Estás seguro/a de que quieres hipotecar tu futuro así?", feedback: "Bajo: Genera miedo e inseguridad en lugar de apoyo. Es una respuesta de juicio que anula la empatía y la escucha. El tono es de reproche, lo que es un hábito no saludable de crítica destructiva.", level: "Bajo" },
+                      { text: "¡Bueno, si quiebras, siempre puedes volver a vivir en casa de tus padres! ¡Jaja!", feedback: "Bajo: Intenta ayudar, pero evita abordar la emoción real (el miedo), demostrando falta de empatía por la seriedad del momento. Bloquea la escucha profunda al usar el humor como distracción. Hábito no saludable de trivializar.", level: "Bajo" }
+                    ]
+                  }
+                ];
+
+                let currentSceneIndex = 0;
+
+                const sceneTitleEl = document.getElementById('scene-title');
+                const avatarEl = document.getElementById('character-avatar');
+                const dialogueEl = document.getElementById('character-dialogue');
+                const optionsContainerEl = document.getElementById('options-container');
+                const feedbackEl = document.getElementById('feedback');
+                const feedbackTextEl = document.getElementById('feedback-text');
+                const nextBtn = document.getElementById('next-btn');
+
+                function renderScene(index) {
+                  const scene = scenes[index];
+                  sceneTitleEl.textContent = scene.title;
+                  avatarEl.textContent = scene.avatar;
+                  dialogueEl.textContent = scene.dialogue;
+                  
+                  optionsContainerEl.innerHTML = '';
+                  scene.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option.text;
+                    button.addEventListener('click', () => {
+                      feedbackTextEl.innerHTML = option.feedback;
+                      if (option.level === 'Alto') {
+                        feedbackEl.className = 'feedback positive';
+                      } else {
+                        feedbackEl.className = 'feedback negative';
+                      }
+                      feedbackEl.style.display = 'block';
+                      nextBtn.style.display = 'block';
+                    });
+                    optionsContainerEl.appendChild(button);
+                  });
+
+                  feedbackEl.style.display = 'none';
+                  nextBtn.style.display = 'none';
+                }
+
+                nextBtn.addEventListener('click', () => {
+                  currentSceneIndex++;
+                  if (currentSceneIndex < scenes.length) {
+                    renderScene(currentSceneIndex);
+                  } else {
+                    alert('¡Has completado todas las escenas! Gracias por participar. Recuerda: escuchar con curiosidad genuina es un hábito saludable que fortalece el bienestar emocional.');
+                    currentSceneIndex = 0; // Optional: reset to play again
+                    renderScene(currentSceneIndex);
+                  }
+                });
+
+                renderScene(currentSceneIndex);
+              </script>
+            </body>
+            </html>`
+          ],
+        },
+        // Punto 2 — Audio: “Escucha atenta 60‑60” (novedad)
+        {
+          id: 'm4a2',
+          type: 'audio',
+          title: 'Punto 2 · Práctica: Calibra tu escucha activa',
+          description: 'Solo concentrate en escuchar el audio y reconocer los sonidos. Identifica cuando el sonido cambia de zona e intensidad.',
+          audioSrc: assetPath('audios/escucha-activa-calibrado.mp3'),
+        },
+        // Punto 3 — Juego de cartas: necesidad ↔ petición clara
+        {
+          id: 'm4a3',
+          type: 'cardGame',
+          title: 'Punto 3 · Juego: De la necesidad a la petición',
+          description: 'Empareja necesidades frecuentes con una petición concreta y respetuosa.',
+          cards: [
+            { id: 1, matchId: 301, text: 'Necesito claridad en tareas', type: 'limiting' },
+            { id: 2, matchId: 302, text: 'Necesito tiempo para concentrarme', type: 'limiting' },
+            { id: 3, matchId: 303, text: 'Necesito apoyo emocional', type: 'limiting' },
+            { id: 301, matchId: 1, text: '“¿Podemos acordar checklist antes del viernes?”', type: 'empowering' },
+            { id: 302, matchId: 2, text: '“¿Podemos bloquear 2 h sin reuniones?”', type: 'empowering' },
+            { id: 303, matchId: 3, text: '“¿Podrías escucharme 10 min sin aconsejar?”', type: 'empowering' },
+          ],
+        },
+        // Punto 4 — Reto guiado (distinto al del m3)
+        {
+          id: 'm4a4',
+          type: 'finalChallenge',
+          title: 'Punto 4 · Reto: Conversación con criterio',
+          description:
+            'Elige un tema real y escribe: (1) Observación, (2) Emoción, (3) Necesidad, (4) Petición clara. Practícalo con alguien de confianza.',
+        },
+      ],
+    },
+
+    // ==========================================================
+    // QUIZ FINAL — Repaso de los 4 módulos
+    // ==========================================================
+    {
+      id: 'm5',
+      title: 'Módulo 5: Quiz Final Integrador',
+      activities: [
+        {
+          id: 'm5a1',
+          type: 'quiz',
+          title: 'Evaluación final — 12 preguntas',
+          description:
+            'Repaso reflexivo de los puntos más relevantes de los cuatro módulos. Lee con calma y elige la mejor respuesta.',
+          questions: [
+            {
+              question: 'Etiquetar con precisión una emoción favorece…',
+              options: [
+                { text: 'La autorregulación y la toma de perspectiva', feedback: 'Correcto.' },
+                { text: 'La supresión emocional', feedback: 'Incorrecto.' },
+                { text: 'Respuestas impulsivas', feedback: 'Incorrecto.' },
+                { text: 'Desconexión del cuerpo', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Indica la tríada de la autocompasión:',
+              options: [
+                { text: 'Bondad hacia uno mismo, humanidad compartida, mindfulness', feedback: 'Correcto.' },
+                { text: 'Autoindulgencia, aislamiento, distracción', feedback: 'Incorrecto.' },
+                { text: 'Autoestima, comparación, exigencia', feedback: 'Incorrecto.' },
+                { text: 'Motivación, ambición, resiliencia', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Un micro‑hábito eficaz para frenar el impulso es…',
+              options: [
+                { text: 'Respiración 2×2×4 con pausa atencional', feedback: 'Correcto.' },
+                { text: 'Responder inmediatamente', feedback: 'Incorrecto.' },
+                { text: 'Rumiación prolongada', feedback: 'Incorrecto.' },
+                { text: 'Aumentar el tono de voz', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: '¿Cuál es un componente conductual de la emoción?',
+              options: [
+                { text: 'Lenguaje corporal y acciones observables', feedback: 'Correcto.' },
+                { text: 'Cambios hormonales', feedback: 'Fisiológico.' },
+                { text: 'Evaluación cognitiva', feedback: 'Cognitivo.' },
+                { text: 'Memoria autobiográfica', feedback: 'Relacionado, no conductual.' },
+              ],
+            },
+            {
+              question: 'La empatía con criterio implica…',
+              options: [
+                { text: 'Comprender y a la vez cuidar el propio límite', feedback: 'Correcto.' },
+                { text: 'Decir a todo que sí', feedback: 'Incorrecto.' },
+                { text: 'Evitar expresar necesidades', feedback: 'Incorrecto.' },
+                { text: 'Juzgar rápidamente', feedback: 'Incorrecto.' },
+              ],
+            },
+            {
+              question: 'Para registrar intensidad emocional puedes usar…',
+              options: [
+                { text: 'Escala de 0 a 10', feedback: 'Correcto.' },
+                { text: 'Solo palabras sueltas', feedback: 'Menos preciso.' },
+                { text: 'Colores sin referencia', feedback: 'Menos granular.' },
+                { text: 'Ningún registro', feedback: 'No ayuda a aprender.' },
+              ],
+            },
+            {
+              question: 'En el caso de María, una acción alineada con “miedo a fallar” sería…',
+              options: [
+                { text: 'Pedir feedback y clarificar expectativas', feedback: 'Correcto.' },
+                { text: 'Trabajar sin pausas', feedback: 'Riesgo de agotamiento.' },
+                { text: 'Evitar reuniones', feedback: 'No resuelve.' },
+                { text: 'Culpabilizar a otros', feedback: 'No ayuda.' },
+              ],
+            },
+            {
+              question: 'Resiliencia cotidiana se construye con…',
+              options: [
+                { text: 'Pequeñas acciones repetidas y apoyo', feedback: 'Correcto.' },
+                { text: 'Solo fuerza de voluntad', feedback: 'Incompleto.' },
+                { text: 'Evitar sentir', feedback: 'Incorrecto.' },
+                { text: 'Compararte constantemente', feedback: 'Contraproducente.' },
+              ],
+            },
+            {
+              question: 'La corteza prefrontal ayuda principalmente a…',
+              options: [
+                { text: 'Planificar y frenar impulsos', feedback: 'Correcto.' },
+                { text: 'Aumentar la reactividad', feedback: 'Incorrecto.' },
+                { text: 'Detectar amenaza primaria', feedback: 'Más propio de amígdala.' },
+                { text: 'Regular la temperatura', feedback: 'No es el foco.' },
+              ],
+            },
+            {
+              question: 'Una técnica de comunicación con criterio es…',
+              options: [
+                { text: 'Observar, nombrar, pedir, acordar', feedback: 'Correcto.' },
+                { text: 'Interrumpir para corregir', feedback: 'Contraproducente.' },
+                { text: 'Generalizar (“siempre”, “nunca”)', feedback: 'Escala el conflicto.' },
+                { text: 'Evitar decir cómo me siento', feedback: 'Reduce comprensión.' },
+              ],
+            },
+            {
+              question: 'Autocompasión en momentos de error significa…',
+              options: [
+                { text: 'Tratarte con amabilidad y aprender', feedback: 'Correcto.' },
+                { text: 'Negar lo ocurrido', feedback: 'Incorrecto.' },
+                { text: 'Castigarte para mejorar', feedback: 'No eficaz.' },
+                { text: 'Culpar a otros', feedback: 'No asume responsabilidad.' },
+              ],
+            },
+            {
+              question: 'Para gestionar una reacción impulsiva, lo primero es…',
+              options: [
+                { text: 'Pausar y volver al cuerpo', feedback: 'Correcto. Luego decide.' },
+                { text: 'Responder rápido', feedback: 'Impulsivo.' },
+                { text: 'Justificarme', feedback: 'No ayuda.' },
+                { text: 'Buscar culpables', feedback: 'No regula.' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export default course;
