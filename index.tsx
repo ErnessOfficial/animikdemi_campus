@@ -30,7 +30,7 @@ root.render(
       clientId={kinDeClientId}
       domain={kinDeDomain}
       logoutUri={siteBase}
-      redirectUri={`${siteBase}/callback`}
+      redirectUri={siteBase}
       useInsecureForRefreshToken={import.meta.env.DEV}
     >
       <App />
