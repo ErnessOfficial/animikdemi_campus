@@ -257,8 +257,8 @@ export const course: Course = {
           id: 'm2a4',
           type: 'audio',
           title: 'Punto 4 · Pausa fisiológica 2×2×4 (práctica guiada)',
-          description: 'Respira 2 segundos inhalar, 2 sostener, 4 exhalar — 3 ciclos. (NOTA: El archivo de audio original no se encontró. Se utiliza un audio de marcador de posición.)',
-          audioSrc: assetPath('audios/meditacion.mp3'),
+          description: 'Respira 2 segundos inhalar, 2 sostener, 4 exhalar — 3 ciclos. Relajate y escucha la guía del audio.',
+          audioSrc: assetPath('audios/pausafisiologica-guiada.mp3'),
         },
       ],
     },
@@ -485,8 +485,8 @@ export const course: Course = {
           id: 'm3a3',
           type: 'audio',
           title: 'Punto 3 · Pausa de amabilidad activa (3 min)',
-          description: 'Práctica breve para suavizar la autocrítica y elegir una acción amable. (NOTA: El archivo de audio original no se encontró. Se utiliza un audio de marcador de posición.)',
-          audioSrc: assetPath('audios/meditacion.mp3'),
+          description: 'Práctica breve para suavizar la autocrítica y elegir una acción amable. (NOTA: Relajate y escucha el audio.)',
+          audioSrc: assetPath('audios/pausa-amabilidad-activa.mp3'),
         },
         // Punto 4 — Infografía interactiva: Fortalece tu Resiliencia (embebida)
         {
@@ -751,9 +751,9 @@ export const course: Course = {
         {
           id: 'm4a2',
           type: 'audio',
-          title: 'Punto 2 · Práctica: Escucha atenta 60‑60',
-          description: '60 segundos escuchas, 60 segundos sintetizas; repite 2 rondas. (NOTA: El archivo de audio original no se encontró. Se utiliza un audio de marcador de posición.)',
-          audioSrc: assetPath('audios/meditacion.mp3'),
+          title: 'Punto 2 · Práctica: Calibra tu escucha activa',
+          description: 'Solo concentrate en escuchar el audio y reconocer los sonidos. Identifica cuando el sonido cambia de zona e intensidad.',
+          audioSrc: assetPath('audios/escucha-activa-calibrado.mp3'),
         },
         // Punto 3 — Juego de cartas: necesidad ↔ petición clara
         {

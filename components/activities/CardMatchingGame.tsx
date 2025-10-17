@@ -27,7 +27,7 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
   }, [initialCards]);
 
   const handleClick = (index: number) => {
-    if (disabled || flipped.includes(index) || solved.includes(cards[index].matchId)) {
+    if (disabled || flipped.includes(index) || solved.includes(cards[index].id)) {
       return;
     }
 
@@ -37,8 +37,8 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
     if (newFlipped.length === 2) {
       setDisabled(true);
       const [firstIndex, secondIndex] = newFlipped;
-      if (cards[firstIndex].matchId === cards[secondIndex].matchId) {
-        setSolved(prev => [...prev, cards[firstIndex].matchId]);
+      if (cards[firstIndex].matchId === cards[secondIndex].id || cards[firstIndex].id === cards[secondIndex].matchId) {
+        setSolved(prev => [...prev, cards[firstIndex].id, cards[secondIndex].id]);
         setFlipped([]);
         setDisabled(false);
       } else {
@@ -50,16 +50,18 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
     }
   };
   
-  const allSolved = solved.length === initialCards.length / 2;
+  const allSolved = solved.length === initialCards.length;
   useEffect(() => {
-    onReadyToComplete?.(allSolved);
-  }, [allSolved, onReadyToComplete]);
+    if (initialCards.length > 0) {
+      onReadyToComplete?.(allSolved);
+    }
+  }, [allSolved, onReadyToComplete, initialCards.length]);
 
   return (
     <div>
       <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transition-opacity ${allSolved ? 'opacity-50' : ''}`}>
         {cards.map((card, index) => {
-          const isFlipped = flipped.includes(index) || solved.includes(card.matchId);
+          const isFlipped = flipped.includes(index) || solved.includes(card.id);
           return (
             <div
               key={index}
