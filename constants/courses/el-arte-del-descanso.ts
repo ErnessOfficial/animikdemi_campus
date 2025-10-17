@@ -246,11 +246,404 @@ export const course: Course = {
         },
         {
           id: 'm3a3',
-          type: 'text',
+          type: 'iframe',
           title: 'Paso a Paso: Incorpora los Pilares',
           description: 'Guía para elegir actividades de cada pilar y formar una rutina diaria.',
           content: [
-            'Elige una o dos actividades de cada pilar del descanso y las incorpore en una rutina diaria. Se ofrecen ejemplos de rutinas personalizadas.'
+            `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rutina de Descanso Consciente - Guía Interactiva</title>
+  <style>
+    :root {
+      --primary: #4a6fa5;
+      --secondary: #6b8cbc;
+      --accent: #ff9f43;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .step {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e9ecef;
+    }
+
+    .step-title::before {
+      content: "▶";
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .step.active .step-title::before {
+      content: "▼";
+    }
+
+    .step-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .step.active .step-content {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .pillar-card {
+      background: #eef4ff;
+      border-left: 4px solid var(--primary);
+      padding: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      background: #dde9ff;
+      transform: scale(1.02);
+    }
+
+    .pillar-card.selected {
+      background: #d0e4ff;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 8px rgba(255,159,67,0.4);
+    }
+
+    .pillar-card h4 {
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    .activity-table th,
+    .activity-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .activity-table th {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .time-block {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid var(--secondary);
+    }
+
+    .time-block h4 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .example-routine {
+      background: #fff8e1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 4px solid var(--warning);
+    }
+
+    .example-routine h4 {
+      color: #e6a000;
+      margin-bottom: 10px;
+    }
+
+    .example-routine ul {
+      padding-left: 20px;
+    }
+
+    .commitment-box {
+      background: #d4edda;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 4px solid var(--success);
+    }
+
+    .commitment-box h4 {
+      color: #155724;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .pillar-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guía Interactiva: Rutina de Descanso Consciente</h1>
+      <p>Diseña tu rutina diaria basada en los 4 pilares del descanso integral</p>
+    </header>
+
+    <!-- Paso 1 -->
+    <div class="step active" id="step1">
+      <div class="step-title" onclick="toggleStep('step1')">PASO 1: Identificar los 4 Pilares del Descanso Consciente</div>
+      <div class="step-content">
+        <p>El descanso consciente abarca cuatro dimensiones esenciales. Comprende cada pilar y sus necesidades:</p>
+        <div class="pillar-grid">
+          <div class="pillar-card" onclick="selectPillar(this)">
+            <h4>1. Físico / Movimiento</h4>
+            <p><strong>Necesidad:</strong> Reposo y activación del cuerpo.</p>
+            <p><em>Carencia:</em> Tensión muscular, fatiga, rigidez.</p>
+          </div>
+          <div class="pillar-card" onclick="selectPillar(this)">
+            <h4>2. Mental / Cognitivo</h4>
+            <p><strong>Necesidad:</strong> Desconexión de tareas y enfoque.</p>
+            <p><em>Carencia:</em> Niebla mental, estrés por sobrecarga.</p>
+          </div>
+          <div class="pillar-card" onclick="selectPillar(this)">
+            <h4>3. Emocional / Social</h4>
+            <p><strong>Necesidad:</strong> Procesamiento de sentimientos y conexión.</p>
+            <p><em>Carencia:</em> Irritabilidad, soledad, emociones reprimidas.</p>
+          </div>
+          <div class="pillar-card" onclick="selectPillar(this)">
+            <h4>4. Espiritual / Propósito</h4>
+            <p><strong>Necesidad:</strong> Conexión con valores o algo más grande.</p>
+            <p><em>Carencia:</em> Vacío, falta de motivación o dirección.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paso 2 -->
+    <div class="step" id="step2">
+      <div class="step-title" onclick="toggleStep('step2')">PASO 2: Elegir Actividades Clave para Cada Pilar</div>
+      <div class="step-content">
+        <p>Selecciona una actividad <strong>Micro</strong> (<5 min) y una <strong>Macro</strong> (15-30 min) para cada pilar:</p>
+        <table class="activity-table">
+          <thead>
+            <tr>
+              <th>Pilar</th>
+              <th>Actividad Micro (5 min)</th>
+              <th>Actividad Macro (15-30 min)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Físico</strong></td>
+              <td>Estiramiento rápido o Pausa Fisiológica (2-2-4)</td>
+              <td>Caminata de 20 min, yoga suave o rodillo de espuma</td>
+            </tr>
+            <tr>
+              <td><strong>Mental</strong></td>
+              <td>Anclaje Sensorial Rápido (nombrar 3 objetos)</td>
+              <td>Leer un libro, pintar, armar rompecabezas</td>
+            </tr>
+            <tr>
+              <td><strong>Emocional</strong></td>
+              <td>Enviar mensaje de voz positivo</td>
+              <td>Diario de desahogo o llamada social intencional</td>
+            </tr>
+            <tr>
+              <td><strong>Espiritual</strong></td>
+              <td>Práctica de gratitud (3 cosas buenas)</td>
+              <td>Meditación guiada o planificar acción con propósito</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Paso 3 -->
+    <div class="step" id="step3">
+      <div class="step-title" onclick="toggleStep('step3')">PASO 3: Diseñar la Estructura de la Rutina Diaria</div>
+      <div class="step-content">
+        <div class="time-block">
+          <h4>☀️ Mañana (Activación y Establecimiento)</h4>
+          <p><strong>Objetivo:</strong> Comenzar con intención antes de la carga cognitiva.</p>
+          <ul>
+            <li>Físico/Espiritual (Macro): 15 min de yoga + gratitud</li>
+            <li>Mental: Planificar 3 tareas importantes</li>
+          </ul>
+        </div>
+
+        <div class="time-block">
+          <h4>⏸️ Pausas Diurnas (Micro-Regulación)</h4>
+          <p><strong>Objetivo:</strong> Interrumpir el estrés cognitivo y la rigidez física (mínimo 3 pausas).</p>
+          <ul>
+            <li><strong>Mañana (Físico):</strong> 3 ciclos de Pausa Fisiológica (2-2-4)</li>
+            <li><strong>Tarde (Mental):</strong> Anclaje Sensorial Rápido</li>
+            <li><strong>Almuerzo (Emocional):</strong> Mensaje positivo a un ser querido</li>
+          </ul>
+        </div>
+
+        <div class="time-block">
+          <h4>🌙 Noche (Desconexión Profunda)</h4>
+          <p><strong>Objetivo:</strong> Señalizar al cuerpo y mente que terminó el trabajo.</p>
+          <ul>
+            <li>Mental (Macro): Apagar pantallas 60 min antes + leer</li>
+            <li>Emocional/Espiritual (Macro): Diario + meditación de 10 min</li>
+            <li>Físico: Estiramiento o ducha caliente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paso 4 -->
+    <div class="step" id="step4">
+      <div class="step-title" onclick="toggleStep('step4')">PASO 4: Evaluación y Compromiso (Ajuste Semanal)</div>
+      <div class="step-content">
+        <div class="commitment-box">
+          <h4>✅ Monitoreo Diario</h4>
+          <p>Al final del día, pregúntate: <em>“¿Tuve un momento para cada uno de los cuatro pilares hoy?”</em></p>
+        </div>
+
+        <div class="commitment-box">
+          <h4>🔄 Ajuste Semanal</h4>
+          <p>Si un pilar (ej: Emocional) se quedó atrás, planifica intencionalmente su Actividad Macro para el día siguiente.</p>
+        </div>
+
+        <div class="commitment-box">
+          <h4>💡 Compromiso Clave</h4>
+          <p><strong>La consistencia (hacer algo pequeño cada día) es más importante que la perfección (hacer mucho de vez en cuando).</strong></p>
+        </div>
+
+        <div class="example-routine">
+          <h4>Ejemplo de Rutina Rápida (1 minuto por pilar)</h4>
+          <ul>
+            <li><strong>8:00 – Físico:</strong> 3 ciclos de Pausa Fisiológica al levantarse</li>
+            <li><strong>11:00 – Mental:</strong> Anclaje Sensorial Rápido</li>
+            <li><strong>14:00 – Emocional:</strong> Enviar mensaje positivo</li>
+            <li><strong>21:00 – Espiritual:</strong> 1 minuto de gratitud antes de acostarse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Recurso interactivo creado por AnImiKdemi como parte del Aprendizaje Reflexivo Emocional • MicroLearning de Descanso Consciente
+    </footer>
+  </div>
+
+  <script>
+    // Toggle steps
+    function toggleStep(stepId) {
+      const step = document.getElementById(stepId);
+      step.classList.toggle('active');
+    }
+
+    // Select pillar cards (visual feedback)
+    function selectPillar(card) {
+      // Remove selection from all
+      document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('selected'));
+      // Add to clicked
+      card.classList.add('selected');
+      
+      // Optional: scroll to next step after selection
+      if (step1.classList.contains('active')) {
+        setTimeout(() => {
+          document.getElementById('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500);
+      }
+    }
+
+    // Initialize: only first step open
+    document.querySelectorAll('.step').forEach((step, index) => {
+      if (index === 0) {
+        step.classList.add('active');
+      } else {
+        step.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>`
           ]
         },
         {
@@ -258,8 +651,8 @@ export const course: Course = {
           type: 'upload',
           title: 'Ejercicio Final: Guarda tu Ritual',
           description: 'Sube tu ritual personalizado para guardarlo en tu perfil.',
-          introText: 'Crea y guarda tu ritual de descanso.',
-          closingText: 'Recibirás recordatorios para completar tu ritual diario.'
+          introText: 'Siguiendo la Guía de la sección anterior, crea tu plan personalizado  en un documento de texto o siguiendo el modelo que encontraras en la sección RECURSOS y sube tu ritual de descanso.',
+          closingText: 'Activa los recordatorios para completar tu ritual diario.'
         },
         {
           id: 'm3a5',

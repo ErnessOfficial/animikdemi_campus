@@ -42,6 +42,10 @@ export const guides: ResourceItem[] = [
   {
     title: 'Plan de Capacitación - Comunicación Asertiva para el Liderazgo y la Colaboración Efectiva',
     url: 'https://drive.google.com/file/d/1ZLvmS6TatE4XMHVAMVVFjexFKGSkLdGD/view?usp=drive_link'
+  },
+  { 
+    title: 'Template para Plan de Descanso Consciente Personalizado - Curso El Arte del Descanso',
+    url: 'https://drive.google.com/file/d/1OJ6K0h6RuI-RdgLtLgLY6LEnvNIuq5xf/view?usp=drive_link'
   }
 ];
 
