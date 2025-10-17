@@ -125,331 +125,214 @@ export const course: Course = {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Componentes de las Emociones: Presentación Interactiva</title>
-    <style>
-        /* CSS con BEM para scoping */
-        .rdi-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            color: #333;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .rdi-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .rdi-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .rdi-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .rdi-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .rdi-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .rdi-slide {
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .rdi-slide-active {
-            display: block;
-        }
-
-        .rdi-hotspot {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .rdi-popup {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 10;
-            width: 300px;
-        }
-
-        .rdi-hotspot:hover .rdi-popup {
-            display: block;
-        }
-
-        .rdi-quiz {
-            margin-top: 20px;
-        }
-
-        .rdi-quiz-question {
-            margin-bottom: 20px;
-        }
-
-        .rdi-feedback {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-
-        .rdi-feedback-correct {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .rdi-feedback-incorrect {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .rdi-reflection {
-            margin-top: 20px;
-        }
-
-        .rdi-reflection textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .rdi-summary {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        /* Accesibilidad */
-        .rdi-btn:focus, .rdi-hotspot:focus {
-            outline: 2px solid #007bff;
-        }
-
-        @media (max-width: 600px) {
-            .rdi-nav {
-                flex-direction: column;
-                gap: 10px;
+    <title>Los 3 Componentes de las Emociones</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de Tailwind y la fuente Inter -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#5E4FA8',
+                        'primary-light': '#8C7BB7',
+                        'accent-blue': '#4F9FA8',
+                        'bg-soft': '#F7F7F9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.5s ease-out',
+                    },
+                }
             }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Estilos base para la tarjeta (simulando un "flip" en la interacción, aunque usaremos un acordeón) */
+        .card-component {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .card-component:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para el botón desplegable */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+        .accordion-content.active {
+            max-height: 500px; /* Suficientemente grande para el contenido */
+            padding-top: 1rem;
         }
     </style>
 </head>
-<body>
-    <div class="rdi-container">
-        <header class="rdi-header">
-            <h1>Componentes de las Emociones</h1>
-            <p>Una presentación interactiva para explorar y reflexionar sobre las emociones como ráfagas intensas y cortas ante estímulos relevantes.</p>
-        </header>
+<body class="bg-bg-soft font-sans min-h-screen p-4 sm:p-8">
 
-        <nav class="rdi-nav">
-            <button class="rdi-btn" id="rdi-prev" onclick="changeSlide(-1)" disabled>Anterior</button>
-            <span id="rdi-slide-indicator">Slide 1 de 5</span>
-            <button class="rdi-btn" id="rdi-next" onclick="changeSlide(1)">Siguiente</button>
-        </nav>
+    <!-- Encabezado y Título -->
+    <header class="text-center mb-10">
+        <div class="inline-flex items-center justify-center p-3 rounded-xl bg-white shadow-lg">
+            <!-- Icono de Corazón para simbolizar la emoción -->
+            <svg class="w-10 h-10 text-primary-dark mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800">
+                Los 3 Componentes de las Emociones
+            </h1>
+        </div>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Descubre cómo se manifiestan las emociones en tu cuerpo, mente y acciones.
+        </p>
+    </header>
 
-        <main>
-            <section id="slide1" class="rdi-slide rdi-slide-active">
-                <h2>Introducción a las Emociones</h2>
-                <p>Las emociones son respuestas intensas y de corta duración que surgen ante estímulos relevantes, como algo que vemos, recordamos o anticipamos. Según la psicología emocional, incluyen tres componentes principales: fisiológico, cognitivo y conductual. Estas ráfagas nos ayudan a adaptarnos al entorno, pero entenderlas promueve el bienestar emocional.</p>
-                <img src="https://online.uwa.edu/wp-content/uploads/2019/05/Our-Basic-Emotions-Infographic-UWA.jpg" alt="Infografía general de emociones" style="max-width: 100%; height: auto;" aria-label="Infografía ilustrativa de componentes emocionales">
-                <p>Explora cada componente en los siguientes slides y reflexiona sobre cómo se manifiestan en tu vida.</p>
-            </section>
+    <!-- Contenedor de la Infografía (Grid Responsive) -->
+    <main class="max-w-6xl mx-auto grid gap-6 md:grid-cols-3">
 
-            <section id="slide2" class="rdi-slide">
-                <h2>1. Componente Fisiológico (Cuerpo) 🧠🫀</h2>
-                <p>Este componente involucra cambios corporales que preparan al organismo para responder. Basado en explicaciones psicológicas, incluye activación del sistema nervioso autónomo, liberando hormonas como adrenalina (para estrés) o endorfinas (para bienestar). Estos cambios son automáticos y universales, pero su intensidad varía por persona.</p>
-                <div class="rdi-hotspot" tabindex="0">
-                    <strong>Detalles ampliados:</strong>
-                    <div class="rdi-popup">
-                        <p>Ejemplos detallados: Aumento del ritmo cardíaco en miedo (prepara para huir), sudoración en ansiedad, o relajación muscular en alegría. Estas señales fisiológicas activan sistemas como el simpático para acción y parasimpático para recuperación.</p>
+        <!-- CARD 1: COMPONENTE FISIOLÓGICO -->
+        <div id="card-fisiologico" class="card-component bg-white p-6 rounded-2xl shadow-xl border-t-8 border-red-500 flex flex-col justify-between animate-fade-in-up">
+            <div class="flex-grow">
+                <div class="flex items-center mb-4">
+                    <!-- Icono Fisiológico (Pulso/Ritmo Cardiaco) -->
+                    <div class="p-3 rounded-full bg-red-100 text-red-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
+                    <h2 class="ml-4 text-2xl font-bold text-gray-900">1. Fisiológico (El Cuerpo)</h2>
                 </div>
-                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente fisiológico" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente fisiológico de las emociones">
-                <p>Reflexiona: ¿Qué sensaciones corporales notas cuando estás estresado?</p>
-            </section>
 
-            <section id="slide3" class="rdi-slide">
-                <h2>2. Componente Cognitivo (Pensamientos) 🤔</h2>
-                <p>Implica la interpretación, evaluación y etiquetado de la situación y sensaciones. No es lo mismo etiquetar "miedo" que "anticipación". Un vocabulario emocional rico mejora la regulación, según teorías como la de Schachter-Singer, donde la cognición interpreta la arousal fisiológica.</p>
-                <div class="rdi-hotspot" tabindex="0">
-                    <strong>Detalles ampliados:</strong>
-                    <div class="rdi-popup">
-                        <p>Ejemplos: En una situación ambigua, pensar "esto es un desafío" (positivo) vs. "esto es una amenaza" (negativo). La cognición incluye appraisals primarios (¿es relevante?) y secundarios (¿puedo manejarlo?), influyendo en la intensidad emocional.</p>
-                    </div>
+                <p class="text-gray-600 mb-4">
+                    Es la respuesta automática de nuestro sistema nervioso. Son las sensaciones físicas que preparan al cuerpo para la acción.
+                </p>
+                <div class="text-sm font-semibold text-gray-700 p-3 bg-red-50 rounded-lg">
+                    \textbf{Manifestaciones:} Aumento del ritmo cardíaco, tensión muscular, sudoración, nudo en el estómago, rubor.
                 </div>
-                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente cognitivo" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente cognitivo de las emociones">
-                <p>Reflexiona: ¿Cómo cambian tus emociones al reetiquetar un pensamiento?</p>
-            </section>
+            </div>
 
-            <section id="slide4" class="rdi-slide">
-                <h2>3. Componente Conductual (Acción) 🗣️</h2>
-                <p>Es la expresión observable: acciones, gestos, tono de voz y postura. Ejemplos incluyen gritar o fruncir el ceño en ira, llorar o encoger hombros en tristeza, o sonreír y abrir la postura en alegría. Este componente es culturalmente influido pero tiene bases universales, como en las expresiones faciales de Ekman.</p>
-                <div class="rdi-hotspot" tabindex="0">
-                    <strong>Detalles ampliados:</strong>
-                    <div class="rdi-popup">
-                        <p>Ejemplos detallados: En ira, acciones impulsivas como golpear; en tristeza, aislamiento; en alegría, acercamiento social. El comportamiento retroalimenta los otros componentes, como cuando una sonrisa induce bienestar fisiológico.</p>
-                    </div>
+            <!-- Sección Desplegable para Reflexión Práctica -->
+            <div class="mt-6 pt-4 border-t border-gray-100">
+                <button onclick="toggleAccordion('fisiologico-reflection')" class="accordion-button flex justify-between items-center w-full text-left font-semibold text-primary-dark p-3 bg-primary-dark/10 rounded-xl transition duration-300 hover:bg-primary-dark/20">
+                    <span>✨ Práctica: ¿Dónde lo siento?</span>
+                    <span class="transform transition duration-300 arrow-icon">▼</span>
+                </button>
+                <div id="fisiologico-reflection" class="accordion-content bg-red-50/50 rounded-b-xl px-4 text-sm text-gray-700">
+                    <ul class="list-disc list-inside space-y-2 py-4">
+                        <li>**Reconoce:** ¿Sientes calor en las orejas, frío en las manos o presión en el pecho? Identificar la ubicación te da control.</li>
+                        <li>**Regula:** Usa la **Pausa Fisiológica (2-2-4)** para enviar una señal de calma al cuerpo y desactivar el modo "alerta".</li>
+                    </ul>
                 </div>
-                <img src="https://www.researchgate.net/publication/269631983/figure/fig2/AS:295235780399112@1447401103599/The-four-components-of-emotion-definition-Source-after-Reeve-2009.png" alt="Diagrama del componente conductual" style="max-width: 100%; height: auto;" aria-label="Diagrama ilustrativo del componente conductual de las emociones">
-                <p>Reflexiona: ¿Qué comportamientos emocionales te ayudan o perjudican?</p>
-            </section>
-
-            <section id="slide5" class="rdi-slide">
-                <h2>Reflexión y Quiz</h2>
-                <div class="rdi-quiz">
-                    <h3>Quiz Reflexivo (6 Preguntas)</h3>
-                    <div class="rdi-quiz-question">
-                        <p>1. El componente fisiológico prepara el cuerpo para acción. (Verdadero/Falso)</p>
-                        <label><input type="radio" name="q1" value="true"> Verdadero</label>
-                        <label><input type="radio" name="q1" value="false"> Falso</label>
-                        <div id="fb1" class="rdi-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- CARD 2: COMPONENTE COGNITIVO -->
+        <div id="card-cognitivo" class="card-component bg-white p-6 rounded-2xl shadow-xl border-t-8 border-yellow-500 flex flex-col justify-between animate-fade-in-up" style="animation-delay: 0.1s;">
+            <div class="flex-grow">
+                <div class="flex items-center mb-4">
+                    <!-- Icono Cognitivo (Cerebro/Idea) -->
+                    <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2-10H7a4 4 0 00-4 4v8a4 4 0 004 4h10a4 4 0 004-4v-8a4 4 0 00-4-4z"></path></svg>
                     </div>
-                    <div class="rdi-quiz-question">
-                        <p>2. ¿Qué incluye el componente cognitivo?</p>
-                        <label><input type="radio" name="q2" value="a"> Cambios en el ritmo cardíaco</label>
-                        <label><input type="radio" name="q2" value="b"> Interpretación y etiquetado</label>
-                        <label><input type="radio" name="q2" value="c"> Gestos observables</label>
-                        <div id="fb2" class="rdi-feedback"></div>
-                    </div>
-                    <div class="rdi-quiz-question">
-                        <p>3. Gritar es un ejemplo del componente conductual en ira. (Verdadero/Falso)</p>
-                        <label><input type="radio" name="q3" value="true"> Verdadero</label>
-                        <label><input type="radio" name="q3" value="false"> Falso</label>
-                        <div id="fb3" class="rdi-feedback"></div>
-                    </div>
-                    <div class="rdi-quiz-question">
-                        <p>4. Un vocabulario emocional rico ayuda en la regulación. (Verdadero/Falso)</p>
-                        <label><input type="radio" name="q4" value="true"> Verdadero</label>
-                        <label><input type="radio" name="q4" value="false"> Falso</label>
-                        <div id="fb4" class="rdi-feedback"></div>
-                    </div>
-                    <div class="rdi-quiz-question">
-                        <p>5. ¿Qué componente involucra hormonas como adrenalina?</p>
-                        <label><input type="radio" name="q5" value="a"> Cognitivo</label>
-                        <label><input type="radio" name="q5" value="b"> Fisiológico</label>
-                        <label><input type="radio" name="q5" value="c"> Conductual</label>
-                        <div id="fb5" class="rdi-feedback"></div>
-                    </div>
-                    <div class="rdi-quiz-question">
-                        <p>6. Las emociones son siempre de larga duración. (Verdadero/Falso)</p>
-                        <label><input type="radio" name="q6" value="true"> Verdadero</label>
-                        <label><input type="radio" name="q6" value="false"> Falso</label>
-                        <div id="fb6" class="rdi-feedback"></div>
-                    </div>
-                    <button class="rdi-btn" onclick="checkQuiz()">Enviar Respuestas</button>
-                    <div id="quiz-summary" class="rdi-summary" hidden></div>
+                    <h2 class="ml-4 text-2xl font-bold text-gray-900">2. Cognitivo (La Mente)</h2>
                 </div>
-                <div class="rdi-reflection">
-                    <h3>Reflexión Personal</h3>
-                    <p>Prompt: Describe una emoción reciente identificando sus tres componentes.</p>
-                    <textarea id="reflection-text" aria-label="Escribe tu reflexión emocional"></textarea>
-                    <button class="rdi-btn" onclick="saveReflection()">Guardar Reflexión</button>
-                    <div id="saved-reflections"></div>
+
+                <p class="text-gray-600 mb-4">
+                    Es la interpretación mental o el juicio que le damos a la situación que provoca la emoción. Incluye creencias y pensamientos automáticos.
+                </p>
+                <div class="text-sm font-semibold text-gray-700 p-3 bg-yellow-50 rounded-lg">
+                    \textbf{Manifestaciones:} "Esto es terrible", "Soy un fracaso", "Él me odia", rumiación, pensamientos catastróficos.
                 </div>
-            </section>
-        </main>
+            </div>
 
-        <footer style="text-align: center; margin-top: 20px; font-size: 0.8em; color: #666;">
-            <p>Desarrollado para Bienestar Emocional. Accesible y autocontenido.</p>
-        </footer>
-    </div>
+            <!-- Sección Desplegable para Reflexión Práctica -->
+            <div class="mt-6 pt-4 border-t border-gray-100">
+                <button onclick="toggleAccordion('cognitivo-reflection')" class="accordion-button flex justify-between items-center w-full text-left font-semibold text-primary-dark p-3 bg-primary-dark/10 rounded-xl transition duration-300 hover:bg-primary-dark/20">
+                    <span>💡 Práctica: Cuestiona la historia</span>
+                    <span class="transform transition duration-300 arrow-icon">▼</span>
+                </button>
+                <div id="cognitivo-reflection" class="accordion-content bg-yellow-50/50 rounded-b-xl px-4 text-sm text-gray-700">
+                    <ul class="list-disc list-inside space-y-2 py-4">
+                        <li>**Identifica:** Usa la técnica **Etiquetar y Validar** (Nombrar la emoción + Separar el hecho de la interpretación).</li>
+                        <li>**Replantea:** Pregúntate: "¿Qué evidencia tengo de que este pensamiento es 100\% real?" Busca una interpretación alternativa.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+        <!-- CARD 3: COMPONENTE CONDUCTUAL -->
+        <div id="card-conductual" class="card-component bg-white p-6 rounded-2xl shadow-xl border-t-8 border-indigo-500 flex flex-col justify-between animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="flex-grow">
+                <div class="flex items-center mb-4">
+                    <!-- Icono Conductual (Acción/Huir) -->
+                    <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8m-1 8v-1m0 0h-1m0 0l-8-8M7 8V7m0 0h1m0 0l8-8"></path></svg>
+                    </div>
+                    <h2 class="ml-4 text-2xl font-bold text-gray-900">3. Conductual (La Acción)</h2>
+                </div>
+
+                <p class="text-gray-600 mb-4">
+                    Es la tendencia a la acción o la reacción observable (o el impulso interno) que surge de los componentes fisiológico y cognitivo.
+                </p>
+                <div class="text-sm font-semibold text-gray-700 p-3 bg-indigo-50 rounded-lg">
+                    \textbf{Manifestaciones:} Gritar, huir, paralizarse, evitar una situación, aislarse, o buscar consuelo (ej. comer en exceso).
+                </div>
+            </div>
+
+            <!-- Sección Desplegable para Reflexión Práctica -->
+            <div class="mt-6 pt-4 border-t border-gray-100">
+                <button onclick="toggleAccordion('conductual-reflection')" class="accordion-button flex justify-between items-center w-full text-left font-semibold text-primary-dark p-3 bg-primary-dark/10 rounded-xl transition duration-300 hover:bg-primary-dark/20">
+                    <span>🏃 Práctica: Elige la respuesta</span>
+                    <span class="transform transition duration-300 arrow-icon">▼</span>
+                </button>
+                <div id="conductual-reflection" class="accordion-content bg-indigo-50/50 rounded-b-xl px-4 text-sm text-gray-700">
+                    <ul class="list-disc list-inside space-y-2 py-4">
+                        <li>**Retrasa:** Antes de actuar, usa **La Pregunta de los 5 Segundos**: "¿Importará esto en 5 días?". Esto crea un espacio entre el impulso y la acción.</li>
+                        <li>**Cambia:** En lugar de reaccionar impulsivamente, elige una **Acción Amable** (ej. caminar 5 minutos, escribir la emoción en lugar de gritar).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Script para la Interactividad del Acordeón -->
     <script>
-        const progressKey = 'rdi-emotions-progress';
-        let currentSlide = 1;
-        const totalSlides = 5;
-        let progress = JSON.parse(localStorage.getItem(progressKey)) || { slide: 1, reflections: [] };
+        /**
+         * Función para alternar el estado (mostrar/ocultar) de la sección de reflexión
+         * y rotar el icono de flecha.
+         * @param {string} id - El ID del div de contenido del acordeón.
+         */
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const button = content.previousElementSibling;
+            const arrow = button.querySelector('.arrow-icon');
 
-        function changeSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide < 1) currentSlide = 1;
-            if (currentSlide > totalSlides) currentSlide = totalSlides;
-            document.querySelectorAll('.rdi-slide').forEach(slide => slide.classList.remove('rdi-slide-active'));
-            document.getElementById(\`slide\${currentSlide}\`).classList.add('rdi-slide-active');
-            document.getElementById('rdi-prev').disabled = currentSlide === 1;
-            document.getElementById('rdi-next').disabled = currentSlide === totalSlides;
-            document.getElementById('rdi-slide-indicator').textContent = \`Slide \${currentSlide} de \${totalSlides}\`;
-            if (currentSlide > progress.slide) {
-                progress.slide = currentSlide;
-                localStorage.setItem(progressKey, JSON.stringify(progress));
+            // Alternar la clase 'active' en el contenido
+            content.classList.toggle('active');
+
+            // Rotar la flecha
+            if (content.classList.contains('active')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
             }
         }
-
-        function checkQuiz() {
-            const answers = {
-                q1: 'true', // Verdadero
-                q2: 'b',    // Interpretación y etiquetado
-                q3: 'true', // Verdadero
-                q4: 'true', // Verdadero
-                q5: 'b',    // Fisiológico
-                q6: 'false' // Falso
-            };
-            let score = 0;
-            for (let i = 1; i <= 6; i++) {
-                const selected = document.querySelector(\`input[name="q\${i}"]:checked\`);
-                const fbEl = document.getElementById(\`fb\${i}\`);
-                fbEl.style.display = 'block';
-                if (selected && selected.value === answers[\`q\${i}\`]) {
-                    fbEl.textContent = '¡Correcto! Reflexiona sobre cómo aplica esto a tu vida.';
-                    fbEl.className = 'rdi-feedback rdi-feedback-correct';
-                    score++;
-                } else {
-                    fbEl.textContent = 'Incorrecto. Revisa el slide correspondiente para más detalles.';
-                    fbEl.className = 'rdi-feedback rdi-feedback-incorrect';
-                }
-            }
-            const summaryEl = document.getElementById('quiz-summary');
-            summaryEl.textContent = \`Puntuación: \${score}/6. ¡Sigue practicando la reflexión emocional!\`;
-            summaryEl.hidden = false;
-        }
-
-        function saveReflection() {
-            const text = document.getElementById('reflection-text').value.trim();
-            if (text) {
-                progress.reflections.push(text);
-                localStorage.setItem(progressKey, JSON.stringify(progress));
-                loadReflections();
-                document.getElementById('reflection-text').value = '';
-                alert('Reflexión guardada. Puedes revisarla aquí.');
-            }
-        }
-
-        function loadReflections() {
-            const reflectionsEl = document.getElementById('saved-reflections');
-            reflectionsEl.innerHTML = '<h4>Tus Reflexiones Guardadas:</h4>';
-            progress.reflections.forEach((ref, index) => {
-                reflectionsEl.innerHTML += \`<p>\${index + 1}. \${ref}</p>\`;
-            });
-        }
-
-        // Inicializar
-        changeSlide(0); // Set to slide 1
-        if (progress.slide > 1) currentSlide = progress.slide - 1; // Para navegar al último
-        changeSlide(1);
-        loadReflections();
+        
+        // Función para inicializar el documento (opcional, pero buena práctica)
+        window.onload = function() {
+            console.log('Infografía cargada e interactiva.');
+            // Opcional: Abrir la primera sección por defecto
+            // toggleAccordion('fisiologico-reflection'); 
+        };
     </script>
 </body>
 </html>`
