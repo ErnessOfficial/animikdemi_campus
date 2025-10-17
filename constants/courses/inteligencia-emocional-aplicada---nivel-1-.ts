@@ -450,7 +450,7 @@ export const course: Course = {
         loadReflections();
     </script>
 </body>
-</html>`
+</html>`,
           ]
         },
         // PUNTO 3 — Estudio de caso + formulario para escribir y guardar
