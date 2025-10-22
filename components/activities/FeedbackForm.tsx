@@ -45,8 +45,10 @@ const FeedbackForm: React.FC<{ onReadyToComplete?: (ready: boolean) => void }> =
           <div className="space-y-6">
             {scenario.questions.map((q, qIndex) => (
               <div key={qIndex}>
-                <label className="block text-md font-semibold text-[#101021] mb-2">{q.label}</label>
+                <label htmlFor={`scenario-${sIndex}-question-${qIndex}`} className="block text-md font-semibold text-[#101021] mb-2">{q.label}</label>
                 <textarea
+                  id={`scenario-${sIndex}-question-${qIndex}`}
+                  name={`scenario-${sIndex}-question-${qIndex}`}
                   rows={4}
                   className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition"
                   placeholder={q.placeholder}
@@ -63,11 +65,11 @@ const FeedbackForm: React.FC<{ onReadyToComplete?: (ready: boolean) => void }> =
           <div className="space-y-6">
             <div>
               <label className="block text-md font-semibold text-[#101021] mb-2">¿Cuál de estas tres situaciones te resultaría más difícil de manejar en la vida real y por qué?</label>
-              <textarea rows={3} className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition"></textarea>
+              <textarea id="final-reflection" name="final-reflection" rows={3} className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition"></textarea>
             </div>
             <div>
               <label className="block text-md font-semibold text-[#101021] mb-2">Escribe una "frase de anclaje" que puedas repetirte antes de recibir feedback.</label>
-              <input type="text" className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition" placeholder='Ejemplo: "Esto es para mi progreso, no es un juicio sobre mi valor."' />
+              <input type="text" id="anchor-phrase" name="anchor-phrase" className="w-full p-3 border border-[#101021]/30 rounded-md focus:ring-2 focus:ring-[#6e4380] focus:border-[#6e4380] transition" placeholder='Ejemplo: "Esto es para mi progreso, no es un juicio sobre mi valor."' />
             </div>
           </div>
       </div>

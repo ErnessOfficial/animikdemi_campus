@@ -1,5 +1,5 @@
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const STATIC_CACHE = `animikdemi-campus-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `animikdemi-campus-runtime-${CACHE_VERSION}`;
 const FONT_CACHE = `animikdemi-campus-fonts-${CACHE_VERSION}`;
