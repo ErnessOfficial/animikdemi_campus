@@ -62,8 +62,16 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') {
     return;
   }
-
   const requestUrl = new URL(request.url);
+
+  if (!['http:', 'https:'].includes(requestUrl.protocol)) {
+    return;
+  }
+
+  if (request.headers.has('range') || ['audio', 'video'].includes(request.destination)) {
+    event.respondWith(fetch(request));
+    return;
+  }
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request));
@@ -101,7 +109,9 @@ async function cacheFirst(request, cacheName) {
   try {
     const response = await fetch(request);
     if (response && response.ok) {
-      cache.put(request, response.clone());
+      if (isCacheableResponse(response)) {
+        cache.put(request, response.clone());
+      }
     }
     return response;
   } catch (error) {
@@ -118,7 +128,9 @@ async function networkFirst(request) {
   try {
     const response = await fetch(request);
     if (response && response.ok) {
-      cache.put(request, response.clone());
+      if (isCacheableResponse(response)) {
+        cache.put(request, response.clone());
+      }
     }
     return response;
   } catch (error) {
@@ -144,7 +156,9 @@ async function staleWhileRevalidate(request, cacheName) {
   const networkResponsePromise = fetch(request)
     .then(response => {
       if (response && response.ok) {
-        cache.put(request, response.clone());
+        if (isCacheableResponse(response)) {
+          cache.put(request, response.clone());
+        }
       }
       return response;
     })
@@ -152,4 +166,8 @@ async function staleWhileRevalidate(request, cacheName) {
 
   const cachedResponse = await cachedResponsePromise;
   return cachedResponse || networkResponsePromise;
+}
+
+function isCacheableResponse(response) {
+  return Boolean(response && response.ok && response.status !== 206);
 }
