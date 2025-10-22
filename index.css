@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles that were previously handled inline */
+body {
+  @apply bg-[#fffafa] text-[#101021];
+}

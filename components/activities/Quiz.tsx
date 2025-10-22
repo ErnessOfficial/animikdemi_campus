@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { QuizQuestion } from '../../types';
 
 interface QuizProps {
@@ -14,6 +14,12 @@ const Quiz: React.FC<QuizProps> = ({ questions, ui, onReadyToComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [quizFinished, setQuizFinished] = useState(false);
+
+  useEffect(() => {
+    if (!quizFinished) {
+      onReadyToComplete?.(false);
+    }
+  }, [quizFinished, currentQuestionIndex, onReadyToComplete]);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
@@ -64,7 +70,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, ui, onReadyToComplete }) => {
 
         <div className="text-center mt-6">
             <button 
-              onClick={() => { setQuizFinished(false); setCurrentQuestionIndex(0); setAnswers([]); }} 
+              onClick={() => { setQuizFinished(false); setCurrentQuestionIndex(0); setAnswers([]); onReadyToComplete?.(false); }} 
               className="bg-[#24668e] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#1a4a69] transition"
             >
               Volver a empezar
@@ -92,9 +98,6 @@ const Quiz: React.FC<QuizProps> = ({ questions, ui, onReadyToComplete }) => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-  // Not finished yet
-  if (onReadyToComplete) onReadyToComplete(false);
-
   return (
     <div className="p-4 sm:p-6 bg-transparent rounded-xl border border-[#101021]/10">
       <div className="mb-6">

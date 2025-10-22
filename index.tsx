@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import './index.css';
 import { KindeProvider } from '@kinde-oss/kinde-auth-react';
-
-// En dev, elimina cualquier Service Worker previo del mismo origen
-if (import.meta.env.DEV && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations?.().then((regs) => {
-    regs.forEach((r) => r.unregister());
-  }).catch(() => {});
-}
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -37,3 +31,18 @@ root.render(
     </KindeProvider>
   </React.StrictMode>
 );
+
+if ('serviceWorker' in navigator) {
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+    });
+  } else {
+    navigator.serviceWorker.getRegistrations?.()
+      .then(regs => regs.forEach(reg => reg.unregister()))
+      .catch(() => {});
+    navigator.serviceWorker.getRegistration?.()
+      .then(reg => reg?.unregister())
+      .catch(() => {});
+  }
+}
