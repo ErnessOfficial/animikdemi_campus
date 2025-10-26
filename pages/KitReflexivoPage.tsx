@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { generateGeminiResponse } from '../utils/gemini';
 
 type KitCardId = 'motivacion' | 'relajacion' | 'desconexion' | 'interaccion';
 
@@ -73,8 +72,21 @@ const KitReflexivoPage: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      const text = await generateGeminiResponse(prompt);
-      setResponseText(text);
+      const response = await fetch('/api/kit-reflexivo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.error || 'No pude obtener una respuesta. Intenta nuevamente.');
+      }
+
+      const payload = await response.json();
+      setResponseText(payload.text || '');
     } catch (err) {
       setError(
         err instanceof Error
