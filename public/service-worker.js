@@ -1,5 +1,5 @@
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const STATIC_CACHE = `animikdemi-campus-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `animikdemi-campus-runtime-${CACHE_VERSION}`;
 const FONT_CACHE = `animikdemi-campus-fonts-${CACHE_VERSION}`;
@@ -7,12 +7,15 @@ const FONT_CACHE = `animikdemi-campus-fonts-${CACHE_VERSION}`;
 const APP_STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/icons/animikdemi-512.png',
+  '/icons/animikdemi-512-maskable.png',
   '/icons/animikdemi-256.png',
   '/icons/animikdemi-192.png',
   '/icons/animikdemi-96.png',
-  '/images/logo_animikdemi.png'
+  '/images/logo_animikdemi.png',
+  '/screenshots/dashboard-wide.png',
+  '/screenshots/dashboard-mobile.png'
 ];
 
 const APP_STATIC_PATHS = new Set(

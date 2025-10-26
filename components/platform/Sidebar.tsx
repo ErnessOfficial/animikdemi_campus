@@ -1,5 +1,6 @@
 import React from 'react';
 import type { View } from '../../App';
+import { assetPath } from '../../utils/paths';
 
 interface SidebarProps {
   activeView: View;
@@ -61,8 +62,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
             onClick={() => onNavigate('my-courses')} 
           />
           <NavItem 
-            icon="fa-users" 
-            label="Comunidad" 
+            icon="fa-seedling" 
+            label="Kit Reflexivo" 
             isActive={activeView === 'community'} 
             onClick={() => onNavigate('community')} 
           />
@@ -88,4 +89,3 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
 };
 
 export default Sidebar;
-import { assetPath } from '../../utils/paths';

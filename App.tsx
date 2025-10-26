@@ -11,6 +11,7 @@ import { courseDataMindfulness } from './constants/courses/courseDataMindfulness
 
 // Import components and pages
 import Sidebar from './components/platform/Sidebar';
+import MobileNav from './components/platform/MobileNav';
 import Header from './components/platform/Header';
 import Dashboard from './pages/Dashboard';
 import CourseCatalogPage from './pages/CourseCatalogPage';
@@ -21,6 +22,7 @@ import ResourcesPage from './pages/ResourcesPage';
 import GuidesAndManualsPage from './pages/resources/GuidesAndManualsPage';
 import ComplementaryResourcesPage from './pages/resources/ComplementaryResourcesPage';
 import InfographicsPage from './pages/resources/InfographicsPage';
+import KitReflexivoPage from './pages/KitReflexivoPage';
 import DiagnosticTestModal from './components/platform/DiagnosticTestModal';
 import EnrollmentConfirmationModal from './components/platform/EnrollmentConfirmationModal';
 import LoginPage from './pages/LoginPage';
@@ -346,12 +348,7 @@ const App: React.FC = () => {
                     </div>
                 );
             case 'community':
-                return (
-                    <div className="bg-white p-8 rounded-lg shadow-md">
-                        <h1 className="text-2xl font-bold">Comunidad</h1>
-                        <p className="mt-2 text-[#101021]/80">Esta página está en construcción.</p>
-                    </div>
-                );
+                return <KitReflexivoPage />;
             case 'profile':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} />;
             default:
@@ -369,14 +366,23 @@ const App: React.FC = () => {
         content = <LoginPage onLogin={() => login()} onRegister={() => register()} />;
     } else {
         content = (
-            <div className="flex h-screen bg-[#f0f2f5] font-sans">
-                <Sidebar activeView={view} onNavigate={handleNavigation} onLogout={() => logout()} />
-                <main className="flex-1 flex flex-col h-screen">
-                    <Header user={user} />
-                    <div className="flex-1 p-6 sm:p-8 overflow-y-auto">
-                        {renderContent()}
+            <div className="min-h-screen bg-[#f0f2f5] font-sans">
+                <div className="flex flex-col lg:flex-row min-h-screen">
+                    <div className="hidden lg:flex lg:flex-shrink-0">
+                        <Sidebar activeView={view} onNavigate={handleNavigation} onLogout={() => logout()} />
                     </div>
-                </main>
+                    <main className="flex-1 flex flex-col min-h-screen">
+                        <MobileNav
+                            activeView={view}
+                            onNavigate={handleNavigation}
+                            onLogout={() => logout()}
+                        />
+                        <Header user={user} />
+                        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+                            {renderContent()}
+                        </div>
+                    </main>
+                </div>
                 {showDiagnostic && (
                     <DiagnosticTestModal 
                         questions={diagnosticTestQuestions}
