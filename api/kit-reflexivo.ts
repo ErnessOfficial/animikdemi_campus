@@ -30,10 +30,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const ai = getClient();
     const result = await ai.models.generateContent({
       model: MODEL_NAME,
-      contents: prompt,
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: prompt }],
+        },
+      ],
     });
+    const text = result?.output?.[0]?.content?.parts?.[0]?.text?.trim?.();
     return res.status(200).json({
-      text: result.response?.text()?.trim() ?? '',
+      text: text || '',
     });
   } catch (error: any) {
     console.error('[kit-reflexivo]', error);
