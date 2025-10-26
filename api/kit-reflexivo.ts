@@ -30,14 +30,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const ai = getClient();
     const result = await ai.models.generateContent({
       model: MODEL_NAME,
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: prompt }],
-        },
-      ],
+      contents: prompt,
     });
-    const text = result?.output?.[0]?.content?.parts?.[0]?.text?.trim?.();
+    const text = result.text?.trim();
     return res.status(200).json({
       text: text || '',
     });
