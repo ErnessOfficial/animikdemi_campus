@@ -2,80 +2,129 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnImiKdemi • Sin conexión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Animikdemi | Sin conexión</title>
+  <meta name="theme-color" content="#633FAF" />
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(180deg, #fffafa 0%, #f0f2f5 100%);
-      min-height: 100vh;
-      margin: 0;
-      color: #101021;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
+    :root{
+      --c-primary:#633FAF;
+      --c-primary-2:#BA7CDC;
+      --c-accent:#008FC6;
+      --c-text:#242D36;
+      --c-bg:#F7F6FB;
     }
-    .card {
-      background: #ffffff;
-      border-radius: 24px;
-      box-shadow: 0 12px 32px rgba(16, 16, 33, 0.08);
-      padding: 2.5rem 2rem;
-      max-width: 420px;
-      width: 100%;
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--c-text);
+      background:
+        radial-gradient(1200px 800px at 100% 0, rgba(186,124,220,.25), transparent 60%),
+        radial-gradient(1000px 700px at 0 100%, rgba(0,143,198,.18), transparent 60%),
+        linear-gradient(180deg,#ffffff 0%, var(--c-bg) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
     }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.75rem;
-      color: #6e4380;
+
+    .card{
+      width:min(520px, 100%);
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(36,45,54,.12);
+      padding:28px 24px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
     }
-    p {
-      margin: 0.75rem 0;
-      line-height: 1.5;
-      color: rgba(16, 16, 33, 0.75);
+
+    .badge{
+      position:absolute;
+      inset:auto -40px auto auto;
+      top:-40px;
+      width:160px; height:160px;
+      background: conic-gradient(from 180deg at 50% 50%, var(--c-primary) 0 50%, var(--c-primary-2) 50% 100%);
+      opacity:.12; border-radius:50%;
+      filter:blur(4px);
+      animation: float 8s ease-in-out infinite;
     }
-    .actions {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+    @keyframes float{
+      0%,100%{ transform: translateY(0) }
+      50%{ transform: translateY(10px) }
     }
-    a, button {
-      padding: 0.65rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    .logo{
+      width:92px; height:auto; margin:4px auto 10px; display:block;
+      animation: breathe 5s ease-in-out infinite;
     }
-    a {
-      background: #6e4380;
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(110, 67, 128, 0.25);
+    @keyframes breathe{
+      0%,100%{ transform:scale(1) }
+      50%{ transform:scale(1.02) }
     }
-    a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(110, 67, 128, 0.25);
+
+    h1{
+      font-size:1.35rem; margin:10px 0 6px; color:var(--c-primary);
+      letter-spacing:.2px;
     }
-    button {
-      background: transparent;
-      color: #24668e;
-      border: 1px solid rgba(36, 102, 142, 0.35);
+    p{
+      margin:0 auto 18px; line-height:1.55; color:#4b5563;
+      max-width:36ch;
     }
+
+    .actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+
+    button, a.button{
+      appearance:none; border:none; cursor:pointer;
+      padding:10px 16px; border-radius:12px; font-weight:600;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg, var(--c-primary) 0%, var(--c-primary-2) 100%);
+      color:#fff; box-shadow:0 6px 16px rgba(99,63,175,.25);
+    }
+    .btn-primary:hover{ transform: translateY(-1px) }
+    .btn-outline{
+      background:#eef2ff; color:var(--c-accent);
+      box-shadow:0 4px 12px rgba(0,143,198,.12);
+    }
+    .hint{
+      font-size:.85rem; color:#6b7280; margin-top:12px;
+    }
+
+    /* Accesibilidad */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Sin conexión</h1>
-    <p>No pudimos conectar con AnImiKdemi Campus en este momento.</p>
-    <p>Puedes revisar tus notas guardadas y retomar cuando recuperes la conexión.</p>
-    <div class="actions">
-      <a href="/">Abrir panel</a>
-      <button type="button" onclick="window.location.reload()">Reintentar</button>
+  <main class="card" role="main" aria-labelledby="title">
+    <div class="badge" aria-hidden="true"></div>
+
+    <img class="logo" src="/animikdemi-logo.svg" alt="Logo de Animikdemi" />
+
+    <h1 id="title">Sin conexión</h1>
+    <p>“Sin conexión, aún podemos seguir conectando”.<br/>
+       Guarda este momento para respirar; cuando vuelvas a tener internet, retomaremos desde donde te quedaste.
+    </p>
+
+    <div class="actions" role="group" aria-label="Acciones">
+      <button class="btn-primary" onclick="window.location.reload()">
+        ↻ Reintentar
+      </button>
+      <a class="button btn-outline" href="/" rel="noopener">
+        ⟵ Ir al inicio
+      </a>
     </div>
-  </div>
+
+    <p class="hint">Si el problema persiste, verifica tu conexión o inténtalo más tarde.</p>
+  </main>
+
+  <script>
+    // Si vuelve la conexión, intentamos refrescar automáticamente
+    window.addEventListener('online', () => setTimeout(() => location.reload(), 400));
+  </script>
 </body>
 </html>
