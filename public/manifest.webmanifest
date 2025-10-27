@@ -8,6 +8,7 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["minimal-ui", "standalone"],
   "orientation": "portrait",
   "background_color": "#fffafa",
   "theme_color": "#101021",
@@ -46,17 +47,75 @@
   ],
   "screenshots": [
     {
-      "src": "screenshots/dashboard-wide.png",
-      "sizes": "2048x1536",
+      "src": "screenshots/home-portrait.png",
+      "sizes": "1080x1920",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Vista del dashboard en escritorio"
+      "form_factor": "narrow",
+      "label": "Vista principal en móvil"
     },
     {
-      "src": "screenshots/dashboard-mobile.png",
-      "sizes": "1242x2688",
+      "src": "screenshots/home-landscape.png",
+      "sizes": "1920x1080",
       "type": "image/png",
-      "label": "Vista del dashboard en móvil"
+      "form_factor": "wide",
+      "label": "Vista principal en escritorio"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mi Panel",
+      "short_name": "Panel",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "icons/shortcut-panel.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Diario Emocional",
+      "short_name": "Diario",
+      "url": "/diario",
+      "icons": [
+        {
+          "src": "icons/shortcut-diario.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "focus-existing"
+    ]
+  },
+  "share_target": {
+    "action": "/compartir",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "titulo",
+      "text": "texto",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/compose?to=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/abrir-archivo",
+      "accept": {
+        "application/json": [
+          ".json"
+        ]
+      }
     }
   ]
 }

@@ -23,6 +23,9 @@ import GuidesAndManualsPage from './pages/resources/GuidesAndManualsPage';
 import ComplementaryResourcesPage from './pages/resources/ComplementaryResourcesPage';
 import InfographicsPage from './pages/resources/InfographicsPage';
 import KitReflexivoPage from './pages/KitReflexivoPage';
+import ShareInboxPage from './pages/ShareInboxPage';
+import ComposeMessagePage from './pages/ComposeMessagePage';
+import FileImportPage from './pages/FileImportPage';
 import DiagnosticTestModal from './components/platform/DiagnosticTestModal';
 import EnrollmentConfirmationModal from './components/platform/EnrollmentConfirmationModal';
 import LoginPage from './pages/LoginPage';
@@ -42,7 +45,46 @@ export type View =
   | 'resources'
   | 'resources-guides'
   | 'resources-infographics'
-  | 'resources-complementary';
+  | 'resources-complementary'
+  | 'share'
+  | 'compose'
+  | 'file-open';
+
+const viewPathMap: Partial<Record<View, string>> = {
+  share: '/compartir',
+  compose: '/compose',
+  'file-open': '/abrir-archivo',
+};
+
+const pathViewMap: Record<string, View> = {
+  '/compartir': 'share',
+  '/compose': 'compose',
+  '/abrir-archivo': 'file-open',
+};
+
+const resolveInitialView = (): View => {
+  if (typeof window === 'undefined') return 'dashboard';
+  const path = window.location.pathname;
+  return pathViewMap[path] ?? 'dashboard';
+};
+
+const readShareParams = () => {
+  if (typeof window === 'undefined') return { title: '', text: '', url: '' };
+  const params = new URLSearchParams(window.location.search);
+  return {
+    title: params.get('titulo') || params.get('title') || '',
+    text: params.get('texto') || params.get('text') || '',
+    url: params.get('url') || '',
+  };
+};
+
+const readComposeParams = () => {
+  if (typeof window === 'undefined') return { to: '' };
+  const params = new URLSearchParams(window.location.search);
+  return {
+    to: params.get('to') || '',
+  };
+};
 
 const App: React.FC = () => {
     const { isLoading, isAuthenticated, user: kindeUser, login, register, logout } = useKindeAuth();
@@ -51,10 +93,12 @@ const App: React.FC = () => {
     // State management
     const [user, setUser] = useState<User | null>(null);
     const [progress, setProgress] = useState<UserProgress>(initialUserProgress);
-    const [view, setView] = useState<View>('dashboard');
+    const [view, setView] = useState<View>(() => resolveInitialView());
     const [activeCourseId, setActiveCourseId] = useState<string | null>(null);
     const [courseToEnroll, setCourseToEnroll] = useState<Course | null>(null);
     const [showDiagnostic, setShowDiagnostic] = useState(false);
+    const [shareDefaults, setShareDefaults] = useState(() => readShareParams());
+    const [composeDefaults, setComposeDefaults] = useState(() => readComposeParams());
 
     useEffect(() => {
         if (bypassAuth) {
@@ -120,6 +164,28 @@ const App: React.FC = () => {
         setView(newView);
         setActiveCourseId(null);
     };
+
+    useEffect(() => {
+      if (typeof window === 'undefined') return;
+      const path = viewPathMap[view] ?? '/';
+      const shouldPreserveSearch = view === 'share' || view === 'compose';
+      const desiredUrl = shouldPreserveSearch ? `${path}${window.location.search}` : path;
+      if (window.location.pathname !== path || (!shouldPreserveSearch && window.location.search)) {
+        window.history.replaceState(null, '', desiredUrl);
+      }
+    }, [view]);
+
+    useEffect(() => {
+      if (view === 'share') {
+        setShareDefaults(readShareParams());
+      }
+    }, [view]);
+
+    useEffect(() => {
+      if (view === 'compose') {
+        setComposeDefaults(readComposeParams());
+      }
+    }, [view]);
     
     const handleDiagnosticComplete = (answers: string[], recommendedCategory: string) => {
        if(!user) return;
@@ -349,6 +415,12 @@ const App: React.FC = () => {
                 );
             case 'community':
                 return <KitReflexivoPage />;
+            case 'share':
+                return <ShareInboxPage initialData={shareDefaults} onBack={() => handleNavigation('dashboard')} />;
+            case 'compose':
+                return <ComposeMessagePage defaultTo={composeDefaults.to} onBack={() => handleNavigation('dashboard')} />;
+            case 'file-open':
+                return <FileImportPage onBack={() => handleNavigation('dashboard')} />;
             case 'profile':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} />;
             default:
