@@ -3,11 +3,13 @@ const STATIC_CACHE = 'animikdemi-campus-static-v5';
 const RUNTIME_CACHE = 'animikdemi-campus-runtime-v5';
 const FONT_CACHE = 'animikdemi-campus-fonts-v5';
 
+const offlineFallbackPage = '/offline.html';
+
 const APP_STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/offline.html',
+  offlineFallbackPage,
   '/icons/animikdemi-512.png',
   '/icons/animikdemi-512-maskable.png',
   '/icons/animikdemi-256.png',
@@ -25,7 +27,6 @@ const APP_STATIC_PATHS = new Set(
 );
 
 const FONT_HOSTNAMES = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
-const OFFLINE_URL = '/offline.html';
 const OFFLINE_ROUTES = ['/dashboard', '/diario'];
 
 self.addEventListener('install', event => {
@@ -190,7 +191,7 @@ async function handleNavigationRequest(request) {
     throw new Error('Invalid response');
   } catch {
     if (cachedShell) return cachedShell;
-    const offline = await cache.match(OFFLINE_URL);
+    const offline = await cache.match(offlineFallbackPage);
     if (offline) return offline;
     throw new Error('Offline and no cached shell');
   }
