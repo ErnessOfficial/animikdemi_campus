@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnImiKdemi • Sin conexión</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #fffafa 0%, #f0f2f5 100%);
+      min-height: 100vh;
+      margin: 0;
+      color: #101021;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(16, 16, 33, 0.08);
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+      color: #6e4380;
+    }
+    p {
+      margin: 0.75rem 0;
+      line-height: 1.5;
+      color: rgba(16, 16, 33, 0.75);
+    }
+    .actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    a, button {
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    a {
+      background: #6e4380;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(110, 67, 128, 0.25);
+    }
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(110, 67, 128, 0.25);
+    }
+    button {
+      background: transparent;
+      color: #24668e;
+      border: 1px solid rgba(36, 102, 142, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Sin conexión</h1>
+    <p>No pudimos conectar con AnImiKdemi Campus en este momento.</p>
+    <p>Puedes revisar tus notas guardadas y retomar cuando recuperes la conexión.</p>
+    <div class="actions">
+      <a href="/">Abrir panel</a>
+      <button type="button" onclick="window.location.reload()">Reintentar</button>
+    </div>
+  </div>
+</body>
+</html>
