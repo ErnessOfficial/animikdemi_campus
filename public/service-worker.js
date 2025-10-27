@@ -1,8 +1,7 @@
 
-const CACHE_VERSION = 'v4';
-const STATIC_CACHE = `animikdemi-campus-static-${CACHE_VERSION}`;
-const RUNTIME_CACHE = `animikdemi-campus-runtime-${CACHE_VERSION}`;
-const FONT_CACHE = `animikdemi-campus-fonts-${CACHE_VERSION}`;
+const STATIC_CACHE = 'animikdemi-campus-static-v5';
+const RUNTIME_CACHE = 'animikdemi-campus-runtime-v5';
+const FONT_CACHE = 'animikdemi-campus-fonts-v5';
 
 const APP_STATIC_ASSETS = [
   '/',
@@ -111,6 +110,9 @@ self.addEventListener('message', event => {
   if (!event.data) return;
   if (event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+    self.clients.matchAll({ type: 'window' }).then(clients => {
+      clients.forEach(client => client.navigate(client.url));
+    });
   }
 });
 
