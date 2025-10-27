@@ -1,5 +1,5 @@
 
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const STATIC_CACHE = `animikdemi-campus-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `animikdemi-campus-runtime-${CACHE_VERSION}`;
 const FONT_CACHE = `animikdemi-campus-fonts-${CACHE_VERSION}`;
@@ -8,14 +8,17 @@ const APP_STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
+  '/offline.html',
   '/icons/animikdemi-512.png',
   '/icons/animikdemi-512-maskable.png',
   '/icons/animikdemi-256.png',
   '/icons/animikdemi-192.png',
   '/icons/animikdemi-96.png',
   '/images/logo_animikdemi.png',
-  '/screenshots/dashboard-wide.png',
-  '/screenshots/dashboard-mobile.png'
+  '/icons/shortcut-panel.png',
+  '/icons/shortcut-diario.png',
+  '/screenshots/home-portrait.png',
+  '/screenshots/home-landscape.png'
 ];
 
 const APP_STATIC_PATHS = new Set(
@@ -23,11 +26,14 @@ const APP_STATIC_PATHS = new Set(
 );
 
 const FONT_HOSTNAMES = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
+const OFFLINE_URL = '/offline.html';
+const OFFLINE_ROUTES = ['/dashboard', '/diario'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then(cache =>
-      Promise.allSettled(
+    (async () => {
+      const cache = await caches.open(STATIC_CACHE);
+      await Promise.allSettled(
         APP_STATIC_ASSETS.map(async asset => {
           try {
             await cache.add(asset);
@@ -35,10 +41,10 @@ self.addEventListener('install', event => {
             // Ignore individual asset failures to avoid blocking the install step.
           }
         })
-      )
-    )
+      );
+      await notifyClientsAboutUpdate();
+    })()
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -77,18 +83,18 @@ self.addEventListener('fetch', event => {
   }
 
   if (request.mode === 'navigate') {
-    event.respondWith(networkFirst(request));
+    event.respondWith(handleNavigationRequest(request));
     return;
   }
 
   if (requestUrl.origin === self.location.origin) {
     if (APP_STATIC_PATHS.has(requestUrl.pathname)) {
-      event.respondWith(cacheFirst(request, STATIC_CACHE));
+      event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
       return;
     }
 
     if (requestUrl.pathname.startsWith('/assets/')) {
-      event.respondWith(cacheFirst(request, STATIC_CACHE));
+      event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
       return;
     }
   }
@@ -99,6 +105,13 @@ self.addEventListener('fetch', event => {
   }
 
   event.respondWith(networkFirst(request));
+});
+
+self.addEventListener('message', event => {
+  if (!event.data) return;
+  if (event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 async function cacheFirst(request, cacheName) {
@@ -153,6 +166,34 @@ async function networkFirst(request) {
   }
 }
 
+async function handleNavigationRequest(request) {
+  const cache = await caches.open(STATIC_CACHE);
+  const cachedShell = await cache.match('/index.html');
+  const isCriticalRoute = OFFLINE_ROUTES.some(route =>
+    request.url.startsWith(new URL(route, self.location.origin).href)
+  );
+
+  if (isCriticalRoute && cachedShell) {
+    networkFirst(request).catch(() => {});
+    return cachedShell;
+  }
+
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) {
+      const runtimeCache = await caches.open(RUNTIME_CACHE);
+      runtimeCache.put(request, response.clone());
+      return response;
+    }
+    throw new Error('Invalid response');
+  } catch {
+    if (cachedShell) return cachedShell;
+    const offline = await cache.match(OFFLINE_URL);
+    if (offline) return offline;
+    throw new Error('Offline and no cached shell');
+  }
+}
+
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cachedResponsePromise = cache.match(request);
@@ -173,4 +214,13 @@ async function staleWhileRevalidate(request, cacheName) {
 
 function isCacheableResponse(response) {
   return Boolean(response && response.ok && response.status !== 206);
+}
+
+async function notifyClientsAboutUpdate() {
+  if (!self.registration || !self.registration.active) return;
+  const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+  if (clients.length === 0) return;
+  for (const client of clients) {
+    client.postMessage({ type: 'SW_UPDATE_AVAILABLE' });
+  }
 }

@@ -99,6 +99,8 @@ const App: React.FC = () => {
     const [showDiagnostic, setShowDiagnostic] = useState(false);
     const [shareDefaults, setShareDefaults] = useState(() => readShareParams());
     const [composeDefaults, setComposeDefaults] = useState(() => readComposeParams());
+    const [swUpdateReady, setSwUpdateReady] = useState(false);
+    const [swUpdating, setSwUpdating] = useState(false);
 
     useEffect(() => {
         if (bypassAuth) {
@@ -186,6 +188,39 @@ const App: React.FC = () => {
         setComposeDefaults(readComposeParams());
       }
     }, [view]);
+
+    useEffect(() => {
+      if (!('serviceWorker' in navigator)) return;
+      const handleMessage = (event: MessageEvent) => {
+        const data = event.data as { type?: string } | undefined;
+        if (data?.type === 'SW_UPDATE_AVAILABLE') {
+          setSwUpdateReady(true);
+        }
+      };
+      navigator.serviceWorker.addEventListener('message', handleMessage);
+
+      const handleControllerChange = () => {
+        window.location.reload();
+      };
+      navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange);
+
+      return () => {
+        navigator.serviceWorker.removeEventListener('message', handleMessage);
+        navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);
+      };
+    }, []);
+
+    const handleRefreshApp = async () => {
+      if (!('serviceWorker' in navigator)) return;
+      setSwUpdating(true);
+      try {
+        const registration = await navigator.serviceWorker.getRegistration();
+        registration?.waiting?.postMessage({ type: 'SKIP_WAITING' });
+      } catch {
+        setSwUpdating(false);
+        setSwUpdateReady(false);
+      }
+    };
     
     const handleDiagnosticComplete = (answers: string[], recommendedCategory: string) => {
        if(!user) return;
@@ -475,6 +510,27 @@ const App: React.FC = () => {
     return (
         <>
             {content}
+            {swUpdateReady && (
+              <div className="fixed bottom-4 right-4 z-50 max-w-xs rounded-2xl bg-[#101021] text-white shadow-lg p-4 space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="mt-1">
+                    <i className="fas fa-arrow-rotate-right text-[#6e4380]"></i>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">Hay una actualización</p>
+                    <p className="text-xs text-white/80 mt-1">Reinicia la aplicación para cargar la última versión.</p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleRefreshApp}
+                  disabled={swUpdating}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#6e4380] px-4 py-2 text-sm font-semibold hover:bg-[#4c1760] disabled:opacity-60"
+                >
+                  <i className="fas fa-sync"></i>
+                  {swUpdating ? 'Actualizando…' : 'Actualizar'}
+                </button>
+              </div>
+            )}
             {import.meta.env.DEV && <DebugAuthPanel />}
         </>
     );
