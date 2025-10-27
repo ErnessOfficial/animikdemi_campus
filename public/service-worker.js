@@ -1,10 +1,17 @@
 
-const STATIC_CACHE = 'animikdemi-campus-static-v5';
+/* Animikdemi Service Worker – v5.1
+   - Estrategia híbrida: App Shell + SWR para estáticos + NetworkFirst para runtime
+   - Copia de páginas visitadas y fallback offline.html para navegaciones
+   - Compatibilidad PWABuilder / Lighthouse / TWA
+*/
+
+const STATIC_CACHE  = 'animikdemi-campus-static-v5';
 const RUNTIME_CACHE = 'animikdemi-campus-runtime-v5';
-const FONT_CACHE = 'animikdemi-campus-fonts-v5';
+const FONT_CACHE    = 'animikdemi-campus-fonts-v5';
 
 const offlineFallbackPage = '/offline.html';
 
+// ---------- App Shell y activos estáticos a precache ----------
 const APP_STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -29,84 +36,94 @@ const APP_STATIC_PATHS = new Set(
 const FONT_HOSTNAMES = new Set(['fonts.googleapis.com', 'fonts.gstatic.com']);
 const OFFLINE_ROUTES = ['/dashboard', '/diario'];
 
+// ---------- Install ----------
 self.addEventListener('install', event => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(STATIC_CACHE);
+      // Precarga tolerante a fallos (no bloquea si un asset falla)
       await Promise.allSettled(
         APP_STATIC_ASSETS.map(async asset => {
           try {
             await cache.add(asset);
           } catch {
-            // Ignore individual asset failures to avoid blocking the install step.
+            // Ignorar fallos individuales
           }
         })
       );
       await notifyClientsAboutUpdate();
     })()
   );
+  self.skipWaiting();
 });
 
+// ---------- Activate ----------
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheKeys =>
-      Promise.all(
+    (async () => {
+      // Limpieza de versiones antiguas
+      const cacheKeys = await caches.keys();
+      await Promise.all(
         cacheKeys
-          .filter(
-            key =>
-              key !== STATIC_CACHE &&
-              key !== RUNTIME_CACHE &&
-              key !== FONT_CACHE
-          )
+          .filter(key => key !== STATIC_CACHE && key !== RUNTIME_CACHE && key !== FONT_CACHE)
           .map(key => caches.delete(key))
-      )
-    )
+      );
+
+      // Precarga de navegación (mejor primera respuesta)
+      if ('navigationPreload' in self.registration) {
+        try {
+          await self.registration.navigationPreload.enable();
+        } catch { /* noop */ }
+      }
+    })()
   );
   self.clients.claim();
 });
 
+// ---------- Fetch ----------
 self.addEventListener('fetch', event => {
   const { request } = event;
 
-  if (request.method !== 'GET') {
-    return;
-  }
+  if (request.method !== 'GET') return;
+
   const requestUrl = new URL(request.url);
+  if (!['http:', 'https:'].includes(requestUrl.protocol)) return;
 
-  if (!['http:', 'https:'].includes(requestUrl.protocol)) {
-    return;
-  }
-
+  // Passthrough para media y peticiones range
   if (request.headers.has('range') || ['audio', 'video'].includes(request.destination)) {
     event.respondWith(fetch(request));
     return;
   }
 
+  // Navegaciones: usar app shell + fallback offline
   if (request.mode === 'navigate') {
     event.respondWith(handleNavigationRequest(request));
     return;
   }
 
+  // Estáticos propios
   if (requestUrl.origin === self.location.origin) {
     if (APP_STATIC_PATHS.has(requestUrl.pathname)) {
       event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
       return;
     }
-
     if (requestUrl.pathname.startsWith('/assets/')) {
       event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
       return;
     }
   }
 
+  // Fuentes
   if (FONT_HOSTNAMES.has(requestUrl.hostname)) {
     event.respondWith(staleWhileRevalidate(request, FONT_CACHE));
     return;
   }
 
+  // Resto: runtime
   event.respondWith(networkFirst(request));
 });
 
+// ---------- Mensajes ----------
 self.addEventListener('message', event => {
   if (!event.data) return;
   if (event.data.type === 'SKIP_WAITING') {
@@ -117,27 +134,22 @@ self.addEventListener('message', event => {
   }
 });
 
+// ========== Estrategias utilitarias ==========
+
 async function cacheFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
-
-  if (cached) {
-    return cached;
-  }
+  if (cached) return cached;
 
   try {
     const response = await fetch(request);
-    if (response && response.ok) {
-      if (isCacheableResponse(response)) {
-        cache.put(request, response.clone());
-      }
+    if (response && response.ok && isCacheableResponse(response)) {
+      cache.put(request, response.clone());
     }
     return response;
   } catch (error) {
     const fallback = await caches.match('/index.html');
-    if (fallback) {
-      return fallback;
-    }
+    if (fallback) return fallback;
     throw error;
   }
 }
@@ -146,25 +158,21 @@ async function networkFirst(request) {
   const cache = await caches.open(RUNTIME_CACHE);
   try {
     const response = await fetch(request);
-    if (response && response.ok) {
-      if (isCacheableResponse(response)) {
-        cache.put(request, response.clone());
-      }
+    if (response && response.ok && isCacheableResponse(response)) {
+      cache.put(request, response.clone());
     }
     return response;
   } catch (error) {
     const cached = await cache.match(request);
-    if (cached) {
-      return cached;
-    }
+    if (cached) return cached;
 
+    // 👉 Mejora: si es navegación y no hay cache ni red, usa offline.html
     if (request.mode === 'navigate') {
-      const fallback = await caches.match('/index.html');
-      if (fallback) {
-        return fallback;
-      }
+      const offline = await caches.match(offlineFallbackPage);
+      if (offline) return offline;
     }
 
+    // Llegados aquí, no hay nada que dar
     throw error;
   }
 }
@@ -177,6 +185,7 @@ async function handleNavigationRequest(request) {
   );
 
   if (isCriticalRoute && cachedShell) {
+    // App shell inmediato, red de fondo
     networkFirst(request).catch(() => {});
     return cachedShell;
   }
@@ -200,12 +209,11 @@ async function handleNavigationRequest(request) {
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cachedResponsePromise = cache.match(request);
+
   const networkResponsePromise = fetch(request)
     .then(response => {
-      if (response && response.ok) {
-        if (isCacheableResponse(response)) {
-          cache.put(request, response.clone());
-        }
+      if (response && response.ok && isCacheableResponse(response)) {
+        cache.put(request, response.clone());
       }
       return response;
     })
