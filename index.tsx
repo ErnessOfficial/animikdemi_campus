@@ -34,9 +34,7 @@ root.render(
 
 if ('serviceWorker' in navigator) {
   if (import.meta.env.PROD) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js').catch(() => {});
-    });
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).catch(() => {});
   } else {
     navigator.serviceWorker.getRegistrations?.()
       .then(regs => regs.forEach(reg => reg.unregister()))
