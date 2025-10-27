@@ -32,8 +32,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       model: MODEL_NAME,
       contents: prompt,
     });
+    const text = result.text?.trim();
     return res.status(200).json({
-      text: result.response?.text()?.trim() ?? '',
+      text: text || '',
     });
   } catch (error: any) {
     console.error('[kit-reflexivo]', error);

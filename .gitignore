@@ -28,3 +28,4 @@ backups/
 *.tar.gz
 *.zip
 *.7z
+.vercel
