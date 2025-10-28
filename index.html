@@ -11,5 +11,15 @@
 <body class="bg-[#fffafa] text-[#101021] animikdemi-campus">
   <div id="root"></div>
   <script type="module" src="./index.tsx"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/service-worker.js', { scope: '/' })
+          .then(reg => console.log('SW registrado (inline)', reg))
+          .catch(err => console.warn('Fallo registro SW', err));
+      });
+    }
+  </script>
 </body>
 </html>
