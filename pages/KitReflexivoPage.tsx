@@ -193,8 +193,10 @@ const KitReflexivoPage: React.FC = () => {
 
         {activeCard === 'interaccion' ? (
           <form onSubmit={handleInteractSubmit} className="space-y-4">
-            <label className="block text-sm font-semibold text-[#101021]">Comparte brevemente en qué necesitas apoyo</label>
+            <label className="block text-sm font-semibold text-[#101021]" htmlFor="kit-reflexivo-question">Comparte brevemente en qué necesitas apoyo</label>
             <textarea
+              id="kit-reflexivo-question"
+              name="kitReflexivoQuestion"
               value={userQuestion}
               onChange={e => setUserQuestion(e.target.value)}
               rows={4}
