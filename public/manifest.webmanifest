@@ -87,6 +87,11 @@
       ]
     }
   ],
+  "serviceworker": {
+    "src": "/service-worker.js",
+    "scope": "/",
+    "type": "classic"
+  },
   "launch_handler": {
     "client_mode": [
       "focus-existing"

@@ -1,9 +1,17 @@
 
-/* Animikdemi Service Worker – v5.1
+/* Animikdemi Service Worker – v5.2
    - Estrategia híbrida: App Shell + SWR para estáticos + NetworkFirst para runtime
    - Copia de páginas visitadas y fallback offline.html para navegaciones
    - Compatibilidad PWABuilder / Lighthouse / TWA
 */
+
+self.addEventListener('error', event => {
+  console.error('[SW] error', event.message);
+});
+
+self.addEventListener('unhandledrejection', event => {
+  console.error('[SW] unhandled rejection', event.reason);
+});
 
 const STATIC_CACHE  = 'animikdemi-campus-static-v5';
 const RUNTIME_CACHE = 'animikdemi-campus-runtime-v5';
