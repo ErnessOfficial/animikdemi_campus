@@ -11,5 +11,20 @@
 <body class="bg-[#fffafa] text-[#101021] animikdemi-campus">
   <div id="root"></div>
   <script type="module" src="./index.tsx"></script>
+  <script>
+    (function () {
+      if (!('serviceWorker' in navigator)) return;
+
+      function registerReal() {
+        return navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
+      }
+
+      window.addEventListener('load', function () {
+        navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .catch(registerReal);
+      });
+    })();
+  </script>
 </body>
 </html>
