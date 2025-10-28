@@ -69,9 +69,8 @@
       ]
     }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/service-worker.js", "dest": "/service-worker.js" },
-    { "src": "/.*", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/service-worker.js", "destination": "/service-worker.js" },
+    { "source": "/:path*", "destination": "/index.html" }
   ]
 }
