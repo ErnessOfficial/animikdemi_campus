@@ -28,6 +28,7 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "orientation": "portrait",
   "background_color": "#fffafa",
   "theme_color": "#101021",
