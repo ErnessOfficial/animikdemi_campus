@@ -39,6 +39,7 @@ const CSS_BASE = `
 const M1A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 .hero{background:linear-gradient(135deg,var(--pd) 0%,var(--b) 100%);padding:32px 24px 36px;color:#fff;position:relative;overflow:hidden}
+.hero p, .hero strong { color:#fff; }
 .hero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
 .hero .chip{background:rgba(255,255,255,.15);color:#fff;margin-bottom:12px}
 .hero h1{font-size:clamp(20px,5vw,28px);font-weight:800;margin-bottom:10px}
@@ -66,22 +67,16 @@ ${CSS_BASE}
   <h2>🎬 Toma el control</h2>
   <p class="sub">Observa este escenario cotidiano y reflexiona sobre cómo responderías.</p>
   <div class="phone-wrap">
-    <div class="phone">
-      <div class="screen">
-        <div class="play" title="Video disponible próximamente">▶</div>
-        <div class="pending">Video en preparación</div>
-        <div class="badge">☁ Cloudinary · Pendiente de enlace</div>
-      </div>
+    <div class="phone" style="padding: 10px;">
+      <video controls playsinline style="width: 100%; border-radius: 20px; aspect-ratio: 9/16; object-fit: cover; background: #000;">
+        <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781543400/video1-modulo_1_sqgnpz.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
   </div>
-  <!-- DESARROLLADOR: Sustituye el div.phone-screen por la etiqueta <video> cuando
-       dispongas del enlace Cloudinary:
-       CLOUDINARY_URL_AQUI → p. ej.:
-       https://res.cloudinary.com/TU_CLOUD/video/upload/m1_toma_el_control.mp4 -->
   <div class="info-box">
     💡 <strong>¿Qué vas a ver?</strong> Un escenario de la vida real: un compañero toma el crédito de tu trabajo en una reunión de equipo. ¿Cómo responderías tú?
   </div>
-  <div class="dev-note">DEV: Insertar URL de Cloudinary para el video vertical 9:16 del Módulo 1.</div>
 </div>
 </body></html>`;
 
