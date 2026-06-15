@@ -39,6 +39,7 @@ const CSS_BASE = `
 const M1A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 .hero{background:linear-gradient(135deg,var(--pd) 0%,var(--b) 100%);padding:32px 24px 36px;color:#fff;position:relative;overflow:hidden}
+.hero p, .hero strong { color:#fff; }
 .hero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
 .hero .chip{background:rgba(255,255,255,.15);color:#fff;margin-bottom:12px}
 .hero h1{font-size:clamp(20px,5vw,28px);font-weight:800;margin-bottom:10px}
@@ -66,22 +67,16 @@ ${CSS_BASE}
   <h2>🎬 Toma el control</h2>
   <p class="sub">Observa este escenario cotidiano y reflexiona sobre cómo responderías.</p>
   <div class="phone-wrap">
-    <div class="phone">
-      <div class="screen">
-        <div class="play" title="Video disponible próximamente">▶</div>
-        <div class="pending">Video en preparación</div>
-        <div class="badge">☁ Cloudinary · Pendiente de enlace</div>
-      </div>
+    <div class="phone" style="padding: 10px;">
+      <video controls playsinline style="width: 100%; border-radius: 20px; aspect-ratio: 9/16; object-fit: cover; background: #000;">
+        <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781543400/video1-modulo_1_sqgnpz.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
   </div>
-  <!-- DESARROLLADOR: Sustituye el div.phone-screen por la etiqueta <video> cuando
-       dispongas del enlace Cloudinary:
-       CLOUDINARY_URL_AQUI → p. ej.:
-       https://res.cloudinary.com/TU_CLOUD/video/upload/m1_toma_el_control.mp4 -->
   <div class="info-box">
     💡 <strong>¿Qué vas a ver?</strong> Un escenario de la vida real: un compañero toma el crédito de tu trabajo en una reunión de equipo. ¿Cómo responderías tú?
   </div>
-  <div class="dev-note">DEV: Insertar URL de Cloudinary para el video vertical 9:16 del Módulo 1.</div>
 </div>
 </body></html>`;
 
@@ -1811,16 +1806,14 @@ export const course: Course = {
         // ── M3·A1 · Texto intro + video ─────────────────────────────────────
         {
           id: 'm3a1',
-          type: 'video',
-          title: '¿Por qué nos cuesta tanto decir NO?',
-          description: 'Descubre la raíz psicológica de la dificultad para negarse y por qué el "no" asertivo es un acto de respeto, no de egoísmo.',
-          videoSrc: 'CLOUDINARY_URL_AQUI_M3_VIDEO_NO',
-          // DESARROLLADOR: Reemplaza CLOUDINARY_URL_AQUI_M3_VIDEO_NO con:
-          // https://res.cloudinary.com/TU_CLOUD/video/upload/m3_el_arte_del_no.mp4
+          type: 'youtube',
+          title: 'Barreras de la Comunicación',
+          description: 'Reproduzca el video y observe con atención las dinámicas de comunicación que ocurren y reflexione al respecto.',
+          videoSrc: 'https://youtu.be/f-glZkwlE1U?si=wcz5s7lFQSKO2kkt',
           content: [
-            '¿Por qué sentimos culpa cuando decimos "no"? La respuesta tiene raíces profundas: desde niños, aprendemos que decir sí genera aprobación y decir no genera conflicto. Con el tiempo, ese patrón se automatiza.',
-            'Pero hay algo que nadie nos enseñó: cada vez que decimos "sí" cuando queremos decir "no", le enviamos un mensaje a nuestra mente que dice: "mis límites no importan". Y eso, acumulado en el tiempo, tiene un coste.',
-            'La fórmula DESC que aprenderás en este módulo no es una técnica de manipulación. Es una forma de hacer que tu "no" sea claro, respetuoso y difícil de ignorar, sin necesitar un argumento de batalla.',
+            'A lo largo de nuestras interacciones diarias nos encontramos con diversos obstáculos que impiden que el mensaje llegue o se entienda tal y como queríamos. A esto le llamamos "barreras de la comunicación".',
+            'Como pudiste observar en el video, la falta de asertividad, el ruido, las distracciones o los prejuicios pueden alterar completamente el significado de una conversación. Identificar estas barreras es el primer paso para poder derribarlas.',
+            'Reflexiona: ¿Cuáles de estas dinámicas reconoces en tus propias conversaciones? ¿Qué puedes hacer hoy para comenzar a ser más asertivo y claro?',
           ],
         },
 
