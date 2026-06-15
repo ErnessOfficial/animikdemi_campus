@@ -17,6 +17,8 @@ const ACTIVITY_MINUTES: Record<Activity['type'], number> = {
   flipCards: 6,
   pillarsInteractive: 10,
   pondGame: 8,
+  iframe: 7,
+  interactiveGame: 10,
 };
 
 // Additional overhead per module (navigation, reading headings)
