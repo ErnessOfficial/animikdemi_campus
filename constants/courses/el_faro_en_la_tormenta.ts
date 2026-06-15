@@ -25,7 +25,7 @@ export const course: Course = {
   // ----------------------------------------------------------
   category: 'Duelo, Pérdida & Crisis',
   broadCategories: ['Gestión Emocional', 'Autoconocimiento'],
-  coverImage: assetPath('images/tormenta_faro_portada.png'),
+  coverImage: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781560718/Logo_Featuring_Sound_Wave_in_Letter_O-13_ue0sfy.png',
 
   // ----------------------------------------------------------
   //  INSTRUCTOR
@@ -69,7 +69,7 @@ export const course: Course = {
             '• Referencia Clave: En "El cuerpo lleva la cuenta", el Dr. Bessel van der Kolk explica cómo el estrés severo altera los filtros del cerebro, haciendo que los estímulos cotidianos parezcan abrumadores.',
             'El primer paso para recuperar el foco es dejar de castigarte por no tenerlo. La compasión reduce el cortisol, y con menos cortisol, la concentración comienza a regresar.'
           ],
-          imageSrc: assetPath('images/cerebro_crisis.png'),
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781560720/Logo_Featuring_Sound_Wave_in_Letter_O-12_dus3dn.png',
           imageAltSrc: assetPath('images/cerebro_crisis_fallback.png'),
         },
         {
@@ -236,7 +236,7 @@ export const course: Course = {
           type: 'reflectionTree',
           title: 'El Árbol de tu Estabilidad',
           description: 'Construye tu mapa visual. Raíces (Técnicas de anclaje), Tronco (Los límites que pondrás esta semana), Ramas (Tus tareas micro-enfocadas reales).',
-          imageSrc: assetPath('images/tree_illustration.png'),
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781560722/Tree_on_island_during_storm_202606152256_i77cnl.jpg',
         },
         {
           id: 'm5a2',
