@@ -1806,16 +1806,14 @@ export const course: Course = {
         // ── M3·A1 · Texto intro + video ─────────────────────────────────────
         {
           id: 'm3a1',
-          type: 'video',
-          title: '¿Por qué nos cuesta tanto decir NO?',
-          description: 'Descubre la raíz psicológica de la dificultad para negarse y por qué el "no" asertivo es un acto de respeto, no de egoísmo.',
-          videoSrc: 'CLOUDINARY_URL_AQUI_M3_VIDEO_NO',
-          // DESARROLLADOR: Reemplaza CLOUDINARY_URL_AQUI_M3_VIDEO_NO con:
-          // https://res.cloudinary.com/TU_CLOUD/video/upload/m3_el_arte_del_no.mp4
+          type: 'youtube',
+          title: 'Barreras de la Comunicación',
+          description: 'Reproduzca el video y observe con atención las dinámicas de comunicación que ocurren y reflexione al respecto.',
+          videoSrc: 'https://youtu.be/f-glZkwlE1U?si=wcz5s7lFQSKO2kkt',
           content: [
-            '¿Por qué sentimos culpa cuando decimos "no"? La respuesta tiene raíces profundas: desde niños, aprendemos que decir sí genera aprobación y decir no genera conflicto. Con el tiempo, ese patrón se automatiza.',
-            'Pero hay algo que nadie nos enseñó: cada vez que decimos "sí" cuando queremos decir "no", le enviamos un mensaje a nuestra mente que dice: "mis límites no importan". Y eso, acumulado en el tiempo, tiene un coste.',
-            'La fórmula DESC que aprenderás en este módulo no es una técnica de manipulación. Es una forma de hacer que tu "no" sea claro, respetuoso y difícil de ignorar, sin necesitar un argumento de batalla.',
+            'A lo largo de nuestras interacciones diarias nos encontramos con diversos obstáculos que impiden que el mensaje llegue o se entienda tal y como queríamos. A esto le llamamos "barreras de la comunicación".',
+            'Como pudiste observar en el video, la falta de asertividad, el ruido, las distracciones o los prejuicios pueden alterar completamente el significado de una conversación. Identificar estas barreras es el primer paso para poder derribarlas.',
+            'Reflexiona: ¿Cuáles de estas dinámicas reconoces en tus propias conversaciones? ¿Qué puedes hacer hoy para comenzar a ser más asertivo y claro?',
           ],
         },
 
