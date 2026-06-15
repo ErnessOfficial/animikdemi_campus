@@ -118,7 +118,7 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
               </div>
             );
         case 'reflectionTree':
-            return <ReflectionTree onReadyToComplete={onReadyToComplete} />;
+            return <ReflectionTree activity={activity} onReadyToComplete={onReadyToComplete} />;
         case 'audio':
             return <AudioPlayer src={activity.audioSrc || ''} transcript={activity.content as string[] | undefined} onEnded={() => onReadyToComplete?.(true)} />;
         case 'interactiveGame':

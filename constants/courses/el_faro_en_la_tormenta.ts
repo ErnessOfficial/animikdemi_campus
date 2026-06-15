@@ -237,6 +237,19 @@ export const course: Course = {
           title: 'El Árbol de tu Estabilidad',
           description: 'Construye tu mapa visual. Raíces (Técnicas de anclaje), Tronco (Los límites que pondrás esta semana), Ramas (Tus tareas micro-enfocadas reales).',
           imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781560722/Tree_on_island_during_storm_202606152256_i77cnl.jpg',
+          treeConfig: {
+            categories: [
+              { id: 'raices', title: 'Raíces: Técnicas de anclaje', icon: 'fas fa-anchor', bgColor: '#e2e8f0' },
+              { id: 'tronco', title: 'Tronco: Límites de esta semana', icon: 'fas fa-shield-alt', bgColor: '#ffedd5' },
+              { id: 'ramas', title: 'Ramas: Tareas micro-enfocadas', icon: 'fas fa-leaf', bgColor: '#dcfce7' }
+            ],
+            bank: {
+              raices: ["Respiración Fisiológica", "Técnica 5-4-3-2-1", "Choque térmico", "Estiramiento consciente", "Pausa somática 2 min"],
+              tronco: ["Apagar notificaciones de noche", "Decir 'no' a reuniones no vitales", "Evitar noticias antes de dormir", "Limitar rumiación a 15 min", "Cerrar laptop a las 18:00"],
+              ramas: ["Escribir 1 correo crítico", "Anotar la idea principal", "Lavar los platos 5 min", "Hacer 1 esquema simple", "Decidir qué cenar"]
+            },
+            hideImage: true
+          }
         },
         {
           id: 'm5a2',
