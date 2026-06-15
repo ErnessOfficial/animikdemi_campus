@@ -408,6 +408,7 @@ body{background:var(--lgray);padding:28px 20px 48px}
 .save-btn:hover{background:var(--pd);transform:translateY(-1px)}
 .saved-msg{text-align:center;font-size:14px;color:var(--green);font-weight:600;margin-top:10px;display:none}
 .closing{max-width:700px;margin:24px auto 0;background:linear-gradient(135deg,var(--pd),var(--bd));color:#fff;border-radius:16px;padding:22px 28px;text-align:center}
+.closing p, .closing strong, .closing .quote { color:#fff; }
 .closing p{font-size:15px;opacity:.92;line-height:1.7}
 .closing .quote{font-size:17px;font-weight:600;font-style:italic;margin-top:10px;opacity:.95}
 </style></head>
@@ -551,7 +552,8 @@ function save(){
 const M2A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
-.hero{background:linear-gradient(160deg,#0f0f23,#0d2a40);padding:36px 28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero{background:linear-gradient(160deg,#0f0f23,#0d2a40);padding:36px 28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(110,67,128,.3);color:#c4b5fd;border:1px solid rgba(196,181,253,.3);margin-bottom:14px}
 .hero h1{font-size:clamp(22px,5vw,30px);font-weight:800;background:linear-gradient(90deg,#c4b5fd,#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
 .hero p{font-size:15px;color:#94a3b8;line-height:1.7;max-width:520px;margin:0 auto}
@@ -640,6 +642,7 @@ const M3A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:var(--lgray);padding:0 0 40px}
 .page-header{background:linear-gradient(135deg,#ff6b35,#f59e0b);padding:28px 24px;color:#fff}
+.page-header p, .page-header strong { color:#fff; }
 .page-header .chip{background:rgba(255,255,255,.2);color:#fff;margin-bottom:10px}
 .page-header h1{font-size:22px;font-weight:800;margin-bottom:6px}
 .page-header p{font-size:14px;opacity:.9;line-height:1.6}
@@ -840,6 +843,7 @@ body{background:linear-gradient(135deg,#fff7ed 0%,#fffbeb 100%);padding:32px 20p
 .rules li{display:flex;gap:12px;font-size:14px;color:#374151;line-height:1.5}
 .rules li .num{width:26px;height:26px;background:#ef4444;color:#fff;border-radius:50%;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .download-hint{text-align:center;margin-top:28px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;border-radius:16px;padding:20px 28px;max-width:900px;margin:28px auto 0}
+.download-hint p, .download-hint strong { color:#fff; }
 .download-hint p{font-size:14px;opacity:.9}
 </style></head>
 <body>
@@ -1081,6 +1085,7 @@ const M4A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:var(--lgray);padding:0 0 48px}
 .hero{background:linear-gradient(135deg,#1e1b4b,#1e3a8a);padding:32px 24px;color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(165,180,252,.2);color:#a5b4fc;border:1px solid rgba(165,180,252,.3);margin-bottom:12px}
 .hero h1{font-size:22px;font-weight:800;margin-bottom:8px}
 .hero p{font-size:14px;color:#a5b4fc;line-height:1.65;max-width:560px}
@@ -1090,6 +1095,7 @@ body{background:var(--lgray);padding:0 0 48px}
 .video-header .dot{width:10px;height:10px;border-radius:50%}
 .r{background:#ef4444}.y{background:#fbbf24}.g{background:#22c55e}
 .video-placeholder{aspect-ratio:16/9;background:linear-gradient(160deg,#0f172a,#1e3a5f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;color:#fff}
+.video-placeholder p, .video-placeholder strong { color:#fff; }
 .video-placeholder .play-lg{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:30px}
 .video-placeholder p{font-size:13px;color:rgba(255,255,255,.5);font-style:italic}
 .badge{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);color:#fbbf24;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700}
@@ -1209,7 +1215,8 @@ function answer(qi,oi){
 const M4A2_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
-.hero{background:linear-gradient(160deg,#1e1b4b,#0f172a);padding:32px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero{background:linear-gradient(160deg,#1e1b4b,#0f172a);padding:32px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(165,180,252,.15);color:#a5b4fc;border:1px solid rgba(165,180,252,.25);margin-bottom:14px}
 .hero h1{font-size:24px;font-weight:800;background:linear-gradient(90deg,#a5b4fc,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
 .hero p{font-size:14px;color:#94a3b8;max-width:500px;margin:0 auto;line-height:1.7}
@@ -1301,7 +1308,8 @@ const M5A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:#0a0a12;color:#e2e8f0;min-height:100vh;overflow-x:hidden}
 #app{max-width:680px;margin:0 auto;padding:0 0 48px}
-.room-header{background:linear-gradient(160deg,#1a0000,#0d0d2a);padding:32px 24px;border-bottom:2px solid rgba(239,68,68,.2);text-align:center;position:relative;overflow:hidden}
+.room-header{background:linear-gradient(160deg,#1a0000,#0d0d2a);padding:32px 24px;border-bottom:2px solid rgba(239,68,68,.2);text-align:center;position:relative;overflow:hidden;color:#fff}
+.room-header p, .room-header strong { color:#fff; }
 .room-header::before{content:'⚠';position:absolute;font-size:120px;opacity:.05;top:0;right:0;pointer-events:none}
 .chip-danger{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);padding:5px 14px;border-radius:20px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:inline-block}
 .room-header h1{font-size:26px;font-weight:800;background:linear-gradient(90deg,#f87171,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
