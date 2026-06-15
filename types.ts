@@ -81,6 +81,11 @@ export interface Activity {
   // Interactive Game (custom)
   gameType?: string;
   instructions?: string;
+  treeConfig?: {
+    categories: Array<{ id: string; title: string; icon: string; bgColor: string }>;
+    bank: Record<string, string[]>;
+    hideImage?: boolean;
+  };
 }
 
 export interface Module {
