@@ -77,6 +77,9 @@ ${CSS_BASE}
   <div class="info-box">
     💡 <strong>¿Qué vas a ver?</strong> Un escenario de la vida real: un compañero toma el crédito de tu trabajo en una reunión de equipo. ¿Cómo responderías tú?
   </div>
+  <div style="margin-top: 24px; text-align: center; background: rgba(36, 102, 142, 0.08); padding: 18px; border-radius: 12px; border: 1px dashed rgba(36, 102, 142, 0.3);">
+    <p style="color: #24668e; font-size: 14px; font-weight: 700; margin: 0;">👉 Cuando termines el video, haz clic en "Marcar como completado" para elegir tu respuesta a esta situación en la siguiente pantalla.</p>
+  </div>
 </div>
 </body></html>`;
 
@@ -85,131 +88,191 @@ ${CSS_BASE}
 // ─────────────────────────────────────────────────────────────────────────────
 const M1A2_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
-body{background:var(--lgray);padding:28px 20px 40px}
-.lead{font-size:16px;color:var(--dark);font-weight:500;text-align:center;max-width:600px;margin:0 auto 28px;line-height:1.7}
-.lead strong{color:var(--p)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:960px;margin:0 auto}
-.card-wrap{perspective:1200px;height:320px;cursor:pointer}
-.card-inner{position:relative;width:100%;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
-.card-wrap.flipped .card-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;border-radius:var(--r);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;padding:24px;box-shadow:var(--sh)}
-.front{background:var(--white);border:2px solid transparent}
-.back{transform:rotateY(180deg)}
-.face .emoji{font-size:32px;margin-bottom:10px}
-.face .opt-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
-.face .opt-title{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--dark)}
-.face .opt-desc{font-size:14px;color:var(--gray);line-height:1.6;flex:1}
-.face .click-hint{font-size:12px;color:var(--b);font-weight:600;margin-top:12px;display:flex;align-items:center;gap:6px}
-/* Pasiva */
-.c0 .front{border-color:#94a3b8}
-.c0 .opt-label{color:#64748b}
-.c0 .back{background:#1e293b;color:#f1f5f9}
-.c0 .back .opt-title{color:#e2e8f0}
-.c0 .back .back-desc{color:#cbd5e1;font-size:14px;line-height:1.65}
-.c0 .back .highlight{background:rgba(100,116,139,.2);border-left:3px solid #64748b;padding:10px 12px;border-radius:0 8px 8px 0;margin-top:14px;font-size:13px;font-style:italic;color:#94a3b8}
-/* Agresiva */
-.c1 .front{border-color:#ef4444}
-.c1 .opt-label{color:#dc2626}
-.c1 .back{background:#450a0a;color:#fef2f2}
-.c1 .back .opt-title{color:#fca5a5}
-.c1 .back .back-desc{color:#fecaca;font-size:14px;line-height:1.65}
-.c1 .back .highlight{background:rgba(239,68,68,.15);border-left:3px solid #ef4444;padding:10px 12px;border-radius:0 8px 8px 0;margin-top:14px;font-size:13px;font-style:italic;color:#fca5a5}
-/* Asertiva */
-.c2 .front{border-color:#16a34a}
-.c2 .opt-label{color:#16a34a}
-.c2 .back{background:#052e16;color:#f0fdf4}
-.c2 .back .opt-title{color:#86efac}
-.c2 .back .back-desc{color:#bbf7d0;font-size:14px;line-height:1.65}
-.c2 .back .highlight{background:rgba(22,163,74,.15);border-left:3px solid #16a34a;padding:10px 12px;border-radius:0 8px 8px 0;margin-top:14px;font-size:13px;font-style:italic;color:#86efac}
-.badge-selected{position:absolute;top:12px;right:12px;background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;opacity:0;transition:opacity .3s}
-.card-wrap.flipped .badge-selected{opacity:1}
-.result-bar{max-width:960px;margin:24px auto 0;background:var(--white);border-radius:var(--r);padding:20px 24px;border:2px dashed var(--p);display:none;text-align:center}
-.result-bar.show{display:block;animation:fadeIn .4s ease}
-.result-bar h3{font-size:18px;color:var(--p);margin-bottom:6px}
-.result-bar p{font-size:14px;color:var(--gray)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+body{background:var(--lgray);padding:32px 20px 48px;max-width:800px;margin:0 auto}
+.intro{text-align:center;margin-bottom:28px}
+.intro h2{font-size:22px;font-weight:800;color:var(--pd);margin-bottom:8px}
+.intro p{font-size:15px;color:var(--dark);line-height:1.6}
+
+.options-container{display:flex;flex-direction:column;gap:16px}
+.option-btn{background:#fff;border:2px solid transparent;border-radius:16px;padding:20px 24px;text-align:left;cursor:pointer;transition:all .2s;box-shadow:var(--sh);display:flex;gap:16px;align-items:flex-start}
+.option-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,16,33,.15)}
+
+.option-btn .icon{font-size:28px;flex-shrink:0;margin-top:-4px}
+.option-btn .content{flex:1}
+.option-btn h3{font-size:18px;font-weight:800;color:var(--dark);margin-bottom:6px}
+.option-btn p{font-size:14px;color:var(--gray);line-height:1.5;margin:0}
+
+/* Option Styles */
+.opt-0:hover{border-color:#94a3b8}
+.opt-1:hover{border-color:#ef4444}
+.opt-2:hover{border-color:#16a34a}
+
+/* Feedback State */
+.feedback-view{display:none}
+.feedback-view.active{display:block;animation:fadeIn .4s ease}
+
+.choice-header{text-align:center;margin-bottom:24px}
+.choice-header .badge{display:inline-block;background:var(--p);color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+
+.feedback-card{background:#fff;border-radius:20px;padding:32px 28px;box-shadow:var(--sh);border-top:6px solid var(--gray);margin-bottom:32px}
+.feedback-card.fc-0{border-color:#64748b}
+.feedback-card.fc-1{border-color:#dc2626}
+.feedback-card.fc-2{border-color:#16a34a}
+
+.feedback-card .fb-title{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.feedback-card .fb-desc{font-size:15px;color:#374151;line-height:1.7;margin-bottom:20px}
+.feedback-card .fb-highlight{background:var(--lgray);padding:16px 20px;border-radius:12px;font-size:14px;font-style:italic;color:var(--dark);border-left:4px solid var(--p)}
+
+.other-options-title{font-size:16px;font-weight:800;color:var(--dark);margin-bottom:16px;text-align:center;border-bottom:1px solid #ddd;padding-bottom:16px}
+
+.other-options{display:grid;grid-template-columns:1fr;gap:12px}
+.other-btn{background:#fff;border:1px solid #ddd;border-radius:12px;padding:16px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s}
+.other-btn:hover{background:var(--pl);border-color:var(--p)}
+.other-btn h4{font-size:15px;font-weight:700;color:var(--dark);margin:0}
+.other-btn .view-link{font-size:12px;font-weight:700;color:var(--p);text-transform:uppercase}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 </style></head>
 <body>
-<p class="lead">En este momento tienes <strong>varias formas de responder</strong>. Y todas son muy humanas, todas las hemos tenido alguna vez.<br>Pero no todas te llevan al mismo lugar. Haz clic en cada tarjeta para descubrir qué hay detrás:</p>
 
-<div class="grid">
-  <!-- OPCIÓN 1 — PASIVA -->
-  <div class="card-wrap c0" onclick="flip(this,0)">
-    <div class="card-inner">
-      <div class="face front">
-        <div class="emoji">😶</div>
-        <div class="opt-label">Opción 1</div>
-        <div class="opt-title">No dices nada</div>
-        <div class="opt-desc">Te quedas callado. Sonríes un poco, o simplemente bajas la mirada. Dejas que la reunión continúe. Piensas "bueno, ya qué… no vale la pena armar un escándalo aquí". Y te tragas todo.</div>
-        <div class="click-hint">👆 Haz clic para ver la consecuencia</div>
-        <span class="badge-selected">✓ Revisada</span>
-      </div>
-      <div class="face back">
-        <div class="emoji">😶</div>
-        <div class="opt-title">La respuesta pasiva</div>
-        <div class="back-desc">Después de la reunión le cuentas a un colega de confianza lo que pasó, te desahogas un rato, y sigues con tu día. Aunque por dentro algo sigue ahí, dando vueltas.<br><br>No te estás validando ni valorando como deberías, y a la larga eso afectará tu rendimiento, tu autoestima y tu estado de ánimo.</div>
-        <div class="highlight">El silencio a veces evita un conflicto puntual… pero alimenta uno mucho más grande contigo mismo.</div>
-      </div>
-    </div>
+<!-- Pantalla 1: Selección inicial -->
+<div id="screen1">
+  <div class="intro">
+    <h2>¿Qué harías en esta situación?</h2>
+    <p>Basado en el escenario del video, selecciona la opción que más se parezca a lo que sería tu primera reacción instintiva.</p>
   </div>
 
-  <!-- OPCIÓN 2 — AGRESIVA -->
-  <div class="card-wrap c1" onclick="flip(this,1)">
-    <div class="card-inner">
-      <div class="face front">
-        <div class="emoji">😤</div>
-        <div class="opt-label">Opción 2</div>
-        <div class="opt-title">Explotas</div>
-        <div class="opt-desc">Ahí mismo, frente a todos, lo interrumpes. Levantas la voz y dices algo como: "Con todo el respeto, pero Andrés no hizo absolutamente nada en este trabajo. Todo lo hice yo. Todo."</div>
-        <div class="click-hint">👆 Haz clic para ver la consecuencia</div>
-        <span class="badge-selected">✓ Revisada</span>
+  <div class="options-container">
+    <button class="option-btn opt-0" onclick="selectOption(0)">
+      <div class="icon">😶</div>
+      <div class="content">
+        <h3>No digo nada</h3>
+        <p>Me quedo callado, bajo la mirada y dejo que la reunión continúe. Pienso "no vale la pena armar un escándalo aquí" y me lo trago.</p>
       </div>
-      <div class="face back">
-        <div class="emoji">😤</div>
-        <div class="opt-title">La respuesta agresiva</div>
-        <div class="back-desc">La sala se pone tensa. Andrés se pone rojo. La directora no sabe para dónde mirar. Y aunque en ese momento sientes que dijiste la verdad… la forma en que lo dijiste convirtió la reunión en un problema.</div>
-        <div class="highlight">Cuando la rabia habla primero, la verdad llega después… y muchas veces ya nadie la quiere escuchar.</div>
+    </button>
+    <button class="option-btn opt-1" onclick="selectOption(1)">
+      <div class="icon">😤</div>
+      <div class="content">
+        <h3>Exploto y lo enfrento</h3>
+        <p>Ahí mismo, frente a todos, lo interrumpo levantando la voz: "Con todo respeto, pero tú no hiciste nada, ese trabajo lo hice todo yo."</p>
       </div>
-    </div>
-  </div>
-
-  <!-- OPCIÓN 3 — ASERTIVA -->
-  <div class="card-wrap c2" onclick="flip(this,2)">
-    <div class="card-inner">
-      <div class="face front">
-        <div class="emoji">🙋</div>
-        <div class="opt-label">Opción 3</div>
-        <div class="opt-title">Tomas la palabra con calma</div>
-        <div class="opt-desc">Tomas aire, intervienes con calma y dices algo como: "Sí, me alegra que mencione el informe. Quiero aprovechar para comentarle cómo estuvo el proceso, porque creo que es importante tener el contexto completo."</div>
-        <div class="click-hint">👆 Haz clic para ver la consecuencia</div>
-        <span class="badge-selected">✓ Revisada</span>
+    </button>
+    <button class="option-btn opt-2" onclick="selectOption(2)">
+      <div class="icon">🙋</div>
+      <div class="content">
+        <h3>Tomo la palabra con calma</h3>
+        <p>Respiro y digo: "Sí, me alegra que menciones el informe. Quiero aprovechar para comentar cómo estuvo el proceso para tener el contexto completo."</p>
       </div>
-      <div class="face back">
-        <div class="emoji">🙋</div>
-        <div class="opt-title">La respuesta asertiva</div>
-        <div class="back-desc">Sin gritos. Sin escenas. Pero tampoco en silencio. Saliste de la reunión sintiéndote tranquilo, no con rabia, no con culpa. Tranquilo. Porque dijiste lo que tenías que decir, de la forma en que se debía decir.<br><br>La directora te ve ahora como alguien profesional, claro, que sabe defender su trabajo sin dramas.</div>
-        <div class="highlight">Ser asertivo no es ganar una discusión. Es cuidar tu voz sin pisar la del otro.</div>
-      </div>
-    </div>
+    </button>
   </div>
 </div>
 
-<div class="result-bar" id="resultBar">
-  <h3>🎉 ¡Excelente reflexión!</h3>
-  <p>Has explorado las tres opciones. Continúa para descubrir más sobre cada estilo de comunicación.</p>
+<!-- Pantalla 2: Feedback y exploración -->
+<div id="screen2" class="feedback-view">
+  <div class="choice-header">
+    <div class="badge" id="choiceBadge">Tu primera elección</div>
+  </div>
+
+  <div id="feedbackContainer"></div>
+
+  <div class="other-options-title">¿Qué habría pasado si elegías otro camino?</div>
+  <div class="other-options" id="otherOptionsContainer"></div>
 </div>
 
 <script>
-var seen = [false,false,false];
-function flip(el,idx){
-  el.classList.toggle('flipped');
-  seen[idx]=true;
-  if(seen[0]&&seen[1]&&seen[2]){
-    document.getElementById('resultBar').classList.add('show');
+const data = [
+  {
+    id: 0,
+    icon: '😶',
+    title: 'La respuesta pasiva',
+    desc: 'Después de la reunión le cuentas a un colega de confianza lo que pasó, te desahogas un rato, y sigues con tu día. Aunque por dentro algo sigue ahí, dando vueltas.<br><br>No te estás validando ni valorando como deberías, y a la larga eso afectará tu rendimiento, tu autoestima y tu estado de ánimo.',
+    highlight: 'El silencio a veces evita un conflicto puntual... pero alimenta uno mucho más grande contigo mismo.',
+    colorClass: 'fc-0',
+    borderColor: '#64748b'
+  },
+  {
+    id: 1,
+    icon: '😤',
+    title: 'La respuesta agresiva',
+    desc: 'La sala se pone tensa. Andrés se pone rojo. La directora no sabe para dónde mirar. Y aunque en ese momento sientes que dijiste la verdad... la forma en que lo dijiste convirtió la reunión en un problema.<br><br>Tu mensaje se pierde detrás de tu tono de voz.',
+    highlight: 'Cuando la rabia habla primero, la verdad llega después... y muchas veces ya nadie la quiere escuchar.',
+    colorClass: 'fc-1',
+    borderColor: '#dc2626'
+  },
+  {
+    id: 2,
+    icon: '🙋',
+    title: 'La respuesta asertiva',
+    desc: 'Sin gritos. Sin escenas. Pero tampoco en silencio. Saliste de la reunión sintiéndote tranquilo, no con rabia, no con culpa. Tranquilo. Porque dijiste lo que tenías que decir, de la forma en que se debía decir.<br><br>La directora te ve ahora como alguien profesional, claro, que sabe defender su trabajo sin dramas.',
+    highlight: 'Ser asertivo no es ganar una discusión. Es cuidar tu voz sin pisar la del otro.',
+    colorClass: 'fc-2',
+    borderColor: '#16a34a'
   }
+];
+
+let initialChoice = -1;
+
+function renderFeedback(id, isInitial) {
+  const d = data[id];
+  
+  // Render Main Card
+  const fbHtml = \`
+    <div class="feedback-card \${d.colorClass}">
+      <div class="fb-title">\${d.icon} \${d.title}</div>
+      <div class="fb-desc">\${d.desc}</div>
+      <div class="fb-highlight" style="border-left-color: \${d.borderColor}">💡 "\${d.highlight}"</div>
+    </div>
+  \`;
+  document.getElementById('feedbackContainer').innerHTML = fbHtml;
+  
+  if(isInitial) {
+    document.getElementById('choiceBadge').innerText = "Tu primera elección";
+    document.getElementById('choiceBadge').style.background = "var(--p)";
+  } else {
+    document.getElementById('choiceBadge').innerText = "Explorando otro camino";
+    document.getElementById('choiceBadge').style.background = "#64748b";
+  }
+
+  // Render Others
+  let othersHtml = '';
+  data.forEach(item => {
+    if(item.id !== id) {
+      othersHtml += \`
+        <button class="other-btn" onclick="renderFeedback(\${item.id}, \${item.id === initialChoice})">
+          <h4>\${item.icon} Ver: \${item.title}</h4>
+          <span class="view-link">Explorar ➔</span>
+        </button>
+      \`;
+    }
+  });
+  
+  // Also add a button to go back to initial choice if we are exploring
+  if(!isInitial) {
+    othersHtml += \`
+        <button class="other-btn" style="background: var(--pl); border-color: var(--p)" onclick="renderFeedback(\${initialChoice}, true)">
+          <h4>↩ Volver a tu elección (\${data[initialChoice].title})</h4>
+        </button>
+    \`;
+  }
+  
+  document.getElementById('otherOptionsContainer').innerHTML = othersHtml;
+}
+
+function selectOption(id) {
+  initialChoice = id;
+  document.getElementById('screen1').style.display = 'none';
+  document.getElementById('screen2').classList.add('active');
+  renderFeedback(id, true);
+  
+  try {
+    if(window.parent && window.parent.document) {
+      setTimeout(() => { window.scrollTo({top:0, behavior:'smooth'}); }, 100);
+    }
+  } catch(e) {}
 }
 </script>
 </body></html>`;
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // M1 A3 · Texto de cierre — animado e interactivo
@@ -345,6 +408,7 @@ body{background:var(--lgray);padding:28px 20px 48px}
 .save-btn:hover{background:var(--pd);transform:translateY(-1px)}
 .saved-msg{text-align:center;font-size:14px;color:var(--green);font-weight:600;margin-top:10px;display:none}
 .closing{max-width:700px;margin:24px auto 0;background:linear-gradient(135deg,var(--pd),var(--bd));color:#fff;border-radius:16px;padding:22px 28px;text-align:center}
+.closing p, .closing strong, .closing .quote { color:#fff; }
 .closing p{font-size:15px;opacity:.92;line-height:1.7}
 .closing .quote{font-size:17px;font-weight:600;font-style:italic;margin-top:10px;opacity:.95}
 </style></head>
@@ -488,7 +552,8 @@ function save(){
 const M2A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
-.hero{background:linear-gradient(160deg,#0f0f23,#0d2a40);padding:36px 28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero{background:linear-gradient(160deg,#0f0f23,#0d2a40);padding:36px 28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(110,67,128,.3);color:#c4b5fd;border:1px solid rgba(196,181,253,.3);margin-bottom:14px}
 .hero h1{font-size:clamp(22px,5vw,30px);font-weight:800;background:linear-gradient(90deg,#c4b5fd,#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
 .hero p{font-size:15px;color:#94a3b8;line-height:1.7;max-width:520px;margin:0 auto}
@@ -577,6 +642,7 @@ const M3A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:var(--lgray);padding:0 0 40px}
 .page-header{background:linear-gradient(135deg,#ff6b35,#f59e0b);padding:28px 24px;color:#fff}
+.page-header p, .page-header strong { color:#fff; }
 .page-header .chip{background:rgba(255,255,255,.2);color:#fff;margin-bottom:10px}
 .page-header h1{font-size:22px;font-weight:800;margin-bottom:6px}
 .page-header p{font-size:14px;opacity:.9;line-height:1.6}
@@ -777,6 +843,7 @@ body{background:linear-gradient(135deg,#fff7ed 0%,#fffbeb 100%);padding:32px 20p
 .rules li{display:flex;gap:12px;font-size:14px;color:#374151;line-height:1.5}
 .rules li .num{width:26px;height:26px;background:#ef4444;color:#fff;border-radius:50%;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .download-hint{text-align:center;margin-top:28px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;border-radius:16px;padding:20px 28px;max-width:900px;margin:28px auto 0}
+.download-hint p, .download-hint strong { color:#fff; }
 .download-hint p{font-size:14px;opacity:.9}
 </style></head>
 <body>
@@ -1018,6 +1085,7 @@ const M4A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:var(--lgray);padding:0 0 48px}
 .hero{background:linear-gradient(135deg,#1e1b4b,#1e3a8a);padding:32px 24px;color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(165,180,252,.2);color:#a5b4fc;border:1px solid rgba(165,180,252,.3);margin-bottom:12px}
 .hero h1{font-size:22px;font-weight:800;margin-bottom:8px}
 .hero p{font-size:14px;color:#a5b4fc;line-height:1.65;max-width:560px}
@@ -1027,6 +1095,7 @@ body{background:var(--lgray);padding:0 0 48px}
 .video-header .dot{width:10px;height:10px;border-radius:50%}
 .r{background:#ef4444}.y{background:#fbbf24}.g{background:#22c55e}
 .video-placeholder{aspect-ratio:16/9;background:linear-gradient(160deg,#0f172a,#1e3a5f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;color:#fff}
+.video-placeholder p, .video-placeholder strong { color:#fff; }
 .video-placeholder .play-lg{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:30px}
 .video-placeholder p{font-size:13px;color:rgba(255,255,255,.5);font-style:italic}
 .badge{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);color:#fbbf24;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700}
@@ -1146,7 +1215,8 @@ function answer(qi,oi){
 const M4A2_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
 body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
-.hero{background:linear-gradient(160deg,#1e1b4b,#0f172a);padding:32px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero{background:linear-gradient(160deg,#1e1b4b,#0f172a);padding:32px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);color:#fff}
+.hero p, .hero strong { color:#fff; }
 .hero .chip{background:rgba(165,180,252,.15);color:#a5b4fc;border:1px solid rgba(165,180,252,.25);margin-bottom:14px}
 .hero h1{font-size:24px;font-weight:800;background:linear-gradient(90deg,#a5b4fc,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
 .hero p{font-size:14px;color:#94a3b8;max-width:500px;margin:0 auto;line-height:1.7}
@@ -1238,7 +1308,8 @@ const M5A1_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><m
 ${CSS_BASE}
 body{background:#0a0a12;color:#e2e8f0;min-height:100vh;overflow-x:hidden}
 #app{max-width:680px;margin:0 auto;padding:0 0 48px}
-.room-header{background:linear-gradient(160deg,#1a0000,#0d0d2a);padding:32px 24px;border-bottom:2px solid rgba(239,68,68,.2);text-align:center;position:relative;overflow:hidden}
+.room-header{background:linear-gradient(160deg,#1a0000,#0d0d2a);padding:32px 24px;border-bottom:2px solid rgba(239,68,68,.2);text-align:center;position:relative;overflow:hidden;color:#fff}
+.room-header p, .room-header strong { color:#fff; }
 .room-header::before{content:'⚠';position:absolute;font-size:120px;opacity:.05;top:0;right:0;pointer-events:none}
 .chip-danger{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);padding:5px 14px;border-radius:20px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:inline-block}
 .room-header h1{font-size:26px;font-weight:800;background:linear-gradient(90deg,#f87171,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
