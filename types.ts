@@ -125,6 +125,7 @@ export interface CourseProgress {
   answers?: {
     [activityId: string]: any;
   };
+  startedAt?: string;
   completedAt?: string; // ISO date when course was fully completed
 }
 

@@ -9,12 +9,13 @@ interface ProfilePageProps {
   user: User;
   progress: UserProgress;
   onUpdateUser: (updatedUser: Partial<User>) => void;
+  initialTab?: ProfileTab;
 }
 
-type ProfileTab = 'personal' | 'account' | 'achievements' | 'certs';
+type ProfileTab = 'personal' | 'account' | 'certs';
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser }) => {
-  const [activeTab, setActiveTab] = useState<ProfileTab>('personal');
+const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser, initialTab = 'personal' }) => {
+  const [activeTab, setActiveTab] = useState<ProfileTab>(initialTab);
   const [formData, setFormData] = useState({
     name: user.name,
     avatarUrl: user.avatarUrl,
@@ -139,63 +140,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser 
                 `}</style>
             </div>
         );
-      case 'achievements':
-        const stats = computeGamification(progress, courseCatalog);
-        return (
-          <div className="space-y-8">
-            <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-6 rounded-lg text-white shadow">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div>
-                  <h3 className="text-xl font-bold">Progreso de Gamificación</h3>
-                  <p className="text-sm opacity-90">Nivel {stats.level} • {stats.points} puntos</p>
-                </div>
-                <div className="min-w-[220px] w-full md:w-1/3">
-                  <div className="w-full bg-white/20 rounded-full h-2">
-                    <div className="bg-yellow-300 h-2 rounded-full" style={{ width: `${stats.currentToNext}%` }}></div>
-                  </div>
-                  <div className="mt-1 text-xs opacity-90">Al siguiente nivel: {stats.currentToNext}%</div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-bold text-[#101021] mb-3">Insignias</h4>
-              {stats.badges.length > 0 ? (
-                <div className="flex items-center gap-3 flex-wrap">
-                  {stats.badges.map(b => (
-                    <span key={b.id} className="inline-flex items-center gap-2 bg-[#101021]/5 text-[#101021] px-3 py-1.5 rounded-full text-sm border border-[#101021]/10">
-                      <i className={`fas ${b.icon} text-[#6e4380]`}></i> {b.label}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-[#101021]/70 text-sm">Aún no has desbloqueado insignias. ¡Sigue avanzando!</p>
-              )}
-            </div>
-
-            <div>
-              <h4 className="text-lg font-bold text-[#101021] mb-3">Áreas del Bienestar</h4>
-              <p className="text-sm text-[#101021]/80 mb-2">Completadas: {stats.areasCompleted}/{stats.areasTotal} {stats.areasLevel === 1 && (<span className="ml-2 inline-flex items-center gap-1 bg-green-500/10 text-green-700 px-2 py-0.5 rounded-full"><i className="fas fa-layer-group"></i> Bienestar Integral</span>)}</p>
-              {stats.areaBadges.length > 0 ? (
-                <div className="flex items-center gap-2 flex-wrap">
-                  {stats.areaBadges.map(b => (
-                    <span key={b.id} className="inline-flex items-center gap-1 bg-[#101021]/5 text-[#101021] px-2.5 py-1 rounded-full text-xs border border-[#101021]/10">
-                      <i className={`fas ${b.icon} text-[#24668e]`}></i> {b.label}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-[#101021]/70 text-sm">Completa al menos un curso en cada área para desbloquear su insignia.</p>
-              )}
-            </div>
-
-            <div>
-              <h4 className="text-lg font-bold text-[#101021] mb-3">Historial de Logros</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {mockAchievements.map(ach => <AchievementBadge key={ach.id} achievement={ach} />)}
-              </div>
-            </div>
-          </div>
         );
       case 'certs':
         return (
@@ -239,7 +183,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser 
       <div className="border-b border-[#101021]/10">
         <TabButton tabId="personal" label="Datos Personales" />
         <TabButton tabId="account" label="Ajustes de Cuenta" />
-        <TabButton tabId="achievements" label="Historial de Logros" />
         <TabButton tabId="certs" label="Certificaciones" />
       </div>
 
