@@ -1987,12 +1987,10 @@ export const course: Course = {
         // ── M5·A1 · Texto + Video intro al módulo ────────────────────────────
         {
           id: 'm5a1',
-          type: 'video',
+          type: 'text',
           title: 'Cuando el cerebro se secuestra: la amígdala en acción',
           description: 'Aprende qué ocurre en tu cerebro cuando una conversación se calienta y por qué "responder bien" en esos momentos requiere preparación, no solo buena intención.',
-          videoSrc: 'CLOUDINARY_URL_AQUI_M5_VIDEO_AMIGDALA',
-          // DESARROLLADOR: Reemplaza con:
-          // https://res.cloudinary.com/TU_CLOUD/video/upload/m5_amigdala_conversaciones.mp4
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781761939/Gemini_Generated_Image_xstd07xstd07xstd_mgizqe.png',
           content: [
             'Cuando percibimos una amenaza en una conversación —un tono agresivo, una crítica, una acusación— nuestro cerebro activa la amígdala: el sistema de alarma. En milisegundos, el córtex prefrontal (la parte racional) queda parcialmente "desconectado".',
             'El resultado: tomamos decisiones impulsivas, decimos cosas que luego lamentamos, o nos bloqueamos completamente. Esto es el "secuestro de la amígdala".',
