@@ -1623,43 +1623,81 @@ function toggleWhy(card){
   var why=card.querySelector('.why');
   why.style.display=why.style.display==='block'?'none':'block';
 }
-var breathing=false;var cycle=0;var phase=0;var timer=null;
-var phases=[
-  {label:'Inhala...',seconds:4,action:'expand'},
-  {label:'Retén...',seconds:7,action:'hold'},
-  {label:'Exhala...',seconds:8,action:'contract'}
+var isBreathing = false;
+var breathCycle = 0;
+var breathTimer = null;
+var phases = [
+  {label:'Inhala...', seconds:4, action:'expand'},
+  {label:'Retén...', seconds:7, action:'hold'},
+  {label:'Exhala...', seconds:8, action:'contract'}
 ];
+
 function startBreath(){
-  if(breathing){clearInterval(timer);breathing=false;resetBreath();return}
-  breathing=true;cycle=0;runPhase(0);
+  var circle = document.getElementById('circle');
+  if(isBreathing){
+    clearInterval(breathTimer);
+    isBreathing = false;
+    resetBreath();
+    return;
+  }
+  isBreathing = true;
+  breathCycle = 0;
+  document.getElementById('cycleLabel').textContent = '';
+  runPhase(0);
 }
+
 function runPhase(p){
-  if(!breathing)return;
-  var ph=phases[p];
-  var circle=document.getElementById('circle');
-  var counter=document.getElementById('counter');
-  var sub=document.getElementById('subLabel');
-  var cycleLabel=document.getElementById('cycleLabel');
-  circle.textContent=ph.label;
-  if(ph.action==='expand'){circle.classList.add('expand');circle.classList.remove('contract')}
-  else if(ph.action==='contract'){circle.classList.add('contract');circle.classList.remove('expand')}
-  var sec=ph.seconds;counter.textContent=sec;sub.textContent=ph.label;
-  timer=setInterval(function(){
-    sec--;counter.textContent=sec;
-    if(sec<=0){
-      clearInterval(timer);
-      var nextP=(p+1)%3;
-      if(nextP===0){cycle++;cycleLabel.textContent='Ciclo '+cycle+' completado'}
-      if(cycle>=3){clearInterval(timer);breathing=false;resetBreath();cycleLabel.textContent='¡Ejercicio completo! 3 ciclos realizados.';return}
+  if(!isBreathing) return;
+  var ph = phases[p];
+  var circle = document.getElementById('circle');
+  var counter = document.getElementById('counter');
+  var sub = document.getElementById('subLabel');
+  var cycleLabel = document.getElementById('cycleLabel');
+  
+  circle.innerHTML = ph.label;
+  
+  if(ph.action === 'expand'){
+    circle.style.transition = 'transform ' + ph.seconds + 's ease, box-shadow ' + ph.seconds + 's ease';
+    circle.classList.add('expand');
+    circle.classList.remove('contract');
+  } else if(ph.action === 'contract'){
+    circle.style.transition = 'transform ' + ph.seconds + 's ease, box-shadow ' + ph.seconds + 's ease';
+    circle.classList.add('contract');
+    circle.classList.remove('expand');
+  }
+  
+  var sec = ph.seconds;
+  counter.textContent = sec;
+  sub.textContent = ph.label;
+  
+  breathTimer = setInterval(function(){
+    sec--;
+    counter.textContent = sec;
+    if(sec <= 0){
+      clearInterval(breathTimer);
+      var nextP = (p + 1) % 3;
+      if(nextP === 0){
+        breathCycle++;
+        cycleLabel.textContent = 'Ciclo ' + breathCycle + ' completado';
+      }
+      if(breathCycle >= 3){
+        isBreathing = false;
+        resetBreath();
+        cycleLabel.textContent = '¡Ejercicio completo! 3 ciclos realizados.';
+        return;
+      }
       runPhase(nextP);
     }
-  },1000);
+  }, 1000);
 }
+
 function resetBreath(){
-  var circle=document.getElementById('circle');
-  circle.textContent='Toca para\nempezar';circle.classList.remove('expand','contract');
-  document.getElementById('counter').textContent='';
-  document.getElementById('subLabel').textContent='Haz clic para comenzar';
+  var circle = document.getElementById('circle');
+  circle.innerHTML = 'Toca para<br>empezar';
+  circle.classList.remove('expand', 'contract');
+  circle.style.transition = 'transform 0.3s ease';
+  document.getElementById('counter').textContent = '';
+  document.getElementById('subLabel').textContent = 'Haz clic para comenzar';
 }
 </script>
 </body></html>`;
