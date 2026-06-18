@@ -80,7 +80,14 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
               </div>
             );
         case 'text':
-            return <TextContent content={activity.content as string[]} />;
+            return (
+              <div className="space-y-6">
+                {activity.audioSrc && (
+                  <AudioPlayer src={activity.audioSrc} />
+                )}
+                <TextContent content={activity.content as string[]} />
+              </div>
+            );
         case 'iframe':
             // Render HTML content inside an iframe using srcDoc when provided,
             // otherwise fall back to a URL in videoSrc.

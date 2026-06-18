@@ -71,6 +71,7 @@ export const course: Course = {
           ],
           imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781560720/Logo_Featuring_Sound_Wave_in_Letter_O-12_dus3dn.png',
           imageAltSrc: assetPath('images/cerebro_crisis_fallback.png'),
+          audioSrc: 'https://res.cloudinary.com/djybwowo6/video/upload/v1781740158/elfarodelatormenta01_atynds.mp3',
         },
         {
           id: 'm1a2',
@@ -177,6 +178,8 @@ export const course: Course = {
             '• No pienses en "Hacer el proyecto". Piensa en "Escribir el primer párrafo en los próximos 10 minutos".',
             '• Utiliza el "Pomodoro de Crisis": En lugar de la técnica tradicional de 25 min de trabajo por 5 de descanso, utiliza bloques de 15 min de trabajo x 10 de descanso somático (sin pantallas, mirando a lo lejos).'
           ],
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781741377/Logo_Featuring_Sound_Wave_in_Letter_O_f79ttg.png',
+          audioSrc: 'https://res.cloudinary.com/djybwowo6/video/upload/v1781740158/elfarodelatormenta02_slusdi.mp3',
         },
         {
           id: 'm3a2',
