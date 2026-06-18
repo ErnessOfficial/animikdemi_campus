@@ -1128,11 +1128,8 @@ body{background:var(--lgray);padding:0 0 48px}
   <p>Observa la evaluación de desempeño y luego identifica los errores de comunicación cometidos. ¿Cuántos puedes detectar?</p>
 </div>
 
-<div class="video-section">
-  <div class="video-card">
-    <div class="video-header"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1781761408/-_visual_selection-2_dxtrqr.png" alt="Evaluación de Desempeño" style="width:100%; display:block;" />
-  </div>
+<div class="video-section" style="padding-top:16px;">
+  <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1781761408/-_visual_selection-2_dxtrqr.png" alt="Evaluación de Desempeño" style="width:100%; display:block; border-radius:12px; box-shadow:var(--sh);" />
   <p style="font-size:13px;color:var(--gray);text-align:center;margin-top:10px">👆 Reflexiona sobre los fundamentos de la comunicación asertiva y luego detecta los errores</p>
 </div>
 
@@ -1967,12 +1964,14 @@ export const course: Course = {
           title: '¿Qué es realmente el feedback?',
           description: 'Desmontando el miedo a dar y recibir retroalimentación constructiva.',
           content: [
+            'img: https://res.cloudinary.com/djybwowo6/image/upload/v1781790109/-_visual_selection-3_gv17y2.png',
             'El feedback tiene mala fama. En muchas organizaciones se asocia con la crítica, con el juicio, con la "llamada al despacho". Y eso no es casualidad: es que históricamente se ha dado mal.',
             'El feedback real —el que genera cambio y no solo defensividad— no es una evaluación de la persona. Es información sobre un comportamiento específico y su impacto observable. Nada más.',
             '🔑 El modelo SBI (Situación-Comportamiento-Impacto):',
             '• SITUACIÓN: Cuándo y dónde ocurrió. "En la reunión del martes con el cliente…"',
             '• COMPORTAMIENTO: Qué hizo o dijo concretamente. "…interrumpiste al cliente tres veces mientras explicaba su problema."',
             '• IMPACTO: Qué efecto tuvo ese comportamiento. "…el cliente pareció incómodo y cortó la reunión antes de lo previsto."',
+            'img: https://res.cloudinary.com/djybwowo6/image/upload/v1781790108/-_visual_selection-4_qelxtn.png',
             'Esto no es un ataque. Es datos. Y cuando el feedback es datos, el otro puede escucharlo sin sentir que está siendo juzgado como persona.',
             '🎭 ¿Y cuando eres TÚ quien recibe el feedback? La tentación natural es defenderte. Pero recuerda: la defensa no es información, es ruido. Tu misión cuando recibes feedback es escuchar, agradecer y decidir después (con la cabeza fría) qué harás con esa información.',
           ],

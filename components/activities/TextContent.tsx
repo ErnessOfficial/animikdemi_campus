@@ -15,6 +15,16 @@ const TextContent: React.FC<TextContentProps> = ({ content }) => {
         if (paragraph.startsWith('i:')) {
           return <p key={index} className="italic">{paragraph.substring(2).trim()}</p>;
         }
+        if (paragraph.startsWith('img:')) {
+          return (
+            <img 
+              key={index} 
+              src={paragraph.substring(4).trim()} 
+              alt="" 
+              className="w-full rounded-xl shadow-md my-6" 
+            />
+          );
+        }
         return <p key={index}>{paragraph}</p>;
       })}
     </div>
