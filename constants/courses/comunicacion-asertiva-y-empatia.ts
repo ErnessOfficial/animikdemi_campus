@@ -1131,17 +1131,9 @@ body{background:var(--lgray);padding:0 0 48px}
 <div class="video-section">
   <div class="video-card">
     <div class="video-header"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-    <div class="video-placeholder">
-      <div class="play-lg">▶</div>
-      <p>Video Roleplay — Evaluación de Desempeño Desastrosa</p>
-      <div class="badge">☁ Cloudinary · CLOUDINARY_URL_AQUI</div>
-    </div>
-    <!-- DESARROLLADOR: Sustituir por:
-         <video controls style="width:100%" preload="metadata"
-                src="CLOUDINARY_URL_AQUI_M4_ROLEPLAY">
-         </video> -->
+    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1781761408/-_visual_selection-2_dxtrqr.png" alt="Evaluación de Desempeño" style="width:100%; display:block;" />
   </div>
-  <p style="font-size:13px;color:var(--gray);text-align:center;margin-top:10px">👆 Mira el video completo y luego responde el quiz identificando los errores</p>
+  <p style="font-size:13px;color:var(--gray);text-align:center;margin-top:10px">👆 Reflexiona sobre los fundamentos de la comunicación asertiva y luego detecta los errores</p>
 </div>
 
 <div class="quiz-section">
@@ -1210,7 +1202,7 @@ function answer(qi,oi){
 </body></html>`;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// M4 A2 · Laboratorio de Tonos de Voz (3 audios Cloudinary)
+// M4 A2 · Laboratorio Multimedia (3 videos Cloudinary)
 // ─────────────────────────────────────────────────────────────────────────────
 const M4A2_HTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
 ${CSS_BASE}
@@ -1246,7 +1238,7 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
 </style></head>
 <body>
 <div class="hero">
-  <span class="chip">🎙️ Módulo 4 · Laboratorio de Audio</span>
+  <span class="chip">🎙️ Módulo 4 · Laboratorio Multimedia</span>
   <h1>El mismo mensaje, tres tonos distintos</h1>
   <p>La forma en que decimos algo puede ser tan importante como lo que decimos. Escucha cómo cambia el impacto de una misma frase según el tono empleado.</p>
 </div>
@@ -1262,9 +1254,9 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
     <h3>Condescendiente</h3>
     <div class="desc">Deja entrever que la otra persona no es capaz, o que ya debería saberlo. Genera resentimiento aunque las palabras sean "correctas".</div>
     <!-- CLOUDINARY_URL_AQUI → audio tono condescendiente -->
-    <audio controls preload="metadata" style="width:100%;margin-top:4px">
-      <source src="" type="audio/mpeg">
-    </audio>
+    <video controls preload="metadata" style="width:100%; border-radius:8px; margin-top:4px">
+      <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781759384/genera_un_video_profesional_ci_eo8rck.mp4" type="video/mp4">
+    </video>
     <div class="cloud-badge">☁ Cloudinary · Tono Condescendiente</div>
   </div>
 
@@ -1273,9 +1265,9 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
     <h3>Tímido / Inseguro</h3>
     <div class="desc">Las palabras son las correctas, pero la voz tiembla o se apaga. Genera incertidumbre sobre si la petición es real o se puede ignorar.</div>
     <!-- CLOUDINARY_URL_AQUI → audio tono tímido -->
-    <audio controls preload="metadata" style="width:100%;margin-top:4px">
-      <source src="" type="audio/mpeg">
-    </audio>
+    <video controls preload="metadata" style="width:100%; border-radius:8px; margin-top:4px">
+      <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781759455/genera_un_video_cinematografic_jtudbp.mp4" type="video/mp4">
+    </video>
     <div class="cloud-badge">☁ Cloudinary · Tono Tímido</div>
   </div>
 
@@ -1284,9 +1276,9 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
     <h3>Asertivo y Claro</h3>
     <div class="desc">Firme sin ser agresivo. Tranquilo sin perder autoridad. La petición se percibe como razonable y el oyente la recibe sin defensividad.</div>
     <!-- CLOUDINARY_URL_AQUI → audio tono asertivo -->
-    <audio controls preload="metadata" style="width:100%;margin-top:4px">
-      <source src="" type="audio/mpeg">
-    </audio>
+    <video controls preload="metadata" style="width:100%; border-radius:8px; margin-top:4px">
+      <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781759367/kling_20260618_VIDEO_crea_un_vi_3283_0_qx3gdb.mp4" type="video/mp4">
+    </video>
     <div class="cloud-badge">☁ Cloudinary · Tono Asertivo</div>
   </div>
 </div>
@@ -1793,6 +1785,7 @@ export const course: Course = {
             '¿Cuál es la barrera principal para llegar al Nivel 4? El ruido mental: nuestros propios pensamientos, prejuicios, urgencias internas y el impulso de formular nuestra respuesta mientras el otro aún habla.',
             '🔑 La clave no es callarte a ti mismo. Es aprender a observar ese ruido sin seguirlo. La escucha empática es una decisión activa que se entrena.',
           ],
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1781760691/-_visual_selection_vmbmjt.png',
         },
 
         // ── M2·A3 · Mitos vs Realidades de la Empatía (flipCards) ───────────
@@ -1957,11 +1950,11 @@ export const course: Course = {
           content: [M4A1_HTML],
         },
 
-        // ── M4·A3 · Laboratorio de Tonos de Voz ─────────────────────────────
+        // ── M4·A3 · Laboratorio Multimedia ─────────────────────────────
         {
           id: 'm4a3',
           type: 'iframe',
-          title: '🎙️ Laboratorio de Audio: El mismo mensaje, tres tonos distintos',
+          title: '🎙️ Laboratorio Multimedia: El mismo mensaje, tres tonos distintos',
           description: 'Escucha cómo el tono de voz cambia por completo la forma en que se recibe un mensaje asertivo.',
           hideHeader: false,
           content: [M4A2_HTML],
