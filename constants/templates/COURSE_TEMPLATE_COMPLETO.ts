@@ -41,7 +41,7 @@
 
 import type { Course } from '../../types';
 import { assetPath } from '../../utils/paths';
-import { mockInstructor } from './courseData'; // Instructor por defecto (Ernesto Mendoza)
+import { mockInstructor } from '../courses/courseData'; // Instructor por defecto (Ernesto Mendoza)
 
 
 // ============================================================

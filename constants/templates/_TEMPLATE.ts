@@ -5,7 +5,7 @@
 // 3) Exporta el objeto como `course` (y opcionalmente `default`)
 
 import type { Course } from '../../types';
-import { mockInstructor } from './courseData';
+import { mockInstructor } from '../courses/courseData';
 
 export const course: Course = {
   // Identificadores básicos
