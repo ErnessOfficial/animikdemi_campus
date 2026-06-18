@@ -606,10 +606,10 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
     <!-- DESARROLLADOR: Reemplaza src="" con la URL de Cloudinary del audio.
          CLOUDINARY_URL_AQUI → audio fase 1 (con ruido/distracciones) -->
     <audio controls style="width:100%;margin-top:4px;border-radius:8px" preload="metadata">
-      <source src="" type="audio/mpeg">
+      <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781765348/inmersiveaudio_nsxahk.wav" type="audio/wav">
       Tu navegador no soporta audio HTML5.
     </audio>
-    <div class="cloud-badge">☁ Cloudinary · Pendiente Pista 1</div>
+    <div class="cloud-badge">☁ Cloudinary · Pista 1</div>
   </div>
 
   <div class="player-card" style="margin-top:16px">
@@ -618,10 +618,10 @@ body{background:#0f1117;color:#e2e8f0;padding:0 0 48px}
     <div class="track-sub">Audio inmersivo 8D — Fase limpia</div>
     <!-- CLOUDINARY_URL_AQUI → audio fase 2 (limpio, empático) -->
     <audio controls style="width:100%;margin-top:4px;border-radius:8px" preload="metadata">
-      <source src="" type="audio/mpeg">
+      <source src="https://res.cloudinary.com/djybwowo6/video/upload/v1781775271/inmersiveaudioclean_br4anv.wav" type="audio/wav">
       Tu navegador no soporta audio HTML5.
     </audio>
-    <div class="cloud-badge">☁ Cloudinary · Pendiente Pista 2</div>
+    <div class="cloud-badge">☁ Cloudinary · Pista 2</div>
   </div>
 </div>
 
