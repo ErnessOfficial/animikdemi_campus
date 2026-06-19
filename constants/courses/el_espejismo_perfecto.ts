@@ -25,7 +25,7 @@ export const course: Course = {
   // ----------------------------------------------------------
   category: 'Autoconciencia & Regulación emocional',
   broadCategories: ['Autoconocimiento', 'Gestión Emocional'],
-  coverImage:'https://res.cloudinary.com/djybwowo6/image/upload/v1781882987/Curso_de_bienestar_emocional_202606191636_m0ng0x.jpg',
+  coverImage: assetPath('images/el_espejismo_perfecto_cover.png'),
 
   // ----------------------------------------------------------
   //  INSTRUCTOR

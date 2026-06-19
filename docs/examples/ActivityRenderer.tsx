@@ -1,7 +1,7 @@
 // src/components/ActivityRenderer.tsx
 
 import React from 'react';
-import InteractiveGameActivity from './activities/InteractiveGameActivity';
+import InteractiveGameActivity from '../../components/activities/InteractiveGameActivity';
 
 interface ActivityProps {
   type: string;
