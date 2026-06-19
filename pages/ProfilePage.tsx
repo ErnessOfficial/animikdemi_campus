@@ -140,7 +140,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                 `}</style>
             </div>
         );
-        );
       case 'certs':
         return (
             <div>
