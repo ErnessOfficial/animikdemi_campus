@@ -42,7 +42,7 @@ const ReflectionTree: React.FC<{ activity?: Activity; onReadyToComplete?: (ready
   };
 
   useEffect(() => {
-    const totalItems = Object.values(tree).reduce((sum, arr) => sum + arr.length, 0);
+    const totalItems = (Object.values(tree) as string[][]).reduce((sum, arr) => sum + arr.length, 0);
     onReadyToComplete?.(totalItems > 0);
   }, [tree, onReadyToComplete]);
 

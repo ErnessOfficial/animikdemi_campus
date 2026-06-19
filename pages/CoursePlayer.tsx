@@ -191,7 +191,7 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
 };
 
 
-const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActivityAsCompleted, onExit, saveActivityAnswers, updateLastAccessed }) => {
+const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActivityAsCompleted, onExit, onNavigateToCertificates, saveActivityAnswers, updateLastAccessed }) => {
   const [activeActivityId, setActiveActivityId] = useState<string>(progress.lastAccessedActivityId || course.modules[0].activities[0].id);
   const [toast, setToast] = useState<string | null>(null);
   const showToast = (msg: string) => {
