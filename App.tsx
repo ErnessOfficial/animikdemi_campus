@@ -16,6 +16,7 @@ import Header from './components/platform/Header';
 import Dashboard from './pages/Dashboard';
 import CourseCatalogPage from './pages/CourseCatalogPage';
 import ProfilePage from './pages/ProfilePage';
+import MyCoursesPage from './pages/MyCoursesPage';
 import CoursePlayer from './pages/CoursePlayer';
 import CourseDetailPage from './pages/CourseDetailPage';
 import ResourcesPage from './pages/ResourcesPage';
@@ -40,6 +41,7 @@ export type View =
   | 'my-courses'
   | 'community'
   | 'profile'
+  | 'profile-certs'
   | 'course-player'
   | 'course-detail'
   | 'resources'
@@ -258,7 +260,8 @@ const App: React.FC = () => {
                     courseId: courseToEnroll.id,
                     lastAccessedActivityId: null,
                     percentage: 0,
-                    completionStatus: {}
+                    completionStatus: {},
+                    startedAt: new Date().toISOString()
                 }
             }
         };
@@ -443,10 +446,11 @@ const App: React.FC = () => {
                 return <ComplementaryResourcesPage onBack={() => handleNavigation('resources')} />;
             case 'my-courses':
                 return (
-                    <div className="bg-white p-8 rounded-lg shadow-md">
-                        <h1 className="text-2xl font-bold">Mis Cursos</h1>
-                        <p className="mt-2 text-[#101021]/80">Esta página está en construcción.</p>
-                    </div>
+                    <MyCoursesPage 
+                        progress={progress} 
+                        onContinueCourse={handleContinueCourse} 
+                        onNavigateToCertificates={() => handleNavigation('profile-certs')} 
+                    />
                 );
             case 'community':
                 return <KitReflexivoPage />;
@@ -457,7 +461,9 @@ const App: React.FC = () => {
             case 'file-open':
                 return <FileImportPage onBack={() => handleNavigation('dashboard')} />;
             case 'profile':
-                return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} />;
+                return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="personal" />;
+            case 'profile-certs':
+                return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="certs" />;
             default:
                 return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} />;
         }

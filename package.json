@@ -11,10 +11,12 @@
   "dependencies": {
     "@google/genai": "^1.19.0",
     "@kinde-oss/kinde-auth-react": "^5.6.1",
+    "canvas-confetti": "^1.9.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.14.0",
     "@vercel/node": "^5.5.0",
     "autoprefixer": "^10.4.21",

@@ -21,12 +21,14 @@ import FlipCards from '../components/activities/FlipCards';
 import PillarsInteractive from '../components/activities/PillarsInteractive';
 import PondGame from '../components/activities/PondGame';
 import InteractiveGameActivity from '../components/activities/InteractiveGameActivity';
+import CourseCompletionModal from '../components/course/CourseCompletionModal';
 
 interface CoursePlayerProps {
   course: Course;
   progress: CourseProgress;
   markActivityAsCompleted: (courseId: string, activityId: string) => void;
   onExit: () => void;
+  onNavigateToCertificates?: () => void;
   saveActivityAnswers?: (courseId: string, activityId: string, data: any) => void;
   updateLastAccessed?: (courseId: string, activityId: string) => void;
 }
@@ -196,7 +198,16 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
     setToast(msg);
     window.setTimeout(() => setToast(null), 2200);
   };
-  const [zoomSrc, setZoomSrc] = useState<string | null>(null);
+  const [zoomSrc, setZoomSrc] = React.useState<string | null>(null);
+  const [showCompletionAnim, setShowCompletionAnim] = React.useState(false);
+  const [wasCompleted, setWasCompleted] = React.useState(progress.percentage === 100);
+
+  React.useEffect(() => {
+    if (!wasCompleted && progress.percentage === 100) {
+      setShowCompletionAnim(true);
+      setWasCompleted(true);
+    }
+  }, [progress.percentage, wasCompleted]);
   const closeZoom = () => setZoomSrc(null);
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeZoom(); };
@@ -399,6 +410,21 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
               </button>
             </div>
           </div>
+        )}
+        
+        {showCompletionAnim && (
+          <CourseCompletionModal
+            courseTitle={course.title}
+            onGoToCertificates={() => {
+              setShowCompletionAnim(false);
+              if (onNavigateToCertificates) {
+                onNavigateToCertificates();
+              } else {
+                onExit();
+              }
+            }}
+            onClose={() => setShowCompletionAnim(false)}
+          />
         )}
       </div>
     );
