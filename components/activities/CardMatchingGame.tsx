@@ -80,7 +80,7 @@ const CardMatchingGame: React.FC<CardMatchingGameProps> = ({ cards: initialCards
               >
                 {/* Back of card */}
                 <div className="absolute w-full h-full backface-hidden bg-[#6e4380] rounded-lg flex items-center justify-center cursor-pointer shadow-lg">
-                  <img src={assetPath('images/logo_animikdemi.png')} alt="Animikdemi" className="w-16 h-16 opacity-90" />
+                  <img src={assetPath('images/animikroNEWnofondo.png')} alt="Animikdemi" className="w-16 h-16 opacity-90" />
                 </div>
                 {/* Front of card */}
                 <div

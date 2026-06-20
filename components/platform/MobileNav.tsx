@@ -29,7 +29,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ activeView, onNavigate, onLogout 
     <div className="lg:hidden sticky top-0 z-30 bg-white shadow-sm border-b border-[#101021]/10">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center space-x-3">
-          <img src={assetPath('images/logo_animikdemi.png')} alt="AnImiKdemi Logo" className="h-10 w-10 rounded-lg object-contain border border-[#101021]/10" />
+          <img src={assetPath('images/animikroNEWnofondo.png')} alt="AnImiKdemi Logo" className="h-10 w-10 rounded-lg object-contain border border-[#101021]/10" />
           <div>
             <p className="text-sm font-semibold text-[#101021] leading-tight">AnImiKdemi Campus</p>
             <p className="text-xs text-[#101021]/60 leading-tight">Aprendizaje emocional</p>
