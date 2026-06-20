@@ -12,7 +12,14 @@ interface CertificateCardProps {
 const CertificateCard: React.FC<CertificateCardProps> = ({ course, userName = 'Participante', completedAt }) => {
   const handleDownload = async () => {
     const dateText = format(completedAt ? new Date(completedAt) : new Date());
-    await downloadCertificate({ userName, courseTitle: course.title, dateText }, `certificado-${course.id}.png`);
+    // Convert estimated duration from minutes to hours (round up)
+    const courseHours = course.estimatedDurationMinutes
+      ? Math.ceil(course.estimatedDurationMinutes / 60)
+      : undefined;
+    await downloadCertificate(
+      { userName, courseTitle: course.title, courseHours, dateText },
+      `certificado-${course.id}.png`
+    );
   };
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm border border-[#101021]/10 flex items-center justify-between">
