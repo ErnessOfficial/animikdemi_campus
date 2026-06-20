@@ -33,6 +33,7 @@ import LoginPage from './pages/LoginPage';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import DebugAuthPanel from './components/common/DebugAuthPanel';
 import { assetPath } from './utils/paths';
+import WhatIsAnimikroPage from './pages/WhatIsAnimikroPage';
 
 
 export type View =
@@ -50,7 +51,8 @@ export type View =
   | 'resources-complementary'
   | 'share'
   | 'compose'
-  | 'file-open';
+  | 'file-open'
+  | 'about';
 
 const viewPathMap: Partial<Record<View, string>> = {
   share: '/compartir',
@@ -433,7 +435,7 @@ const App: React.FC = () => {
         
         switch (view) {
             case 'dashboard':
-                return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} />;
+                return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} onNavigate={handleNavigation} />;
             case 'catalog':
                 return <CourseCatalogPage progress={progress} onSelectCourse={handleSelectCourse} onEnroll={handleEnroll} />;
             case 'resources':
@@ -454,6 +456,8 @@ const App: React.FC = () => {
                 );
             case 'community':
                 return <KitReflexivoPage />;
+            case 'about':
+                return <WhatIsAnimikroPage />;
             case 'share':
                 return <ShareInboxPage initialData={shareDefaults} onBack={() => handleNavigation('dashboard')} />;
             case 'compose':
@@ -465,7 +469,7 @@ const App: React.FC = () => {
             case 'profile-certs':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="certs" />;
             default:
-                return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} />;
+                return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} onNavigate={handleNavigation} />;
         }
     };
     

@@ -4,6 +4,7 @@ import { assetPath } from '../../utils/paths';
 
 const navItems: Array<{ icon: string; label: string; view: View }> = [
   { icon: 'fa-home', label: 'Dashboard', view: 'dashboard' },
+  { icon: 'fa-circle-info', label: '¿Qué es Animikro?', view: 'about' },
   { icon: 'fa-book', label: 'Catálogo', view: 'catalog' },
   { icon: 'fa-folder-open', label: 'Recursos', view: 'resources' },
   { icon: 'fa-graduation-cap', label: 'Mis Cursos', view: 'my-courses' },

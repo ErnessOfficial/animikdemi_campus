@@ -44,6 +44,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
             onClick={() => onNavigate('dashboard')} 
           />
           <NavItem 
+            icon="fa-circle-info" 
+            label="¿Qué es Animikro?" 
+            isActive={activeView === 'about'} 
+            onClick={() => onNavigate('about')} 
+          />
+          <NavItem 
             icon="fa-book" 
             label="Catálogo de Cursos" 
             isActive={activeView === 'catalog'} 
