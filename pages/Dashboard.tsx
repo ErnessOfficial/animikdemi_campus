@@ -1,7 +1,6 @@
 import React from 'react';
 import type { User, UserProgress } from '../types';
 import { courseCatalog } from '../constants/platformData';
-import CourseCard from '../components/platform/CourseCard';
 import GamificationWidget from '../components/platform/GamificationWidget';
 
 interface DashboardProps {
@@ -10,27 +9,23 @@ interface DashboardProps {
     onContinueCourse: (courseId: string) => void;
     onExploreCourse: (courseId: string) => void;
     onEnroll: (courseId: string) => void;
+    onNavigate: (view: any) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ user, progress, onContinueCourse, onExploreCourse, onEnroll }) => {
+const Dashboard: React.FC<DashboardProps> = ({ 
+    user, 
+    progress, 
+    onContinueCourse, 
+    onExploreCourse, 
+    onEnroll, 
+    onNavigate 
+}) => {
     const enrolledCourses = courseCatalog.filter(course => progress.courses[course.id]);
-    
-    const recommendedCategory = user.recommendedCategory;
+    const activeEnrolled = enrolledCourses.slice(0, 2);
 
-    const recommendedCourses = courseCatalog.filter(course => {
-        if (!progress.courses[course.id]) { // Not enrolled
-            if (recommendedCategory) {
-                return course.broadCategories?.includes(recommendedCategory as any);
-            }
-            return false; 
-        }
-        return false;
-    });
-
-    const otherCourses = courseCatalog.filter(c => 
-        !progress.courses[c.id] && (!recommendedCategory || !c.broadCategories?.includes(recommendedCategory as any))
-    );
-
+    const notEnrolled = courseCatalog.filter(course => !progress.courses[course.id]);
+    // Take up to 2 of the non-enrolled courses (prioritizing the detailed ones which appear first)
+    const recentCourses = notEnrolled.slice(0, 2);
 
     return (
         <div className="animate-fade-in space-y-10">
@@ -38,60 +33,250 @@ const Dashboard: React.FC<DashboardProps> = ({ user, progress, onContinueCourse,
             <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-6 md:p-8 rounded-xl shadow-lg text-white flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h1 className="text-3xl md:text-4xl font-extrabold">¡Bienvenido de nuevo, {user.name.split(' ')[0]}!</h1>
-                    <p className="mt-2 text-lg opacity-80">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
+                    <p className="mt-2 text-lg opacity-85">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
                 </div>
                 <GamificationWidget progress={progress} catalog={courseCatalog} />
             </div>
 
-            {/* Continue Learning */}
-            {enrolledCourses.length > 0 && (
-                 <div>
-                    <h2 className="text-2xl font-bold text-[#101021] mb-4">Continuar Aprendiendo</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        {enrolledCourses.map(course => {
-                            const courseProgress = progress.courses[course.id];
-                            return (
-                                <CourseCard
-                                    key={course.id}
-                                    course={course}
-                                    progress={courseProgress.percentage}
-                                    onSelect={() => onContinueCourse(course.id)}
-                                    isContinue={true}
-                                />
-                            );
-                        })}
+            {/* Welcome Summary & Methodology Section */}
+            <div className="bg-white rounded-xl shadow-md border border-[#101021]/10 overflow-hidden">
+                <div className="p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-1 space-y-4">
+                        <span className="bg-[#6e4380]/10 text-[#6e4380] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                            Sobre Nosotros
+                        </span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold text-[#101021] leading-tight">
+                            Bienvenidos a Animikro - MicroLearning
+                        </h2>
+                        <p className="text-[#101021]/80 text-sm md:text-base leading-relaxed">
+                            La aplicación multiplataforma que funciona como el complemento esencial de Animikdemi y que es una pieza clave dentro de nuestro ecosistema integral de bienestar emocional, <strong>Animkind</strong>.
+                        </p>
+                        <p className="text-[#101021]/80 text-sm md:text-base leading-relaxed">
+                            En Animikro, creemos que la fusión de lecciones interactivas, dinámicas y altamente focalizadas junto con un espacio seguro para el autoexamen y la reflexión crítica, crea el ecosistema perfecto para la transformación personal.
+                        </p>
+                        <p className="text-[#101021]/80 text-sm md:text-base leading-relaxed">
+                            Únete a Animikro y descubre una forma accesible, rápida y profunda de cultivar tu salud mental, construyendo tu bienestar emocional una pequeña reflexión a la vez.
+                        </p>
                     </div>
-                </div>
-            )}
-            
-            {/* Recommendations */}
-            <div>
-                <h2 className="text-2xl font-bold text-[#101021] mb-4">
-                    {recommendedCategory ? `Recomendado para Ti (Área: ${recommendedCategory})` : 'Explora Nuestros Cursos'}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    {[...recommendedCourses, ...otherCourses].slice(0, 4).map(course => (
-                         <CourseCard
-                            key={course.id}
-                            course={course}
-                            onSelect={() => onExploreCourse(course.id)}
-                            onEnroll={onEnroll}
+                    <div className="w-full md:w-5/12 flex justify-center">
+                        <img 
+                            src="https://res.cloudinary.com/djybwowo6/image/upload/v1781978309/Microlearning_vs._Capacitaci%C3%B3n_Tradicional_ys9uc9.png" 
+                            alt="Microlearning vs Capacitación Tradicional" 
+                            className="max-h-64 md:max-h-80 w-auto object-contain rounded-lg shadow-sm border border-slate-100 hover:scale-[1.02] transition-transform duration-300"
                         />
-                    ))}
+                    </div>
                 </div>
             </div>
 
-             {/* Community Spotlight */}
+            {/* Courses Redirect Sections (Miniatures) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Section 1: Ir a tus cursos */}
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-xl font-bold text-[#101021] flex items-center gap-2">
+                            <i className="fas fa-graduation-cap text-[#6e4380]"></i>
+                            Ir a tus cursos
+                        </h2>
+                        {enrolledCourses.length > 0 && (
+                            <button
+                                onClick={() => onNavigate('my-courses')}
+                                className="text-sm font-semibold text-[#24668e] hover:text-[#1a4a69] flex items-center gap-1 transition"
+                            >
+                                Ver todos ({enrolledCourses.length}) <i className="fas fa-chevron-right text-xs"></i>
+                            </button>
+                        )}
+                    </div>
+
+                    <div className="space-y-4">
+                        {activeEnrolled.length > 0 ? (
+                            activeEnrolled.map(course => {
+                                const courseProgress = progress.courses[course.id];
+                                const percentage = courseProgress?.percentage || 0;
+                                return (
+                                    <div
+                                        key={course.id}
+                                        onClick={() => onContinueCourse(course.id)}
+                                        className="flex gap-4 p-4 bg-white rounded-xl border border-[#101021]/10 hover:border-[#24668e]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                    >
+                                        <img
+                                            src={course.coverImage}
+                                            alt={course.title}
+                                            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                                        />
+                                        <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[9px] font-bold text-[#6e4380] uppercase tracking-wider bg-[#6e4380]/10 px-2 py-0.5 rounded truncate">
+                                                        {course.category}
+                                                    </span>
+                                                </div>
+                                                <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#24668e] transition-colors">
+                                                    {course.title}
+                                                </h3>
+                                                <p className="text-xs text-[#101021]/60 truncate mt-0.5">{course.subtitle}</p>
+                                            </div>
+                                            <div className="mt-2">
+                                                <div className="flex items-center justify-between text-[10px] text-[#101021]/60 mb-1">
+                                                    <span>Progreso</span>
+                                                    <span className="font-semibold">{Math.round(percentage)}%</span>
+                                                </div>
+                                                <div className="w-full bg-[#101021]/5 rounded-full h-1.5 overflow-hidden">
+                                                    <div
+                                                        className="bg-gradient-to-r from-[#24668e] to-[#6e4380] h-full rounded-full transition-all duration-500"
+                                                        style={{ width: `${percentage}%` }}
+                                                    ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div className="p-8 bg-white rounded-xl border border-dashed border-[#101021]/20 text-center space-y-4">
+                                <p className="text-sm text-[#101021]/60">Aún no estás inscrito en ningún curso.</p>
+                                <button
+                                    onClick={() => onNavigate('catalog')}
+                                    className="inline-flex items-center gap-2 bg-[#24668e] text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-[#1a4a69] transition"
+                                >
+                                    Explorar Catálogo <i className="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Section 2: Lo más reciente */}
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-xl font-bold text-[#101021] flex items-center gap-2">
+                            <i className="fas fa-sparkles text-[#dd566f]"></i>
+                            Lo más reciente
+                        </h2>
+                        <button
+                            onClick={() => onNavigate('catalog')}
+                            className="text-sm font-semibold text-[#dd566f] hover:text-[#c04359] flex items-center gap-1 transition"
+                        >
+                            Ver catálogo <i className="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div className="space-y-4">
+                        {recentCourses.length > 0 ? (
+                            recentCourses.map(course => (
+                                <div
+                                    key={course.id}
+                                    onClick={() => onExploreCourse(course.id)}
+                                    className="flex gap-4 p-4 bg-white rounded-xl border border-[#101021]/10 hover:border-[#dd566f]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                >
+                                    <img
+                                        src={course.coverImage}
+                                        alt={course.title}
+                                        className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                                    />
+                                    <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-[9px] font-bold text-[#dd566f] uppercase tracking-wider bg-[#dd566f]/10 px-2 py-0.5 rounded truncate">
+                                                    {course.category}
+                                                </span>
+                                            </div>
+                                            <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#dd566f] transition-colors">
+                                                {course.title}
+                                            </h3>
+                                            <p className="text-xs text-[#101021]/60 line-clamp-2 mt-0.5">{course.subtitle}</p>
+                                        </div>
+                                        <div className="flex items-center justify-between mt-2 pt-1">
+                                            <span className="text-[10px] font-semibold text-[#24668e] bg-[#24668e]/10 px-2 py-0.5 rounded-full">
+                                                Nuevo
+                                            </span>
+                                            <span className="text-xs font-bold text-[#dd566f] group-hover:underline flex items-center gap-1">
+                                                Explorar <i className="fas fa-arrow-right text-[10px]"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="p-8 bg-white rounded-xl border border-dashed border-[#101021]/20 text-center">
+                                <p className="text-sm text-[#101021]/60">¡Has completado o estás inscrito en todos los cursos!</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Section 3: Accesos Directos */}
+            <div className="space-y-4">
+                <h2 className="text-xl font-bold text-[#101021] flex items-center gap-2">
+                    <i className="fas fa-compass text-[#24668e]"></i>
+                    Accesos directos
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div 
+                        onClick={() => onNavigate('resources')}
+                        className="bg-gradient-to-br from-[#24668e]/5 to-[#24668e]/10 p-5 rounded-xl border border-[#24668e]/10 hover:border-[#24668e]/40 hover:shadow-md cursor-pointer transition-all duration-300 group flex items-start gap-4"
+                    >
+                        <div className="p-3 bg-[#24668e]/10 rounded-lg text-[#24668e] group-hover:bg-[#24668e] group-hover:text-white transition-colors duration-300">
+                            <i className="fas fa-folder-open text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-[#101021] text-sm group-hover:text-[#24668e] transition-colors">Biblioteca de Recursos</h3>
+                            <p className="text-xs text-[#101021]/70 mt-1">Guías, manuales e infografías descargables para tu bienestar.</p>
+                        </div>
+                    </div>
+
+                    <div 
+                        onClick={() => onNavigate('community')}
+                        className="bg-gradient-to-br from-[#6e4380]/5 to-[#6e4380]/10 p-5 rounded-xl border border-[#6e4380]/10 hover:border-[#6e4380]/40 hover:shadow-md cursor-pointer transition-all duration-300 group flex items-start gap-4"
+                    >
+                        <div className="p-3 bg-[#6e4380]/10 rounded-lg text-[#6e4380] group-hover:bg-[#6e4380] group-hover:text-white transition-colors duration-300">
+                            <i className="fas fa-comments text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-[#101021] text-sm group-hover:text-[#6e4380] transition-colors">Kit Reflexivo</h3>
+                            <p className="text-xs text-[#101021]/70 mt-1">Comparte reflexiones, conecta con la comunidad y abre tus archivos.</p>
+                        </div>
+                    </div>
+
+                    <div 
+                        onClick={() => onNavigate('profile')}
+                        className="bg-gradient-to-br from-teal-600/5 to-teal-600/10 p-5 rounded-xl border border-teal-600/10 hover:border-teal-600/40 hover:shadow-md cursor-pointer transition-all duration-300 group flex items-start gap-4"
+                    >
+                        <div className="p-3 bg-teal-600/10 rounded-lg text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                            <i className="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-[#101021] text-sm group-hover:text-teal-600 transition-colors">Mi Perfil</h3>
+                            <p className="text-xs text-[#101021]/70 mt-1">Revisa tu progreso general, gestiona tu avatar y tus logros.</p>
+                        </div>
+                    </div>
+
+                    <div 
+                        onClick={() => onNavigate('about')}
+                        className="bg-gradient-to-br from-[#dd566f]/5 to-[#dd566f]/10 p-5 rounded-xl border border-[#dd566f]/10 hover:border-[#dd566f]/40 hover:shadow-md cursor-pointer transition-all duration-300 group flex items-start gap-4"
+                    >
+                        <div className="p-3 bg-[#dd566f]/10 rounded-lg text-[#dd566f] group-hover:bg-[#dd566f] group-hover:text-white transition-colors duration-300">
+                            <i className="fas fa-circle-info text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-[#101021] text-sm group-hover:text-[#dd566f] transition-colors">¿Qué es Animikro?</h3>
+                            <p className="text-xs text-[#101021]/70 mt-1">Explora nuestra metodología interactiva de microaprendizaje.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Community Spotlight */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-[#101021]/10">
                 <h3 className="font-bold text-xl text-[#101021] mb-3">Actividad en la Comunidad</h3>
                 <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                         <i className="fas fa-comments text-[#24668e] mt-1"></i>
-                        <p className="text-sm text-[#101021]/80"><strong>Ana S.</strong> ha compartido su "Árbol de la Reflexión" en el foro del <strong>Módulo 2</strong>. <a href="#" className="text-[#24668e] font-semibold hover:underline">Ver y comentar.</a></p>
+                        <p className="text-sm text-[#101021]/80"><strong>Ana S.</strong> ha compartido su "Árbol de la Reflexión" en el foro del <strong>Módulo 2</strong>. <span onClick={() => onNavigate('community')} className="text-[#24668e] font-semibold hover:underline cursor-pointer">Ver y comentar.</span></p>
                     </div>
-                     <div className="flex items-start space-x-3">
+                    <div className="flex items-start space-x-3">
                         <i className="fas fa-lightbulb text-[#24668e] mt-1"></i>
-                        <p className="text-sm text-[#101021]/80">Nuevo artículo en el blog: <strong>"5 Maneras de Integrar el Mindfulness en tu Día a Día"</strong>. <a href="#" className="text-[#24668e] font-semibold hover:underline">Leer ahora.</a></p>
+                        <p className="text-sm text-[#101021]/80">Nuevo artículo en el blog: <strong>"5 Maneras de Integrar el Mindfulness en tu Día a Día"</strong>. <span onClick={() => onNavigate('resources')} className="text-[#24668e] font-semibold hover:underline cursor-pointer">Leer ahora.</span></p>
                     </div>
                 </div>
             </div>
