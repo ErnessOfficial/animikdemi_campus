@@ -11,6 +11,20 @@ export interface CertificateData {
 // The new diploma template in public/images
 const defaultTemplate = 'images/certifcados-animikdemi/Diplomafinal.png';
 
+function formatHours(hours: number): string {
+  if (hours === 1) return '1 hora';
+  if (hours % 1 === 0) return `${hours} horas`;
+  const wholeHours = Math.floor(hours);
+  const decimalPart = hours - wholeHours;
+  if (decimalPart === 0.5) {
+    if (wholeHours === 0) return 'media hora';
+    return `${wholeHours} horas y media`;
+  }
+  const minutes = Math.round(decimalPart * 60);
+  if (wholeHours === 0) return `${minutes} minutos`;
+  return `${wholeHours} ${wholeHours === 1 ? 'hora' : 'horas'} y ${minutes} minutos`;
+}
+
 /**
  * Word-wrap helper that draws centered multi-line text on canvas.
  * Returns the Y coordinate after the last drawn line.
@@ -75,7 +89,7 @@ export async function generateCertificateImage({
   ctx.textBaseline = 'middle';
   ctx.fillStyle = '#000000';
   ctx.font = `bold ${Math.floor(W * 0.028)}px Georgia, "Times New Roman", serif`;
-  ctx.fillText(userName.toUpperCase(), W * 0.42, H * 0.417);
+  ctx.fillText(userName.toUpperCase(), W * 0.50, H * 0.417);
 
   // ── Course Title (with word-wrap) ─────────────────────────
   // Centered under the "por completar con éxito..." text.
@@ -84,7 +98,7 @@ export async function generateCertificateImage({
   const courseTitleMaxWidth = W * 0.60;
   const courseTitleY = H * 0.635;
   const courseLineHeight = Math.floor(H * 0.035);
-  drawWrappedText(ctx, `“${courseTitle}”`, W * 0.42, courseTitleY, courseTitleMaxWidth, courseLineHeight);
+  drawWrappedText(ctx, `“${courseTitle}”`, W * 0.50, courseTitleY, courseTitleMaxWidth, courseLineHeight);
 
   // ── Course Duration (hours) ───────────────────────────────
   // Rendered on the bottom-left next to the pre-printed "Duración Total:" label
@@ -93,7 +107,7 @@ export async function generateCertificateImage({
     ctx.textAlign = 'left';
     ctx.font = `bold ${Math.floor(W * 0.016)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
     ctx.fillStyle = '#000000';
-    const hoursLabel = courseHours === 1 ? '1 hora' : `${courseHours} horas`;
+    const hoursLabel = formatHours(courseHours);
     ctx.fillText(hoursLabel, W * 0.225, H * 0.804);
     ctx.restore();
   }
@@ -103,7 +117,7 @@ export async function generateCertificateImage({
   ctx.textAlign = 'center';
   ctx.font = `italic 500 ${Math.floor(W * 0.016)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
   ctx.fillStyle = '#444444';
-  ctx.fillText(dateText, W * 0.42, H * 0.77);
+  ctx.fillText(dateText, W * 0.50, H * 0.77);
 
   return await new Promise<Blob>((resolve) =>
     canvas.toBlob((b) => resolve(b!), 'image/png')

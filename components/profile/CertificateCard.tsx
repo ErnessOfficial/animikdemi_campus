@@ -12,9 +12,9 @@ interface CertificateCardProps {
 const CertificateCard: React.FC<CertificateCardProps> = ({ course, userName = 'Participante', completedAt }) => {
   const handleDownload = async () => {
     const dateText = format(completedAt ? new Date(completedAt) : new Date());
-    // Convert estimated duration from minutes to hours (round up)
+    // Convert estimated duration from minutes to exact decimal hours
     const courseHours = course.estimatedDurationMinutes
-      ? Math.ceil(course.estimatedDurationMinutes / 60)
+      ? course.estimatedDurationMinutes / 60
       : undefined;
     await downloadCertificate(
       { userName, courseTitle: course.title, courseHours, dateText },
