@@ -149,13 +149,14 @@ export const initialUserProgress: UserProgress = {
       courseId: 'autoconocimiento-101',
       lastAccessedActivityId: 'm1a2',
       completionStatus: {
-        m1: { completed: false, activities: { m1a1: true, m1a2: false, m1a3: false, m1a4: false } },
-        m2: { completed: false, activities: { m2a1: false, m2a2: false, m2a3: false } },
-        m3: { completed: false, activities: { m3a1: false, m3a2: false, m3a3: false, m3a4: false } },
-        m4: { completed: false, activities: { m4a1: false, m4a2: false } },
-        m5: { completed: false, activities: { m5a1: false } },
+        m1: { completed: true, activities: { m1a1: true, m1a2: true, m1a3: true, m1a4: true } },
+        m2: { completed: true, activities: { m2a1: true, m2a2: true, m2a3: true } },
+        m3: { completed: true, activities: { m3a1: true, m3a2: true, m3a3: true, m3a4: true } },
+        m4: { completed: true, activities: { m4a1: true, m4a2: true } },
+        m5: { completed: true, activities: { m5a1: true } },
       },
-      percentage: 15,
+      percentage: 100,
+      completedAt: '2026-06-20T20:27:16Z',
       answers: {}
     }
   }

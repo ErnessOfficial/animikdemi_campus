@@ -9,7 +9,7 @@ export interface CertificateData {
 }
 
 // The new diploma template in public/images
-const defaultTemplate = 'images/certifcados-animikdemi/NuevoDiploma.png';
+const defaultTemplate = 'images/certifcados-animikdemi/Diplomafinal.png';
 
 /**
  * Word-wrap helper that draws centered multi-line text on canvas.
