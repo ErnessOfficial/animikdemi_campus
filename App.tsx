@@ -34,6 +34,8 @@ import LoadingSpinner from './components/common/LoadingSpinner';
 import DebugAuthPanel from './components/common/DebugAuthPanel';
 import { assetPath } from './utils/paths';
 import WhatIsAnimikroPage from './pages/WhatIsAnimikroPage';
+import WelcomeReflectionModal from './components/platform/WelcomeReflectionModal';
+import { welcomePhrases } from './constants/welcomePhrases';
 
 
 export type View =
@@ -90,6 +92,42 @@ const readComposeParams = () => {
   };
 };
 
+function selectRandomWelcomePhrase(userName: string): string {
+  if (welcomePhrases.length === 0) return '';
+  const historyKey = `anik:reflection-history:v1:${userName}`;
+  let shownIndices: number[] = [];
+  try {
+    const raw = localStorage.getItem(historyKey);
+    if (raw) {
+      shownIndices = JSON.parse(raw);
+      if (!Array.isArray(shownIndices)) shownIndices = [];
+    }
+  } catch {}
+
+  const maxHistorySize = 100;
+  let availableIndices = welcomePhrases
+    .map((_, idx) => idx)
+    .filter(idx => !shownIndices.includes(idx));
+
+  if (availableIndices.length === 0) {
+    shownIndices = [];
+    availableIndices = welcomePhrases.map((_, idx) => idx);
+  }
+
+  const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+  
+  shownIndices.push(randomIndex);
+  if (shownIndices.length > maxHistorySize) {
+    shownIndices.shift();
+  }
+
+  try {
+    localStorage.setItem(historyKey, JSON.stringify(shownIndices));
+  } catch {}
+
+  return welcomePhrases[randomIndex];
+}
+
 const App: React.FC = () => {
     const { isLoading, isAuthenticated, user: kindeUser, login, register, logout } = useKindeAuth();
     const bypassAuth = import.meta.env.VITE_BYPASS_AUTH === 'true';
@@ -101,6 +139,8 @@ const App: React.FC = () => {
     const [activeCourseId, setActiveCourseId] = useState<string | null>(null);
     const [courseToEnroll, setCourseToEnroll] = useState<Course | null>(null);
     const [showDiagnostic, setShowDiagnostic] = useState(false);
+    const [showReflection, setShowReflection] = useState(false);
+    const [randomReflectionPhrase, setRandomReflectionPhrase] = useState('');
     const [shareDefaults, setShareDefaults] = useState(() => readShareParams());
     const [composeDefaults, setComposeDefaults] = useState(() => readComposeParams());
     const [swUpdateReady, setSwUpdateReady] = useState(false);
@@ -114,6 +154,19 @@ const App: React.FC = () => {
                 bio: 'Usuario simulado para desarrollo',
                 hasTakenDiagnostic: false,
             };
+            
+            // Cargar datos de usuario desde localStorage si existen
+            const userKey = `anik:user:v1:${appUser.name}`;
+            try {
+              const rawUser = localStorage.getItem(userKey);
+              if (rawUser) {
+                const parsedUser = JSON.parse(rawUser);
+                appUser.hasTakenDiagnostic = parsedUser.hasTakenDiagnostic;
+                appUser.recommendedCategory = parsedUser.recommendedCategory;
+                appUser.diagnosticAnswers = parsedUser.diagnosticAnswers;
+              }
+            } catch {}
+
             setUser(appUser);
             // Cargar progreso desde localStorage si existe
             const key = `anik:progress:v1:${appUser.name}`;
@@ -124,18 +177,39 @@ const App: React.FC = () => {
                 if (parsed && parsed.courses) setProgress(parsed);
               }
             } catch {}
-            const timer = setTimeout(() => setShowDiagnostic(true), 800);
-            return () => clearTimeout(timer);
+            
+            // Decidir si mostrar Diagnóstico o Reflexión de Bienvenida
+            if (!appUser.hasTakenDiagnostic) {
+                const timer = setTimeout(() => setShowDiagnostic(true), 800);
+                return () => clearTimeout(timer);
+            } else {
+                const phrase = selectRandomWelcomePhrase(appUser.name);
+                setRandomReflectionPhrase(phrase);
+                const timer = setTimeout(() => setShowReflection(true), 800);
+                return () => clearTimeout(timer);
+            }
         }
         if (isAuthenticated && kindeUser) {
+            const userName = `${kindeUser.givenName || ''} ${kindeUser.familyName || ''}`.trim();
             const appUser: User = {
-                // FIX: Corrected property names from snake_case to camelCase for Kinde user object.
-                name: `${kindeUser.givenName || ''} ${kindeUser.familyName || ''}`.trim(),
+                name: userName,
                 avatarUrl: kindeUser.picture || assetPath('images/instructor_avatar.png'),
-                // Assuming these are stored/managed within the app's own backend in a real scenario
                 bio: 'Aprendiz de por vida y entusiasta del crecimiento personal.',
-                hasTakenDiagnostic: false, // This would be fetched from your DB
+                hasTakenDiagnostic: false,
             };
+            
+            // Cargar datos de usuario desde localStorage si existen
+            const userKey = `anik:user:v1:${userName}`;
+            try {
+              const rawUser = localStorage.getItem(userKey);
+              if (rawUser) {
+                const parsedUser = JSON.parse(rawUser);
+                appUser.hasTakenDiagnostic = parsedUser.hasTakenDiagnostic;
+                appUser.recommendedCategory = parsedUser.recommendedCategory;
+                appUser.diagnosticAnswers = parsedUser.diagnosticAnswers;
+              }
+            } catch {}
+
             setUser(appUser);
             // Cargar progreso desde localStorage si existe
             const key = `anik:progress:v1:${appUser.name || 'user'}`;
@@ -147,8 +221,14 @@ const App: React.FC = () => {
               }
             } catch {}
             
+            // Decidir si mostrar Diagnóstico o Reflexión de Bienvenida
             if (!appUser.hasTakenDiagnostic) {
                  const timer = setTimeout(() => setShowDiagnostic(true), 1000);
+                 return () => clearTimeout(timer);
+            } else {
+                 const phrase = selectRandomWelcomePhrase(userName);
+                 setRandomReflectionPhrase(phrase);
+                 const timer = setTimeout(() => setShowReflection(true), 1000);
                  return () => clearTimeout(timer);
             }
         } else {
@@ -164,6 +244,15 @@ const App: React.FC = () => {
         localStorage.setItem(key, JSON.stringify(progress));
       } catch {}
     }, [user, progress]);
+
+    // Persistir perfil de usuario en localStorage
+    useEffect(() => {
+      if (!user) return;
+      const key = `anik:user:v1:${user.name}`;
+      try {
+        localStorage.setItem(key, JSON.stringify(user));
+      } catch {}
+    }, [user]);
     
     // Handlers
     const handleNavigation = (newView: View) => {
@@ -511,6 +600,12 @@ const App: React.FC = () => {
                         course={courseToEnroll}
                         onConfirm={confirmEnrollment}
                         onCancel={() => setCourseToEnroll(null)}
+                    />
+                )}
+                {showReflection && (
+                    <WelcomeReflectionModal 
+                        phrase={randomReflectionPhrase}
+                        onClose={() => setShowReflection(false)}
                     />
                 )}
             </div>
