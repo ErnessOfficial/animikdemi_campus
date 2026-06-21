@@ -9,7 +9,7 @@ export interface CertificateData {
 }
 
 // The new diploma template in public/images
-const defaultTemplate = 'images/certifcados-animikdemi/NuevoDiploma.png';
+const defaultTemplate = 'images/certifcados-animikdemi/Diplomafinal.png';
 
 /**
  * Word-wrap helper that draws centered multi-line text on canvas.
@@ -88,12 +88,15 @@ export async function generateCertificateImage({
   const lastLineY = drawWrappedText(ctx, `"${courseTitle}"`, W * 0.42, courseTitleY, courseTitleMaxWidth, courseLineHeight);
 
   // ── Course Duration (hours) ───────────────────────────────
-  // Rendered just below the course title
+  // Rendered on the bottom-left, next to the pre-printed "Duración Total:" label
   if (courseHours && courseHours > 0) {
-    ctx.font = `500 ${Math.floor(W * 0.018)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
-    ctx.fillStyle = '#444';
+    ctx.save();
+    ctx.textAlign = 'left';
+    ctx.font = `bold ${Math.floor(W * 0.018)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
+    ctx.fillStyle = '#101021';
     const hoursLabel = courseHours === 1 ? '1 hora' : `${courseHours} horas`;
-    ctx.fillText(`Duración: ${hoursLabel}`, W * 0.42, lastLineY + courseLineHeight);
+    ctx.fillText(hoursLabel, W * 0.225, H * 0.806);
+    ctx.restore();
   }
 
   // ── Date ──────────────────────────────────────────────────
