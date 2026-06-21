@@ -70,41 +70,40 @@ export async function generateCertificateImage({
   const H = canvas.height;
 
   // ── Participant Name ──────────────────────────────────────
-  // The new diploma has "QUE SE OTORGA A" at ~30% height.
-  // The blank area for the name sits at roughly 38-42% of the height.
+  // Centered vertically between the "Este certificado se otorga con orgullo a" text and the horizontal line.
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#2c2c2c';
-  ctx.font = `bold ${Math.floor(W * 0.04)}px Georgia, "Times New Roman", serif`;
-  ctx.fillText(userName, W * 0.42, H * 0.42);
+  ctx.fillStyle = '#000000';
+  ctx.font = `bold ${Math.floor(W * 0.028)}px Georgia, "Times New Roman", serif`;
+  ctx.fillText(userName.toUpperCase(), W * 0.42, H * 0.417);
 
   // ── Course Title (with word-wrap) ─────────────────────────
-  // Below the "Por haber completado..." line, at roughly 58-68% of height.
-  ctx.fillStyle = '#1b1b1b';
-  ctx.font = `600 ${Math.floor(W * 0.024)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
-  const courseTitleMaxWidth = W * 0.55;
-  const courseTitleY = H * 0.60;
-  const courseLineHeight = Math.floor(H * 0.04);
-  const lastLineY = drawWrappedText(ctx, `"${courseTitle}"`, W * 0.42, courseTitleY, courseTitleMaxWidth, courseLineHeight);
+  // Centered under the "por completar con éxito..." text.
+  ctx.fillStyle = '#000000';
+  ctx.font = `bold ${Math.floor(W * 0.020)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
+  const courseTitleMaxWidth = W * 0.60;
+  const courseTitleY = H * 0.635;
+  const courseLineHeight = Math.floor(H * 0.035);
+  drawWrappedText(ctx, `“${courseTitle}”`, W * 0.42, courseTitleY, courseTitleMaxWidth, courseLineHeight);
 
   // ── Course Duration (hours) ───────────────────────────────
-  // Rendered on the bottom-left, next to the pre-printed "Duración Total:" label
+  // Rendered on the bottom-left next to the pre-printed "Duración Total:" label
   if (courseHours && courseHours > 0) {
     ctx.save();
     ctx.textAlign = 'left';
-    ctx.font = `bold ${Math.floor(W * 0.018)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
-    ctx.fillStyle = '#101021';
+    ctx.font = `bold ${Math.floor(W * 0.016)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
+    ctx.fillStyle = '#000000';
     const hoursLabel = courseHours === 1 ? '1 hora' : `${courseHours} horas`;
-    ctx.fillText(hoursLabel, W * 0.225, H * 0.806);
+    ctx.fillText(hoursLabel, W * 0.225, H * 0.804);
     ctx.restore();
   }
 
   // ── Date ──────────────────────────────────────────────────
-  // Placed in the lower-left area, near the signature zone
+  // Centered at 77% height
   ctx.textAlign = 'center';
   ctx.font = `italic 500 ${Math.floor(W * 0.016)}px "Segoe UI", system-ui, -apple-system, Roboto, sans-serif`;
-  ctx.fillStyle = '#555';
-  ctx.fillText(dateText, W * 0.42, H * 0.78);
+  ctx.fillStyle = '#444444';
+  ctx.fillText(dateText, W * 0.42, H * 0.77);
 
   return await new Promise<Blob>((resolve) =>
     canvas.toBlob((b) => resolve(b!), 'image/png')
