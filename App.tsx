@@ -36,6 +36,11 @@ import { assetPath } from './utils/paths';
 import WhatIsAnimikroPage from './pages/WhatIsAnimikroPage';
 import WelcomeReflectionModal from './components/platform/WelcomeReflectionModal';
 import { welcomePhrases } from './constants/welcomePhrases';
+import Footer from './components/platform/Footer';
+import MedicalDisclaimerPage from './pages/MedicalDisclaimerPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import CookiePolicyPage from './pages/CookiePolicyPage';
+import TermsConditionsPage from './pages/TermsConditionsPage';
 
 
 export type View =
@@ -54,18 +59,30 @@ export type View =
   | 'share'
   | 'compose'
   | 'file-open'
-  | 'about';
+  | 'about'
+  | 'medical-disclaimer'
+  | 'privacy-policy'
+  | 'cookie-policy'
+  | 'terms-conditions';
 
 const viewPathMap: Partial<Record<View, string>> = {
   share: '/compartir',
   compose: '/compose',
   'file-open': '/abrir-archivo',
+  'medical-disclaimer': '/disclaimer-medico',
+  'privacy-policy': '/politica-privacidad',
+  'cookie-policy': '/politica-cookies',
+  'terms-conditions': '/terminos-condiciones',
 };
 
 const pathViewMap: Record<string, View> = {
   '/compartir': 'share',
   '/compose': 'compose',
   '/abrir-archivo': 'file-open',
+  '/disclaimer-medico': 'medical-disclaimer',
+  '/politica-privacidad': 'privacy-policy',
+  '/politica-cookies': 'cookie-policy',
+  '/terminos-condiciones': 'terms-conditions',
 };
 
 const resolveInitialView = (): View => {
@@ -557,6 +574,14 @@ const App: React.FC = () => {
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="personal" />;
             case 'profile-certs':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="certs" />;
+            case 'medical-disclaimer':
+                return <MedicalDisclaimerPage onBack={() => handleNavigation('dashboard')} />;
+            case 'privacy-policy':
+                return <PrivacyPolicyPage onBack={() => handleNavigation('dashboard')} />;
+            case 'cookie-policy':
+                return <CookiePolicyPage onBack={() => handleNavigation('dashboard')} />;
+            case 'terms-conditions':
+                return <TermsConditionsPage onBack={() => handleNavigation('dashboard')} />;
             default:
                 return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} onNavigate={handleNavigation} />;
         }
@@ -584,8 +609,11 @@ const App: React.FC = () => {
                             onLogout={() => logout()}
                         />
                         <Header user={user} />
-                        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-                            {renderContent()}
+                        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto flex flex-col">
+                            <div className="flex-grow pb-8 flex flex-col">
+                                {renderContent()}
+                            </div>
+                            <Footer onNavigate={handleNavigation} />
                         </div>
                     </main>
                 </div>
