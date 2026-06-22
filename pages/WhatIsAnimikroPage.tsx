@@ -64,10 +64,10 @@ const WhatIsAnimikroPage: React.FC = () => {
       {/* 1. Top Centered Platform Logo Header */}
       <div className="flex flex-col items-center justify-center pt-2 pb-1">
         <img
-          src={assetPath('images/footer1.png')}
+          src="https://res.cloudinary.com/djybwowo6/image/upload/v1781974305/animikroNEWnofondo_rngry0.png"
           alt="AnimiKro AnImiKdemi Logo"
-          className="w-28 h-28 sm:w-36 sm:h-36 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-md cursor-zoom-in"
-          onClick={() => setZoomSrc(assetPath('images/footer1.png'))}
+          className="h-20 sm:h-28 md:h-36 w-auto object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm cursor-zoom-in"
+          onClick={() => setZoomSrc('https://res.cloudinary.com/djybwowo6/image/upload/v1781974305/animikroNEWnofondo_rngry0.png')}
         />
       </div>
 
