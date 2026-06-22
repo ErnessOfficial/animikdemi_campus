@@ -1,5 +1,6 @@
 import React from 'react';
 import type { View } from '../../App';
+import { assetPath } from '../../utils/paths';
 
 interface FooterProps {
   onNavigate: (view: View) => void;
@@ -7,144 +8,259 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="mt-auto w-full bg-[#f8fafc] border-t border-[#101021]/10 px-4 py-8 sm:px-6 lg:px-8 text-xs sm:text-sm text-[#101021]/60 rounded-xl shadow-sm">
-      {/* Top Section: Logos, Links, Disclaimer */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-[#101021]/10">
-        
-        {/* Left Column: Logos & Slogan (Spans 4 columns) */}
-        <div className="md:col-span-4 flex flex-col items-center md:items-start space-y-4">
-          <div className="flex items-center gap-4 flex-wrap justify-center md:justify-start">
-            <img 
-              src="https://res.cloudinary.com/djybwowo6/image/upload/v1781974305/animikroNEWnofondo_rngry0.png" 
-              alt="AnImiKro Logo" 
-              className="h-10 sm:h-12 w-auto object-contain hover:opacity-80 transition"
-            />
-            <img 
-              src="https://res.cloudinary.com/djybwowo6/image/upload/v1772859581/logogroup_f2ou5u.png" 
-              alt="Group Logo" 
-              className="h-8 sm:h-10 w-auto object-contain hover:opacity-80 transition"
-            />
-          </div>
-          <p className="w-full text-center md:text-left text-[#101021]/70 font-semibold tracking-wide text-xs">
-            “Kind Intelligence - Trusted Technology”
-          </p>
+    <footer className="mt-auto w-full bg-white border border-[#101021]/10 rounded-2xl shadow-md p-6 sm:p-8 text-xs sm:text-sm text-[#101021]/70 tracking-wide font-sans">
+      
+      {/* Top Banner: Split gradient bar with centered circular logo badge */}
+      <div className="flex items-center justify-between w-full mb-10 relative">
+        <div className="flex-1 h-[6px] bg-gradient-to-r from-[#6e4380] to-[#24668e] rounded-full shadow-[0_2px_4px_rgba(110,67,128,0.25)]"></div>
+        <div className="mx-4 sm:mx-6 flex-shrink-0 z-10 -mt-10 sm:-mt-12">
+          <img 
+            src={assetPath('images/footer1.png')} 
+            alt="AnimiKro Micro-Learning" 
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain rounded-full bg-white shadow-lg p-1 border border-[#101021]/5 hover:scale-105 transition-transform duration-300"
+          />
         </div>
-
-        {/* Center Column: Navigation Links (Spans 4 columns) */}
-        <div className="md:col-span-4 flex flex-col items-center md:items-start">
-          <h4 className="font-bold text-[#101021] mb-3 text-sm tracking-wide">Enlaces de interés</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full text-center md:text-left">
-            <button 
-              onClick={() => onNavigate('medical-disclaimer')} 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Medical Disclaimer
-            </button>
-            <button 
-              onClick={() => onNavigate('privacy-policy')} 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Política de Privacidad
-            </button>
-            <button 
-              onClick={() => onNavigate('cookie-policy')} 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Política de Cookies
-            </button>
-            <button 
-              onClick={() => onNavigate('terms-conditions')} 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Términos y Condiciones
-            </button>
-            <a 
-              href="https://www.animikind.com/contact/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Contáctanos <i className="fas fa-external-link-alt text-[10px] ml-0.5"></i>
-            </a>
-            <a 
-              href="https://www.animikind.com/about/origins/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-[#24668e] text-left transition duration-200"
-            >
-              Sobre Nosotros <i className="fas fa-external-link-alt text-[10px] ml-0.5"></i>
-            </a>
-          </div>
-        </div>
-
-        {/* Right Column: AI Warning/Disclaimer (Spans 4 columns) */}
-        <div className="md:col-span-4 bg-[#6e4380]/5 rounded-xl p-4 border border-[#6e4380]/10 flex flex-col justify-start space-y-2">
-          <div className="flex items-center gap-2 text-[#6e4380] font-bold text-xs uppercase tracking-wider">
-            <i className="fas fa-triangle-exclamation text-sm"></i>
-            <span>Aviso de no sustitución</span>
-          </div>
-          <p className="text-xs text-[#101021]/80 leading-relaxed">
-            La Inteligencia Artificial no es un psicólogo, terapeuta ni sustituto de atención médica profesional. Si necesitas atención para tu salud mental, acude a un centro de salud o llama a las líneas de ayuda habilitadas para dar soporte en tu país.
-          </p>
-        </div>
-
+        <div className="flex-1 h-[6px] bg-gradient-to-r from-[#6e4380] to-[#24668e] rounded-full shadow-[0_2px_4px_rgba(36,102,142,0.25)]"></div>
       </div>
 
-      {/* Bottom Section: Copyright, Contact Email, Visit Link, Social Icons */}
-      <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 flex-wrap text-xs">
+      {/* Main Content Layout Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         
-        {/* Left side: Copyright & Email */}
-        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
-          <span>copyright © 2026 AnimiKind Ltd</span>
-          <span className="hidden sm:inline text-[#101021]/20">|</span>
-          <a href="mailto:hello@animikind.com" className="hover:text-[#6e4380] transition font-medium">
-            <i className="far fa-envelope mr-1.5"></i>hello@animikind.com
-          </a>
-        </div>
-
-        {/* Center/Right: Social & Visit link */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <a 
-            href="https://www.animikind.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="hover:text-[#6e4380] transition font-medium"
-          >
-            Visita: <span className="underline">www.animikind.com</span>
-          </a>
+        {/* LEFT COLUMN: Links, separator, contact info & copyright (Spans 5 columns on desktop) */}
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           
-          <div className="flex items-center space-x-4 text-base">
-            <a 
-              href="https://www.facebook.com/animikindecosystem" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Facebook" 
-              className="text-[#101021]/60 hover:text-[#1877f2] transition duration-200"
-            >
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a 
-              href="https://www.instagram.com/animikind" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Instagram" 
-              className="text-[#101021]/60 hover:text-[#c13584] transition duration-200"
-            >
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a 
-              href="https://www.linkedin.com/ernesto-mendoza-animikind" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="LinkedIn" 
-              className="text-[#101021]/60 hover:text-[#0a66c2] transition duration-200"
-            >
-              <i className="fab fa-linkedin"></i>
-            </a>
+          {/* Inner Grid for Link Columns */}
+          <div className="grid grid-cols-2 gap-6">
+            
+            {/* Col 1: Te Puede Interesar */}
+            <div className="flex flex-col space-y-3">
+              <h4 className="font-bold text-[#101021] text-xs sm:text-sm uppercase tracking-wider mb-2">
+                Te Puede Interesar
+              </h4>
+              <div className="flex flex-col space-y-2 text-[#101021]/80">
+                <a 
+                  href="https://www.animikind.com/components/animikdemi/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Animikdemi
+                </a>
+                <a 
+                  href="https://www.animikind.es/about-thekindblog" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  The KindBlog / Artículos
+                </a>
+                <a 
+                  href="https://www.animikind.com/ecosystem/unified-safeguarding/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Bienestar Emocional Escolar
+                </a>
+                <a 
+                  href="https://www.animikind.com/resources/key-topics/#video-presentations" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Videos
+                </a>
+                <a 
+                  href="https://www.animikind.com/resources/key-topics/#thematic-infographics" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Infografías y Otros Recursos
+                </a>
+                <a 
+                  href="https://animikind-resources.vercel.app/?lang=es" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  The Kind-Kit
+                </a>
+                <a 
+                  href="https://www.animikind.com/contact/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#6e4380] transition duration-200 block font-bold text-[#101021] hover:translate-x-0.5 transform"
+                >
+                  Contáctanos <i className="fas fa-external-link-alt text-[10px] ml-0.5"></i>
+                </a>
+              </div>
+            </div>
+
+            {/* Col 2: Empresa */}
+            <div className="flex flex-col space-y-3">
+              <h4 className="font-bold text-[#101021] text-xs sm:text-sm uppercase tracking-wider mb-2">
+                Empresa
+              </h4>
+              <div className="flex flex-col space-y-2 text-[#101021]/80">
+                <button 
+                  onClick={() => onNavigate('medical-disclaimer')} 
+                  className="text-left hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Medical Disclaimer
+                </button>
+                <button 
+                  onClick={() => onNavigate('cookie-policy')} 
+                  className="text-left hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Política de Cookies
+                </button>
+                <button 
+                  onClick={() => onNavigate('privacy-policy')} 
+                  className="text-left hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Política de Privacidad
+                </button>
+                <button 
+                  onClick={() => onNavigate('terms-conditions')} 
+                  className="text-left hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Términos y Condiciones
+                </button>
+                <a 
+                  href="https://www.animikind.com/about/cpd-accreditation/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Acreditación CPD
+                </a>
+                <a 
+                  href="https://www.animikind.com/about/social-focusing/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
+                >
+                  Enfoque Social
+                </a>
+                <a 
+                  href="https://www.animikind.com/about/origins/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-[#6e4380] transition duration-200 block font-bold text-[#101021] hover:translate-x-0.5 transform"
+                >
+                  Sobre Nosotros <i className="fas fa-external-link-alt text-[10px] ml-0.5"></i>
+                </a>
+              </div>
+            </div>
+
           </div>
+
+          {/* Left Side Footer Footer (Email, Social, Copyright) */}
+          <div className="flex flex-col space-y-4">
+            
+            {/* Rounded horizontal line divider */}
+            <div className="h-[4px] bg-gray-200 rounded-full w-full"></div>
+
+            {/* Email & Social Icons Row */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <a 
+                href="mailto:hello@animikind.com" 
+                className="hover:text-[#6e4380] transition font-semibold text-sm text-[#101021]/80"
+              >
+                <i className="far fa-envelope mr-2 text-[#6e4380] text-base"></i>hello@animikind.com
+              </a>
+              
+              <div className="flex items-center space-x-3">
+                <a 
+                  href="https://www.facebook.com/animikindecosystem" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="Facebook" 
+                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#1877f2] hover:text-white transition duration-300 shadow-sm text-sm"
+                >
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a 
+                  href="https://www.instagram.com/animikind" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="Instagram" 
+                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#c13584] hover:text-white transition duration-300 shadow-sm text-sm"
+                >
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a 
+                  href="https://www.linkedin.com/ernesto-mendoza-animikind" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="LinkedIn" 
+                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#0a66c2] hover:text-white transition duration-300 shadow-sm text-sm"
+                >
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+
+            {/* Copyright block */}
+            <p className="text-[#24668e] font-semibold text-xs text-center sm:text-left mt-2">
+              © 2026 AnimiKind Ltd . Todos los Derechos Reservados
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* RIGHT COLUMN: Disclaimer box, brand logos, slogan & ecosystem text (Spans 7 columns on desktop) */}
+        <div className="lg:col-span-7 flex flex-col space-y-6">
+          
+          {/* Disclaimer Box */}
+          <div className="bg-[#f0f2f5] border border-[#101021]/5 rounded-2xl p-5 shadow-sm text-center">
+            <h5 className="font-extrabold text-[#6e4380] text-xs sm:text-sm tracking-wider uppercase mb-2">
+              Aviso de no sustitución
+            </h5>
+            <p className="text-xs sm:text-sm text-[#101021]/90 leading-relaxed font-normal">
+              La Inteligencia Artificial no es un psicólogo, terapeuta ni sustituto de atención médica profesional. Si necesitas atención para tu salud mental, acude a un centro de salud o llama a las líneas de ayuda habilitadas para dar soporte en tu país.
+            </p>
+          </div>
+
+          {/* Ecosystem Logo Array */}
+          <div className="flex flex-col items-center space-y-4">
+            <img 
+              src="https://res.cloudinary.com/djybwowo6/image/upload/v1782157346/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud_m4fgxx.png" 
+              alt="AnimiKind Ecosystem Logos" 
+              className="w-full max-w-lg object-contain h-auto hover:scale-[1.02] transition-transform duration-300"
+            />
+            <p className="text-center font-bold text-[#101021]/80 text-xs sm:text-sm tracking-wide">
+              “Kind Intelligence - Trusted Technology”
+            </p>
+          </div>
+
+          {/* Right Side Divider & Visit links */}
+          <div className="flex flex-col items-center space-y-3 pt-2">
+            
+            {/* Rounded horizontal line divider */}
+            <div className="h-[4px] bg-gray-200 rounded-full w-full mb-2"></div>
+            
+            <p className="text-center font-extrabold text-[#24668e] text-[10px] sm:text-xs tracking-wider uppercase">
+              Conoce más sobre nuestro ecosistema de bienestar emocional
+            </p>
+            
+            <a 
+              href="https://www.animikind.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-center font-bold text-[#101021]/90 hover:text-[#6e4380] text-sm sm:text-base tracking-wide uppercase transition duration-200 hover:scale-105 transform inline-block"
+            >
+              Visita: <span className="underline">www.animikind.com</span>
+            </a>
+
+          </div>
+
         </div>
 
       </div>
+
     </footer>
   );
 };
