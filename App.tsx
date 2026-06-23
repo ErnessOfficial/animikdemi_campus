@@ -50,6 +50,7 @@ export type View =
   | 'community'
   | 'profile'
   | 'profile-certs'
+  | 'profile-account'
   | 'course-player'
   | 'course-detail'
   | 'resources'
@@ -73,6 +74,7 @@ const viewPathMap: Partial<Record<View, string>> = {
   'privacy-policy': '/politica-privacidad',
   'cookie-policy': '/politica-cookies',
   'terms-conditions': '/terminos-condiciones',
+  'profile-account': '/perfil-ajustes',
 };
 
 const pathViewMap: Record<string, View> = {
@@ -83,6 +85,7 @@ const pathViewMap: Record<string, View> = {
   '/politica-privacidad': 'privacy-policy',
   '/politica-cookies': 'cookie-policy',
   '/terminos-condiciones': 'terms-conditions',
+  '/perfil-ajustes': 'profile-account',
 };
 
 const resolveInitialView = (): View => {
@@ -574,6 +577,8 @@ const App: React.FC = () => {
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="personal" />;
             case 'profile-certs':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="certs" />;
+            case 'profile-account':
+                return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="account" />;
             case 'medical-disclaimer':
                 return <MedicalDisclaimerPage onBack={() => handleNavigation('dashboard')} />;
             case 'privacy-policy':
@@ -608,7 +613,11 @@ const App: React.FC = () => {
                             onNavigate={handleNavigation}
                             onLogout={() => logout()}
                         />
-                        <Header user={user} />
+                        <Header 
+                            user={user} 
+                            onNavigate={handleNavigation} 
+                            onLogout={() => logout()} 
+                        />
                         <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto flex flex-col">
                             <div className="flex-grow pb-8 flex flex-col">
                                 {renderContent()}

@@ -8,8 +8,7 @@ const navItems: Array<{ icon: string; label: string; view: View }> = [
   { icon: 'fa-book', label: 'Catálogo', view: 'catalog' },
   { icon: 'fa-folder-open', label: 'Recursos', view: 'resources' },
   { icon: 'fa-graduation-cap', label: 'Mis Cursos', view: 'my-courses' },
-  { icon: 'fa-seedling', label: 'Kit Reflexivo', view: 'community' },
-  { icon: 'fa-user', label: 'Perfil', view: 'profile' }
+  { icon: 'fa-seedling', label: 'Kit Reflexivo', view: 'community' }
 ];
 
 interface MobileNavProps {

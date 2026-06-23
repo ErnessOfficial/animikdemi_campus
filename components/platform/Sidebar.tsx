@@ -73,12 +73,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
             isActive={activeView === 'community'} 
             onClick={() => onNavigate('community')} 
           />
-           <NavItem 
-            icon="fa-user" 
-            label="Mi Perfil" 
-            isActive={activeView === 'profile'} 
-            onClick={() => onNavigate('profile')} 
-          />
         </ul>
       </nav>
       <div className="p-6 border-t border-[#101021]/10">

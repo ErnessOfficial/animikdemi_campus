@@ -127,12 +127,12 @@ export const courseDataMindfulness: Course = {
           title: 'Juego: Pensamiento Ancla vs. Pensamiento Nube',
           description: 'Identifica los pensamientos que te arrastran (nubes) y transfórmalos en pensamientos que te anclan al presente (anclas).',
           cards: [
-            { id: 1, matchId: 1, text: 'Siempre me equivoco en esto.', type: 'limiting' },
+            { id: 1, matchId: 2, text: 'Siempre me equivoco en esto.', type: 'limiting' },
             { id: 2, matchId: 1, text: 'Estoy aprendiendo. Este es un pensamiento, no un hecho.', type: 'empowering' },
-            { id: 3, matchId: 2, text: 'Esta sensación de ansiedad nunca se irá.', type: 'limiting' },
-            { id: 4, matchId: 2, text: 'Siento ansiedad ahora. Es una sensación temporal y puedo respirar con ella.', type: 'empowering' },
-            { id: 5, matchId: 3, text: 'Debería estar haciendo algo más productivo.', type: 'limiting' },
-            { id: 6, matchId: 3, text: 'En este momento, elijo descansar. Es una acción valiosa.', type: 'empowering' },
+            { id: 3, matchId: 4, text: 'Esta sensación de ansiedad nunca se irá.', type: 'limiting' },
+            { id: 4, matchId: 3, text: 'Siento ansiedad ahora. Es una sensación temporal y puedo respirar con ella.', type: 'empowering' },
+            { id: 5, matchId: 6, text: 'Debería estar haciendo algo más productivo.', type: 'limiting' },
+            { id: 6, matchId: 5, text: 'En este momento, elijo descansar. Es una acción valiosa.', type: 'empowering' },
           ]
         },
       ]
