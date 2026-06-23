@@ -7,6 +7,9 @@ export interface User {
   hasTakenDiagnostic?: boolean;
   diagnosticAnswers?: string[];
   recommendedCategory?: string;
+  notifyCourses?: boolean;
+  notifyCommunity?: boolean;
+  notifyProgress?: boolean;
 }
 
 export interface Instructor {

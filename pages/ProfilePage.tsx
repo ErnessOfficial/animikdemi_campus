@@ -24,6 +24,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
   const [isDirty, setIsDirty] = useState(false);
 
   useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
+
+  useEffect(() => {
     if (formData.name !== user.name || formData.avatarUrl !== user.avatarUrl || formData.bio !== (user.bio || '')) {
       setIsDirty(true);
     } else {
@@ -104,9 +108,39 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                 <div className="pt-4 border-t border-[#101021]/10">
                     <h3 className="text-lg font-bold text-[#101021] mb-4">Preferencias de Notificación</h3>
                     <div className="space-y-3">
-                        <label className="flex items-center justify-between" htmlFor="notify-courses"><span className="text-[#101021]/90">Nuevos cursos y eventos</span><input id="notify-courses" name="notifyCourses" type="checkbox" className="toggle-checkbox" defaultChecked /></label>
-                        <label className="flex items-center justify-between" htmlFor="notify-community"><span className="text-[#101021]/90">Actividad en la comunidad</span><input id="notify-community" name="notifyCommunity" type="checkbox" className="toggle-checkbox" defaultChecked /></label>
-                        <label className="flex items-center justify-between" htmlFor="notify-progress"><span className="text-[#101021]/90">Recordatorios de progreso</span><input id="notify-progress" name="notifyProgress" type="checkbox" className="toggle-checkbox" /></label>
+                        <label className="flex items-center justify-between" htmlFor="notify-courses">
+                          <span className="text-[#101021]/90">Nuevos cursos y eventos</span>
+                          <input 
+                            id="notify-courses" 
+                            name="notifyCourses" 
+                            type="checkbox" 
+                            className="toggle-checkbox" 
+                            checked={user.notifyCourses !== false} 
+                            onChange={(e) => onUpdateUser({ notifyCourses: e.target.checked })}
+                          />
+                        </label>
+                        <label className="flex items-center justify-between" htmlFor="notify-community">
+                          <span className="text-[#101021]/90">Actividad en la comunidad</span>
+                          <input 
+                            id="notify-community" 
+                            name="notifyCommunity" 
+                            type="checkbox" 
+                            className="toggle-checkbox" 
+                            checked={user.notifyCommunity !== false} 
+                            onChange={(e) => onUpdateUser({ notifyCommunity: e.target.checked })}
+                          />
+                        </label>
+                        <label className="flex items-center justify-between" htmlFor="notify-progress">
+                          <span className="text-[#101021]/90">Recordatorios de progreso</span>
+                          <input 
+                            id="notify-progress" 
+                            name="notifyProgress" 
+                            type="checkbox" 
+                            className="toggle-checkbox" 
+                            checked={user.notifyProgress === true} 
+                            onChange={(e) => onUpdateUser({ notifyProgress: e.target.checked })}
+                          />
+                        </label>
                     </div>
                 </div>
                 <style>{`

@@ -303,17 +303,17 @@ export const course: Course = {
           description: 'Empareja cada [concepto A] con su [concepto B] correspondiente.',
           cards: [
             // Par 1
-            { id: 1, matchId: 1, text: 'Creencia o situación limitante 1', type: 'limiting' },
+            { id: 1, matchId: 2, text: 'Creencia o situación limitante 1', type: 'limiting' },
             { id: 2, matchId: 1, text: 'Su versión potenciadora o solución', type: 'empowering' },
             // Par 2
-            { id: 3, matchId: 2, text: 'Creencia o situación limitante 2', type: 'limiting' },
-            { id: 4, matchId: 2, text: 'Su versión potenciadora o solución', type: 'empowering' },
+            { id: 3, matchId: 4, text: 'Creencia o situación limitante 2', type: 'limiting' },
+            { id: 4, matchId: 3, text: 'Su versión potenciadora o solución', type: 'empowering' },
             // Par 3
-            { id: 5, matchId: 3, text: 'Creencia o situación limitante 3', type: 'limiting' },
-            { id: 6, matchId: 3, text: 'Su versión potenciadora o solución', type: 'empowering' },
+            { id: 5, matchId: 6, text: 'Creencia o situación limitante 3', type: 'limiting' },
+            { id: 6, matchId: 5, text: 'Su versión potenciadora o solución', type: 'empowering' },
             // Par 4
-            { id: 7, matchId: 4, text: 'Creencia o situación limitante 4', type: 'limiting' },
-            { id: 8, matchId: 4, text: 'Su versión potenciadora o solución', type: 'empowering' },
+            { id: 7, matchId: 8, text: 'Creencia o situación limitante 4', type: 'limiting' },
+            { id: 8, matchId: 7, text: 'Su versión potenciadora o solución', type: 'empowering' },
           ],
         },
 

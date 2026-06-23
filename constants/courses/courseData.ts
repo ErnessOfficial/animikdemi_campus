@@ -147,14 +147,14 @@ export const courseData: Course = {
           title: 'Juego de Pares: Identifica y Transforma',
           description: 'Encuentra las parejas de creencias limitantes y sus correspondientes creencias potenciadoras para entrenar tu mente a pensar de forma más constructiva.',
           cards: [
-            { id: 1, matchId: 1, text: 'No soy lo suficientemente bueno/a para ese puesto.', type: 'limiting' },
+            { id: 1, matchId: 2, text: 'No soy lo suficientemente bueno/a para ese puesto.', type: 'limiting' },
             { id: 2, matchId: 1, text: 'Tengo las habilidades y la capacidad de aprender para tener éxito.', type: 'empowering' },
-            { id: 3, matchId: 2, text: 'Si fracaso, será una catástrofe.', type: 'limiting' },
-            { id: 4, matchId: 2, text: 'El fracaso es una oportunidad para aprender y crecer.', type: 'empowering' },
-            { id: 5, matchId: 3, text: 'No puedo pedir ayuda, pareceré débil.', type: 'limiting' },
-            { id: 6, matchId: 3, text: 'Pedir ayuda es un signo de fortaleza y autoconciencia.', type: 'empowering' },
-            { id: 7, matchId: 4, text: 'Es demasiado tarde para aprender algo nuevo.', type: 'limiting' },
-            { id: 8, matchId: 4, text: 'Nunca es tarde para crecer y adquirir nuevas habilidades.', type: 'empowering' },
+            { id: 3, matchId: 4, text: 'Si fracaso, será una catástrofe.', type: 'limiting' },
+            { id: 4, matchId: 3, text: 'El fracaso es una oportunidad para aprender y crecer.', type: 'empowering' },
+            { id: 5, matchId: 6, text: 'No puedo pedir ayuda, pareceré débil.', type: 'limiting' },
+            { id: 6, matchId: 5, text: 'Pedir ayuda es un signo de fortaleza y autoconciencia.', type: 'empowering' },
+            { id: 7, matchId: 8, text: 'Es demasiado tarde para aprender algo nuevo.', type: 'limiting' },
+            { id: 8, matchId: 7, text: 'Nunca es tarde para crecer y adquirir nuevas habilidades.', type: 'empowering' },
           ]
         },
       ]
