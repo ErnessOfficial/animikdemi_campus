@@ -1,6 +1,18 @@
 import type { Course, UserProgress, GamificationBadge, GamificationAchievement, ActivityHistoryItem, WeeklyChallenge } from '../types';
-import { courseCategories } from '../constants/platformData';
 import type { CelebrationItem } from '../components/platform/CelebrationOverlay';
+
+const courseCategories = [
+  "Autoconciencia & Regulación emocional",
+  "Ansiedad, Estrés y Calma",
+  "Sueño & Descanso consciente",
+  "Relaciones & Comunicación con Criterio",
+  "Familia, Crianza & Adolescencia",
+  "Bienestar en el Trabajo - Especial \"PILAR\"",
+  "Mujer, Hombre & Etapas vitales",
+  "Migración & Cambio de vida",
+  "Duelo, Pérdida & Crisis",
+  "Digital & Autocuidado en la era de pantallas"
+];
 
 export interface GamificationStats {
   points: number;
