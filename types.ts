@@ -132,10 +132,58 @@ export interface CourseProgress {
   completedAt?: string; // ISO date when course was fully completed
 }
 
+export interface GamificationBadge {
+  id: string;
+  label: string;
+  icon: string; // fontawesome class suffix, e.g., 'fa-star'
+  unlockedAt: string; // ISO date
+  description: string;
+  rarity: 'Común' | 'Poco común' | 'Épico' | 'Legendario' | 'Mítico';
+}
+
+export interface GamificationAchievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  unlockedAt: string; // ISO date
+}
+
+export interface ActivityHistoryItem {
+  date: string; // YYYY-MM-DD
+  type: 'activity' | 'course' | 'reflection' | 'emotional_tool' | 'meditation' | 'certificate' | 'streak_bonus' | 'weekly_challenge_bonus';
+  id: string;
+  title: string;
+  xp: number;
+}
+
+export interface WeeklyChallenge {
+  id: string;
+  title: string;
+  target: number;
+  current: number;
+  xpReward: number;
+  type: 'reflection' | 'meditation' | 'capsule' | 'any';
+  completed: boolean;
+}
+
 export interface UserProgress {
   courses: {
     [courseId: string]: CourseProgress;
   };
+  xp?: number;
+  streak?: number;
+  longestStreak?: number;
+  lastActiveDate?: string; // YYYY-MM-DD
+  restDays?: number;
+  unlockedBadges?: GamificationBadge[];
+  unlockedAchievements?: GamificationAchievement[];
+  completedMeditationsCount?: number;
+  completedReflectionsCount?: number;
+  emotionalToolsUsedCount?: number;
+  studyMinutes?: number;
+  activityHistory?: ActivityHistoryItem[];
+  weeklyChallenges?: WeeklyChallenge[];
 }
 
 export interface Achievement {

@@ -9,6 +9,10 @@ import { initialUserProgress, courseCatalog, diagnosticTestQuestions } from './c
 import { courseData as detailedCourseData } from './constants/courses/courseData';
 import { courseDataMindfulness } from './constants/courses/courseDataMindfulness';
 
+// Import gamification helpers
+import CelebrationOverlay, { CelebrationItem } from './components/platform/CelebrationOverlay';
+import { recordCompletedAction, checkDailyStreak, initializeGamification } from './utils/gamification';
+
 // Import components and pages
 import Sidebar from './components/platform/Sidebar';
 import MobileNav from './components/platform/MobileNav';
@@ -166,6 +170,15 @@ const App: React.FC = () => {
     const [swUpdateReady, setSwUpdateReady] = useState(false);
     const [swUpdating, setSwUpdating] = useState(false);
 
+    // Gamification states
+    const [pendingCelebrations, setPendingCelebrations] = useState<CelebrationItem[]>([]);
+    const [streakChecked, setStreakChecked] = useState(false);
+    const [appToast, setAppToast] = useState<string | null>(null);
+    const showAppToast = (msg: string) => {
+        setAppToast(msg);
+        window.setTimeout(() => setAppToast(null), 3000);
+    };
+
     useEffect(() => {
         if (bypassAuth) {
             const appUser: User = {
@@ -194,7 +207,9 @@ const App: React.FC = () => {
               const raw = localStorage.getItem(key);
               if (raw) {
                 const parsed = JSON.parse(raw);
-                if (parsed && parsed.courses) setProgress(parsed);
+                if (parsed && parsed.courses) setProgress(initializeGamification(parsed));
+              } else {
+                setProgress(initializeGamification(initialUserProgress));
               }
             } catch {}
             
@@ -237,7 +252,9 @@ const App: React.FC = () => {
               const raw = localStorage.getItem(key);
               if (raw) {
                 const parsed = JSON.parse(raw);
-                if (parsed && parsed.courses) setProgress(parsed);
+                if (parsed && parsed.courses) setProgress(initializeGamification(parsed));
+              } else {
+                setProgress(initializeGamification(initialUserProgress));
               }
             } catch {}
             
@@ -255,6 +272,20 @@ const App: React.FC = () => {
             setUser(null);
         }
     }, [bypassAuth, isAuthenticated, kindeUser]);
+
+    // Check daily streak when user and progress are loaded
+    useEffect(() => {
+        if (!user || streakChecked) return;
+        
+        setProgress(prev => {
+            const checkResult = checkDailyStreak(prev);
+            if (checkResult.message) {
+                showAppToast(checkResult.message);
+            }
+            return checkResult.updatedProgress;
+        });
+        setStreakChecked(true);
+    }, [user, streakChecked]);
 
     // Persistir progreso en localStorage por usuario
     useEffect(() => {
@@ -424,6 +455,21 @@ const App: React.FC = () => {
         setUser(prev => prev ? ({ ...prev, ...updatedUser }) : null);
     };
 
+    const handleReflectionCompleted = () => {
+        setProgress(prev => {
+            const actionResult = recordCompletedAction(
+                prev,
+                { type: 'reflection', id: 'kit-reflexivo-chat', title: 'Reflexión en Kit Reflexivo' },
+                courseCatalog
+            );
+            if (actionResult.newCelebrations.length > 0) {
+                setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
+            }
+            showAppToast('¡Reflexión registrada! +15 XP obtenidos 🌿');
+            return actionResult.updatedProgress;
+        });
+    };
+
     const markActivityAsCompleted = (courseId: string, activityId: string) => {
         setProgress(prevProgress => {
             const courseProgress = prevProgress.courses[courseId];
@@ -441,6 +487,8 @@ const App: React.FC = () => {
             }
 
             if (!moduleId) return prevProgress;
+
+            const wasActivityCompleted = courseProgress.completionStatus[moduleId]?.activities[activityId];
 
             const newCompletionStatus = { ...courseProgress.completionStatus };
             if (!newCompletionStatus[moduleId]) {
@@ -466,7 +514,7 @@ const App: React.FC = () => {
             const isNowCompleted = totalCompleted === totalActivities && totalActivities > 0;
             const nextCompletedAt = isNowCompleted && !courseProgress.completedAt ? new Date().toISOString() : courseProgress.completedAt;
 
-            return {
+            let currentProgress: UserProgress = {
                 ...prevProgress,
                 courses: {
                     ...prevProgress.courses,
@@ -477,7 +525,58 @@ const App: React.FC = () => {
                         completedAt: nextCompletedAt,
                     }
                 }
+            };
+
+            if (!wasActivityCompleted) {
+                const activityObj = detailedCourse.modules.find(m => m.id === moduleId)?.activities.find(a => a.id === activityId);
+                const actTitle = activityObj?.title || 'Actividad';
+                const actType = activityObj?.type || 'text';
+
+                const actionResult = recordCompletedAction(
+                    currentProgress,
+                    { type: actType, id: activityId, title: actTitle, courseId },
+                    courseCatalog
+                );
+                currentProgress = actionResult.updatedProgress;
+                
+                if (actionResult.newCelebrations.length > 0) {
+                    setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
+                }
+
+                if (isNowCompleted && !courseProgress.completedAt) {
+                    const isProgram = courseId.startsWith('programa') || detailedCourse.title.toLowerCase().includes('programa');
+                    const xpForCourse = isProgram ? 500 : 100;
+                    
+                    const courseResult = recordCompletedAction(
+                        currentProgress,
+                        { 
+                          type: isProgram ? 'pillarsInteractive' : 'finalChallenge', 
+                          id: courseId, 
+                          title: `Completado: ${detailedCourse.title}`, 
+                          courseId 
+                        },
+                        courseCatalog
+                    );
+                    
+                    currentProgress = courseResult.updatedProgress;
+                    currentProgress.xp = (currentProgress.xp || 0) + xpForCourse + 200; // Award +200 XP for certificate and +100/500 XP for course completion
+                    
+                    setPendingCelebrations(prevCel => [
+                      ...prevCel,
+                      {
+                        type: 'course',
+                        id: courseId,
+                        title: '¡Curso Completado!',
+                        description: `Completaste con éxito el curso: ${detailedCourse.title}. +200 XP por tu Certificado y +${xpForCourse} XP por finalizar.`,
+                        icon: 'fa-certificate',
+                        xpReward: xpForCourse + 200
+                      },
+                      ...courseResult.newCelebrations
+                    ]);
+                }
             }
+
+            return currentProgress;
         });
     };
 
@@ -564,7 +663,7 @@ const App: React.FC = () => {
                     />
                 );
             case 'community':
-                return <KitReflexivoPage />;
+                return <KitReflexivoPage onReflectionCompleted={handleReflectionCompleted} />;
             case 'about':
                 return <WhatIsAnimikroPage />;
             case 'share':
@@ -615,6 +714,7 @@ const App: React.FC = () => {
                         />
                         <Header 
                             user={user} 
+                            progress={progress}
                             onNavigate={handleNavigation} 
                             onLogout={() => logout()} 
                         />
@@ -652,6 +752,18 @@ const App: React.FC = () => {
     return (
         <>
             {content}
+            {pendingCelebrations.length > 0 && (
+              <CelebrationOverlay 
+                item={pendingCelebrations[0]} 
+                onClose={() => setPendingCelebrations(prev => prev.slice(1))} 
+              />
+            )}
+            {appToast && (
+              <div className="fixed bottom-6 right-6 bg-[#24668e] text-white px-4 py-3 rounded-xl shadow-lg z-50 text-sm sm:text-base animate-fade-in flex items-center gap-2 border border-white/10">
+                <i className="fas fa-info-circle text-white/90"></i>
+                <span>{appToast}</span>
+              </div>
+            )}
             {swUpdateReady && (
               <div className="fixed bottom-4 right-4 z-50 max-w-xs rounded-2xl bg-[#101021] text-white shadow-lg p-4 space-y-3">
                 <div className="flex items-start gap-3">
