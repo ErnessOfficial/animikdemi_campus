@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { User } from '../../types';
+import type { User, UserProgress } from '../../types';
 import type { View } from '../../App';
+import { computeGamification } from '../../utils/gamification';
+import { courseCatalog } from '../../constants/platformData';
 
 interface HeaderProps {
   user: User;
+  progress?: UserProgress;
   onNavigate: (view: View) => void;
   onLogout: () => void;
 }
@@ -86,6 +89,9 @@ const Header: React.FC<HeaderProps> = ({ user, onNavigate, onLogout }) => {
     onNavigate(view);
     setIsUserDropdownOpen(false);
   };
+
+  const stats = progress ? computeGamification(progress, courseCatalog) : null;
+  const levelTitle = stats ? stats.levelTitle : 'Aprendiz de Bienestar';
 
   return (
     <header className="bg-white shadow-sm px-4 py-3 sm:px-6 flex flex-col gap-4 sm:gap-3 sm:flex-row sm:items-center sm:justify-between flex-shrink-0 z-20 border-b border-[#101021]/10">
@@ -183,7 +189,7 @@ const Header: React.FC<HeaderProps> = ({ user, onNavigate, onLogout }) => {
             />
             <div className="leading-tight hidden sm:block">
               <span className="block text-xs sm:text-sm font-semibold text-[#101021]">{user.name}</span>
-              <span className="block text-[10px] text-[#101021]/50">Aprendiz</span>
+              <span className="block text-[10px] text-[#101021]/50 truncate max-w-[120px] font-medium" title={levelTitle}>{levelTitle}</span>
             </div>
             <button className="text-[#101021]/50 hover:text-[#101021] p-0.5" aria-label="Menú de usuario">
                <i className={`fas fa-chevron-down text-[10px] transition-transform duration-200 ${isUserDropdownOpen ? 'rotate-180 text-[#6e4380]' : ''}`}></i>

@@ -2,6 +2,8 @@ import React from 'react';
 import type { User, UserProgress } from '../types';
 import { courseCatalog } from '../constants/platformData';
 import GamificationWidget from '../components/platform/GamificationWidget';
+import WellnessCalendar from '../components/platform/WellnessCalendar';
+import { computeGamification } from '../utils/gamification';
 
 interface DashboardProps {
     user: User;
@@ -20,6 +22,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     onEnroll, 
     onNavigate 
 }) => {
+    const stats = computeGamification(progress, courseCatalog);
     const enrolledCourses = courseCatalog.filter(course => progress.courses[course.id]);
     const activeEnrolled = enrolledCourses.slice(0, 2);
 
@@ -36,6 +39,109 @@ const Dashboard: React.FC<DashboardProps> = ({
                     <p className="mt-2 text-lg opacity-85">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
                 </div>
                 <GamificationWidget progress={progress} catalog={courseCatalog} />
+            </div>
+
+            {/* Gamification Dashboard Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Weekly Challenges & Emotional Level Card */}
+                <div className="lg:col-span-2 space-y-6">
+                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-md">
+                        <div className="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 className="font-extrabold text-slate-800 text-lg flex items-center gap-2">
+                                    <i className="fas fa-tasks text-[#24668e]"></i>
+                                    Retos Semanales
+                                </h3>
+                                <p className="text-xs text-slate-500 mt-0.5">Completa estas metas semanales y obtén recompensas</p>
+                            </div>
+                            <span className="text-[10px] font-bold text-[#6e4380] bg-[#6e4380]/10 px-3 py-1 rounded-full uppercase">
+                                Semana activa
+                            </span>
+                        </div>
+                        
+                        <div className="space-y-4">
+                            {stats.weeklyChallenges.map(challenge => {
+                                const isChallengeCompleted = challenge.current >= challenge.target;
+                                return (
+                                    <div key={challenge.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 gap-3">
+                                        <div className="flex items-start gap-3">
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs mt-0.5 ${isChallengeCompleted ? 'bg-emerald-100 text-emerald-600 animate-pulse' : 'bg-slate-200 text-slate-500'}`}>
+                                                {challenge.type === 'capsule' && <i className="fas fa-book-open"></i>}
+                                                {challenge.type === 'meditation' && <i className="fas fa-spa"></i>}
+                                                {challenge.type === 'reflection' && <i className="fas fa-brain"></i>}
+                                            </div>
+                                            <div>
+                                                <h4 className={`text-sm font-bold text-slate-800 ${isChallengeCompleted ? 'line-through opacity-60' : ''}`}>{challenge.title}</h4>
+                                                <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">
+                                                    Progreso: {challenge.current} / {challenge.target} • Recompensa: +{challenge.xpReward} XP
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {isChallengeCompleted ? (
+                                                <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
+                                                    <i className="fas fa-check"></i> Completado
+                                                </span>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        if (challenge.type === 'capsule') onNavigate('catalog');
+                                                        if (challenge.type === 'meditation') onNavigate('my-courses');
+                                                        if (challenge.type === 'reflection') onNavigate('community');
+                                                    }}
+                                                    className="w-full sm:w-auto bg-[#24668e]/10 text-[#24668e] hover:bg-[#24668e] hover:text-white text-xs font-bold px-4 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center gap-1.5"
+                                                >
+                                                    Realizar <i className="fas fa-chevron-right text-[10px]"></i>
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        {stats.weeklyChallenges.every(c => c.current >= c.target) && (
+                            <div className="mt-4 p-3 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-xl border border-emerald-100 flex items-center gap-2">
+                                <i className="fas fa-gift text-sm animate-bounce"></i>
+                                ¡Felicidades! Has completado todos los retos de esta semana. +125 XP adicionales otorgados.
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Emotional Stage Card */}
+                    <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 p-5 rounded-2xl border border-emerald-500/20 flex flex-col sm:flex-row items-center gap-4 justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20 text-xl flex-shrink-0">
+                                <i className="fas fa-heart-pulse animate-pulse"></i>
+                            </div>
+                            <div>
+                                <h4 className="font-extrabold text-slate-800 text-sm">Etapa Emocional Actual</h4>
+                                <p className="text-[11px] text-slate-500">Representa tu constancia, autoexamen y meditación</p>
+                            </div>
+                        </div>
+                        <div className="text-center sm:text-right">
+                            <span className="text-xl font-extrabold text-emerald-700 block">
+                                {stats.emotionalStage}
+                            </span>
+                            <span className="text-[10px] text-emerald-600 font-semibold bg-emerald-100/50 px-2 py-0.5 rounded-full mt-1 inline-block">
+                                {stats.emotionalStage === 'Trascendencia' && 'Sabiduría Compartida'}
+                                {stats.emotionalStage === 'Inspiración' && 'Guía y Luz'}
+                                {stats.emotionalStage === 'Florecimiento' && 'Fruto Emocional'}
+                                {stats.emotionalStage === 'Equilibrio' && 'Armonía y Templanza'}
+                                {stats.emotionalStage === 'Consolidación' && 'Hábitos Firmes'}
+                                {stats.emotionalStage === 'Crecimiento' && 'Integración Activa'}
+                                {stats.emotionalStage === 'Descubrimiento' && 'Reconocimiento'}
+                                {stats.emotionalStage === 'Curiosidad' && 'Exploración Activa'}
+                                {stats.emotionalStage === 'Despertar' && 'Primeros Pasos'}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Calendar Column */}
+                <div className="lg:col-span-1">
+                    <WellnessCalendar history={stats.activityHistory} />
+                </div>
             </div>
 
             {/* Welcome Summary & Methodology Section */}

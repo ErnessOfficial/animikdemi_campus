@@ -87,6 +87,9 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
                         <div className="w-full bg-[#101021]/10 rounded-full h-2">
                           <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] h-2 rounded-full transition-all duration-500" style={{ width: `${prog.percentage}%` }}></div>
                         </div>
+                        <p className="text-xs text-[#101021]/60 mt-2 font-medium italic">
+                          "Te faltan {Math.ceil((course.estimatedDurationMinutes || (course.modules.reduce((acc, m) => acc + m.activities.length, 0) * 15)) * (1 - prog.percentage / 100))} minutos para finalizar."
+                        </p>
                       </div>
                       <div className="mt-3 text-sm text-[#101021]/60">
                         <i className="far fa-calendar-alt mr-1"></i> Iniciado: {formatDate(prog.startedAt)}
@@ -187,9 +190,24 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
 
               <div>
                 <h4 className="text-lg font-bold text-[#101021] mb-3">Historial de Logros</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {mockAchievements.map(ach => <AchievementBadge key={ach.id} achievement={ach} />)}
-                </div>
+                {progress.unlockedAchievements && progress.unlockedAchievements.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {progress.unlockedAchievements.map(ach => (
+                      <AchievementBadge 
+                        key={ach.id} 
+                        achievement={{
+                          id: ach.id,
+                          title: ach.title,
+                          description: ach.description,
+                          icon: ach.icon,
+                          date: new Date(ach.unlockedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+                        }} 
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[#101021]/70 text-sm">Aún no has desbloqueado ningún logro. ¡Sigue aprendiendo para completar hitos importantes!</p>
+                )}
               </div>
             </div>
           );

@@ -55,7 +55,11 @@ const cardIcons: Record<KitCardId, string> = {
   interaccion: 'fa-comments'
 };
 
-const KitReflexivoPage: React.FC = () => {
+interface KitReflexivoPageProps {
+  onReflectionCompleted?: () => void;
+}
+
+const KitReflexivoPage: React.FC<KitReflexivoPageProps> = ({ onReflectionCompleted }) => {
   const [activeCard, setActiveCard] = useState<KitCardId | null>(null);
   const [responseText, setResponseText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -87,6 +91,9 @@ const KitReflexivoPage: React.FC = () => {
 
       const payload = await response.json();
       setResponseText(payload.text || '');
+      if (payload.text && onReflectionCompleted) {
+        onReflectionCompleted();
+      }
     } catch (err) {
       setError(
         err instanceof Error

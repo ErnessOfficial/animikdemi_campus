@@ -10,55 +10,87 @@ interface Props {
 const GamificationWidget: React.FC<Props> = ({ progress, catalog }) => {
   const stats = computeGamification(progress, catalog);
   const pct = stats.currentToNext;
+
   return (
-    <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 min-w-[260px] text-white border border-white/20">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <i className="fas fa-medal"></i>
-          <span className="font-bold">Nivel {stats.level}</span>
-        </div>
-        <div className="text-sm opacity-90">
-          <i className="fas fa-star text-yellow-300 mr-1"></i>
-          {stats.points} pts
-        </div>
-      </div>
-      <div className="w-full bg-white/20 rounded-full h-2">
-        <div className="bg-yellow-300 h-2 rounded-full transition-all" style={{ width: `${pct}%` }}></div>
-      </div>
-      <div className="mt-2 text-xs opacity-90">Progreso al siguiente nivel: {pct}%</div>
-      {stats.badges.length > 0 && (
-        <div className="mt-3 flex items-center gap-3 flex-wrap">
-          {stats.badges.map(b => (
-            <span key={b.id} className="inline-flex items-center gap-1 bg-white/10 px-2 py-1 rounded-full text-xs">
-              <i className={`fas ${b.icon}`}></i>
-              {b.label}
+    <div className="bg-gradient-to-br from-[#6e4380]/70 to-[#24668e]/70 backdrop-blur-md rounded-2xl p-4 sm:p-5 min-w-[280px] text-white border border-white/20 shadow-lg flex flex-col justify-between">
+      {/* Header Level & XP */}
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center border border-white/30">
+              <i className="fas fa-medal text-yellow-300"></i>
+            </div>
+            <div className="leading-tight">
+              <span className="block text-xs text-white/70">Nivel {stats.level}</span>
+              <span className="block text-sm font-extrabold truncate max-w-[140px]" title={stats.levelTitle}>
+                {stats.levelTitle}
+              </span>
+            </div>
+          </div>
+          <div className="text-right">
+            <span className="block text-[10px] text-white/75 font-semibold">Experiencia</span>
+            <span className="text-sm font-extrabold text-yellow-300 flex items-center justify-end gap-1">
+              <i className="fas fa-star text-xs"></i>
+              {stats.points} XP
             </span>
-          ))}
+          </div>
         </div>
-      )}
-      <div className="mt-3 text-xs opacity-90">Cursos completados: <strong>{stats.completedCourses}</strong></div>
-      <div className="mt-2 text-xs opacity-90 flex items-center gap-2">
-        <i className="fas fa-heart"></i>
-        Áreas del bienestar: <strong>{stats.areasCompleted}/{stats.areasTotal}</strong>
-        {stats.areasLevel === 1 && (
-          <span className="ml-2 inline-flex items-center gap-1 bg-green-400/20 text-green-100 px-2 py-0.5 rounded-full">
-            <i className="fas fa-layer-group"></i> Bienestar Integral
-          </span>
-        )}
+
+        {/* Progress Bar */}
+        <div className="mt-3">
+          <div className="w-full bg-white/20 rounded-full h-2">
+            <div 
+              className="bg-gradient-to-r from-yellow-300 to-amber-300 h-2 rounded-full transition-all duration-700" 
+              style={{ width: `${pct}%` }}
+            ></div>
+          </div>
+          <div className="flex justify-between items-center text-[10px] text-white/80 mt-1.5 font-medium">
+            <span>Siguiente nivel: {pct}%</span>
+            <span>{100 - pct} XP restantes</span>
+          </div>
+        </div>
       </div>
-      {stats.areaBadges.length > 0 && (
-        <div className="mt-2 flex items-center gap-2 flex-wrap">
-          {stats.areaBadges.slice(0, 6).map(b => (
-            <span key={b.id} className="inline-flex items-center gap-1 bg-white/10 px-2 py-1 rounded-full text-[10px]">
-              <i className={`fas ${b.icon}`}></i>
-              {b.label}
-            </span>
-          ))}
-          {stats.areaBadges.length > 6 && (
-            <span className="text-[10px] opacity-90">+{stats.areaBadges.length - 6} más</span>
-          )}
+
+      <div className="border-t border-white/10 my-3"></div>
+
+      {/* Row Stats: Streak & Emotional Level */}
+      <div className="grid grid-cols-2 gap-2 text-center text-xs">
+        {/* Streak */}
+        <div className="bg-white/10 p-2 rounded-xl border border-white/10 flex flex-col justify-center items-center">
+          <div className="flex items-center gap-1 text-orange-400">
+            <i className="fas fa-fire text-sm animate-pulse"></i>
+            <span className="font-extrabold text-sm text-white">{stats.streak} {stats.streak === 1 ? 'día' : 'días'}</span>
+          </div>
+          <span className="text-[9px] text-white/70 mt-0.5">Racha Actual</span>
         </div>
-      )}
+
+        {/* Emotional Level */}
+        <div className="bg-white/10 p-2 rounded-xl border border-white/10 flex flex-col justify-center items-center">
+          <div className="flex items-center gap-1 text-emerald-300">
+            <i className="fas fa-heart text-xs"></i>
+            <span className="font-extrabold text-[11px] text-white truncate max-w-[90px]" title={stats.emotionalStage}>
+              {stats.emotionalStage}
+            </span>
+          </div>
+          <span className="text-[9px] text-white/70 mt-0.5">Nivel Emocional</span>
+        </div>
+      </div>
+
+      {/* Compassionate Rest Days status */}
+      <div className="mt-3 flex items-center justify-between text-[10px] text-white/85">
+        <span className="flex items-center gap-1">
+          <i className="fas fa-bed text-white/80"></i>
+          Días de descanso:
+        </span>
+        <span className="font-bold flex gap-1">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <i 
+              key={idx} 
+              className={`fas fa-circle text-[7px] ${idx < stats.restDays ? 'text-green-300' : 'text-white/20'}`}
+            ></i>
+          ))}
+        </span>
+      </div>
     </div>
   );
 };

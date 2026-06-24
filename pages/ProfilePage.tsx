@@ -12,10 +12,23 @@ interface ProfilePageProps {
   initialTab?: ProfileTab;
 }
 
-type ProfileTab = 'personal' | 'account' | 'certs';
+type ProfileTab = 'personal' | 'account' | 'certs' | 'badges';
+
+const ALL_SYSTEM_BADGES = [
+  { id: 'first-course', label: 'Primer paso', icon: 'fa-trophy', description: 'Primer curso completado con éxito.', rarity: 'Común' },
+  { id: 'constancy-7', label: 'Aprendiz constante', icon: 'fa-calendar-check', description: 'Dedicaste tiempo a tu bienestar durante 7 días seguidos.', rarity: 'Poco común' },
+  { id: 'courses-10', label: 'Explorador emocional', icon: 'fa-compass', description: 'Completaste 10 cursos finalizados.', rarity: 'Épico' },
+  { id: 'meditations-20', label: 'Mente tranquila', icon: 'fa-spa', description: 'Realizaste 20 meditaciones o ejercicios de calma.', rarity: 'Épico' },
+  { id: 'active-30', label: 'Constructor de hábitos', icon: 'fa-leaf', description: 'Estuviste activo durante 30 días en la plataforma.', rarity: 'Épico' },
+  { id: 'courses-50', label: 'Maestro del aprendizaje', icon: 'fa-graduation-cap', description: 'Completaste 50 cursos en AnImiK.', rarity: 'Legendario' },
+  { id: 'constancy-100', label: 'Constancia admirable', icon: 'fa-fire', description: 'Mantuviste una racha de bienestar de 100 días.', rarity: 'Legendario' },
+  { id: 'programs-5', label: 'Bienestar integral', icon: 'fa-layer-group', description: 'Completaste 5 programas formativos completos.', rarity: 'Legendario' },
+  { id: 'anniversary-1', label: 'Comunidad AnImiK', icon: 'fa-users', description: 'Cumpliste tu primer año en la plataforma.', rarity: 'Mítico' }
+];
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser, initialTab = 'personal' }) => {
   const [activeTab, setActiveTab] = useState<ProfileTab>(initialTab);
+  const [selectedBadge, setSelectedBadge] = useState<any | null>(null);
   const [formData, setFormData] = useState({
     name: user.name,
     avatarUrl: user.avatarUrl,
@@ -192,6 +205,51 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                 )}
             </div>
         );
+      case 'badges':
+        const stats = computeGamification(progress, courseCatalog);
+        return (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-[#101021]">Colección de Insignias</h3>
+              <span className="text-xs bg-[#6e4380]/10 text-[#6e4380] font-bold px-3 py-1.5 rounded-full">
+                Obtenidas: {stats.badges.filter(b => !b.id.startsWith('area-')).length} de {ALL_SYSTEM_BADGES.length}
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {ALL_SYSTEM_BADGES.map(badge => {
+                const unlocked = stats.badges.find(b => b.id === badge.id);
+                const dateText = unlocked
+                  ? new Date(unlocked.unlockedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+                  : null;
+                  
+                return (
+                  <div
+                    key={badge.id}
+                    onClick={() => setSelectedBadge({ ...badge, unlockedAt: dateText })}
+                    className={`p-4 rounded-xl border flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 ${
+                      unlocked
+                        ? 'bg-white border-[#6e4380]/20 shadow-sm hover:shadow-md hover:scale-[1.03] text-slate-800'
+                        : 'bg-slate-50 border-slate-200 opacity-60 hover:opacity-80 text-slate-400'
+                    }`}
+                  >
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 shadow-inner ${
+                      unlocked
+                        ? 'bg-[#6e4380]/10 text-[#6e4380]'
+                        : 'bg-slate-200 text-slate-400'
+                    }`}>
+                      <i className={`fas ${badge.icon} text-lg`}></i>
+                    </div>
+                    <span className="text-xs font-bold truncate w-full">{badge.label}</span>
+                    <span className="text-[9px] text-slate-400 font-semibold mt-1">
+                      {unlocked ? 'Desbloqueado' : 'Bloqueado'}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -206,6 +264,16 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
     </button>
   );
 
+  const getRarityStyle = (rarity?: string) => {
+    switch (rarity) {
+      case 'Mítico': return 'from-purple-600 to-pink-600 text-white';
+      case 'Legendario': return 'from-amber-500 via-orange-500 to-yellow-500 text-white';
+      case 'Épico': return 'from-indigo-500 to-purple-500 text-white';
+      case 'Poco común': return 'from-blue-500 to-cyan-500 text-white';
+      default: return 'from-teal-500 to-emerald-500 text-white';
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto animate-fade-in space-y-8">
       <div>
@@ -213,15 +281,45 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
         <p className="mt-2 text-lg text-[#101021]/70">Gestiona tu información personal, logros y preferencias.</p>
       </div>
       
-      <div className="border-b border-[#101021]/10">
+      <div className="border-b border-[#101021]/10 flex overflow-x-auto hide-scrollbar">
         <TabButton tabId="personal" label="Datos Personales" />
         <TabButton tabId="account" label="Ajustes de Cuenta" />
         <TabButton tabId="certs" label="Certificaciones" />
+        <TabButton tabId="badges" label="Insignias" />
       </div>
 
       <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-[#101021]/10 min-h-[400px]">
         {renderTabContent()}
       </div>
+
+      {/* Badge Detail Modal */}
+      {selectedBadge && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#101021]/80 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-2xl p-6 max-w-sm w-full text-center relative">
+            <button
+              onClick={() => setSelectedBadge(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+            >
+              <i className="fas fa-times"></i>
+            </button>
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border ${selectedBadge.unlockedAt ? 'bg-[#6e4380]/10 text-[#6e4380]' : 'bg-slate-200 text-slate-400'}`}>
+              <i className={`fas ${selectedBadge.icon} text-2xl`}></i>
+            </div>
+            <h4 className="text-lg font-bold text-slate-800 mb-1">{selectedBadge.label}</h4>
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-gradient-to-r ${getRarityStyle(selectedBadge.rarity)} inline-block mb-3`}>
+              {selectedBadge.rarity}
+            </span>
+            <p className="text-sm text-slate-600 mb-4 leading-relaxed">{selectedBadge.description}</p>
+            <div className="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              {selectedBadge.unlockedAt ? (
+                <span>Obtenida el: <strong>{selectedBadge.unlockedAt}</strong></span>
+              ) : (
+                <span className="flex items-center justify-center gap-1"><i className="fas fa-lock"></i> Aún bloqueada. ¡Sigue adelante!</span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
