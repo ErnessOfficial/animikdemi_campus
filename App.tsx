@@ -45,6 +45,8 @@ import MedicalDisclaimerPage from './pages/MedicalDisclaimerPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import TermsConditionsPage from './pages/TermsConditionsPage';
+import HelpPage from './pages/HelpPage';
+import CookieConsentBanner from './components/platform/CookieConsentBanner';
 
 
 export type View =
@@ -68,7 +70,8 @@ export type View =
   | 'medical-disclaimer'
   | 'privacy-policy'
   | 'cookie-policy'
-  | 'terms-conditions';
+  | 'terms-conditions'
+  | 'help';
 
 const viewPathMap: Partial<Record<View, string>> = {
   share: '/compartir',
@@ -79,6 +82,7 @@ const viewPathMap: Partial<Record<View, string>> = {
   'cookie-policy': '/politica-cookies',
   'terms-conditions': '/terminos-condiciones',
   'profile-account': '/perfil-ajustes',
+  help: '/ayuda',
 };
 
 const pathViewMap: Record<string, View> = {
@@ -90,6 +94,7 @@ const pathViewMap: Record<string, View> = {
   '/politica-cookies': 'cookie-policy',
   '/terminos-condiciones': 'terms-conditions',
   '/perfil-ajustes': 'profile-account',
+  '/ayuda': 'help',
 };
 
 const resolveInitialView = (): View => {
@@ -177,6 +182,15 @@ const App: React.FC = () => {
     const showAppToast = (msg: string) => {
         setAppToast(msg);
         window.setTimeout(() => setAppToast(null), 3000);
+    };
+
+    const handleCookieConsentChange = (consent: 'all' | 'necessary') => {
+        if (consent === 'all') {
+            console.log('Cookies analíticas/opcionales permitidas. Cargando scripts analíticos... 📊');
+            // Si en el futuro existiera algún script de analíticas (ej. gtag), se cargaría dinámicamente aquí.
+        } else {
+            console.log('Cookies opcionales rechazadas. Solo se ejecutan cookies estrictamente necesarias. 🔒');
+        }
     };
 
     useEffect(() => {
@@ -684,6 +698,8 @@ const App: React.FC = () => {
                 return <CookiePolicyPage onBack={() => handleNavigation('dashboard')} />;
             case 'terms-conditions':
                 return <TermsConditionsPage onBack={() => handleNavigation('dashboard')} />;
+            case 'help':
+                return <HelpPage />;
             default:
                 return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} onNavigate={handleNavigation} />;
         }
@@ -784,6 +800,7 @@ const App: React.FC = () => {
               </div>
             )}
             {import.meta.env.DEV && <DebugAuthPanel />}
+            <CookieConsentBanner onConsentChange={handleCookieConsentChange} />
         </>
     );
 };
