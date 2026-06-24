@@ -203,9 +203,37 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             {/* Copyright block */}
-            <p className="text-[#24668e] font-semibold text-[10px] sm:text-[12px] text-center sm:text-left mt-1">
-              © 2026 AnimiKind Ltd . Todos los Derechos Reservados
-            </p>
+            <div className="text-[#24668e] text-[9px] sm:text-[11px] text-center sm:text-left mt-1 flex flex-wrap gap-x-1.5 gap-y-1 items-center justify-center sm:justify-start">
+              <span className="font-semibold">© 2026 Animikind Limited. Todos los derechos reservados.</span>
+              <span className="text-gray-300">|</span>
+              <button 
+                onClick={() => onNavigate('terms-conditions')}
+                className="hover:text-[#6e4380] transition font-bold"
+              >
+                Términos y Condiciones
+              </button>
+              <span className="text-gray-300">|</span>
+              <button 
+                onClick={() => onNavigate('privacy-policy')}
+                className="hover:text-[#6e4380] transition font-bold"
+              >
+                Política de Privacidad
+              </button>
+              <span className="text-gray-300">|</span>
+              <button 
+                onClick={() => onNavigate('cookie-policy')}
+                className="hover:text-[#6e4380] transition font-bold"
+              >
+                Política de Cookies
+              </button>
+              <span className="text-gray-300">|</span>
+              <button 
+                onClick={() => onNavigate('medical-disclaimer')}
+                className="hover:text-[#6e4380] transition font-bold"
+              >
+                Descargo de Responsabilidad
+              </button>
+            </div>
 
           </div>
 

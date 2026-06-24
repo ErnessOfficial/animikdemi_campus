@@ -46,6 +46,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import CookiePolicyPage from './pages/CookiePolicyPage';
 import TermsConditionsPage from './pages/TermsConditionsPage';
 import HelpPage from './pages/HelpPage';
+import CookieConsentBanner from './components/platform/CookieConsentBanner';
 
 
 export type View =
@@ -181,6 +182,15 @@ const App: React.FC = () => {
     const showAppToast = (msg: string) => {
         setAppToast(msg);
         window.setTimeout(() => setAppToast(null), 3000);
+    };
+
+    const handleCookieConsentChange = (consent: 'all' | 'necessary') => {
+        if (consent === 'all') {
+            console.log('Cookies analíticas/opcionales permitidas. Cargando scripts analíticos... 📊');
+            // Si en el futuro existiera algún script de analíticas (ej. gtag), se cargaría dinámicamente aquí.
+        } else {
+            console.log('Cookies opcionales rechazadas. Solo se ejecutan cookies estrictamente necesarias. 🔒');
+        }
     };
 
     useEffect(() => {
@@ -790,6 +800,7 @@ const App: React.FC = () => {
               </div>
             )}
             {import.meta.env.DEV && <DebugAuthPanel />}
+            <CookieConsentBanner onConsentChange={handleCookieConsentChange} />
         </>
     );
 };
