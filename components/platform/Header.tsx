@@ -20,7 +20,7 @@ interface NotificationItem {
   view: View;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, onNavigate, onLogout }) => {
+const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout }) => {
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
   

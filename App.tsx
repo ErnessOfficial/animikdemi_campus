@@ -277,15 +277,13 @@ const App: React.FC = () => {
     useEffect(() => {
         if (!user || streakChecked) return;
         
-        setProgress(prev => {
-            const checkResult = checkDailyStreak(prev);
-            if (checkResult.message) {
-                showAppToast(checkResult.message);
-            }
-            return checkResult.updatedProgress;
-        });
+        const checkResult = checkDailyStreak(progress);
+        setProgress(checkResult.updatedProgress);
+        if (checkResult.message) {
+            showAppToast(checkResult.message);
+        }
         setStreakChecked(true);
-    }, [user, streakChecked]);
+    }, [user, streakChecked, progress]);
 
     // Persistir progreso en localStorage por usuario
     useEffect(() => {
@@ -456,128 +454,128 @@ const App: React.FC = () => {
     };
 
     const handleReflectionCompleted = () => {
-        setProgress(prev => {
-            const actionResult = recordCompletedAction(
-                prev,
-                { type: 'reflection', id: 'kit-reflexivo-chat', title: 'Reflexión en Kit Reflexivo' },
-                courseCatalog
-            );
-            if (actionResult.newCelebrations.length > 0) {
-                setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
-            }
-            showAppToast('¡Reflexión registrada! +15 XP obtenidos 🌿');
-            return actionResult.updatedProgress;
-        });
+        const actionResult = recordCompletedAction(
+            progress,
+            { type: 'reflection', id: 'kit-reflexivo-chat', title: 'Reflexión en Kit Reflexivo' },
+            courseCatalog
+        );
+        setProgress(actionResult.updatedProgress);
+        if (actionResult.newCelebrations.length > 0) {
+            setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
+        }
+        showAppToast('¡Reflexión registrada! +15 XP obtenidos 🌿');
     };
 
     const markActivityAsCompleted = (courseId: string, activityId: string) => {
-        setProgress(prevProgress => {
-            const courseProgress = prevProgress.courses[courseId];
-            if (!courseProgress) return prevProgress;
+        const courseProgress = progress.courses[courseId];
+        if (!courseProgress) return;
 
-            const detailedCourse = courseCatalog.find(c => c.id === courseId);
-            if (!detailedCourse) return prevProgress;
+        const detailedCourse = courseCatalog.find(c => c.id === courseId);
+        if (!detailedCourse) return;
 
-            let moduleId: string | null = null;
-            for (const m of detailedCourse.modules) {
-                if(m.activities.some(a => a.id === activityId)) {
-                    moduleId = m.id;
-                    break;
+        let moduleId: string | null = null;
+        for (const m of detailedCourse.modules) {
+            if (m.activities.some(a => a.id === activityId)) {
+                moduleId = m.id;
+                break;
+            }
+        }
+
+        if (!moduleId) return;
+
+        const wasActivityCompleted = courseProgress.completionStatus[moduleId]?.activities[activityId];
+
+        const newCompletionStatus = { ...courseProgress.completionStatus };
+        if (!newCompletionStatus[moduleId]) {
+            newCompletionStatus[moduleId] = { completed: false, activities: {} };
+        }
+        newCompletionStatus[moduleId].activities[activityId] = true;
+
+        const moduleActivities = detailedCourse.modules.find(m => m.id === moduleId)!.activities;
+        const completedActivitiesInModule = Object.values(newCompletionStatus[moduleId].activities).filter(Boolean).length;
+        if (completedActivitiesInModule === moduleActivities.length) {
+            newCompletionStatus[moduleId].completed = true;
+        }
+
+        let totalActivities = 0;
+        let totalCompleted = 0;
+        detailedCourse.modules.forEach(m => {
+            totalActivities += m.activities.length;
+            totalCompleted += Object.values(newCompletionStatus[m.id]?.activities || {}).filter(Boolean).length;
+        });
+        const percentage = totalActivities > 0 ? (totalCompleted / totalActivities) * 100 : 0;
+
+        const isNowCompleted = totalCompleted === totalActivities && totalActivities > 0;
+        const nextCompletedAt = isNowCompleted && !courseProgress.completedAt ? new Date().toISOString() : courseProgress.completedAt;
+
+        let currentProgress: UserProgress = {
+            ...progress,
+            courses: {
+                ...progress.courses,
+                [courseId]: {
+                    ...courseProgress,
+                    completionStatus: newCompletionStatus,
+                    percentage,
+                    completedAt: nextCompletedAt,
                 }
             }
+        };
 
-            if (!moduleId) return prevProgress;
+        let newCels: CelebrationItem[] = [];
 
-            const wasActivityCompleted = courseProgress.completionStatus[moduleId]?.activities[activityId];
+        if (!wasActivityCompleted) {
+            const activityObj = detailedCourse.modules.find(m => m.id === moduleId)?.activities.find(a => a.id === activityId);
+            const actTitle = activityObj?.title || 'Actividad';
+            const actType = activityObj?.type || 'text';
 
-            const newCompletionStatus = { ...courseProgress.completionStatus };
-            if (!newCompletionStatus[moduleId]) {
-                newCompletionStatus[moduleId] = { completed: false, activities: {} };
+            const actionResult = recordCompletedAction(
+                currentProgress,
+                { type: actType, id: activityId, title: actTitle, courseId },
+                courseCatalog
+            );
+            currentProgress = actionResult.updatedProgress;
+            
+            if (actionResult.newCelebrations.length > 0) {
+                newCels = [...newCels, ...actionResult.newCelebrations];
             }
-            newCompletionStatus[moduleId].activities[activityId] = true;
 
-            const moduleActivities = detailedCourse.modules.find(m => m.id === moduleId)!.activities;
-            const completedActivitiesInModule = Object.values(newCompletionStatus[moduleId].activities).filter(Boolean).length;
-            if (completedActivitiesInModule === moduleActivities.length) {
-                newCompletionStatus[moduleId].completed = true;
-            }
-
-            let totalActivities = 0;
-            let totalCompleted = 0;
-            detailedCourse.modules.forEach(m => {
-                totalActivities += m.activities.length;
-                totalCompleted += Object.values(newCompletionStatus[m.id]?.activities || {}).filter(Boolean).length;
-            });
-            const percentage = totalActivities > 0 ? (totalCompleted / totalActivities) * 100 : 0;
-
-            // If course just got completed, set completedAt if not already set
-            const isNowCompleted = totalCompleted === totalActivities && totalActivities > 0;
-            const nextCompletedAt = isNowCompleted && !courseProgress.completedAt ? new Date().toISOString() : courseProgress.completedAt;
-
-            let currentProgress: UserProgress = {
-                ...prevProgress,
-                courses: {
-                    ...prevProgress.courses,
-                    [courseId]: {
-                        ...courseProgress,
-                        completionStatus: newCompletionStatus,
-                        percentage,
-                        completedAt: nextCompletedAt,
-                    }
-                }
-            };
-
-            if (!wasActivityCompleted) {
-                const activityObj = detailedCourse.modules.find(m => m.id === moduleId)?.activities.find(a => a.id === activityId);
-                const actTitle = activityObj?.title || 'Actividad';
-                const actType = activityObj?.type || 'text';
-
-                const actionResult = recordCompletedAction(
+            if (isNowCompleted && !courseProgress.completedAt) {
+                const isProgram = courseId.startsWith('programa') || detailedCourse.title.toLowerCase().includes('programa');
+                const xpForCourse = isProgram ? 500 : 100;
+                
+                const courseResult = recordCompletedAction(
                     currentProgress,
-                    { type: actType, id: activityId, title: actTitle, courseId },
+                    { 
+                      type: isProgram ? 'pillarsInteractive' : 'finalChallenge', 
+                      id: courseId, 
+                      title: `Completado: ${detailedCourse.title}`, 
+                      courseId 
+                    },
                     courseCatalog
                 );
-                currentProgress = actionResult.updatedProgress;
                 
-                if (actionResult.newCelebrations.length > 0) {
-                    setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
-                }
-
-                if (isNowCompleted && !courseProgress.completedAt) {
-                    const isProgram = courseId.startsWith('programa') || detailedCourse.title.toLowerCase().includes('programa');
-                    const xpForCourse = isProgram ? 500 : 100;
-                    
-                    const courseResult = recordCompletedAction(
-                        currentProgress,
-                        { 
-                          type: isProgram ? 'pillarsInteractive' : 'finalChallenge', 
-                          id: courseId, 
-                          title: `Completado: ${detailedCourse.title}`, 
-                          courseId 
-                        },
-                        courseCatalog
-                    );
-                    
-                    currentProgress = courseResult.updatedProgress;
-                    currentProgress.xp = (currentProgress.xp || 0) + xpForCourse + 200; // Award +200 XP for certificate and +100/500 XP for course completion
-                    
-                    setPendingCelebrations(prevCel => [
-                      ...prevCel,
-                      {
-                        type: 'course',
-                        id: courseId,
-                        title: '¡Curso Completado!',
-                        description: `Completaste con éxito el curso: ${detailedCourse.title}. +200 XP por tu Certificado y +${xpForCourse} XP por finalizar.`,
-                        icon: 'fa-certificate',
-                        xpReward: xpForCourse + 200
-                      },
-                      ...courseResult.newCelebrations
-                    ]);
-                }
+                currentProgress = courseResult.updatedProgress;
+                currentProgress.xp = (currentProgress.xp || 0) + xpForCourse + 200;
+                
+                newCels = [
+                  ...newCels,
+                  {
+                    type: 'course',
+                    id: courseId,
+                    title: '¡Curso Completado!',
+                    description: `Completaste con éxito el curso: ${detailedCourse.title}. +200 XP por tu Certificado y +${xpForCourse} XP por finalizar.`,
+                    icon: 'fa-certificate',
+                    xpReward: xpForCourse + 200
+                  },
+                  ...courseResult.newCelebrations
+                ];
             }
+        }
 
-            return currentProgress;
-        });
+        setProgress(currentProgress);
+        if (newCels.length > 0) {
+            setPendingCelebrations(prevCel => [...prevCel, ...newCels]);
+        }
     };
 
     const saveActivityAnswers = (courseId: string, activityId: string, data: any) => {
