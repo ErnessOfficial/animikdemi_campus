@@ -2,7 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles that were previously handled inline */
-body {
-  @apply bg-[#fffafa] text-[#101021];
+/* Breakpoints & Responsive Architecture Conventions:
+ * - Mobile (Base): 320px - 768px
+ * - Tablet Vertical: md: (768px - 1024px)
+ * - Tablet Horizontal: lg: (1024px - 1280px)
+ * - Desktop: xl: (1280px+)
+ */
+
+/* Root Variables for Fluid Tokens */
+:root {
+  --font-fluid-h1: clamp(1.75rem, 4.5vw, 2.5rem);
+  --font-fluid-h2: clamp(1.25rem, 3.5vw, 1.75rem);
+  --font-fluid-h3: clamp(1.05rem, 2.5vw, 1.25rem);
+  --font-fluid-body: clamp(0.875rem, 1.5vw, 1rem);
 }
+
+body {
+  @apply bg-[#fffafa] text-[#101021] font-sans antialiased;
+  font-size: var(--font-fluid-body);
+}
+
+@layer utilities {
+  /* Fluid Typography Utilities */
+  .text-fluid-h1 {
+    font-size: var(--font-fluid-h1);
+    line-height: 1.15;
+  }
+  .text-fluid-h2 {
+    font-size: var(--font-fluid-h2);
+    line-height: 1.2;
+  }
+  .text-fluid-h3 {
+    font-size: var(--font-fluid-h3);
+    line-height: 1.25;
+  }
+  .text-fluid-body {
+    font-size: var(--font-fluid-body);
+    line-height: 1.5;
+  }
+
+  /* Safe Minimum Touch Targets for Mobile Devices (≥48px) */
+  .touch-target {
+    min-height: 3rem; /* 48px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Safe Touch Target padding */
+  .btn-touch {
+    @apply touch-target px-5 py-3;
+  }
+}
+

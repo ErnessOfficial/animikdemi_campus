@@ -82,23 +82,23 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
           <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div className="flex flex-col items-center space-y-4">
               <img src={formData.avatarUrl} alt="User Avatar" className="w-40 h-40 rounded-full object-cover border-4 border-[#24668e]" />
-              <button type="button" className="w-full text-center bg-[#101021]/5 text-[#101021] font-semibold py-2 px-4 rounded-lg hover:bg-[#101021]/10 transition">
+              <button type="button" className="w-full text-center bg-[#101021]/5 text-[#101021] font-semibold rounded-xl hover:bg-[#101021]/10 transition touch-target sm:min-h-0 sm:py-2">
                 Cambiar Foto
               </button>
             </div>
             <div className="md:col-span-2 space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-[#101021] mb-2">Nombre Completo</label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} className="w-full bg-white rounded-md py-2 px-4 border-2 border-[#101021]/20 focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition" />
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} className="w-full bg-white rounded-xl py-3 px-4 border-2 border-[#101021]/20 focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition text-sm" />
               </div>
               <div>
                 <label htmlFor="bio" className="block text-sm font-bold text-[#101021] mb-2">Biografía Corta</label>
-                <textarea id="bio" name="bio" rows={4} value={formData.bio} onChange={handleInputChange} className="w-full bg-white rounded-md py-2 px-4 border-2 border-[#101021]/20 focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition" placeholder="Cuéntanos un poco sobre ti..."></textarea>
+                <textarea id="bio" name="bio" rows={4} value={formData.bio} onChange={handleInputChange} className="w-full bg-white rounded-xl py-3 px-4 border-2 border-[#101021]/20 focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition text-sm" placeholder="Cuéntanos un poco sobre ti..."></textarea>
               </div>
               {isDirty && (
-                <div className="flex justify-end items-center space-x-4 pt-4 border-t border-[#101021]/10">
-                  <button type="button" onClick={handleCancel} className="text-[#101021]/80 font-semibold py-2 px-6 rounded-lg hover:bg-[#101021]/10 transition">Cancelar</button>
-                  <button type="submit" className="bg-[#24668e] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#1a4a69] transition shadow">Guardar Cambios</button>
+                <div className="flex flex-col sm:flex-row justify-end items-center gap-3 pt-4 border-t border-[#101021]/10">
+                  <button type="button" onClick={handleCancel} className="w-full sm:w-auto text-[#101021]/80 font-semibold rounded-xl hover:bg-[#101021]/10 transition touch-target sm:min-h-0 sm:py-2 sm:px-6">Cancelar</button>
+                  <button type="submit" className="w-full sm:w-auto bg-[#24668e] text-white font-bold rounded-xl hover:bg-[#1a4a69] transition shadow touch-target sm:min-h-0 sm:py-2 sm:px-6">Guardar Cambios</button>
                 </div>
               )}
             </div>
@@ -109,17 +109,17 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
             <div className="max-w-2xl space-y-6">
                  <div>
                     <label htmlFor="email" className="block text-sm font-bold text-[#101021] mb-2">Correo Electrónico</label>
-                    <input type="email" id="email" value="alex.learner@animikdemi.com" readOnly className="w-full bg-[#f0f2f5] text-[#101021]/60 rounded-md py-2 px-4 border-2 border-[#101021]/20 cursor-not-allowed" />
+                    <input type="email" id="email" value="alex.learner@animikdemi.com" readOnly className="w-full bg-[#f0f2f5] text-[#101021]/60 rounded-xl py-3 px-4 border-2 border-[#101021]/20 cursor-not-allowed text-sm" />
                 </div>
-                 <div>
-                    <label className="block text-sm font-bold text-[#101021] mb-2">Contraseña</label>
-                    <button className="text-[#24668e] font-semibold hover:underline">Cambiar contraseña</button>
+                 <div className="flex flex-col items-start gap-2">
+                    <label className="block text-sm font-bold text-[#101021]">Contraseña</label>
+                    <button className="text-[#24668e] font-semibold hover:underline touch-target sm:min-h-0 sm:py-1">Cambiar contraseña</button>
                 </div>
                 <div className="pt-4 border-t border-[#101021]/10">
                     <h3 className="text-lg font-bold text-[#101021] mb-4">Preferencias de Notificación</h3>
-                    <div className="space-y-3">
-                        <label className="flex items-center justify-between" htmlFor="notify-courses">
-                          <span className="text-[#101021]/90">Nuevos cursos y eventos</span>
+                    <div className="space-y-4 divide-y divide-[#101021]/5">
+                        <label className="flex items-center justify-between py-2 cursor-pointer" htmlFor="notify-courses">
+                          <span className="text-[#101021]/90 text-sm">Nuevos cursos y eventos</span>
                           <input 
                             id="notify-courses" 
                             name="notifyCourses" 
@@ -129,8 +129,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                             onChange={(e) => onUpdateUser({ notifyCourses: e.target.checked })}
                           />
                         </label>
-                        <label className="flex items-center justify-between" htmlFor="notify-community">
-                          <span className="text-[#101021]/90">Actividad en la comunidad</span>
+                        <label className="flex items-center justify-between py-3 cursor-pointer" htmlFor="notify-community">
+                          <span className="text-[#101021]/90 text-sm">Actividad en la comunidad</span>
                           <input 
                             id="notify-community" 
                             name="notifyCommunity" 
@@ -140,8 +140,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                             onChange={(e) => onUpdateUser({ notifyCommunity: e.target.checked })}
                           />
                         </label>
-                        <label className="flex items-center justify-between" htmlFor="notify-progress">
-                          <span className="text-[#101021]/90">Recordatorios de progreso</span>
+                        <label className="flex items-center justify-between py-3 cursor-pointer" htmlFor="notify-progress">
+                          <span className="text-[#101021]/90 text-sm">Recordatorios de progreso</span>
                           <input 
                             id="notify-progress" 
                             name="notifyProgress" 
@@ -304,9 +304,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
           <div className="bg-white rounded-2xl border border-slate-100 shadow-2xl p-6 max-w-sm w-full text-center relative">
             <button
               onClick={() => setSelectedBadge(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+              className="absolute top-3 right-3 text-slate-400 hover:text-slate-600 p-2.5 touch-target flex items-center justify-center rounded-full hover:bg-slate-100 transition"
+              aria-label="Cerrar"
             >
-              <i className="fas fa-times"></i>
+              <i className="fas fa-times text-lg"></i>
             </button>
             <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border ${selectedBadge.unlockedAt ? 'bg-[#6e4380]/10 border-[#6e4380]/20' : 'bg-slate-200 border-slate-300'}`}>
               {selectedBadge.icon.startsWith('http') ? (

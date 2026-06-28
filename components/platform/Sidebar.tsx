@@ -44,10 +44,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
             onClick={() => onNavigate('dashboard')} 
           />
           <NavItem 
-            icon="fa-circle-info" 
-            label="¿Qué es Animikro?" 
-            isActive={activeView === 'about'} 
-            onClick={() => onNavigate('about')} 
+            icon="fa-graduation-cap" 
+            label="Mis Cursos" 
+            isActive={activeView === 'my-courses'} 
+            onClick={() => onNavigate('my-courses')} 
           />
           <NavItem 
             icon="fa-book" 
@@ -56,22 +56,22 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onNavigate, onLogout }) =
             onClick={() => onNavigate('catalog')} 
           />
           <NavItem 
+            icon="fa-seedling" 
+            label="Kit Reflexivo" 
+            isActive={activeView === 'community'} 
+            onClick={() => onNavigate('community')} 
+          />
+          <NavItem 
             icon="fa-folder-open" 
             label="Recursos" 
             isActive={activeView === 'resources' || activeView.startsWith('resources-')}
             onClick={() => onNavigate('resources')} 
           />
           <NavItem 
-            icon="fa-graduation-cap" 
-            label="Mis Cursos" 
-            isActive={activeView === 'my-courses'} 
-            onClick={() => onNavigate('my-courses')} 
-          />
-          <NavItem 
-            icon="fa-seedling" 
-            label="Kit Reflexivo" 
-            isActive={activeView === 'community'} 
-            onClick={() => onNavigate('community')} 
+            icon="fa-circle-info" 
+            label="¿Qué es Animikro?" 
+            isActive={activeView === 'about'} 
+            onClick={() => onNavigate('about')} 
           />
           <NavItem 
             icon="fa-circle-question" 
