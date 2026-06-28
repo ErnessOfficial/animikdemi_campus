@@ -36,7 +36,7 @@ const playLocalChimeSound = () => {
 };
 
 const HelpPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'philosophy' | 'xp' | 'levels' | 'streaks' | 'simulator'>('philosophy');
+  const [activeTab, setActiveTab] = useState<'philosophy' | 'xp' | 'levels' | 'streaks' | 'badges' | 'simulator'>('philosophy');
   
   // Simulator state
   const [simXp, setSimXp] = useState(0);
@@ -145,6 +145,18 @@ const HelpPage: React.FC = () => {
         >
           <i className="fas fa-fire text-base text-orange-500 animate-pulse"></i>
           <span>Racha & Descanso</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('badges')}
+          className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 ${
+            activeTab === 'badges'
+              ? 'bg-[#6e4380] text-white shadow-md'
+              : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+          }`}
+        >
+          <i className="fas fa-award text-base text-[#6e4380]"></i>
+          <span>Insignias de Logros</span>
         </button>
 
         <button
@@ -360,6 +372,184 @@ const HelpPage: React.FC = () => {
                 <p className="text-xs font-semibold text-slate-700 leading-relaxed">
                   Si dejas de realizar actividades durante un día, el sistema **consumirá automáticamente uno de tus Días de Descanso** para proteger tu racha. Tu esfuerzo anterior queda intacto.
                 </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'badges' && (
+          <div className="space-y-6 animate-fade-in">
+            <div>
+              <h2 className="text-2xl font-extrabold text-[#00385b] flex items-center gap-2">
+                <i className="fas fa-award text-[#6e4380]"></i>
+                Guía de Insignias de Logro 🏆
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                Aprende cómo conseguir cada una de las 9 insignias de AnImiKdemi. Tu dedicación personal es tu mejor recompensa.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+              {/* Badge 1 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-teal-600 bg-teal-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-teal-100">
+                      Común
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Primer paso</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Completa tu primer curso corto de autoestudio en el campus.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611473/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud_ghztmq.svg" alt="Primer paso" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 2 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-cyan-600 bg-cyan-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-cyan-100">
+                      Poco común
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Aprendiz constante</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Mantén una racha de bienestar de 7 días consecutivos dedicando tiempo a ti mismo.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611470/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-2_fjivwr.svg" alt="Aprendiz constante" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 3 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-purple-100">
+                      Épico
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Explorador emocional</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Completa 10 cursos finalizados en el catálogo de AnImiKdemi.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611471/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-3_fy0bs4.svg" alt="Explorador emocional" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 4 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-purple-100">
+                      Épico
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Mente tranquila</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Realiza 20 meditaciones o ejercicios de calma y respiración.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611469/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-4_jt0xp5.svg" alt="Mente tranquila" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 5 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-purple-100">
+                      Épico
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Constructor de hábitos</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Dedica tiempo y mantén actividad durante 30 días acumulados en tu calendario.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611468/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-5_rtfp7l.svg" alt="Constructor de hábitos" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 6 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-amber-100">
+                      Legendario
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Maestro del aprendizaje</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Completa un total de 50 cursos finalizados en AnImiKdemi.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611467/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-6_xjywzc.svg" alt="Maestro del aprendizaje" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 7 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-amber-100">
+                      Legendario
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Constancia admirable</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Logra mantener una racha récord de bienestar de 100 días consecutivos.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611467/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-7_cqx5gs.svg" alt="Constancia admirable" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 8 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-amber-100">
+                      Legendario
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Bienestar integral</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Completa 5 programas formativos integrales completos en el campus.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611466/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-8_rrabd8.svg" alt="Bienestar integral" className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge 9 */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col justify-between hover:bg-white hover:border-[#6e4380]/20 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="text-[9px] font-extrabold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-purple-200">
+                      Mítico
+                    </span>
+                    <h4 className="font-bold text-sm text-slate-800 mt-2">Royal Animikind</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1">
+                      Cumple tu primer año (365 días) de registro en el ecosistema AnImiK.
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 shrink-0 rounded-full bg-white border border-slate-100 p-1 flex items-center justify-center shadow-sm">
+                    <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782611465/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-9_fkc5kk.svg" alt="Royal Animikind" className="w-full h-full object-contain" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
