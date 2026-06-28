@@ -3,7 +3,7 @@ import type { User, UserProgress } from '../types';
 import { courseCatalog } from '../constants/platformData';
 import GamificationWidget from '../components/platform/GamificationWidget';
 import WellnessCalendar from '../components/platform/WellnessCalendar';
-import { computeGamification } from '../utils/gamification';
+import { computeGamification, BADGE_CONFIGS } from '../utils/gamification';
 
 interface DashboardProps {
     user: User;
@@ -30,15 +30,49 @@ const Dashboard: React.FC<DashboardProps> = ({
     // Take up to 2 of the non-enrolled courses (prioritizing the detailed ones which appear first)
     const recentCourses = notEnrolled.slice(0, 2);
 
+    // Compute highest unlocked badge
+    const unlockedList = progress.unlockedBadges || [];
+    const badgeKeys = Object.keys(BADGE_CONFIGS);
+    let highestBadgeId = '';
+    let highestIndex = -1;
+
+    unlockedList.forEach(unlocked => {
+        const idx = badgeKeys.indexOf(unlocked.id);
+        if (idx > highestIndex) {
+            highestIndex = idx;
+            highestBadgeId = unlocked.id;
+        }
+    });
+
+    const isBadgeLocked = highestIndex === -1;
+    const displayBadgeKey = isBadgeLocked ? badgeKeys[0] : highestBadgeId;
+    const displayBadge = BADGE_CONFIGS[displayBadgeKey];
+
     return (
         <div className="animate-fade-in space-y-10">
             {/* Welcome Header */}
-            <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-6 md:p-8 rounded-xl shadow-lg text-white flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl md:text-4xl font-extrabold">¡Bienvenido de nuevo, {user.name.split(' ')[0]}!</h1>
-                    <p className="mt-2 text-lg opacity-85">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
+            <div className="bg-gradient-to-r from-[#6e4380] to-[#24668e] p-5 sm:p-6 md:p-8 rounded-2xl shadow-md text-white flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div className="text-center md:text-left flex-grow">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">¡Bienvenido de nuevo, {user.name.split(' ')[0]}!</h1>
+                    <p className="mt-1 text-sm sm:text-base md:text-lg opacity-85 leading-relaxed">"El conocimiento de uno mismo es el primer paso hacia la sabiduría."</p>
                 </div>
-                <GamificationWidget progress={progress} catalog={courseCatalog} />
+                
+                {/* Highest Badge Container */}
+                <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm px-4 py-3 rounded-2xl border border-white/15 shadow-inner text-center self-center shrink-0 w-28 h-28 md:w-32 md:h-32">
+                    <img 
+                        src={displayBadge.icon} 
+                        alt={displayBadge.label} 
+                        className={`w-14 h-14 md:w-16 md:h-16 object-contain drop-shadow-md transition-all duration-300 ${isBadgeLocked ? 'grayscale opacity-30 animate-pulse' : 'hover:scale-110'}`} 
+                        title={isBadgeLocked ? `Próximo logro: ${displayBadge.label}` : `Tu insignia más alta: ${displayBadge.label}`}
+                    />
+                    <span className="text-[10px] md:text-xs font-extrabold tracking-wide mt-1.5 opacity-90 truncate max-w-full px-1">
+                        {isBadgeLocked ? 'Bloqueada' : displayBadge.label}
+                    </span>
+                </div>
+
+                <div className="hidden md:block flex-shrink-0">
+                    <GamificationWidget progress={progress} catalog={courseCatalog} />
+                </div>
             </div>
 
             {/* Gamification Dashboard Grid */}
@@ -77,9 +111,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                 </span>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div className="w-full sm:w-auto mt-2 sm:mt-0">
                                             {isChallengeCompleted ? (
-                                                <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
+                                                <span className="w-full sm:w-auto inline-flex items-center justify-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-2 sm:py-1 rounded-xl sm:rounded-full border border-emerald-200">
                                                     <i className="fas fa-check"></i> Completado
                                                 </span>
                                             ) : (
@@ -89,7 +123,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                         if (challenge.type === 'meditation') onNavigate('my-courses');
                                                         if (challenge.type === 'reflection') onNavigate('community');
                                                     }}
-                                                    className="w-full sm:w-auto bg-[#24668e]/10 text-[#24668e] hover:bg-[#24668e] hover:text-white text-xs font-bold px-4 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center gap-1.5"
+                                                    className="w-full sm:w-auto bg-[#24668e]/10 text-[#24668e] hover:bg-[#24668e] hover:text-white text-xs font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 touch-target sm:min-h-0 sm:py-1.5 sm:px-4"
                                                 >
                                                     Realizar <i className="fas fa-chevron-right text-[10px]"></i>
                                                 </button>

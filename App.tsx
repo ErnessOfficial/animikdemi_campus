@@ -15,7 +15,7 @@ import { recordCompletedAction, checkDailyStreak, initializeGamification } from 
 
 // Import components and pages
 import Sidebar from './components/platform/Sidebar';
-import MobileNav from './components/platform/MobileNav';
+import BottomNavBar from './components/platform/BottomNavBar';
 import Header from './components/platform/Header';
 import Dashboard from './pages/Dashboard';
 import CourseCatalogPage from './pages/CourseCatalogPage';
@@ -721,16 +721,11 @@ const App: React.FC = () => {
     } else {
         content = (
             <div className="min-h-screen bg-[#f0f2f5] font-sans">
-                <div className="flex flex-col lg:flex-row min-h-screen">
-                    <div className="hidden lg:flex lg:flex-shrink-0">
+                <div className="flex flex-col md:flex-row min-h-screen">
+                    <div className="hidden md:flex md:flex-shrink-0">
                         <Sidebar activeView={view} onNavigate={handleNavigation} onLogout={() => logout()} />
                     </div>
-                    <main className="flex-1 flex flex-col min-h-screen">
-                        <MobileNav
-                            activeView={view}
-                            onNavigate={handleNavigation}
-                            onLogout={() => logout()}
-                        />
+                    <main className="flex-1 flex flex-col min-h-screen pb-16 md:pb-0">
                         <Header 
                             user={user} 
                             progress={progress}
@@ -764,6 +759,7 @@ const App: React.FC = () => {
                         onClose={() => setShowReflection(false)}
                     />
                 )}
+                <BottomNavBar activeView={view} onNavigate={handleNavigation} />
             </div>
         );
     }

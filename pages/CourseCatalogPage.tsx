@@ -18,15 +18,15 @@ const CourseCatalogPage: React.FC<CourseCatalogPageProps> = ({ progress, onSelec
       </div>
 
       {/* Filter Section */}
-      <div className="mb-8 p-4 bg-white rounded-lg shadow-sm flex items-center space-x-4">
-        <span className="font-semibold">Filtrar por:</span>
-        <select className="p-2 rounded-md border border-[#101021]/20 focus:ring-1 focus:ring-[#6e4380]">
+      <div className="mb-8 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <span className="font-semibold text-sm text-[#101021]/80">Filtrar por:</span>
+        <select className="w-full sm:w-auto p-2.5 sm:p-2 rounded-xl sm:rounded-md border border-[#101021]/20 focus:ring-1 focus:ring-[#6e4380] text-sm">
           <option value="">Todas las Categorías</option>
           {courseCategories.map(category => (
             <option key={category} value={category}>{category}</option>
           ))}
         </select>
-        <select className="p-2 rounded-md border border-[#101021]/20 focus:ring-1 focus:ring-[#6e4380]">
+        <select className="w-full sm:w-auto p-2.5 sm:p-2 rounded-xl sm:rounded-md border border-[#101021]/20 focus:ring-1 focus:ring-[#6e4380] text-sm">
           <option>Nivel</option>
           <option>Básico</option>
           <option>Intermedio</option>

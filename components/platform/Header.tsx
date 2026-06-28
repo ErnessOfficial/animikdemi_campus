@@ -109,6 +109,26 @@ const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout })
       {/* Right Controls Container */}
       <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">
         
+        {/* Gamification Quick Stats (Mobile/Tablet and Desktop Quick View) */}
+        {stats && (
+          <div className="flex items-center gap-2.5 bg-slate-50 border border-[#101021]/5 px-3 py-1.5 rounded-full text-[11px] font-bold text-slate-700 shadow-sm">
+            <div className="flex items-center gap-1 text-orange-500" title="Racha actual">
+              <i className="fas fa-fire"></i>
+              <span>{stats.streak}d</span>
+            </div>
+            <span className="text-[#101021]/20">|</span>
+            <div className="flex items-center gap-1 text-yellow-600" title="Puntos de Experiencia">
+              <i className="fas fa-star"></i>
+              <span>{stats.points} XP</span>
+            </div>
+            <span className="text-[#101021]/20">|</span>
+            <div className="flex items-center gap-1 text-[#6e4380]" title="Nivel actual">
+              <i className="fas fa-medal"></i>
+              <span>N.{stats.level}</span>
+            </div>
+          </div>
+        )}
+
         {/* Notifications Icon with Dropdown */}
         <div className="relative" ref={notifMenuRef}>
           <button 
