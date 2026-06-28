@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Animikdemi
+                  Animikdemi <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.es/about-thekindblog" 
@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  The KindBlog / Artículos
+                  The KindBlog / Artículos <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/ecosystem/unified-safeguarding/" 
@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Bienestar Emocional Escolar
+                  Bienestar Emocional Escolar <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/resources/key-topics/#video-presentations" 
@@ -68,7 +68,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Videos
+                  Videos <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/resources/key-topics/#thematic-infographics" 
@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Infografías y Otros Recursos
+                  Infografías y Otros Recursos <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://animikind-resources.vercel.app/?lang=es" 
@@ -84,7 +84,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  The Kind-Kit
+                  The Kind-Kit <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/contact/" 
@@ -133,7 +133,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Acreditación CPD
+                  Acreditación CPD <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/about/social-focusing/" 
@@ -141,7 +141,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer" 
                   className="hover:text-[#24668e] transition duration-200 block hover:translate-x-0.5 transform"
                 >
-                  Enfoque Social
+                  Enfoque Social <i className="fas fa-external-link-alt text-[8px] sm:text-[10px] ml-0.5"></i>
                 </a>
                 <a 
                   href="https://www.animikind.com/about/origins/" 
