@@ -57,6 +57,7 @@ export type View =
   | 'profile'
   | 'profile-certs'
   | 'profile-account'
+  | 'profile-badges'
   | 'course-player'
   | 'course-detail'
   | 'resources'
@@ -82,6 +83,7 @@ const viewPathMap: Partial<Record<View, string>> = {
   'cookie-policy': '/politica-cookies',
   'terms-conditions': '/terminos-condiciones',
   'profile-account': '/perfil-ajustes',
+  'profile-badges': '/perfil-insignias',
   help: '/ayuda',
 };
 
@@ -94,6 +96,7 @@ const pathViewMap: Record<string, View> = {
   '/politica-cookies': 'cookie-policy',
   '/terminos-condiciones': 'terms-conditions',
   '/perfil-ajustes': 'profile-account',
+  '/perfil-insignias': 'profile-badges',
   '/ayuda': 'help',
 };
 
@@ -690,6 +693,8 @@ const App: React.FC = () => {
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="certs" />;
             case 'profile-account':
                 return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="account" />;
+            case 'profile-badges':
+                return <ProfilePage user={user} progress={progress} onUpdateUser={handleUpdateUser} initialTab="badges" />;
             case 'medical-disclaimer':
                 return <MedicalDisclaimerPage onBack={() => handleNavigation('dashboard')} />;
             case 'privacy-policy':

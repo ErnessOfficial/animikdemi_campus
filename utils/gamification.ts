@@ -1,6 +1,63 @@
 import type { Course, UserProgress, GamificationBadge, GamificationAchievement, ActivityHistoryItem, WeeklyChallenge } from '../types';
 import type { CelebrationItem } from '../components/platform/CelebrationOverlay';
 
+export const BADGE_CONFIGS: Record<string, { label: string; icon: string; description: string; rarity: 'Común' | 'Poco común' | 'Épico' | 'Legendario' | 'Mítico' }> = {
+  'first-course': {
+    label: 'Primer paso',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611473/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud_ghztmq.svg',
+    description: 'Primer curso completado con éxito.',
+    rarity: 'Común'
+  },
+  'constancy-7': {
+    label: 'Aprendiz constante',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611470/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-2_fjivwr.svg',
+    description: 'Dedicaste tiempo a tu bienestar durante 7 días seguidos.',
+    rarity: 'Poco común'
+  },
+  'courses-10': {
+    label: 'Explorador emocional',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611471/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-3_fy0bs4.svg',
+    description: 'Completaste 10 cursos finalizados.',
+    rarity: 'Épico'
+  },
+  'meditations-20': {
+    label: 'Mente tranquila',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611469/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-4_jt0xp5.svg',
+    description: 'Realizaste 20 meditaciones o ejercicios de calma.',
+    rarity: 'Épico'
+  },
+  'active-30': {
+    label: 'Constructor de hábitos',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611468/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-5_rtfp7l.svg',
+    description: 'Estuviste activo durante 30 días en la plataforma.',
+    rarity: 'Épico'
+  },
+  'courses-50': {
+    label: 'Maestro del aprendizaje',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611467/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-6_xjywzc.svg',
+    description: 'Completaste 50 cursos en AnImiK.',
+    rarity: 'Legendario'
+  },
+  'constancy-100': {
+    label: 'Constancia admirable',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611467/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-7_cqx5gs.svg',
+    description: 'Mantuviste una racha de bienestar de 100 días.',
+    rarity: 'Legendario'
+  },
+  'programs-5': {
+    label: 'Bienestar integral',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611466/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-8_rrabd8.svg',
+    description: 'Completaste 5 programas formativos completos.',
+    rarity: 'Legendario'
+  },
+  'anniversary-1': {
+    label: 'Royal Animikind',
+    icon: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782611465/AVISO_DE_NO_SUSTITUCI%C3%93N_La_Inteligencia_Artificial_no_es_un_psic%C3%B3logo_terapeuta_ni_sustituto_de_atenci%C3%B3n_m%C3%A9dica_profesional._Si_necesitas_atenci%C3%B3n_para_tu_salud_mental_acude_a_un_centro_de_salud-9_fkc5kk.svg',
+    description: 'Cumpliste tu primer año en la plataforma.',
+    rarity: 'Mítico'
+  }
+};
+
 const courseCategories = [
   "Autoconciencia & Regulación emocional",
   "Ansiedad, Estrés y Calma",
@@ -148,7 +205,23 @@ export const initializeGamification = (progress: UserProgress): UserProgress => 
     studyMinutes: progress.studyMinutes ?? 0,
     activityHistory: progress.activityHistory ?? [],
     weeklyChallenges: progress.weeklyChallenges ?? generateWeeklyChallenges(new Date()),
+    createdAt: progress.createdAt ?? new Date().toISOString(),
   };
+
+  // Migrar insignias antiguas con iconos fa- o nombres antiguos a la nueva configuración de Cloudinary
+  initialized.unlockedBadges = (initialized.unlockedBadges || []).map(badge => {
+    const config = BADGE_CONFIGS[badge.id];
+    if (config) {
+      return {
+        ...badge,
+        label: config.label,
+        icon: config.icon,
+        description: config.description,
+        rarity: config.rarity
+      };
+    }
+    return badge;
+  });
 
   // Migrar puntos antiguos si xp es 0 pero ya completó actividades
   if (initialized.xp === 0) {
@@ -196,77 +269,77 @@ export const checkBadgesAndAchievements = (
   if (completedCoursesCount >= 1 && !hasBadge('first-course')) {
     newBadges.push({
       id: 'first-course',
-      label: 'Primer paso',
-      icon: 'fa-trophy',
+      label: BADGE_CONFIGS['first-course'].label,
+      icon: BADGE_CONFIGS['first-course'].icon,
       unlockedAt: now,
-      description: 'Primer curso completado con éxito.',
-      rarity: 'Común',
+      description: BADGE_CONFIGS['first-course'].description,
+      rarity: BADGE_CONFIGS['first-course'].rarity,
     });
   }
 
   if (streak >= 7 && !hasBadge('constancy-7')) {
     newBadges.push({
       id: 'constancy-7',
-      label: 'Aprendiz constante',
-      icon: 'fa-calendar-check',
+      label: BADGE_CONFIGS['constancy-7'].label,
+      icon: BADGE_CONFIGS['constancy-7'].icon,
       unlockedAt: now,
-      description: 'Dedicaste tiempo a tu bienestar durante 7 días seguidos.',
-      rarity: 'Poco común',
+      description: BADGE_CONFIGS['constancy-7'].description,
+      rarity: BADGE_CONFIGS['constancy-7'].rarity,
     });
   }
 
   if (completedCoursesCount >= 10 && !hasBadge('courses-10')) {
     newBadges.push({
       id: 'courses-10',
-      label: 'Explorador emocional',
-      icon: 'fa-compass',
+      label: BADGE_CONFIGS['courses-10'].label,
+      icon: BADGE_CONFIGS['courses-10'].icon,
       unlockedAt: now,
-      description: 'Completaste 10 cursos finalizados.',
-      rarity: 'Épico',
+      description: BADGE_CONFIGS['courses-10'].description,
+      rarity: BADGE_CONFIGS['courses-10'].rarity,
     });
   }
 
   if (meditations >= 20 && !hasBadge('meditations-20')) {
     newBadges.push({
       id: 'meditations-20',
-      label: 'Mente tranquila',
-      icon: 'fa-spa',
+      label: BADGE_CONFIGS['meditations-20'].label,
+      icon: BADGE_CONFIGS['meditations-20'].icon,
       unlockedAt: now,
-      description: 'Realizaste 20 meditaciones o ejercicios de calma.',
-      rarity: 'Épico',
+      description: BADGE_CONFIGS['meditations-20'].description,
+      rarity: BADGE_CONFIGS['meditations-20'].rarity,
     });
   }
 
   if (activeDays >= 30 && !hasBadge('active-30')) {
     newBadges.push({
       id: 'active-30',
-      label: 'Constructor de hábitos',
-      icon: 'fa-leaf',
+      label: BADGE_CONFIGS['active-30'].label,
+      icon: BADGE_CONFIGS['active-30'].icon,
       unlockedAt: now,
-      description: 'Estuviste activo durante 30 días en la plataforma.',
-      rarity: 'Épico',
+      description: BADGE_CONFIGS['active-30'].description,
+      rarity: BADGE_CONFIGS['active-30'].rarity,
     });
   }
 
   if (completedCoursesCount >= 50 && !hasBadge('courses-50')) {
     newBadges.push({
       id: 'courses-50',
-      label: 'Maestro del aprendizaje',
-      icon: 'fa-graduation-cap',
+      label: BADGE_CONFIGS['courses-50'].label,
+      icon: BADGE_CONFIGS['courses-50'].icon,
       unlockedAt: now,
-      description: 'Completaste 50 cursos en AnImiK.',
-      rarity: 'Legendario',
+      description: BADGE_CONFIGS['courses-50'].description,
+      rarity: BADGE_CONFIGS['courses-50'].rarity,
     });
   }
 
   if (longestStreak >= 100 && !hasBadge('constancy-100')) {
     newBadges.push({
       id: 'constancy-100',
-      label: 'Constancia admirable',
-      icon: 'fa-fire',
+      label: BADGE_CONFIGS['constancy-100'].label,
+      icon: BADGE_CONFIGS['constancy-100'].icon,
       unlockedAt: now,
-      description: 'Mantuviste una racha de bienestar de 100 días.',
-      rarity: 'Legendario',
+      description: BADGE_CONFIGS['constancy-100'].description,
+      rarity: BADGE_CONFIGS['constancy-100'].rarity,
     });
   }
 
@@ -280,11 +353,25 @@ export const checkBadgesAndAchievements = (
   if (completedProgramsCount >= 5 && !hasBadge('programs-5')) {
     newBadges.push({
       id: 'programs-5',
-      label: 'Bienestar integral',
-      icon: 'fa-layer-group',
+      label: BADGE_CONFIGS['programs-5'].label,
+      icon: BADGE_CONFIGS['programs-5'].icon,
       unlockedAt: now,
-      description: 'Completaste 5 programas formativos completos.',
-      rarity: 'Legendario',
+      description: BADGE_CONFIGS['programs-5'].description,
+      rarity: BADGE_CONFIGS['programs-5'].rarity,
+    });
+  }
+
+  // anniversary-1 check: count days since creation
+  const createdAt = progress.createdAt || now;
+  const daysActive = getDaysDifference(createdAt.split('T')[0], now.split('T')[0]);
+  if (daysActive >= 365 && !hasBadge('anniversary-1')) {
+    newBadges.push({
+      id: 'anniversary-1',
+      label: BADGE_CONFIGS['anniversary-1'].label,
+      icon: BADGE_CONFIGS['anniversary-1'].icon,
+      unlockedAt: now,
+      description: BADGE_CONFIGS['anniversary-1'].description,
+      rarity: BADGE_CONFIGS['anniversary-1'].rarity,
     });
   }
 

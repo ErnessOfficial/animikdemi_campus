@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { User, UserProgress } from '../types';
 import { mockAchievements, courseCatalog } from '../constants/platformData';
-import { computeGamification } from '../utils/gamification';
+import { computeGamification, BADGE_CONFIGS } from '../utils/gamification';
 import AchievementBadge from '../components/profile/AchievementBadge';
 import CertificateCard from '../components/profile/CertificateCard';
 
@@ -14,17 +14,14 @@ interface ProfilePageProps {
 
 type ProfileTab = 'personal' | 'account' | 'certs' | 'badges';
 
-const ALL_SYSTEM_BADGES = [
-  { id: 'first-course', label: 'Primer paso', icon: 'fa-trophy', description: 'Primer curso completado con éxito.', rarity: 'Común' },
-  { id: 'constancy-7', label: 'Aprendiz constante', icon: 'fa-calendar-check', description: 'Dedicaste tiempo a tu bienestar durante 7 días seguidos.', rarity: 'Poco común' },
-  { id: 'courses-10', label: 'Explorador emocional', icon: 'fa-compass', description: 'Completaste 10 cursos finalizados.', rarity: 'Épico' },
-  { id: 'meditations-20', label: 'Mente tranquila', icon: 'fa-spa', description: 'Realizaste 20 meditaciones o ejercicios de calma.', rarity: 'Épico' },
-  { id: 'active-30', label: 'Constructor de hábitos', icon: 'fa-leaf', description: 'Estuviste activo durante 30 días en la plataforma.', rarity: 'Épico' },
-  { id: 'courses-50', label: 'Maestro del aprendizaje', icon: 'fa-graduation-cap', description: 'Completaste 50 cursos en AnImiK.', rarity: 'Legendario' },
-  { id: 'constancy-100', label: 'Constancia admirable', icon: 'fa-fire', description: 'Mantuviste una racha de bienestar de 100 días.', rarity: 'Legendario' },
-  { id: 'programs-5', label: 'Bienestar integral', icon: 'fa-layer-group', description: 'Completaste 5 programas formativos completos.', rarity: 'Legendario' },
-  { id: 'anniversary-1', label: 'Comunidad AnImiK', icon: 'fa-users', description: 'Cumpliste tu primer año en la plataforma.', rarity: 'Mítico' }
-];
+const ALL_SYSTEM_BADGES = Object.entries(BADGE_CONFIGS).map(([id, config]) => ({
+  id,
+  label: config.label,
+  icon: config.icon,
+  description: config.description,
+  rarity: config.rarity,
+}));
+
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser, initialTab = 'personal' }) => {
   const [activeTab, setActiveTab] = useState<ProfileTab>(initialTab);
@@ -207,12 +204,13 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
         );
       case 'badges':
         const stats = computeGamification(progress, courseCatalog);
+        const unlockedCount = stats.badges.filter(b => ALL_SYSTEM_BADGES.some(sb => sb.id === b.id)).length;
         return (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-[#101021]">Colección de Insignias</h3>
               <span className="text-xs bg-[#6e4380]/10 text-[#6e4380] font-bold px-3 py-1.5 rounded-full">
-                Obtenidas: {stats.badges.filter(b => !b.id.startsWith('area-')).length} de {ALL_SYSTEM_BADGES.length}
+                Obtenidas: {unlockedCount} de {ALL_SYSTEM_BADGES.length}
               </span>
             </div>
             
@@ -233,12 +231,20 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
                         : 'bg-slate-50 border-slate-200 opacity-60 hover:opacity-80 text-slate-400'
                     }`}
                   >
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 shadow-inner ${
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 shadow-inner overflow-hidden ${
                       unlocked
                         ? 'bg-[#6e4380]/10 text-[#6e4380]'
                         : 'bg-slate-200 text-slate-400'
                     }`}>
-                      <i className={`fas ${badge.icon} text-lg`}></i>
+                      {badge.icon.startsWith('http') ? (
+                        <img 
+                          src={badge.icon} 
+                          alt={badge.label} 
+                          className={`w-10 h-10 object-contain transition-all duration-300 ${unlocked ? '' : 'grayscale opacity-40'}`} 
+                        />
+                      ) : (
+                        <i className={`fas ${badge.icon} text-lg`}></i>
+                      )}
                     </div>
                     <span className="text-xs font-bold truncate w-full">{badge.label}</span>
                     <span className="text-[9px] text-slate-400 font-semibold mt-1">
@@ -302,8 +308,16 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, progress, onUpdateUser,
             >
               <i className="fas fa-times"></i>
             </button>
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border ${selectedBadge.unlockedAt ? 'bg-[#6e4380]/10 text-[#6e4380]' : 'bg-slate-200 text-slate-400'}`}>
-              <i className={`fas ${selectedBadge.icon} text-2xl`}></i>
+            <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border ${selectedBadge.unlockedAt ? 'bg-[#6e4380]/10 border-[#6e4380]/20' : 'bg-slate-200 border-slate-300'}`}>
+              {selectedBadge.icon.startsWith('http') ? (
+                <img 
+                  src={selectedBadge.icon} 
+                  alt={selectedBadge.label} 
+                  className={`w-20 h-20 object-contain ${selectedBadge.unlockedAt ? '' : 'grayscale opacity-40'}`} 
+                />
+              ) : (
+                <i className={`fas ${selectedBadge.icon} text-3xl`}></i>
+              )}
             </div>
             <h4 className="text-lg font-bold text-slate-800 mb-1">{selectedBadge.label}</h4>
             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-gradient-to-r ${getRarityStyle(selectedBadge.rarity)} inline-block mb-3`}>
