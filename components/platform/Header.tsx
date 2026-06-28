@@ -206,6 +206,14 @@ const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout })
                 <i className="fas fa-id-card text-sm text-[#101021]/40 w-4 text-center"></i>
                 <span>Mis datos</span>
               </button>
+
+              <button
+                onClick={() => handleProfileOptionClick('profile-badges')}
+                className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-2.5 transition text-[10px] sm:text-xs text-[#101021]/80 font-medium"
+              >
+                <i className="fas fa-award text-sm text-[#101021]/40 w-4 text-center"></i>
+                <span>Insignias</span>
+              </button>
               
               <button
                 onClick={() => handleProfileOptionClick('profile-account')}

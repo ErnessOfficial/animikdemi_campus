@@ -184,6 +184,7 @@ export interface UserProgress {
   studyMinutes?: number;
   activityHistory?: ActivityHistoryItem[];
   weeklyChallenges?: WeeklyChallenge[];
+  createdAt?: string;
 }
 
 export interface Achievement {

@@ -163,7 +163,12 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
                   <div className="flex items-center gap-3 flex-wrap">
                     {stats.badges.map(b => (
                       <span key={b.id} className="inline-flex items-center gap-2 bg-[#101021]/5 text-[#101021] px-3 py-1.5 rounded-full text-sm border border-[#101021]/10">
-                        <i className={`fas ${b.icon} text-[#6e4380]`}></i> {b.label}
+                        {b.icon.startsWith('http') ? (
+                          <img src={b.icon} alt={b.label} className="w-5 h-5 object-contain" />
+                        ) : (
+                          <i className={`fas ${b.icon} text-[#6e4380]`}></i>
+                        )}
+                        {b.label}
                       </span>
                     ))}
                   </div>

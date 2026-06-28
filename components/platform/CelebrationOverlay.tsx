@@ -142,8 +142,12 @@ const CelebrationOverlay: React.FC<CelebrationOverlayProps> = ({ item, onClose }
         </span>
 
         {/* Large Floating Icon */}
-        <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center mx-auto my-4 shadow-inner ${getIconWrapperColor()}`}>
-          <i className={`fas ${item.icon} text-4xl animate-bounce`}></i>
+        <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center mx-auto my-4 shadow-inner overflow-hidden ${getIconWrapperColor()}`}>
+          {item.icon.startsWith('http') ? (
+            <img src={item.icon} alt={item.title} className="w-16 h-16 object-contain animate-bounce" />
+          ) : (
+            <i className={`fas ${item.icon} text-4xl animate-bounce`}></i>
+          )}
         </div>
 
         {/* Level Up Special Indicator */}
