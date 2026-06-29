@@ -21,7 +21,7 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
 
     courseCatalog.forEach(course => {
       const prog = progress.courses[course.id];
-      if (prog && prog.percentage > 0) {
+      if (prog) {
         if (prog.percentage >= 100) {
           completed.push({ course, prog });
         } else {

@@ -11,7 +11,9 @@ interface CourseDetailPageProps {
 }
 
 const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, progress, onEnroll, onGoToCourse, onBack }) => {
-  const isEnrolled = !!progress.courses[course.id];
+  const courseProgress = progress.courses[course.id];
+  const isEnrolled = !!courseProgress;
+  const isCompleted = courseProgress && courseProgress.percentage >= 100;
 
   return (
     <div className="max-w-6xl mx-auto animate-fade-in">
@@ -31,12 +33,25 @@ const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, progress, o
               <span>Duración estimada: {formatDuration(estimateCourseDurationMinutes(course))}</span>
             </div>
           )}
-          {isEnrolled ? (
+          {isCompleted ? (
+            <div className="mt-6 space-y-2">
+              <button 
+                  onClick={() => onGoToCourse(course.id)}
+                  className="w-full md:w-auto bg-[#4cbd9a] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#3ca483] transition shadow-lg transform hover:scale-105 flex items-center justify-center md:inline-flex gap-1.5"
+              >
+                  <i className="fas fa-check-circle"></i>
+                  Repasar Lecciones (Completado)
+              </button>
+              <p className="text-xs text-[#24668e] font-semibold">
+                Este curso ya ha sido completado. Ve a tu perfil si quieres ver o descargar tu certificado, o haz clic arriba para repasar lo aprendido.
+              </p>
+            </div>
+          ) : isEnrolled ? (
             <button 
                 onClick={() => onGoToCourse(course.id)}
                 className="mt-6 w-full md:w-auto bg-[#24668e] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#1a4a69] transition shadow-lg transform hover:scale-105"
             >
-                Ir al Curso
+                Continuar Curso
             </button>
           ) : (
             <button 

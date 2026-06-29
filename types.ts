@@ -56,10 +56,10 @@ export interface InfoCard {
   color?: string;
 }
 
-export interface Activity {
+export interface BaseActivity {
   id: string;
   title: string;
-  type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe' | 'interactiveGame';
+  type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe' | 'interactiveGame' | 'sliderAssessment' | 'emotionWheel' | 'mythBuster' | 'interactiveScenario' | 'habitTrackerBuilder';
   description: string;
   videoSrc?: string;
   audioSrc?: string;
@@ -90,6 +90,78 @@ export interface Activity {
     hideImage?: boolean;
   };
 }
+
+// 1. Radar de Auto-percepción
+export interface SliderAssessmentActivity {
+  id: string;
+  type: 'sliderAssessment';
+  title: string;
+  description: string;
+  domains: Array<{
+    id: string;
+    name: string;
+    leftLabel: string;
+    rightLabel: string;
+  }>;
+}
+
+// 2. Rueda de Granularidad Emocional
+export interface EmotionWheelActivity {
+  id: string;
+  type: 'emotionWheel';
+  title: string;
+  description: string;
+  coreEmotions: Array<{
+    name: string;
+    color: string;
+    nuances: string[];
+    physicalSensation: string;
+  }>;
+}
+
+// 3. Cazador de Mitos (Estilo Tinder Swipe)
+export interface MythBusterActivity {
+  id: string;
+  type: 'mythBuster';
+  title: string;
+  description: string;
+  statements: Array<{
+    text: string;
+    isMyth: boolean;
+    explanation: string;
+  }>;
+}
+
+// 4. Simulador de Escenarios Interpersonales
+export interface InteractiveScenarioActivity {
+  id: string;
+  type: 'interactiveScenario';
+  title: string;
+  description: string;
+  scenarios: Array<{
+    context: string;
+    options: Array<{
+      text: string;
+      isOptimal: boolean;
+      consequence: string;
+    }>;
+  }>;
+}
+
+// 5. Tablero de Hábitos (Drag & Drop)
+export interface HabitTrackerBuilderActivity {
+  id: string;
+  type: 'habitTrackerBuilder';
+  title: string;
+  description: string;
+  habitsToChoose: Array<{
+    category: string;
+    text: string;
+  }>;
+  maxSelection: number;
+}
+
+export type Activity = BaseActivity & Partial<SliderAssessmentActivity & EmotionWheelActivity & MythBusterActivity & InteractiveScenarioActivity & HabitTrackerBuilderActivity>;
 
 export interface Module {
   id: string;

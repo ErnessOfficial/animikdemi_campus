@@ -13,6 +13,7 @@ import FeedbackForm from '../components/activities/FeedbackForm';
 import CardMatchingGame from '../components/activities/CardMatchingGame';
 import FinalChallenge from '../components/activities/FinalChallenge';
 import CourseSidebar from '../components/course/CourseSidebar';
+import CourseMobileHeader from '../components/course/CourseMobileHeader';
 import InfoCards from '../components/activities/InfoCards';
 import InvisibleWall from '../components/activities/InvisibleWall';
 import ReframeWall from '../components/activities/ReframeWall';
@@ -22,6 +23,11 @@ import PillarsInteractive from '../components/activities/PillarsInteractive';
 import PondGame from '../components/activities/PondGame';
 import InteractiveGameActivity from '../components/activities/InteractiveGameActivity';
 import CourseCompletionModal from '../components/course/CourseCompletionModal';
+import SliderAssessment from '../components/activities/SliderAssessment';
+import EmotionWheel from '../components/activities/EmotionWheel';
+import MythBuster from '../components/activities/MythBuster';
+import InteractiveScenario from '../components/activities/InteractiveScenario';
+import HabitTrackerBuilder from '../components/activities/HabitTrackerBuilder';
 
 interface CoursePlayerProps {
   course: Course;
@@ -31,6 +37,7 @@ interface CoursePlayerProps {
   onNavigateToCertificates?: () => void;
   saveActivityAnswers?: (courseId: string, activityId: string, data: any) => void;
   updateLastAccessed?: (courseId: string, activityId: string) => void;
+  isMobileView?: boolean;
 }
 
 // Subcomponente para actividades de video que pueden incluir transcripción (content)
@@ -98,15 +105,13 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
                 {activity.content && activity.content.length > 0 ? (
                   <iframe
                     title={activity.title}
-                    className="w-full border rounded-lg shadow-sm"
-                    style={{ minHeight: 1300 }}
+                    className="w-full border rounded-2xl shadow-sm min-h-[550px] md:min-h-[800px] lg:min-h-[1000px] transition-all duration-300"
                     srcDoc={(activity.content as string[]).join('\n')}
                   />
                 ) : (
                   <iframe
                     title={activity.title}
-                    className="w-full border rounded-lg shadow-sm"
-                    style={{ minHeight: 1300 }}
+                    className="w-full border rounded-2xl shadow-sm min-h-[550px] md:min-h-[800px] lg:min-h-[1000px] transition-all duration-300"
                     src={activity.videoSrc || ''}
                   />
                 )}
@@ -185,13 +190,23 @@ const ActivityRenderer: React.FC<{ activity: Activity; answers?: any; onSaveAnsw
             return <ReframeWall initial={answers} onSave={onSaveAnswers} onReadyToComplete={onReadyToComplete} />;
         case 'finalChallenge':
             return <FinalChallenge onReadyToComplete={onReadyToComplete} />;
+        case 'sliderAssessment':
+            return <SliderAssessment activity={activity} onReadyToComplete={onReadyToComplete} />;
+        case 'emotionWheel':
+            return <EmotionWheel activity={activity} onReadyToComplete={onReadyToComplete} />;
+        case 'mythBuster':
+            return <MythBuster activity={activity} onReadyToComplete={onReadyToComplete} />;
+        case 'interactiveScenario':
+            return <InteractiveScenario activity={activity} onReadyToComplete={onReadyToComplete} />;
+        case 'habitTrackerBuilder':
+            return <HabitTrackerBuilder activity={activity} onReadyToComplete={onReadyToComplete} />;
         default:
             return <p>Actividad no encontrada.</p>;
     }
 };
 
 
-const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActivityAsCompleted, onExit, onNavigateToCertificates, saveActivityAnswers, updateLastAccessed }) => {
+const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActivityAsCompleted, onExit, onNavigateToCertificates, saveActivityAnswers, updateLastAccessed, isMobileView }) => {
   const [activeActivityId, setActiveActivityId] = useState<string>(progress.lastAccessedActivityId || course.modules[0].activities[0].id);
   const [toast, setToast] = useState<string | null>(null);
   const showToast = (msg: string) => {
@@ -201,6 +216,8 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
   const [zoomSrc, setZoomSrc] = React.useState<string | null>(null);
   const [showCompletionAnim, setShowCompletionAnim] = React.useState(false);
   const [wasCompleted, setWasCompleted] = React.useState(progress.percentage === 100);
+
+  const activityViewerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (!wasCompleted && progress.percentage === 100) {
@@ -218,6 +235,13 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
   const handleSelectActivity = (activityId: string) => {
     setActiveActivityId(activityId);
     updateLastAccessed?.(course.id, activityId);
+
+    // Smooth scroll to player on mobile devices to ensure user sees the content
+    setTimeout(() => {
+      if (activityViewerRef.current) {
+        activityViewerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
   
   const handleMarkAsCompleted = (activityId: string) => {
@@ -303,15 +327,37 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
         return 'Completa las creencias y la acción de compromiso.';
       case 'finalChallenge':
         return 'Escribe tu plan en el recuadro.';
+      case 'sliderAssessment':
+        return 'Usa los deslizadores de percepción.';
+      case 'emotionWheel':
+        return 'Selecciona al menos un matiz emocional.';
+      case 'mythBuster':
+        return 'Desmitifica todas las tarjetas para avanzar.';
+      case 'interactiveScenario':
+        return 'Selecciona la respuesta óptima para completar la conversación.';
+      case 'habitTrackerBuilder':
+        return 'Selecciona tus hábitos para llenar tu mochila de acción.';
       default:
         return null;
     }
   };
   const isCompleted = activeModule && activeActivity ? progress.completionStatus[activeModule.id]?.activities[activeActivity.id] || false : false;
 
-    return (
-      <div className="flex flex-col md:flex-row gap-8 animate-fade-in">
-        <div className="w-full md:w-80 lg:w-96 flex-shrink-0">
+  return (
+    <div className="flex flex-col gap-6 md:gap-8 animate-fade-in">
+      {/* Sticky Mobile syllabus navigation */}
+      <CourseMobileHeader
+        course={course}
+        activeActivityId={activeActivityId}
+        completionStatus={progress.completionStatus}
+        onSelectActivity={handleSelectActivity}
+        onExit={onExit}
+        isMobileView={isMobileView}
+      />
+
+      <div className={`flex ${isMobileView ? 'flex-col gap-4' : 'flex-col md:flex-row gap-6 md:gap-8'} items-start`}>
+        {/* Desktop/Tablet Sidebar */}
+        <div className={`${isMobileView ? 'hidden' : 'hidden md:block'} w-full md:w-80 lg:w-96 flex-shrink-0 sticky top-4`}>
             <CourseSidebar
                 course={course}
                 activeActivityId={activeActivityId}
@@ -320,79 +366,82 @@ const CoursePlayer: React.FC<CoursePlayerProps> = ({ course, progress, markActiv
                 onExit={onExit}
             />
         </div>
-        <div className="flex-1">
+        
+        {/* Active Activity Player Frame */}
+        <div ref={activityViewerRef} className="flex-grow w-full scroll-mt-24">
              {activeModule && activeActivity ? (
-                <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-[#101021]/10">
-                    {!activeActivity.hideHeader && (
-                      <>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#4c1760] mb-2">{activeActivity.title}</h2>
-                        <p className="text-[#00385b] font-semibold mb-6">{activeActivity.description}</p>
-                      </>
-                    )}
-                    {activeActivity.imageSrc && activeActivity.type !== 'flipCards' && (
-                      <div className="mb-6 flex justify-center">
-                        {activeActivity.imageAltSrc ? (
-                          <picture>
-                            <source srcSet={activeActivity.imageSrc} type="image/svg+xml" />
-                            <img
-                              src={activeActivity.imageAltSrc}
-                              alt={`Ilustración para ${activeActivity.title}`}
-                              className="rounded-lg shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
-                              onClick={() => setZoomSrc(activeActivity.imageAltSrc || activeActivity.imageSrc!)}
-                            />
-                          </picture>
-                        ) : (
+              <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-md border border-[#101021]/10">
+                  {!activeActivity.hideHeader && (
+                    <>
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#4c1760] mb-2 leading-tight">{activeActivity.title}</h2>
+                      <p className="text-sm text-[#00385b] font-semibold mb-6">{activeActivity.description}</p>
+                    </>
+                  )}
+                  {activeActivity.imageSrc && activeActivity.type !== 'flipCards' && (
+                    <div className="mb-6 flex justify-center">
+                      {activeActivity.imageAltSrc ? (
+                        <picture>
+                          <source srcSet={activeActivity.imageSrc} type="image/svg+xml" />
                           <img
-                            src={activeActivity.imageSrc}
+                            src={activeActivity.imageAltSrc}
                             alt={`Ilustración para ${activeActivity.title}`}
-                            className="rounded-lg shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
-                            onClick={() => setZoomSrc(activeActivity.imageSrc!)}
+                            className="rounded-xl shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
+                            onClick={() => setZoomSrc(activeActivity.imageAltSrc || activeActivity.imageSrc!)}
                           />
-                        )}
-                      </div>
-                    )}
-                    <div className="prose max-w-none prose-slate">
-                        <ActivityRenderer 
-                          activity={activeActivity} 
-                          answers={progress.answers?.[activeActivity.id]}
-                          onSaveAnswers={saveActivityAnswers ? (data) => saveActivityAnswers(course.id, activeActivity.id, data) : undefined}
-                          onReadyToComplete={(ready) => setCanComplete(!!ready)}
+                        </picture>
+                      ) : (
+                        <img
+                          src={activeActivity.imageSrc}
+                          alt={`Ilustración para ${activeActivity.title}`}
+                          className="rounded-xl shadow-md w-full h-auto max-w-3xl cursor-zoom-in"
+                          onClick={() => setZoomSrc(activeActivity.imageSrc!)}
                         />
+                      )}
                     </div>
-                    
-                    {!isCompleted && (
-                        <div className="mt-8 flex items-center justify-between">
+                  )}
+                  <div className="prose max-w-none prose-slate text-sm sm:text-base leading-relaxed">
+                      <ActivityRenderer 
+                        activity={activeActivity} 
+                        answers={progress.answers?.[activeActivity.id]}
+                        onSaveAnswers={saveActivityAnswers ? (data) => saveActivityAnswers(course.id, activeActivity.id, data) : undefined}
+                        onReadyToComplete={(ready) => setCanComplete(!!ready)}
+                      />
+                  </div>
+                  
+                  {!isCompleted && (
+                      <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-6">
+                          <button
+                              onClick={() => { updateLastAccessed?.(course.id, activeActivityId); showToast('Progreso guardado.'); setTimeout(() => onExit(), 800); }}
+                              className="w-full sm:w-auto bg-[#101021]/15 text-[#101021] font-semibold rounded-xl hover:bg-[#101021]/20 transition touch-target sm:min-h-0 sm:py-2 sm:px-5 text-sm"
+                          >
+                              Guardar y salir
+                          </button>
+                          <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+                            {!canComplete && requiresInteraction(activeActivity.type) && (
+                              <div className="text-xs text-[#101021]/70 font-semibold flex items-center gap-1">
+                                <i className="fas fa-info-circle text-[#24668e]"></i>
+                                {getDisableHint(activeActivity)}
+                              </div>
+                            )}
                             <button
-                                onClick={() => { updateLastAccessed?.(course.id, activeActivityId); showToast('Progreso guardado.'); setTimeout(() => onExit(), 800); }}
-                                className="bg-[#101021]/10 text-[#101021] font-semibold py-2 px-4 rounded-lg hover:bg-[#101021]/20 transition"
+                                onClick={() => handleMarkAsCompleted(activeActivity.id)}
+                                disabled={!canComplete}
+                                className={`w-full sm:w-auto font-bold rounded-xl transition-all shadow-md touch-target sm:min-h-0 sm:py-2 sm:px-6 text-sm ${canComplete ? 'bg-[#24668e] text-white hover:bg-[#1a4a69]' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
                             >
-                                Guardar y salir
+                                Marcar como completado
                             </button>
-                            <div className="flex flex-col items-end gap-2">
-                              {!canComplete && requiresInteraction(activeActivity.type) && (
-                                <div className="text-xs text-[#101021]/70">
-                                  <i className="fas fa-info-circle mr-1 text-[#24668e]"></i>
-                                  {getDisableHint(activeActivity)}
-                                </div>
-                              )}
-                              <button
-                                  onClick={() => handleMarkAsCompleted(activeActivity.id)}
-                                  disabled={!canComplete}
-                                  className={`font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105 shadow-md ${canComplete ? 'bg-[#24668e] text-white hover:bg-[#1a4a69]' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
-                              >
-                                  Marcar como completado
-                              </button>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            ) : (
-                <div className="flex items-center justify-center h-full">
-                <p className="text-xl text-[#2b3244]/70">Selecciona una actividad para comenzar.</p>
-                </div>
-            )}
+                          </div>
+                      </div>
+                  )}
+              </div>
+          ) : (
+              <div className="flex items-center justify-center h-full min-h-[300px]">
+                <p className="text-lg text-[#2b3244]/70 font-bold">Selecciona una actividad para comenzar.</p>
+              </div>
+          )}
         </div>
-        {toast && (
+      </div>
+      {toast && (
           <div className="fixed bottom-6 right-6 bg-[#24668e] text-white px-4 py-3 rounded-lg shadow-lg text-sm sm:text-base animate-fade-in">
             <i className="fas fa-check-circle mr-2 text-white/90"></i>{toast}
           </div>

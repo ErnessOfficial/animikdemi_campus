@@ -23,7 +23,10 @@ const Dashboard: React.FC<DashboardProps> = ({
     onNavigate 
 }) => {
     const stats = computeGamification(progress, courseCatalog);
-    const enrolledCourses = courseCatalog.filter(course => progress.courses[course.id]);
+    const enrolledCourses = courseCatalog.filter(course => {
+        const prog = progress.courses[course.id];
+        return prog && prog.percentage < 100;
+    });
     const activeEnrolled = enrolledCourses.slice(0, 2);
 
     const notEnrolled = courseCatalog.filter(course => !progress.courses[course.id]);

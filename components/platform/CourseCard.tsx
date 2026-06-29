@@ -8,9 +8,19 @@ interface CourseCardProps {
   onSelect: () => void;
   isContinue?: boolean;
   onEnroll?: (courseId: string) => void;
+  isEnrolled?: boolean;
+  isCompleted?: boolean;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, progress, onSelect, isContinue = false, onEnroll }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ 
+  course, 
+  progress, 
+  onSelect, 
+  isContinue = false, 
+  onEnroll,
+  isEnrolled = false,
+  isCompleted = false
+}) => {
   const handleEnrollClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if(onEnroll) {
@@ -57,7 +67,17 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, progress, onSelect, isC
         )}
 
         <div className="mt-4">
-          {isContinue ? (
+          {isCompleted ? (
+             <div className="space-y-1.5">
+               <button className="w-full bg-[#4cbd9a] text-white font-bold rounded-xl hover:bg-[#3ca483] hover:shadow transition-all touch-target sm:min-h-0 sm:py-2 flex items-center justify-center gap-1.5">
+                 <i className="fas fa-check-circle"></i>
+                 Completado
+               </button>
+               <p className="text-[9px] text-[#24668e] font-semibold text-center leading-snug">
+                 Curso completado. Ve a tu perfil para ver tu certificado, o haz clic arriba para repasar lo aprendido.
+               </p>
+             </div>
+          ) : (isEnrolled || isContinue) ? (
              <button className="w-full bg-[#24668e] text-white font-bold rounded-xl hover:bg-[#1a4a69] hover:shadow transition-all touch-target sm:min-h-0 sm:py-2">
               Continuar
             </button>
