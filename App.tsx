@@ -178,6 +178,25 @@ const App: React.FC = () => {
     const [swUpdateReady, setSwUpdateReady] = useState(false);
     const [swUpdating, setSwUpdating] = useState(false);
 
+    // Device Simulator Viewport overrides
+    const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+    const getQueryDevice = () => {
+      if (typeof window === 'undefined') return 'responsive';
+      const params = new URLSearchParams(window.location.search);
+      return (params.get('device') as 'desktop' | 'tablet' | 'mobile' | 'responsive') || 'responsive';
+    };
+    const [viewportMode, setViewportMode] = useState<'desktop' | 'tablet' | 'mobile' | 'responsive'>(() => {
+      return isIframe ? getQueryDevice() : 'responsive';
+    });
+    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+    useEffect(() => {
+      if (typeof window === 'undefined') return;
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     // Gamification states
     const [pendingCelebrations, setPendingCelebrations] = useState<CelebrationItem[]>([]);
     const [streakChecked, setStreakChecked] = useState(false);
@@ -483,6 +502,50 @@ const App: React.FC = () => {
         showAppToast('¡Reflexión registrada! +15 XP obtenidos 🌿');
     };
 
+    const handleKitAction = (toolType: string, xpReward: number, extraData?: any) => {
+        const actionResult = recordCompletedAction(
+            progress,
+            { 
+              type: toolType as any, 
+              id: `kit-${toolType}-${new Date().toISOString()}`, 
+              title: `Uso de herramienta: ${toolType}` 
+            },
+            courseCatalog
+        );
+        
+        let updated = { ...actionResult.updatedProgress };
+
+        if (toolType === 'diario' && extraData) {
+            updated.emotionLogs = [
+                ...(updated.emotionLogs || []),
+                {
+                    date: new Date().toISOString(),
+                    emotion: extraData.emotion,
+                    cause: extraData.cause,
+                    somaticSensation: extraData.somaticSensation,
+                    thoughts: extraData.thoughts
+                }
+            ];
+        } else if (toolType === 'fortaleza' && extraData) {
+            updated.strengthStars = [
+                ...(updated.strengthStars || []),
+                {
+                    date: new Date().toISOString(),
+                    strength: extraData.strength,
+                    description: extraData.description
+                }
+            ];
+        }
+
+        updated.xp = (updated.xp || 0) + xpReward;
+        
+        setProgress(updated);
+
+        if (actionResult.newCelebrations.length > 0) {
+            setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
+        }
+    };
+
     const markActivityAsCompleted = (courseId: string, activityId: string) => {
         const courseProgress = progress.courses[courseId];
         if (!courseProgress) return;
@@ -617,7 +680,7 @@ const App: React.FC = () => {
     };
     
     // Render logic for authenticated user
-    const renderContent = () => {
+    const renderContent = (isMobileView: boolean) => {
         if (view === 'course-player' && activeCourseId) {
             const detailedCourse = courseCatalog.find(c => c.id === activeCourseId);
             if (detailedCourse) {
@@ -628,6 +691,7 @@ const App: React.FC = () => {
                             saveActivityAnswers={saveActivityAnswers}
                             updateLastAccessed={updateLastAccessed}
                             onExit={() => handleNavigation('dashboard')}
+                            isMobileView={isMobileView}
                         />;
             } else {
                  return (
@@ -678,7 +742,13 @@ const App: React.FC = () => {
                     />
                 );
             case 'community':
-                return <KitReflexivoPage onReflectionCompleted={handleReflectionCompleted} />;
+                return (
+                    <KitReflexivoPage 
+                        progress={progress}
+                        onKitAction={handleKitAction}
+                        onReflectionCompleted={handleReflectionCompleted}
+                    />
+                );
             case 'about':
                 return <WhatIsAnimikroPage />;
             case 'share':
@@ -712,6 +782,7 @@ const App: React.FC = () => {
     
     const uiLoading = bypassAuth ? false : isLoading;
     const uiAuthenticated = bypassAuth ? true : isAuthenticated;
+    const isMobileView = viewportMode === 'mobile' || (viewportMode === 'responsive' && windowWidth < 768);
 
     let content: React.ReactNode = null;
     if (uiLoading) {
@@ -720,26 +791,88 @@ const App: React.FC = () => {
         content = <LoginPage onLogin={() => login()} onRegister={() => register()} />;
     } else {
         content = (
-            <div className="min-h-screen bg-[#f0f2f5] font-sans">
-                <div className="flex flex-col md:flex-row min-h-screen">
-                    <div className="hidden md:flex md:flex-shrink-0">
-                        <Sidebar activeView={view} onNavigate={handleNavigation} onLogout={() => logout()} />
-                    </div>
-                    <main className="flex-1 flex flex-col min-h-screen pb-16 md:pb-0">
-                        <Header 
-                            user={user} 
-                            progress={progress}
-                            onNavigate={handleNavigation} 
-                            onLogout={() => logout()} 
-                        />
-                        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto flex flex-col">
-                            <div className="flex-grow pb-8 flex flex-col">
-                                {renderContent()}
-                            </div>
-                            <Footer onNavigate={handleNavigation} />
+            <div className="flex flex-col min-h-screen w-full bg-[#f0f2f5] font-sans">
+                {/* Header is always rendered in parent frame at full width, unless inside iframe */}
+                {!isIframe && (
+                    <Header 
+                        user={user} 
+                        progress={progress}
+                        onNavigate={handleNavigation} 
+                        onLogout={() => logout()}
+                        viewportMode={viewportMode}
+                        onViewportModeChange={setViewportMode}
+                        hideSimulator={false}
+                    />
+                )}
+                
+                {/* If simulator mode is active and we are NOT inside the iframe, render device shell wrapper */}
+                {!isIframe && viewportMode !== 'responsive' && viewportMode !== 'desktop' ? (
+                    <div className="flex-grow bg-slate-200/80 p-4 sm:p-8 flex items-center justify-center overflow-y-auto">
+                        <div 
+                            className={`bg-white transition-all duration-300 flex flex-col relative shadow-2xl border-slate-900 border-[12px] overflow-hidden ${
+                                viewportMode === 'mobile' 
+                                    ? 'w-[400px] h-[820px] rounded-[52px]'
+                                    : 'w-[768px] h-[1024px] rounded-[36px]'
+                            }`}
+                        >
+                            {/* Simulated Notch for Mobile Device Mode */}
+                            {viewportMode === 'mobile' && (
+                                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5 bg-slate-900 rounded-full z-50 flex items-center justify-between px-3 shadow-inner pointer-events-none">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-800/80"></div>
+                                    <div className="w-2.5 h-1 bg-slate-800/60 rounded-full"></div>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-800/80"></div>
+                                </div>
+                            )}
+                            {/* Simulated Camera for Tablet Device Mode */}
+                            {viewportMode === 'tablet' && (
+                                <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-slate-800 z-50 pointer-events-none"></div>
+                            )}
+
+                            {/* App Iframe load simulated viewport mode */}
+                            <iframe 
+                                src={`${window.location.pathname}${window.location.search}${window.location.search ? '&' : '?'}simulated=true&device=${viewportMode}`}
+                                className="w-full h-full border-0 bg-[#f0f2f5]"
+                                title="Device Simulator Frame"
+                            />
                         </div>
-                    </main>
-                </div>
+                    </div>
+                ) : (
+                    // Otherwise, render the normal application view directly
+                    <div className={`flex flex-col min-h-screen ${isIframe ? 'w-full h-full' : 'w-full min-h-screen'}`}>
+                        {/* If we are inside the iframe, we render its own Header but hide simulator controls */}
+                        {isIframe && (
+                            <Header 
+                                user={user} 
+                                progress={progress}
+                                onNavigate={handleNavigation} 
+                                onLogout={() => logout()}
+                                viewportMode={viewportMode}
+                                onViewportModeChange={setViewportMode}
+                                hideSimulator={true}
+                            />
+                        )}
+                        <div className={`flex flex-grow ${isMobileView ? 'flex-col' : 'flex-row'} min-h-0 w-full overflow-y-auto overflow-x-hidden`}>
+                            {/* Sidebar: only show if not mobile view */}
+                            {!isMobileView && (
+                                <div className="flex-shrink-0">
+                                    <Sidebar activeView={view} onNavigate={handleNavigation} onLogout={() => logout()} />
+                                </div>
+                            )}
+                            <main className={`flex-grow flex flex-col min-h-full relative ${isMobileView ? 'pb-16' : ''}`}>
+                                <div className={`flex-grow p-4 sm:p-6 lg:p-8 flex flex-col ${isMobileView ? 'px-3 py-4' : ''}`}>
+                                    <div className="flex-grow pb-8 flex flex-col">
+                                        {renderContent(isMobileView)}
+                                    </div>
+                                    <Footer onNavigate={handleNavigation} />
+                                </div>
+                            </main>
+                        </div>
+                        {/* Bottom nav for simulated/actual mobile layout */}
+                        {isMobileView && <BottomNavBar activeView={view} onNavigate={handleNavigation} />}
+                    </div>
+                )}
+
+                {/* Modals placed outside device shell, absolute to the main viewport */}
                 {showDiagnostic && (
                     <DiagnosticTestModal 
                         questions={diagnosticTestQuestions}
@@ -759,7 +892,6 @@ const App: React.FC = () => {
                         onClose={() => setShowReflection(false)}
                     />
                 )}
-                <BottomNavBar activeView={view} onNavigate={handleNavigation} />
             </div>
         );
     }

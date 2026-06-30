@@ -155,37 +155,86 @@ function getWeekNumber(d: Date): number {
   return Math.ceil((((date.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
 }
 
+function seededRandom(seed: number) {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
+
 export const generateWeeklyChallenges = (date: Date): WeeklyChallenge[] => {
   const weekNum = getWeekNumber(date);
-  return [
+  
+  const pool: Array<{ title: string; target: number; xpReward: number; type: WeeklyChallenge['type'] }> = [
     {
-      id: `weekly-capsule-${weekNum}`,
-      title: 'Completa una cápsula (Video o lectura)',
+      title: 'Completa una sesión de respiración consciente en Nube de Calma 🌬️',
       target: 1,
-      current: 0,
+      xpReward: 50,
+      type: 'respiracion',
+    },
+    {
+      title: 'Registra tu estado de ánimo 2 veces en el Diario Emocional 📝',
+      target: 2,
+      xpReward: 60,
+      type: 'diario',
+    },
+    {
+      title: 'Resuelve 1 caso en el Simulador de Situaciones Sociales 🤝',
+      target: 1,
+      xpReward: 50,
+      type: 'simulador',
+    },
+    {
+      title: 'Avanza 1 nivel en el Quiz de Inteligencia Emocional 🏆',
+      target: 1,
+      xpReward: 60,
+      type: 'quiz',
+    },
+    {
+      title: 'Usa el Sello de Validación para procesar una emoción 💙',
+      target: 1,
+      xpReward: 40,
+      type: 'validacion',
+    },
+    {
+      title: 'Crea 1 estrella de fortaleza en tu mural de autoconfianza ⭐',
+      target: 1,
+      xpReward: 40,
+      type: 'fortaleza',
+    },
+    {
+      title: 'Completa una cápsula (Video o lectura) de un curso 📚',
+      target: 1,
       xpReward: 50,
       type: 'capsule',
-      completed: false,
     },
     {
-      id: `weekly-meditation-${weekNum}`,
-      title: 'Realiza una práctica de meditación',
+      title: 'Realiza una práctica de audio o meditación 🧘',
       target: 1,
-      current: 0,
       xpReward: 50,
       type: 'meditation',
-      completed: false,
-    },
-    {
-      id: `weekly-reflection-${weekNum}`,
-      title: 'Haz una parada reflexiva en el Kit',
-      target: 1,
-      current: 0,
-      xpReward: 50,
-      type: 'reflection',
-      completed: false,
     }
   ];
+
+  const selected: WeeklyChallenge[] = [];
+  const available = [...pool];
+  
+  let seed = weekNum + 10; // offset slightly
+  for (let i = 0; i < 3; i++) {
+    const rand = seededRandom(seed);
+    seed += 13;
+    const idx = Math.floor(rand * available.length);
+    const item = available.splice(idx, 1)[0];
+    selected.push({
+      id: `weekly-${item.type}-${weekNum}`,
+      title: item.title,
+      target: item.target,
+      current: 0,
+      xpReward: item.xpReward,
+      type: item.type,
+      completed: false,
+    });
+  }
+
+  return selected;
 };
 
 export const initializeGamification = (progress: UserProgress): UserProgress => {
@@ -699,6 +748,8 @@ export const recordCompletedAction = (
     } else if (challenge.type === 'meditation' && action.type === 'audio') {
       matches = true;
     } else if (challenge.type === 'reflection' && (action.type === 'reflection' || action.type === 'reflectionTree' || action.type === 'interactiveInvisible')) {
+      matches = true;
+    } else if (challenge.type === action.type) {
       matches = true;
     }
 

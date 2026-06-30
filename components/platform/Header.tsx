@@ -9,6 +9,9 @@ interface HeaderProps {
   progress?: UserProgress;
   onNavigate: (view: View) => void;
   onLogout: () => void;
+  viewportMode: 'desktop' | 'tablet' | 'mobile' | 'responsive';
+  onViewportModeChange: (mode: 'desktop' | 'tablet' | 'mobile' | 'responsive') => void;
+  hideSimulator?: boolean;
 }
 
 interface NotificationItem {
@@ -20,7 +23,7 @@ interface NotificationItem {
   view: View;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout }) => {
+const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout, viewportMode, onViewportModeChange, hideSimulator }) => {
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
   
@@ -105,6 +108,60 @@ const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout })
           className="w-full bg-[#f0f2f5] rounded-full py-2 pl-10 pr-4 border border-transparent focus:bg-white focus:border-[#6e4380] focus:ring-1 focus:ring-[#6e4380] transition text-xs sm:text-sm"
         />
       </div>
+
+      {/* Device Simulator Segmented Controls */}
+      {!hideSimulator && (
+        <div className="flex items-center bg-slate-100 p-0.5 rounded-full border border-slate-200/50 shadow-inner max-w-max mx-auto sm:mx-0">
+          <button
+            onClick={() => onViewportModeChange('responsive')}
+            title="Auto / Responsivo"
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all ${
+              viewportMode === 'responsive'
+                ? 'bg-white text-[#24668e] shadow-sm font-extrabold scale-105'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <i className="fas fa-sync-alt text-[9px] sm:text-[10px]"></i>
+            <span>Auto</span>
+          </button>
+          <button
+            onClick={() => onViewportModeChange('desktop')}
+            title="Vista Escritorio"
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all ${
+              viewportMode === 'desktop'
+                ? 'bg-white text-[#4c1760] shadow-sm font-extrabold scale-105'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <i className="fas fa-desktop text-[9px] sm:text-[10px]"></i>
+            <span>Escritorio</span>
+          </button>
+          <button
+            onClick={() => onViewportModeChange('tablet')}
+            title="Vista Tableta"
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all ${
+              viewportMode === 'tablet'
+                ? 'bg-white text-[#4c1760] shadow-sm font-extrabold scale-105'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <i className="fas fa-tablet-alt text-[9px] sm:text-[10px]"></i>
+            <span>Tablet</span>
+          </button>
+          <button
+            onClick={() => onViewportModeChange('mobile')}
+            title="Vista Móvil"
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all ${
+              viewportMode === 'mobile'
+                ? 'bg-white text-[#4c1760] shadow-sm font-extrabold scale-105'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <i className="fas fa-mobile-alt text-[9px] sm:text-[10px]"></i>
+            <span>Móvil</span>
+          </button>
+        </div>
+      )}
 
       {/* Right Controls Container */}
       <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">

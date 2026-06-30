@@ -37,13 +37,18 @@ const CourseCatalogPage: React.FC<CourseCatalogPageProps> = ({ progress, onSelec
       {/* Course Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {courseCatalog.map(course => {
-          const isEnrolled = !!progress.courses[course.id];
+          const courseProgress = progress.courses[course.id];
+          const isEnrolled = !!courseProgress;
+          const isCompleted = courseProgress && courseProgress.percentage >= 100;
           return (
             <CourseCard 
               key={course.id}
               course={course}
               onSelect={() => onSelectCourse(course.id)}
-              onEnroll={!isEnrolled ? onEnroll : undefined}
+              progress={courseProgress ? courseProgress.percentage : undefined}
+              isEnrolled={isEnrolled}
+              isCompleted={isCompleted}
+              onEnroll={onEnroll}
             />
           );
         })}
