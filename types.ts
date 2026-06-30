@@ -275,7 +275,7 @@ export interface WeeklyChallenge {
   target: number;
   current: number;
   xpReward: number;
-  type: 'reflection' | 'meditation' | 'capsule' | 'any';
+  type: 'reflection' | 'meditation' | 'capsule' | 'any' | 'respiracion' | 'diario' | 'simulador' | 'quiz' | 'validacion' | 'fortaleza';
   completed: boolean;
 }
 
@@ -297,6 +297,18 @@ export interface UserProgress {
   activityHistory?: ActivityHistoryItem[];
   weeklyChallenges?: WeeklyChallenge[];
   createdAt?: string;
+  emotionLogs?: Array<{
+    date: string;
+    emotion: string;
+    cause: string;
+    somaticSensation: string;
+    thoughts: string;
+  }>;
+  strengthStars?: Array<{
+    date: string;
+    strength: string;
+    description: string;
+  }>;
 }
 
 export interface Achievement {

@@ -106,6 +106,12 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                 {challenge.type === 'capsule' && <i className="fas fa-book-open"></i>}
                                                 {challenge.type === 'meditation' && <i className="fas fa-spa"></i>}
                                                 {challenge.type === 'reflection' && <i className="fas fa-brain"></i>}
+                                                {challenge.type === 'respiracion' && <i className="fas fa-wind"></i>}
+                                                {challenge.type === 'diario' && <i className="fas fa-book-open"></i>}
+                                                {challenge.type === 'simulador' && <i className="fas fa-comments"></i>}
+                                                {challenge.type === 'quiz' && <i className="fas fa-trophy"></i>}
+                                                {challenge.type === 'validacion' && <i className="fas fa-heart"></i>}
+                                                {challenge.type === 'fortaleza' && <i className="fas fa-star"></i>}
                                             </div>
                                             <div>
                                                 <h4 className={`text-sm font-bold text-slate-800 ${isChallengeCompleted ? 'line-through opacity-60' : ''}`}>{challenge.title}</h4>
@@ -123,8 +129,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                 <button
                                                     onClick={() => {
                                                         if (challenge.type === 'capsule') onNavigate('catalog');
-                                                        if (challenge.type === 'meditation') onNavigate('my-courses');
-                                                        if (challenge.type === 'reflection') onNavigate('community');
+                                                        else if (challenge.type === 'meditation') onNavigate('my-courses');
+                                                        else if (challenge.type === 'reflection') onNavigate('community');
+                                                        else onNavigate('community'); // Go to Kit Reflexivo
                                                     }}
                                                     className="w-full sm:w-auto bg-[#24668e]/10 text-[#24668e] hover:bg-[#24668e] hover:text-white text-xs font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 touch-target sm:min-h-0 sm:py-1.5 sm:px-4"
                                                 >

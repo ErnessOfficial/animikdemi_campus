@@ -502,6 +502,50 @@ const App: React.FC = () => {
         showAppToast('¡Reflexión registrada! +15 XP obtenidos 🌿');
     };
 
+    const handleKitAction = (toolType: string, xpReward: number, extraData?: any) => {
+        const actionResult = recordCompletedAction(
+            progress,
+            { 
+              type: toolType as any, 
+              id: `kit-${toolType}-${new Date().toISOString()}`, 
+              title: `Uso de herramienta: ${toolType}` 
+            },
+            courseCatalog
+        );
+        
+        let updated = { ...actionResult.updatedProgress };
+
+        if (toolType === 'diario' && extraData) {
+            updated.emotionLogs = [
+                ...(updated.emotionLogs || []),
+                {
+                    date: new Date().toISOString(),
+                    emotion: extraData.emotion,
+                    cause: extraData.cause,
+                    somaticSensation: extraData.somaticSensation,
+                    thoughts: extraData.thoughts
+                }
+            ];
+        } else if (toolType === 'fortaleza' && extraData) {
+            updated.strengthStars = [
+                ...(updated.strengthStars || []),
+                {
+                    date: new Date().toISOString(),
+                    strength: extraData.strength,
+                    description: extraData.description
+                }
+            ];
+        }
+
+        updated.xp = (updated.xp || 0) + xpReward;
+        
+        setProgress(updated);
+
+        if (actionResult.newCelebrations.length > 0) {
+            setPendingCelebrations(prevCel => [...prevCel, ...actionResult.newCelebrations]);
+        }
+    };
+
     const markActivityAsCompleted = (courseId: string, activityId: string) => {
         const courseProgress = progress.courses[courseId];
         if (!courseProgress) return;
@@ -698,7 +742,13 @@ const App: React.FC = () => {
                     />
                 );
             case 'community':
-                return <KitReflexivoPage onReflectionCompleted={handleReflectionCompleted} />;
+                return (
+                    <KitReflexivoPage 
+                        progress={progress}
+                        onKitAction={handleKitAction}
+                        onReflectionCompleted={handleReflectionCompleted}
+                    />
+                );
             case 'about':
                 return <WhatIsAnimikroPage />;
             case 'share':
