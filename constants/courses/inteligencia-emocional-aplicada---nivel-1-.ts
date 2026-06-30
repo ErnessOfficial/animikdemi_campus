@@ -10,20 +10,21 @@ import { assetPath } from '../../utils/paths';
 // - Contenido ampliado para hacerlo más interactivo, dinámico y reflexivo.
 
 export const course: Course = {
-  id: 'programa-inteligencia-emocional-nivel-1',
-  title: 'Programa de Inteligencia Emocional Aplicada - Nivel 1',
-  subtitle: 'Conciencia emocional, autorregulación, autocompasión y empatía práctica',
+  id: 'gestion-emocional-101',
+  title: 'Inteligencia Emocional Aplicada',
+  subtitle: 'Aprende a gestionar tus emociones para una vida más plena.',
   description:
-    'Un recorrido práctico para desarrollar habilidades emocionales esenciales: reconocer y etiquetar emociones, regular impulsos, cultivar autocompasión y comunicarnos con empatía y criterio. Nivel 1 del programa de AnImiKdemi.',
-  category: 'Inteligencia Emocional Aplicada',
+    'Un recorrido práctico para desarrollar habilidades emocionales esenciales: reconocer y etiquetar emociones, regular impulsos, cultivar autocompasión y comunicarnos con empatía y criterio.',
+  category: 'Autoconciencia & Regulación emocional',
   broadCategories: ['Autoconocimiento', 'Gestión Emocional', 'Habilidades Sociales'],
-  coverImage: assetPath('images/inteligencia-emocional-aplicada---nivel-1-_portada.png'),
+  coverImage: assetPath('images/course_cover_2.png'),
   instructor: mockInstructor,
   learningObjectives: [
-    'Reconocer y etiquetar con precisión las emociones propias y ajenas.',
-    'Aplicar micro-hábitos de regulación para mejorar el control de impulsos.',
-    'Practicar autocompasión basada en evidencia como base de la resiliencia.',
-    'Usar empatía con límites y criterio para mejorar relaciones y comunicación.',
+    'Identificar emociones básicas en ti mismo y en los demás.',
+    'Aplicar técnicas de regulación emocional en momentos de estrés.',
+    'Comprender el impacto de las emociones en la toma de decisiones.',
+    'Desarrollar la capacidad de responder en lugar de reaccionar.',
+    'Mejorar la comunicación de tus estados emocionales.'
   ],
   modules: [
     // ==========================================================
@@ -339,13 +340,38 @@ export const course: Course = {
   ]
 },
 
-        // PUNTO 3 — Estudio de caso + formulario para escribir y guardar
+        // PUNTO 3 — Rueda de Granularidad Emocional
         {
           id: 'm1a3',
-          type: 'feedbackForm',
-          title: 'Punto 3 · Estudio de caso: Nombrar cambia la historia',
-          description:
-            'Lee el caso y responde en los campos de texto. Usa “Guardar” para almacenar tus respuestas en tu progreso del curso.',
+          type: 'emotionWheel' as any,
+          title: 'Punto 3 · Rueda de Granularidad Emocional',
+          description: 'Decir "estoy mal" es poco preciso. Haz clic en las emociones primarias para descubrir los matices (granularidad) y cómo se sienten en el cuerpo.',
+          coreEmotions: [
+            {
+              name: 'Ira',
+              color: '#ef4444',
+              nuances: ['Frustración', 'Resentimiento', 'Indignación', 'Furia'],
+              physicalSensation: 'Calor en el pecho y cara, tensión en la mandíbula, respiración corta y acelerada.'
+            },
+            {
+              name: 'Miedo',
+              color: '#8b5cf6',
+              nuances: ['Inseguridad', 'Ansiedad', 'Pavor', 'Abrumamiento'],
+              physicalSensation: 'Nudo en el estómago, manos frías, pulso acelerado, mente acelerada o en blanco.'
+            },
+            {
+              name: 'Tristeza',
+              color: '#3b82f6',
+              nuances: ['Decepción', 'Melancolía', 'Apatía', 'Duelo'],
+              physicalSensation: 'Pesadez en los hombros y párpados, falta de energía, presión en la garganta y pecho.'
+            },
+            {
+              name: 'Alegría',
+              color: '#eab308',
+              nuances: ['Satisfacción', 'Alivio', 'Entusiasmo', 'Éxtasis'],
+              physicalSensation: 'Sensación de ligereza, sonrisa espontánea, respiración amplia y relajada, calor reconfortante.'
+            }
+          ]
         },
 
         // PUNTO 4 — Diario Emocional: Video + Recurso incrustado (misma pantalla)
@@ -442,22 +468,34 @@ export const course: Course = {
           description: 'Aqui tienes 4 casos comunes y 4 micro-respuestas prácticas para bajar la activación y decidir mejor.',
           videoSrc: assetPath('videos/microrespuestas-casos.mp4'),
         },
-        // Punto 3 — Juego de cartas: disparadores vs. respuestas regulatorias
+        // Punto 3 — Cazador de Mitos de Autoregulación
         {
           id: 'm2a3',
-          type: 'cardGame',
-          title: 'Punto 3 · Juego: Disparador ↔ Respuesta regulatoria',
-          description: 'Empareja disparadores comunes con micro‑respuestas efectivas.',
-          cards: [
-            { id: 1, matchId: 101, text: 'Correo urgente a última hora', type: 'limiting' },
-            { id: 2, matchId: 102, text: 'Comentario crítico en reunión', type: 'limiting' },
-            { id: 3, matchId: 103, text: 'Notificación constante en el móvil', type: 'limiting' },
-            { id: 4, matchId: 104, text: 'Tráfico/espera inesperada', type: 'limiting' },
-            { id: 101, matchId: 1, text: 'Respiración 2×2×4 + clarificar prioridad', type: 'empowering' },
-            { id: 102, matchId: 2, text: 'Pausa de 10 segundos + parafraseo', type: 'empowering' },
-            { id: 103, matchId: 3, text: 'Silenciar 20 min + lote de respuestas', type: 'empowering' },
-            { id: 104, matchId: 4, text: 'Escaneo corporal + música neutra', type: 'empowering' },
-          ],
+          type: 'mythBuster' as any,
+          title: 'Punto 3 · Cazador de Mitos de Autoregulación',
+          description: 'Desliza o presiona para clasificar cada afirmación como un Mito (Falso) o un Hecho (Verdadero).',
+          statements: [
+            {
+              text: 'Las personas con alta inteligencia emocional nunca experimentan enojo o frustración.',
+              isMyth: true,
+              explanation: 'Mito. Todos experimentamos ira y frustración; la diferencia radica en la capacidad de pausar y elegir cómo expresar y canalizar esa emoción de forma constructiva.'
+            },
+            {
+              text: 'La respiración profunda prolongada estimula el nervio vago y reduce el ritmo cardíaco casi de inmediato.',
+              isMyth: false,
+              explanation: 'Hecho. La exhalación larga (como en la técnica 2x2x4) activa el sistema nervioso parasimpático, induciendo un estado físico de calma y seguridad.'
+            },
+            {
+              text: 'Ignorar o tragarse las emociones difíciles ayuda a que desaparezcan más rápidamente.',
+              isMyth: true,
+              explanation: 'Mito. La supresión emocional intensifica la activación fisiológica de la amígdala a largo plazo. Nombrar y validar lo que sientes disipa su fuerza.'
+            },
+            {
+              text: 'Un "secuestro de la amígdala" anula temporalmente la toma de decisiones lógicas en la corteza prefrontal.',
+              isMyth: false,
+              explanation: 'Hecho. Ante una amenaza percibida, la amígdala asume el control antes de que la corteza prefrontal pueda procesar la información. De ahí la necesidad de una pausa de 6 segundos.'
+            }
+          ]
         },
         // Punto 4 — Audio de práctica (nuevo, distinto al m1)
         {
@@ -672,20 +710,38 @@ export const course: Course = {
             </html>`
           ],
         },
-        // Punto 2 — Juego de cartas: autocrítica ↔ reencuadre compasivo
+        // Punto 2 — Tu Radar de Resiliencia y Autocompasión
         {
           id: 'm3a2',
-          type: 'cardGame',
-          title: 'Punto 2 · Juego: De la autocrítica al cuidado efectivo',
-          description: 'Empareja frases de autocrítica con respuestas compasivas y accionables.',
-          cards: [
-            { id: 1, matchId: 201, text: '“Siempre arruino todo”', type: 'limiting' },
-            { id: 2, matchId: 202, text: '“No debería sentirme así”', type: 'limiting' },
-            { id: 3, matchId: 203, text: '“Si descanso, soy flojo/a”', type: 'limiting' },
-            { id: 201, matchId: 1, text: '“Estoy aprendiendo; ¿qué micro‑paso ahora?”', type: 'empowering' },
-            { id: 202, matchId: 2, text: '“Es humano sentir; respiro y nombro lo que hay”', type: 'empowering' },
-            { id: 203, matchId: 3, text: '“Descansar repone recursos; agendo 10 min”', type: 'empowering' },
-          ],
+          type: 'sliderAssessment' as any,
+          title: 'Punto 2 · Tu Radar de Resiliencia y Autocompasión',
+          description: 'Ajusta los deslizadores según tu tendencia actual para analizar tu nivel de resiliencia y autocuidado.',
+          domains: [
+            {
+              id: 'bondad_propia',
+              name: 'Bondad Propia',
+              leftLabel: 'Me castigo y juzgo severamente',
+              rightLabel: 'Me hablo con paciencia y apoyo'
+            },
+            {
+              id: 'humanidad_compartida',
+              name: 'Humanidad Compartida',
+              leftLabel: 'Me siento solo en mi dolor',
+              rightLabel: 'Sé que fallar es parte de ser humano'
+            },
+            {
+              id: 'atencion_plena',
+              name: 'Atención Plena (Mindfulness)',
+              leftLabel: 'Sobredramatizo e ignoro el cuerpo',
+              rightLabel: 'Observo mis emociones con calma'
+            },
+            {
+              id: 'resiliencia_activa',
+              name: 'Resiliencia Activa',
+              leftLabel: 'Me hundo y evito actuar',
+              rightLabel: 'Pauso, aprendo y sigo adelante'
+            }
+          ]
         },
         // Punto 3 — Audio nuevo: “Pausa de amabilidad activa”
         {
@@ -712,8 +768,8 @@ export const course: Course = {
                 .container { max-width: 900px; margin: 0 auto; padding: 20px; }
                 h1 { text-align: center; color: #2c3e50; font-size: 2.4rem; margin-bottom: 10px; }
                 .subtitle { text-align: center; color: #7f8c8d; font-size: 1.1rem; margin-bottom: 26px; }
-                .resiliencia-tree { width: 100%; height: 300px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f0f8ff" width="100" height="100"/><circle fill="%234CAF50" cx="50" cy="50" r="30"/></svg>'); background-size: cover; margin: 20px 0; position: relative; display: flex; justify-content: center; align-items: center; }
-                .resiliencia-tree img { width: 150px; height: auto; }
+                .resiliencia-tree { width: 100%; margin: 20px 0; display: flex; justify-content: center; align-items: center; }
+                .resiliencia-tree img { max-width: 100%; max-height: 280px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
                 .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
                 .pilar { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease; }
                 .pilar:hover { transform: scale(1.05); }
@@ -730,7 +786,7 @@ export const course: Course = {
                 <h1>Fortalece Tu Resiliencia</h1>
                 <p class="subtitle">Conoce los pilares que te ayudan a recuperarte y crecer ante la adversidad</p>
                 <div class="resiliencia-tree">
-                  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nIzQ0QzVFNicvPjx0ZXh0IHg9JzUwJyB5PSc1NScgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnPkI8L3RleHQ+PC9zdmc=" alt="Árbol de resiliencia">
+                  <img src="https://res.cloudinary.com/djybwowo6/image/upload/v1782833448/el_texto_debe_estar_en_202606301617_ln5lna.jpg" alt="Árbol de resiliencia">
                 </div>
                 <div class="pilares">
                   <div class="pilar" data-id="conexion"><h3>Conexión con Uno Mismo</h3><p>Autoconocimiento y regulación emocional</p></div>
@@ -962,28 +1018,48 @@ export const course: Course = {
           description: 'Solo concentrate en escuchar el audio y reconocer los sonidos. Identifica cuando el sonido cambia de zona e intensidad.',
           audioSrc: assetPath('audios/escucha-activa-calibrado.mp3'),
         },
-        // Punto 3 — Juego de cartas: necesidad ↔ petición clara
+        // Punto 3 — Simulador de Diálogos Asertivos
         {
           id: 'm4a3',
-          type: 'cardGame',
-          title: 'Punto 3 · Juego: De la necesidad a la petición',
-          description: 'Empareja necesidades frecuentes con una petición concreta y respetuosa.',
-          cards: [
-            { id: 1, matchId: 301, text: 'Necesito claridad en tareas', type: 'limiting' },
-            { id: 2, matchId: 302, text: 'Necesito tiempo para concentrarme', type: 'limiting' },
-            { id: 3, matchId: 303, text: 'Necesito apoyo emocional', type: 'limiting' },
-            { id: 301, matchId: 1, text: '“¿Podemos acordar checklist antes del viernes?”', type: 'empowering' },
-            { id: 302, matchId: 2, text: '“¿Podemos bloquear 2 h sin reuniones?”', type: 'empowering' },
-            { id: 303, matchId: 3, text: '“¿Podrías escucharme 10 min sin aconsejar?”', type: 'empowering' },
-          ],
+          type: 'interactiveScenario' as any,
+          title: 'Punto 3 · Simulador de Diálogos Asertivos',
+          description: 'Enfréntate a situaciones de comunicación difíciles y selecciona la opción que combine empatía y límites con criterio.',
+          scenarios: [
+            {
+              context: 'Un colaborador de tu equipo de trabajo entra a tu oficina visiblemente molesto y te reclama delante de otros: "Siempre me asignas las tareas más aburridas e irrelevantes a última hora del viernes".',
+              options: [
+                {
+                  text: 'Responder asertivamente en el momento: "Entiendo que te sientas frustrado/a por la carga de tareas de hoy. Busquemos un espacio el lunes a primera hora a solas para revisar cómo distribuir las asignaciones de forma equitativa".',
+                  isOptimal: true,
+                  consequence: '¡Excelente elección! Muestra empatía activa reconociendo su frustración, protege su privacidad aplazando la discusión a solas y propone un límite resolutivo de prioridades.'
+                },
+                {
+                  text: 'Reaccionar a la defensiva: "Todos aquí tenemos trabajo aburrido que hacer. Si no te gusta la carga laboral o el horario, habla con el director".',
+                  isOptimal: false,
+                  consequence: 'Invalida por completo la emoción del colaborador y escala el conflicto innecesariamente, dañando la seguridad del equipo.'
+                },
+                {
+                  text: 'Evitar el conflicto y hacer su tarea: "No te preocupes, déjamela aquí y yo la termino. Puedes irte a casa".',
+                  isOptimal: false,
+                  consequence: 'Es una respuesta pasiva que no pone límites con criterio. Genera resentimiento personal y no ayuda a tu colaborador a aprender ni a organizarse.'
+                }
+              ]
+            }
+          ]
         },
-        // Punto 4 — Reto guiado (distinto al del m3)
+        // Punto 4 — Tablero de Hábitos Emocionales
         {
           id: 'm4a4',
-          type: 'finalChallenge',
-          title: 'Punto 4 · Reto: Conversación con criterio',
-          description:
-            'Elige un tema real y escribe: (1) Observación, (2) Emoción, (3) Necesidad, (4) Petición clara. Practícalo con alguien de confianza.',
+          type: 'habitTrackerBuilder' as any,
+          title: 'Punto 4 · Tu Mochila de Hábitos Relacionales',
+          description: 'Selecciona hasta 3 micro-hábitos de Inteligencia Emocional y asertividad que te comprometes a entrenar y aplicar en tus relaciones esta semana.',
+          habitsToChoose: [
+            { category: 'Escucha Activa', text: 'Esperar 3 segundos antes de responder a cualquier persona en una conversación.' },
+            { category: 'Asertividad', text: 'Expresar mis peticiones usando la estructura: "Cuando ocurre X, me siento Y, porque necesito Z..."' },
+            { category: 'Límites', text: 'Decir "No" amablemente pero con firmeza a cualquier tarea que comprometa mi límite de tiempo.' },
+            { category: 'Validación', text: 'Validar explícitamente la emoción de alguien al menos una vez al día ("Veo que te preocupa...").' }
+          ],
+          maxSelection: 3
         },
       ],
     },
@@ -997,8 +1073,23 @@ export const course: Course = {
       activities: [
         {
           id: 'm5a1',
+          type: 'text',
+          title: 'Punto 1 · La Brújula de Integración Emocional',
+          description: 'Reflexión y recapitulación final sobre la aplicación práctica de los 4 pilares en tu vida diaria.',
+          content: [
+            'Felicidades por llegar al final de este recorrido. Has explorado la base de la Inteligencia Emocional y adquirido herramientas invaluables.',
+            'Para que este conocimiento perdure, es fundamental la integración. Recuerda los 4 pilares clave:',
+            '1. Conciencia Emocional: Observar sin juzgar y nombrar tus emociones de forma granular.',
+            '2. Regulación de Impulsos: Aprovechar el espacio entre el estímulo y la respuesta con micro-pausas.',
+            '3. Autocompasión: Hablarte a ti mismo con amabilidad en los momentos de caída y dificultad.',
+            '4. Empatía con Criterio: Escuchar activamente al otro sin descuidar ni anular tus límites personales.',
+            'A continuación, te invitamos a realizar el Quiz Final Integrador para poner a prueba tu comprensión y consolidar tus nuevas habilidades. ¡Adelante!'
+          ]
+        },
+        {
+          id: 'm5a2',
           type: 'quiz',
-          title: 'Evaluación final — 12 preguntas',
+          title: 'Punto 2 · Evaluación final — 12 preguntas',
           description:
             'Repaso reflexivo de los puntos más relevantes de los cuatro módulos. Lee con calma y elige la mejor respuesta.',
           questions: [

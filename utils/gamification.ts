@@ -679,7 +679,7 @@ export const checkDailyStreak = (progress: UserProgress): { updatedProgress: Use
 export const recordCompletedAction = (
   progress: UserProgress,
   action: { 
-    type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe' | 'interactiveGame' | 'reflection' | 'streak_bonus' | 'weekly_challenge_bonus';
+    type: string;
     id: string; 
     title: string; 
     courseId?: string;
