@@ -56,7 +56,7 @@ export interface InfoCard {
   color?: string;
 }
 
-export interface BaseActivity {
+export interface Activity {
   id: string;
   title: string;
   type: 'video' | 'youtube' | 'text' | 'quiz' | 'evaluation' | 'reflectionTree' | 'audio' | 'upload' | 'feedbackForm' | 'cardGame' | 'finalChallenge' | 'interactiveInvisible' | 'reframeWall' | 'flipCards' | 'pillarsInteractive' | 'pondGame' | 'iframe' | 'interactiveGame' | 'sliderAssessment' | 'emotionWheel' | 'mythBuster' | 'interactiveScenario' | 'habitTrackerBuilder';
@@ -89,6 +89,48 @@ export interface BaseActivity {
     bank: Record<string, string[]>;
     hideImage?: boolean;
   };
+  // Custom activities properties
+  domains?: Array<{
+    id: string;
+    name: string;
+    leftLabel: string;
+    rightLabel: string;
+  }>;
+  sliderDomains?: Array<{
+    id: string;
+    name: string;
+    leftLabel: string;
+    rightLabel: string;
+  }>;
+  coreEmotions?: Array<{
+    id?: string;
+    name: string;
+    color: string;
+    nuances: string[];
+    physicalSensation: string;
+  }>;
+  statements?: Array<{
+    text: string;
+    isMyth: boolean;
+    explanation: string;
+  }>;
+  swipeStatements?: Array<{
+    id: string;
+    text: string;
+    isMyth: boolean;
+    explanation: string;
+  }>;
+  scenarios?: Array<{
+    id?: string;
+    context: string;
+    options: Array<{
+      text: string;
+      isOptimal: boolean;
+      consequence: string;
+    }>;
+  }>;
+  habitsToChoose?: any; // supports string[] or Array<{category, text}>
+  maxSelection?: number;
 }
 
 // 1. Radar de Auto-percepción
@@ -160,8 +202,6 @@ export interface HabitTrackerBuilderActivity {
   }>;
   maxSelection: number;
 }
-
-export type Activity = BaseActivity & Partial<SliderAssessmentActivity & EmotionWheelActivity & MythBusterActivity & InteractiveScenarioActivity & HabitTrackerBuilderActivity>;
 
 export interface Module {
   id: string;
