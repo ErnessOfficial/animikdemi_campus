@@ -70,7 +70,7 @@ export const course: Course = {
           type: 'text',
           title: 'Punto 2 · Seguridad Psicológica e Inclusión',
           description: 'Nociones clave sobre el cimiento esencial de la innovación y la colaboración según Amy Edmondson.',
-          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782833448/placeholder_pilar_m1a2_z9xypq.jpg',
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782932241/Logo_Featuring_Sound_Wave_in_Letter_O-15_k70fdt.png',
           content: [
             'La seguridad psicológica no significa ser complaciente o evitar el debate. Se define como la libertad para ser vulnerable: cometer errores, hacer preguntas, proponer ideas audaces y dar feedback sin temor a represalias, juicios destructivos o humillaciones públicas.',
             'Basado en las investigaciones de la Dra. Amy Edmondson de Harvard, existen 5 pilares para consolidar este entorno:',
@@ -120,7 +120,7 @@ export const course: Course = {
           type: 'interactiveScenario' as any,
           title: 'Punto 2 · Simulador: El Feedback de Mejora Crítico',
           description: 'Pon a prueba tus habilidades de comunicación consciente al recibir una observación difícil por parte de tu líder.',
-          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782833448/placeholder_pilar_m2a2_w8aypd.jpg',
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782932243/Logo_Featuring_Sound_Wave_in_Letter_O-14_j4l3q2.png',
           scenarios: [
             {
               context: 'Tu líder de proyecto te cita a solas y te comenta de manera directa y firme: "El último informe financiero que presentaste tiene bastantes inconsistencias en la comparativa de datos y la estructura es compleja. Debes corregirlo hoy".',
@@ -159,7 +159,7 @@ export const course: Course = {
           type: 'emotionWheel' as any,
           title: 'Punto 1 · La Rueda del Aprecio y Crecimiento',
           description: 'El reconocimiento va mucho más allá de un bono financiero. Explora las distintas vías de motivación y validación profesional.',
-          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782833448/placeholder_pilar_m3a1_rueda.jpg',
+          imageSrc: 'https://res.cloudinary.com/djybwowo6/image/upload/v1782932250/Logo_Featuring_Sound_Wave_in_Letter_O-18_ivhdd4.png',
           coreEmotions: [
             {
               name: 'Verbal / Social',
