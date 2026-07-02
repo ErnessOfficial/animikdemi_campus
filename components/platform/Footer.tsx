@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="flex-1 h-[3px] bg-gradient-to-r from-[#6e4380] to-[#24668e] rounded-full shadow-[0_1px_2px_rgba(110,67,128,0.2)]"></div>
         <div className="mx-4 flex-shrink-0 z-10 -mt-8 sm:-mt-10 md:-mt-12">
           <img 
-            src={assetPath('images/footer1.png')} 
+            src="https://res.cloudinary.com/djybwowo6/image/upload/v1782952172/Logo_Featuring_Sound_Wave_in_Letter_O-19_vqurya.png" 
             alt="AnimiKro Micro-Learning" 
             className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-full bg-white shadow-md p-1 border border-[#101021]/5 hover:scale-105 transition-transform duration-300"
           />
