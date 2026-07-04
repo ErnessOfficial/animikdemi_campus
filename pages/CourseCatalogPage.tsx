@@ -3,6 +3,7 @@ import { courseCatalog, courseCategories } from '../constants/platformData';
 import CourseCard from '../components/platform/CourseCard';
 import { estimateCourseDurationMinutes } from '../utils/course';
 import type { UserProgress } from '../types';
+import { assetPath } from '../utils/paths';
 
 interface CourseCatalogPageProps {
   progress: UserProgress;
@@ -100,8 +101,9 @@ const CourseCatalogPage: React.FC<CourseCatalogPageProps> = ({ progress, onSelec
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">Kapsulas</h2>
-              <span className="text-[10px] sm:text-xs font-bold bg-[#24668e] text-white py-0.5 px-2.5 rounded-full uppercase tracking-wider shadow-sm">
-                Free Access
+              <span className="text-[10px] sm:text-xs font-bold bg-[#6e4380] text-white py-1 px-3 rounded-full flex items-center gap-1.5 shadow-sm uppercase tracking-wider">
+                <img src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                <span>1 Crédito</span>
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-1.5 leading-relaxed">
@@ -147,8 +149,8 @@ const CourseCatalogPage: React.FC<CourseCatalogPageProps> = ({ progress, onSelec
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">Mikro Plus</h2>
-              <span className="text-[10px] sm:text-xs font-bold bg-gradient-to-r from-[#6e4380] to-[#dd566f] text-white py-0.5 px-2.5 rounded-full uppercase tracking-wider shadow-sm">
-                Total Access
+              <span className="text-[10px] sm:text-xs font-bold bg-gradient-to-r from-[#6e4380] to-[#dd566f] text-white py-1 px-3 rounded-full uppercase tracking-wider shadow-sm">
+                Micro Programas
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-1.5 leading-relaxed">

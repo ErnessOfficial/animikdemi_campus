@@ -48,3 +48,17 @@ export function formatDuration(mins: number): string {
   return `${m} min`;
 }
 
+export function getCourseCredits(course: Course): number {
+  if (course.id === 'habilidades-sociales-101' || course.id === 'el-arte-del-descanso') {
+    return 5;
+  }
+  const mins = estimateCourseDurationMinutes(course);
+  if (mins < 60) {
+    return 1;
+  }
+  if (mins <= 150) {
+    return 3;
+  }
+  return 5;
+}
+

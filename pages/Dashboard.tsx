@@ -4,6 +4,8 @@ import { courseCatalog } from '../constants/platformData';
 import GamificationWidget from '../components/platform/GamificationWidget';
 import WellnessCalendar from '../components/platform/WellnessCalendar';
 import { computeGamification, BADGE_CONFIGS } from '../utils/gamification';
+import { estimateCourseDurationMinutes, getCourseCredits } from '../utils/course';
+import { assetPath } from '../utils/paths';
 
 interface DashboardProps {
     user: User;
@@ -242,6 +244,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                             activeEnrolled.map(course => {
                                 const courseProgress = progress.courses[course.id];
                                 const percentage = courseProgress?.percentage || 0;
+                                const credits = getCourseCredits(course);
                                 return (
                                     <div
                                         key={course.id}
@@ -258,6 +261,14 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                 <div className="flex items-center gap-2">
                                                     <span className="text-[9px] font-bold text-[#6e4380] uppercase tracking-wider bg-[#6e4380]/10 px-2 py-0.5 rounded truncate">
                                                         {course.category}
+                                                    </span>
+                                                    <span className="text-[9px] font-extrabold text-[#6e4380] bg-[#6e4380]/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+                                                        <div className="flex items-center gap-0.5">
+                                                            {Array.from({ length: credits }).map((_, idx) => (
+                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3 h-3" />
+                                                            ))}
+                                                        </div>
+                                                        <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
                                                     </span>
                                                 </div>
                                                 <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#24668e] transition-colors">
@@ -312,27 +323,37 @@ const Dashboard: React.FC<DashboardProps> = ({
 
                     <div className="space-y-4">
                         {recentCourses.length > 0 ? (
-                            recentCourses.map(course => (
-                                <div
-                                    key={course.id}
-                                    onClick={() => onExploreCourse(course.id)}
-                                    className="flex gap-4 p-4 bg-white rounded-xl border border-[#101021]/10 hover:border-[#dd566f]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
-                                >
-                                    <img
-                                        src={course.coverImage}
-                                        alt={course.title}
-                                        className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
-                                    />
-                                    <div className="flex-1 min-w-0 flex flex-col justify-between">
-                                        <div>
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-[9px] font-bold text-[#dd566f] uppercase tracking-wider bg-[#dd566f]/10 px-2 py-0.5 rounded truncate">
-                                                    {course.category}
-                                                </span>
-                                            </div>
-                                            <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#dd566f] transition-colors">
-                                                {course.title}
-                                            </h3>
+                            recentCourses.map(course => {
+                                const credits = getCourseCredits(course);
+                                return (
+                                    <div
+                                        key={course.id}
+                                        onClick={() => onExploreCourse(course.id)}
+                                        className="flex gap-4 p-4 bg-white rounded-xl border border-[#101021]/10 hover:border-[#dd566f]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                    >
+                                        <img
+                                            src={course.coverImage}
+                                            alt={course.title}
+                                            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                                        />
+                                        <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[9px] font-bold text-[#dd566f] uppercase tracking-wider bg-[#dd566f]/10 px-2 py-0.5 rounded truncate">
+                                                        {course.category}
+                                                    </span>
+                                                    <span className="text-[9px] font-extrabold text-[#6e4380] bg-[#6e4380]/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+                                                        <div className="flex items-center gap-0.5">
+                                                            {Array.from({ length: credits }).map((_, idx) => (
+                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3 h-3" />
+                                                            ))}
+                                                        </div>
+                                                        <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
+                                                    </span>
+                                                </div>
+                                                <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#dd566f] transition-colors">
+                                                    {course.title}
+                                                </h3>
                                             <p className="text-xs text-[#101021]/60 line-clamp-2 mt-0.5">{course.subtitle}</p>
                                         </div>
                                         <div className="flex items-center justify-between mt-2 pt-1">
@@ -345,7 +366,8 @@ const Dashboard: React.FC<DashboardProps> = ({
                                         </div>
                                     </div>
                                 </div>
-                            ))
+                            );
+                        })
                         ) : (
                             <div className="p-8 bg-white rounded-xl border border-dashed border-[#101021]/20 text-center">
                                 <p className="text-sm text-[#101021]/60">¡Has completado o estás inscrito en todos los cursos!</p>

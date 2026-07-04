@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Course } from '../../types';
-import { estimateCourseDurationMinutes, formatDuration } from '../../utils/course';
+import { estimateCourseDurationMinutes, formatDuration, getCourseCredits } from '../../utils/course';
+import { assetPath } from '../../utils/paths';
 
 interface CourseCardProps {
   course: Course;
@@ -28,6 +29,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
     }
   };
   
+  const credits = getCourseCredits(course);
+
   return (
     <div 
       className="bg-white rounded-2xl border border-slate-100 shadow-md overflow-hidden transform hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group flex flex-col justify-between"
@@ -46,12 +49,22 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div>
           <h3 className="text-base sm:text-lg font-bold text-[#101021] group-hover:text-[#24668e] transition-colors leading-snug">{course.title}</h3>
           <p className="text-xs sm:text-sm text-[#101021]/60 mt-1.5 hidden md:block h-10 leading-relaxed overflow-hidden text-ellipsis line-clamp-2">{course.subtitle}</p>
-          {estimateCourseDurationMinutes(course) > 0 && (
-            <div className="mt-2 text-[11px] text-[#101021]/60 font-semibold flex items-center gap-1.5">
-              <i className="far fa-clock text-[#24668e]"></i>
-              <span>{formatDuration(estimateCourseDurationMinutes(course))}</span>
+          <div className="mt-2.5 flex flex-wrap items-center gap-2">
+            {estimateCourseDurationMinutes(course) > 0 && (
+              <div className="text-[11px] text-[#101021]/60 font-semibold flex items-center gap-1.5">
+                <i className="far fa-clock text-[#24668e]"></i>
+                <span>{formatDuration(estimateCourseDurationMinutes(course))}</span>
+              </div>
+            )}
+            <div className="text-[10px] text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-2.5 py-0.5 rounded-full">
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: credits }).map((_, idx) => (
+                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                ))}
+              </div>
+              <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
             </div>
-          )}
+          </div>
         </div>
         
         {progress !== undefined && (
