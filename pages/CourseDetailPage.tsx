@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Course, UserProgress } from '../types';
-import { estimateCourseDurationMinutes, formatDuration } from '../utils/course';
+import { estimateCourseDurationMinutes, formatDuration, getCourseCredits } from '../utils/course';
+import { assetPath } from '../utils/paths';
 
 interface CourseDetailPageProps {
   course: Course;
@@ -27,12 +28,22 @@ const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, progress, o
           <span className="font-bold text-[#6e4380]">{course.category.toUpperCase()}</span>
           <h1 className="text-4xl lg:text-5xl font-extrabold text-[#101021] mt-2">{course.title}</h1>
           <p className="mt-4 text-lg text-[#101021]/80">{course.subtitle}</p>
-          {estimateCourseDurationMinutes(course) > 0 && (
-            <div className="mt-2 text-sm text-[#101021]/70 flex items-center gap-2">
-              <i className="far fa-clock text-[#24668e]"></i>
-              <span>Duración estimada: {formatDuration(estimateCourseDurationMinutes(course))}</span>
+          <div className="mt-2.5 flex flex-wrap items-center gap-3">
+            {estimateCourseDurationMinutes(course) > 0 && (
+              <div className="text-sm text-[#101021]/70 flex items-center gap-2">
+                <i className="far fa-clock text-[#24668e]"></i>
+                <span>Duración estimada: {formatDuration(estimateCourseDurationMinutes(course))}</span>
+              </div>
+            )}
+            <div className="text-xs text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-3 py-1 rounded-full">
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: getCourseCredits(course) }).map((_, idx) => (
+                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                ))}
+              </div>
+              <span>{getCourseCredits(course)} {getCourseCredits(course) === 1 ? 'Crédito' : 'Créditos'}</span>
             </div>
-          )}
+          </div>
           {isCompleted ? (
             <div className="mt-6 space-y-2">
               <button 

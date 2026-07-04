@@ -3,6 +3,8 @@ import type { Course, UserProgress } from '../types';
 import { courseCatalog, mockAchievements } from '../constants/platformData';
 import { computeGamification } from '../utils/gamification';
 import AchievementBadge from '../components/profile/AchievementBadge';
+import { estimateCourseDurationMinutes, getCourseCredits } from '../utils/course';
+import { assetPath } from '../utils/paths';
 
 interface MyCoursesPageProps {
   progress: UserProgress;
@@ -76,7 +78,17 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
                         <img src={course.coverImage} alt={course.title} className="w-16 h-16 object-cover rounded-lg" />
                         <div>
                           <h3 className="font-bold text-[#101021]">{course.title}</h3>
-                          <span className="text-xs bg-[#101021]/5 text-[#101021]/70 px-2 py-1 rounded-full">{course.category}</span>
+                          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                            <span className="text-xs bg-[#101021]/5 text-[#101021]/70 px-2 py-1 rounded-full">{course.category}</span>
+                            <span className="text-[10px] text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-2.5 py-0.5 rounded-full">
+                              <div className="flex items-center gap-0.5">
+                                {Array.from({ length: getCourseCredits(course) }).map((_, idx) => (
+                                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                                ))}
+                              </div>
+                              <span>{getCourseCredits(course)} {getCourseCredits(course) === 1 ? 'Crédito' : 'Créditos'}</span>
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="mt-4">
@@ -119,7 +131,17 @@ const MyCoursesPage: React.FC<MyCoursesPageProps> = ({ progress, onContinueCours
                         <img src={course.coverImage} alt={course.title} className="w-16 h-16 object-cover rounded-lg border-2 border-[#6e4380]" />
                         <div>
                           <h3 className="font-bold text-[#101021]">{course.title}</h3>
-                          <span className="text-xs bg-[#6e4380]/10 text-[#6e4380] px-2 py-1 rounded-full font-bold">Completado 100%</span>
+                          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                            <span className="text-xs bg-[#6e4380]/10 text-[#6e4380] px-2 py-1 rounded-full font-bold">Completado 100%</span>
+                            <span className="text-[10px] text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-2.5 py-0.5 rounded-full">
+                              <div className="flex items-center gap-0.5">
+                                {Array.from({ length: getCourseCredits(course) }).map((_, idx) => (
+                                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                                ))}
+                              </div>
+                              <span>{getCourseCredits(course)} {getCourseCredits(course) === 1 ? 'Crédito' : 'Créditos'}</span>
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="mt-3 text-sm text-[#101021]/60">
