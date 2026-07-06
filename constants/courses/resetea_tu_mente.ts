@@ -99,7 +99,7 @@ export const course: Course = {
               description: 'Presentas las tres dimensiones clínicas del burnout (agotamiento, despersonalización y baja eficacia). Tu prioridad número uno debe ser el descanso radical y la reestructuración de límites.'
             }
           ]
-        },
+        } as any,
         {
           id: 'm1a2',
           type: 'text',
