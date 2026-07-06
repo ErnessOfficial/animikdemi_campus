@@ -19,6 +19,11 @@ const ACTIVITY_MINUTES: Record<Activity['type'], number> = {
   pondGame: 8,
   iframe: 7,
   interactiveGame: 10,
+  sliderAssessment: 5,
+  emotionWheel: 6,
+  mythBuster: 6,
+  interactiveScenario: 8,
+  habitTrackerBuilder: 7,
 };
 
 // Additional overhead per module (navigation, reading headings)
