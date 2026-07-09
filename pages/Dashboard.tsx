@@ -265,10 +265,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                     <span className="text-[9px] font-extrabold text-[#6e4380] bg-[#6e4380]/10 px-1.5 py-0.5 rounded flex items-center gap-1">
                                                         <div className="flex items-center gap-0.5">
                                                             {Array.from({ length: credits }).map((_, idx) => (
-                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3 h-3" />
+                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Krédito" className="w-3 h-3" />
                                                             ))}
                                                         </div>
-                                                        <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
+                                                        <span>{credits} {credits === 1 ? 'Krédito' : 'Kréditos'}</span>
                                                     </span>
                                                 </div>
                                                 <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#24668e] transition-colors">
@@ -345,10 +345,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                                                     <span className="text-[9px] font-extrabold text-[#6e4380] bg-[#6e4380]/10 px-1.5 py-0.5 rounded flex items-center gap-1">
                                                         <div className="flex items-center gap-0.5">
                                                             {Array.from({ length: credits }).map((_, idx) => (
-                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3 h-3" />
+                                                                <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Krédito" className="w-3 h-3" />
                                                             ))}
                                                         </div>
-                                                        <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
+                                                        <span>{credits} {credits === 1 ? 'Krédito' : 'Kréditos'}</span>
                                                     </span>
                                                 </div>
                                                 <h3 className="font-bold text-[#101021] text-sm mt-1 truncate group-hover:text-[#dd566f] transition-colors">

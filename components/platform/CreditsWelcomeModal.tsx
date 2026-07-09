@@ -93,15 +93,15 @@ const CreditsWelcomeModal: React.FC<CreditsWelcomeModalProps> = ({ onClose, onVi
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#101021] mb-2 leading-tight">
             🎁 Tienes{' '}
             <span className="bg-gradient-to-r from-[#6e4380] to-[#24668e] bg-clip-text text-transparent">
-              {creditsAmount} créditos
+              {creditsAmount} Kréditos
             </span>{' '}
             {creditsAmount >= 50 ? 'disponibles' : 'gratis'}
           </h2>
           <p className="text-sm text-[#101021]/65 leading-relaxed mb-6 max-w-sm">
             {creditsAmount >= 50 ? (
-              <>Hemos añadido <strong>{creditsAmount} créditos</strong> a tu cuenta como usuario registrado. Úsalos para comenzar cualquier curso de la plataforma desde hoy. <strong>Tus cursos actuales no se ven afectados.</strong></>
+              <>Hemos añadido <strong>{creditsAmount} Kréditos</strong> a tu cuenta como usuario registrado. Úsalos para comenzar cualquier curso de la plataforma desde hoy. <strong>Tus cursos actuales no se ven afectados.</strong></>
             ) : (
-              <>Como regalo de bienvenida, hemos añadido <strong>{creditsAmount} créditos</strong> a tu cuenta. Úsalos para comenzar hasta <strong>{creditsAmount} cursos</strong> de tu elección, ¡sin coste alguno!</>
+              <>Como regalo de bienvenida, hemos añadido <strong>{creditsAmount} Kréditos</strong> a tu cuenta. Úsalos para comenzar hasta <strong>{creditsAmount} Kapsulas</strong> de tu elección, ¡sin coste alguno!</>
             )}
           </p>
 
@@ -115,7 +115,7 @@ const CreditsWelcomeModal: React.FC<CreditsWelcomeModalProps> = ({ onClose, onVi
                 </div>
                 <div className="text-left">
                   <div className="text-3xl font-black text-amber-600">{creditsAmount}</div>
-                  <div className="text-xs text-amber-700/70 font-medium">créditos disponibles</div>
+                  <div className="text-xs text-amber-700/70 font-medium">Kréditos disponibles</div>
                 </div>
               </div>
             ) : (
@@ -134,9 +134,9 @@ const CreditsWelcomeModal: React.FC<CreditsWelcomeModalProps> = ({ onClose, onVi
           {/* Info box */}
           <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 text-left space-y-2.5">
             {[
-              { icon: 'fa-book-open', color: 'text-[#24668e]', text: '1 crédito = 1 curso desbloqueado' },
+              { icon: 'fa-book-open', color: 'text-[#24668e]', text: '1 Krédito = 1 Kápsula desbloqueada' },
               { icon: 'fa-clock', color: 'text-[#6e4380]', text: 'Sin fecha de caducidad, úsalos cuando quieras' },
-              { icon: 'fa-plus-circle', color: 'text-amber-600', text: 'Puedes comprar más créditos en cualquier momento' },
+              { icon: 'fa-plus-circle', color: 'text-amber-600', text: 'Puedes comprar más Kréditos en cualquier momento' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-xs text-[#101021]/70">
                 <i className={`fas ${item.icon} ${item.color} w-4 text-center`} />
@@ -153,7 +153,7 @@ const CreditsWelcomeModal: React.FC<CreditsWelcomeModalProps> = ({ onClose, onVi
               className="w-full bg-gradient-to-r from-[#6e4380] to-[#24668e] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-[#4c1760] hover:to-[#1a4a69] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2"
             >
               <i className="fas fa-coins" />
-              Ver mis créditos
+              Ver mis Kréditos
             </button>
             <button
               onClick={onClose}

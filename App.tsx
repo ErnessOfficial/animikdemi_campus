@@ -570,7 +570,7 @@ const App: React.FC = () => {
         setProgress(newProgress);
         // Notificar descuento de crédito al usuario
         if (creditsUpdate.credits !== undefined) {
-            showAppToast(`¡Curso iniciado! Se descontará 1 crédito 🪙 Te quedan ${creditsUpdate.credits} crédito${creditsUpdate.credits !== 1 ? 's' : ''}.`);
+            showAppToast(`¡Curso iniciado! Se descontará 1 Krédito 🪙 Te quedan ${creditsUpdate.credits} Krédito${creditsUpdate.credits !== 1 ? 's' : ''}.`);
         }
         setActiveCourseId(courseToEnroll.id);
         setView('course-player');
