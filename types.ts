@@ -309,6 +309,14 @@ export interface UserProgress {
     strength: string;
     description: string;
   }>;
+  // Credits system — undefined = legacy user (no restriction), number = credit balance
+  credits?: number;
+  creditHistory?: Array<{
+    date: string;
+    type: 'earned' | 'used';
+    amount: number;
+    reason: string;
+  }>;
 }
 
 export interface Achievement {
