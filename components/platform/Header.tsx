@@ -183,6 +183,20 @@ const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout, v
               <i className="fas fa-medal"></i>
               <span>N.{stats.level}</span>
             </div>
+            {progress && progress.credits !== undefined && (
+              <>
+                <span className="text-[#101021]/20">|</span>
+                <button
+                  onClick={() => onNavigate('credits')}
+                  className="flex items-center gap-1 text-amber-600 hover:text-amber-700 transition-colors cursor-pointer"
+                  title={`Créditos disponibles: ${progress.credits}`}
+                >
+                  <i className="fas fa-coins"></i>
+                  <span className="font-extrabold">{progress.credits}</span>
+                  <span className="font-medium opacity-80">créditos</span>
+                </button>
+              </>
+            )}
           </div>
         )}
 
@@ -292,6 +306,19 @@ const Header: React.FC<HeaderProps> = ({ user, progress, onNavigate, onLogout, v
                 <span>Insignias</span>
               </button>
               
+              <button
+                onClick={() => handleProfileOptionClick('credits')}
+                className="w-full text-left px-4 py-2 hover:bg-amber-50 flex items-center gap-2.5 transition text-[10px] sm:text-xs text-amber-700 font-semibold"
+              >
+                <i className="fas fa-coins text-sm text-amber-500 w-4 text-center"></i>
+                <span>Mis Créditos</span>
+                {progress && progress.credits !== undefined && (
+                  <span className="ml-auto bg-amber-100 text-amber-700 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full">
+                    {progress.credits}
+                  </span>
+                )}
+              </button>
+
               <button
                 onClick={() => handleProfileOptionClick('profile-account')}
                 className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-2.5 transition text-[10px] sm:text-xs text-[#101021]/80 font-medium"

@@ -47,6 +47,8 @@ import CookiePolicyPage from './pages/CookiePolicyPage';
 import TermsConditionsPage from './pages/TermsConditionsPage';
 import HelpPage from './pages/HelpPage';
 import CookieConsentBanner from './components/platform/CookieConsentBanner';
+import CreditsPage from './pages/CreditsPage';
+import CreditsWelcomeModal from './components/platform/CreditsWelcomeModal';
 
 
 export type View =
@@ -72,7 +74,8 @@ export type View =
   | 'privacy-policy'
   | 'cookie-policy'
   | 'terms-conditions'
-  | 'help';
+  | 'help'
+  | 'credits';
 
 const viewPathMap: Partial<Record<View, string>> = {
   share: '/compartir',
@@ -177,6 +180,7 @@ const App: React.FC = () => {
     const [composeDefaults, setComposeDefaults] = useState(() => readComposeParams());
     const [swUpdateReady, setSwUpdateReady] = useState(false);
     const [swUpdating, setSwUpdating] = useState(false);
+    const [showCreditsWelcome, setShowCreditsWelcome] = useState(false);
 
     // Device Simulator Viewport overrides
     const isIframe = typeof window !== 'undefined' && window.self !== window.top;
@@ -239,13 +243,58 @@ const App: React.FC = () => {
             setUser(appUser);
             // Cargar progreso desde localStorage si existe
             const key = `anik:progress:v1:${appUser.name}`;
+            const creditsKey = `anik:credits-welcome-shown:v1:${appUser.name}`;
             try {
               const raw = localStorage.getItem(key);
               if (raw) {
                 const parsed = JSON.parse(raw);
-                if (parsed && parsed.courses) setProgress(initializeGamification(parsed));
+                if (parsed && parsed.courses) {
+                  // --- USUARIO DEV EXISTENTE: asignar 50 créditos si no tiene aún ---
+                  if (parsed.credits === undefined || parsed.credits === null) {
+                    parsed.credits = 50;
+                    parsed.creditHistory = [
+                      ...(parsed.creditHistory || []),
+                      {
+                        date: new Date().toISOString(),
+                        type: 'earned',
+                        amount: 50,
+                        reason: 'Créditos asignados al usuario de desarrollo',
+                      }
+                    ];
+                    const creditsAlreadyShown = localStorage.getItem(creditsKey);
+                    if (!creditsAlreadyShown) {
+                      localStorage.setItem(creditsKey, '1');
+                      setProgress(initializeGamification(parsed));
+                      const creditsTimer = setTimeout(() => setShowCreditsWelcome(true), 1000);
+                      // Continuar con el flujo normal de diagnóstico/reflexión
+                      if (!appUser.hasTakenDiagnostic) {
+                        const timer = setTimeout(() => setShowDiagnostic(true), 800);
+                        return () => { clearTimeout(creditsTimer); clearTimeout(timer); };
+                      }
+                      return () => clearTimeout(creditsTimer);
+                    }
+                  }
+                  setProgress(initializeGamification(parsed));
+                }
               } else {
-                setProgress(initializeGamification(initialUserProgress));
+                // Dev User completamente nuevo: 50 créditos
+                const newProgress = {
+                  ...initializeGamification(initialUserProgress),
+                  credits: 50,
+                  creditHistory: [{
+                    date: new Date().toISOString(),
+                    type: 'earned' as const,
+                    amount: 50,
+                    reason: 'Créditos de bienvenida - Dev User',
+                  }],
+                };
+                setProgress(newProgress);
+                const creditsAlreadyShown = localStorage.getItem(creditsKey);
+                if (!creditsAlreadyShown) {
+                  localStorage.setItem(creditsKey, '1');
+                  const creditsTimer = setTimeout(() => setShowCreditsWelcome(true), 1200);
+                  return () => clearTimeout(creditsTimer);
+                }
               }
             } catch {}
             
@@ -284,13 +333,54 @@ const App: React.FC = () => {
             setUser(appUser);
             // Cargar progreso desde localStorage si existe
             const key = `anik:progress:v1:${appUser.name || 'user'}`;
+            const creditsKey = `anik:credits-welcome-shown:v1:${appUser.name || 'user'}`;
             try {
               const raw = localStorage.getItem(key);
               if (raw) {
                 const parsed = JSON.parse(raw);
-                if (parsed && parsed.courses) setProgress(initializeGamification(parsed));
+                if (parsed && parsed.courses) {
+                  // --- USUARIO REGISTRADO EXISTENTE: asignar 50 créditos si no tiene aún ---
+                  if (parsed.credits === undefined || parsed.credits === null) {
+                    parsed.credits = 50;
+                    parsed.creditHistory = [
+                      ...(parsed.creditHistory || []),
+                      {
+                        date: new Date().toISOString(),
+                        type: 'earned',
+                        amount: 50,
+                        reason: 'Créditos de bienvenida por ser usuario registrado',
+                      }
+                    ];
+                    const creditsAlreadyShown = localStorage.getItem(creditsKey);
+                    if (!creditsAlreadyShown) {
+                      localStorage.setItem(creditsKey, '1');
+                      setProgress(initializeGamification(parsed));
+                      const creditsTimer = setTimeout(() => setShowCreditsWelcome(true), 1500);
+                      return () => clearTimeout(creditsTimer);
+                    }
+                  }
+                  setProgress(initializeGamification(parsed));
+                }
               } else {
-                setProgress(initializeGamification(initialUserProgress));
+                // --- USUARIO COMPLETAMENTE NUEVO: 3 créditos gratis ---
+                const creditsAlreadyShown = localStorage.getItem(creditsKey);
+                const newProgressWithCredits = {
+                  ...initializeGamification(initialUserProgress),
+                  credits: 3,
+                  creditHistory: [{
+                    date: new Date().toISOString(),
+                    type: 'earned' as const,
+                    amount: 3,
+                    reason: 'Créditos de bienvenida por registro',
+                  }],
+                };
+                setProgress(newProgressWithCredits);
+                // Mostrar modal de bienvenida de créditos solo la primera vez
+                if (!creditsAlreadyShown) {
+                  localStorage.setItem(creditsKey, '1');
+                  const creditsTimer = setTimeout(() => setShowCreditsWelcome(true), 1200);
+                  return () => clearTimeout(creditsTimer);
+                }
               }
             } catch {}
             
@@ -428,8 +518,28 @@ const App: React.FC = () => {
         
         const detailedCourse = courseCatalog.find(c => c.id === courseToEnroll.id);
         
+        // --- CRÉDITOS: descontar 1 crédito solo si el curso NO estaba previamente iniciado ---
+        const courseAlreadyStarted = !!progress.courses[courseToEnroll.id];
+        let creditsUpdate: Partial<UserProgress> = {};
+        if (progress.credits !== undefined && !courseAlreadyStarted) {
+            const newCredits = Math.max(0, progress.credits - 1);
+            creditsUpdate = {
+                credits: newCredits,
+                creditHistory: [
+                    ...(progress.creditHistory || []),
+                    {
+                        date: new Date().toISOString(),
+                        type: 'used' as const,
+                        amount: 1,
+                        reason: `Inicio del curso: ${courseToEnroll.title}`,
+                    }
+                ],
+            };
+        }
+        
         const newProgress: UserProgress = {
             ...progress,
+            ...creditsUpdate,
             courses: {
                 ...progress.courses,
                 [courseToEnroll.id]: {
@@ -458,6 +568,10 @@ const App: React.FC = () => {
         }
 
         setProgress(newProgress);
+        // Notificar descuento de crédito al usuario
+        if (creditsUpdate.credits !== undefined) {
+            showAppToast(`¡Curso iniciado! Se descontará 1 crédito 🪙 Te quedan ${creditsUpdate.credits} crédito${creditsUpdate.credits !== 1 ? 's' : ''}.`);
+        }
         setActiveCourseId(courseToEnroll.id);
         setView('course-player');
         setCourseToEnroll(null);
@@ -775,6 +889,8 @@ const App: React.FC = () => {
                 return <TermsConditionsPage onBack={() => handleNavigation('dashboard')} />;
             case 'help':
                 return <HelpPage />;
+            case 'credits':
+                return <CreditsPage progress={progress} />;
             default:
                 return <Dashboard user={user} progress={progress} onContinueCourse={handleContinueCourse} onExploreCourse={handleSelectCourse} onEnroll={handleEnroll} onNavigate={handleNavigation} />;
         }
@@ -890,6 +1006,16 @@ const App: React.FC = () => {
                     <WelcomeReflectionModal 
                         phrase={randomReflectionPhrase}
                         onClose={() => setShowReflection(false)}
+                    />
+                )}
+                {showCreditsWelcome && (
+                    <CreditsWelcomeModal
+                        creditsAmount={progress.credits}
+                        onClose={() => setShowCreditsWelcome(false)}
+                        onViewCredits={() => {
+                            setShowCreditsWelcome(false);
+                            handleNavigation('credits');
+                        }}
                     />
                 )}
             </div>
