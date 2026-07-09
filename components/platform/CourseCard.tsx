@@ -59,10 +59,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <div className="text-[10px] text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-2.5 py-0.5 rounded-full">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: credits }).map((_, idx) => (
-                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Krédito" className="w-3.5 h-3.5" />
                 ))}
               </div>
-              <span>{credits} {credits === 1 ? 'Crédito' : 'Créditos'}</span>
+              <span>{credits} {credits === 1 ? 'Krédito' : 'Kréditos'}</span>
             </div>
           </div>
         </div>

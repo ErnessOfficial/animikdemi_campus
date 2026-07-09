@@ -38,10 +38,10 @@ const CourseDetailPage: React.FC<CourseDetailPageProps> = ({ course, progress, o
             <div className="text-xs text-[#6e4380] font-extrabold flex items-center gap-1.5 bg-[#6e4380]/10 px-3 py-1 rounded-full">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: getCourseCredits(course) }).map((_, idx) => (
-                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
+                  <img key={idx} src={assetPath('icons/credito.svg')} alt="Icono Krédito" className="w-3.5 h-3.5" />
                 ))}
               </div>
-              <span>{getCourseCredits(course)} {getCourseCredits(course) === 1 ? 'Crédito' : 'Créditos'}</span>
+              <span>{getCourseCredits(course)} {getCourseCredits(course) === 1 ? 'Krédito' : 'Kréditos'}</span>
             </div>
           </div>
           {isCompleted ? (

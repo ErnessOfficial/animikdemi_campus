@@ -102,8 +102,8 @@ const CourseCatalogPage: React.FC<CourseCatalogPageProps> = ({ progress, onSelec
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">Kapsulas</h2>
               <span className="text-[10px] sm:text-xs font-bold bg-[#6e4380] text-white py-1 px-3 rounded-full flex items-center gap-1.5 shadow-sm uppercase tracking-wider">
-                <img src={assetPath('icons/credito.svg')} alt="Icono Crédito" className="w-3.5 h-3.5" />
-                <span>1 Crédito</span>
+                <img src={assetPath('icons/credito.svg')} alt="Icono Krédito" className="w-3.5 h-3.5" />
+                <span>1 Krédito</span>
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-semibold mt-1.5 leading-relaxed">
