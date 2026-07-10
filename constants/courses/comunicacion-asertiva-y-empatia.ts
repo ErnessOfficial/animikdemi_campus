@@ -1712,7 +1712,7 @@ export const course: Course = {
   broadCategories: ['Habilidades Sociales', 'Gestión Emocional'],
   coverImage: assetPath('images/course_cover_3.png'),
   instructor: mockInstructor,
-  estimatedDurationMinutes: 270,
+  estimatedDurationMinutes: 240,
   learningObjectives: [
     'Identificar los tres estilos de comunicación (pasivo, agresivo, asertivo) y su impacto en las relaciones.',
     'Aplicar la escucha activa y la empatía para comprender antes de responder.',
