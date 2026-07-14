@@ -221,6 +221,10 @@ export interface Course {
   estimatedDurationMinutes?: number;
   learningObjectives: string[];
   modules: Module[];
+  /** Kréditos necesarios para acceder al curso (1 = Kápsula, undefined = libre/Plus) */
+  kreditos?: number;
+  /** Tipo de formación: 'kapsula' para microcursos individuales, 'plus' para programas completos */
+  courseType?: 'kapsula' | 'plus';
 }
 
 export interface CompletionStatus {
